@@ -1,18 +1,29 @@
-{
-	"good": {
+import uuid from 'uuid';
+
+const adjectives = [
+	{
 		"base": "good",
 		"comparative": "better",
 		"superlative": "best"
 	},
-	"important": {
+	{
 		"base": "important"
 	},
-	"honest": {
+	{
 		"base": "honest"
 	},
-	"old": {
+	{
 		"base": "old",
 		"comparative": "older",
 		"superlative": "oldest"
 	}
-}
+].map(o => {
+  return {
+    ...o,
+    id: uuid.v4(),
+    pos: 'Adjective'
+  };
+});
+
+export default adjectives;
+

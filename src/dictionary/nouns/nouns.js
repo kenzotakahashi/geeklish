@@ -1,41 +1,50 @@
-const data = {
-	dog: {
+import uuid from 'uuid';
+
+const nouns = [
+	{
 		type: "countable",
-		singular: "dog",
+		base: "dog",
 		plural: "dogs"
 	},
-	John: {
+	{
 		type: "both",
-		singular: "John"
+		base: "John"
 	},
-	park: {
+	{
 		type: "countable",
-		singular: 'park',
+		base: 'park',
 		plural: 'parks'
 	},
-	child: {
+	{
 		type: "countable",
-		singular: 'child',
+		base: 'child',
 		plural: 'children'
 	},
-	student: {
+	{
 		type: "countable",
-		singular: 'student',
+		base: 'student',
 		plural: 'students'
 	},
-	life: {
+	{
 		type: 'both',
-		singular: 'life',
+		base: 'life',
 		plural: 'lives'
 	},
-	person: {
+	{
 		type: "countable",
-		singular: 'person',
+		base: 'person',
 		plural: 'people'
 	},
-	lunch: {
+	{
 		type: 'both',
-		singular: 'lunch',
+		base: 'lunch',
 		plural: 'lunches'
 	}
-}
+].map(o => {
+  return {
+    ...o,
+    id: uuid.v4(),
+    pos: 'Noun',
+  };
+});
+export default nouns;

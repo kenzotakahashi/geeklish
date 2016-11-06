@@ -1,34 +1,36 @@
-const data = {
-	love: {
+import uuid from 'uuid';
+
+const verbs = [
+	{
 		base: 'love',
-		3s: 'loves',
+		'3s': 'loves',
 		past: 'loved',
 		gerund: 'loving',
 		complements: [
 			['N']
 		]
 	},
-	like: {
+	{
 		base: 'like',
-		3s: 'likes',
+		'3s': 'likes',
 		past: 'liked',
 		gerund: 'liking',
 		complements: [
 			['N']
 		]
 	},
-	find: {
+	{
 		base: 'find',
-		3s: 'finds',
+		'3s': 'finds',
 		past: 'found',
 		gerund: 'finding',
 		complements: [
 			['N']
 		]
 	},
-	have: {
+	{
 		base: 'have',
-		3s: 'has',
+		'3s': 'has',
 		past: 'had',
 		gerund: 'having',
 		complements: [
@@ -36,9 +38,9 @@ const data = {
 			['To']
 		]
 	},
-	give: {
+	{
 		base: 'give',
-		3s: 'gives',
+		'3s': 'gives',
 		past: 'gave',
 		passive: 'given',
 		gerund: 'giving',
@@ -47,18 +49,18 @@ const data = {
 			['N', 'P']
 		]
 	},
-	talk: {
+	{
 		base: 'talk',
-		3s: 'talks',
+		'3s': 'talks',
 		past: 'talked',
-		gerund: talking,
+		gerund: 'talking',
 		complements: [
 			['P']
 		]
 	},
-	live: {
+	{
 		base: 'live',
-		3s: 'lives',
+		'3s': 'lives',
 		past: 'lived',
 		gerund: 'living',
 		complements: [
@@ -66,9 +68,9 @@ const data = {
 			['P']
 		]
 	},
-	work: {
+	{
 		base: 'work',
-		3s: 'works',
+		'3s': 'works',
 		past: 'worked',
 		gerund: 'working',
 		complements: [
@@ -76,9 +78,9 @@ const data = {
 			['P']
 		]
 	},
-	eat: {
+	{
 		base: 'eat',
-		3s: 'eats',
+		'3s': 'eats',
 		past: 'ate',
 		passive: 'eaten',
 		gerund: 'eating',
@@ -87,9 +89,9 @@ const data = {
 			['N']
 		]
 	},
-	walk: {
+	{
 		base: 'walk',
-		3s: 'walks',
+		'3s': 'walks',
 		past: 'walked',
 		gerund: 'walking',
 		complements: [
@@ -97,4 +99,12 @@ const data = {
 			['N']
 		]
 	}
-}
+].map(o => {
+  return {
+    ...o,
+    id: uuid.v4(),
+    pos: 'Verb',
+  };
+});
+
+export default verbs;

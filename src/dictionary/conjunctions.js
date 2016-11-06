@@ -1,14 +1,14 @@
 {
 	"and": {
-		"word": "and",
+		"base": "and",
 		"type": "coordinating"
 	},
 	"if": {
-		"word": "if",
+		"base": "if",
 		"type": "subordinating"
 	},
 	"when": {
-		"word": "when",
+		"base": "when",
 		"type": "subordinating"
 	}
 }

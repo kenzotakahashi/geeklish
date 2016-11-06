@@ -11,11 +11,11 @@ const Pronoun = function(p, state) {
     return this.word[this.mode];
   };
 
-  this.get_list = function() {
+  this.getList = function() {
     return [this];
   };
 
-  this.is_3s = function() {
+  this.is3s = function() {
     return this.number === 'singular' && ![1,2].includes(this.person);
   };
 };

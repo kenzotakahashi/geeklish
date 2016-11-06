@@ -7,7 +7,7 @@ const factory = {
       id: uuid.v4(),
       pos: 'Pronoun',
       word: {
-        n: w.n,
+        n: w.base,
         a: w.a || w.n,
         p: w.p || null,
         r: w.r || null,
@@ -88,7 +88,6 @@ function reducer(state, action) {
       const wordIndex = state.Words.findIndex(t => t.id === action.activeWord);
       const oldWord = state.Words[wordIndex];
       const word_base = Dictionary.find(o => o.id === action.id);
-      console.log(oldWord);
       const [updated, initialized] = takeWord[oldWord.pos][word_base.pos](word_base, oldWord[action.target]);  
       const newWord = {
         ...oldWord,

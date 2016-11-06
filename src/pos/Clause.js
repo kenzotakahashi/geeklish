@@ -10,43 +10,43 @@ const Clause = function(c, state) {
   this.adverbs = c.adverbs;
   this.conjunction = c.conjunction;
 
-  this.get_verb = function(v) {
+  this.getVerb = function(v) {
     if (v.perfect || v.continuous || !!v.modal || v.negative || v.passive) {
       return // TODO
     }
     if (v.past) {
       return [v.word['past']];
     }
-    return this.subject.is_3s() ? [v.word['3s']] : [v.word['base']];
+    return this.subject.is3s() ? [v.word['3s']] : [v.word['base']];
   };
 
-  this.get_clause = function() {
+  this.getClause = function() {
     let s = this.subject;
     let v = this.verb;
 
     if (this.c_type === 'command') {
       if (!v) return '(You need a verb)';
       const negative = v.negative ? ['do not '] : [];
-      return negative.concat(v.get_list([v.word.base]));
+      return negative.concat(v.getList([v.word.base]));
     }
     if (!s || !v) return '(You need a subject and a verb)';
     
-    let c = s.get_list();
+    let c = s.getList();
     if (v.pos === "Be") {
       return // TODO
     }
     if (v.pos === "Verb") {
       if (this.c_type === 'question' && !s.is_wh) {
-        const [head, rest] = this.get_verb_for_question(v);
-        return [head, ...c, ...v.get_list(rest)];
+        const [head, rest] = this.getVerb_for_question(v);
+        return [head, ...c, ...v.getList(rest)];
       } else {
-        return c.concat(v.get_list(this.get_verb(v)));
+        return c.concat(v.getList(this.getVerb(v)));
       }
     }
   }
 
   this.print = function() {
-    let c = this.get_clause();
+    let c = this.getClause();
     if (typeof(c) === 'string') {
       return c;
     }

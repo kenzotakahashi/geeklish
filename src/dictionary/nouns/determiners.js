@@ -1,17 +1,26 @@
-const data = {
-	this: {
-		word: "this",
+import uuid from 'uuid';
+
+const determiners = [
+	{
+		base: "this",
 		number: "singular",
 		independent: true
 	},
-	a: {
-		word: "a",
+	{
+		base: "a",
 		number: "singular",
 		independent: false	
 	},
-	the: {
-		word: "the",
+	{
+		base: "the",
 		number: "both",
 		independent: false			
 	}
-}
+].map(o => {
+  return {
+    ...o,
+    id: uuid.v4(),
+    pos: 'Determiner'
+  };
+});
+export default determiners;

@@ -1,51 +1,61 @@
-{
-	there: {
-		n: "there"
-	},
-	he: {
-		n: 'he',
-		a: 'him',
-		p: 'his',
-		r: 'himself',
-		person: 3,
-		number: 'singular'
-	},
-	I: {
-		n: 'I',
-		a: 'me',
-		p: 'my',
-		pp: 'mine',
-		r: 'myself',
-		person: 1,
-		number: 'singular'
-	},
-	you: {
-		n: 'you',
-		a: 'you',
-		p: 'your',
-		pp: 'yours',
-		r: 'yourself',
-		person: 2,
-		number: 'singular'
-	},
-	what: {
-		n: 'what',
-		person: 3,
-		number: 'singular'
-	},
-	who: {
-		n: 'who',
-		person: 3,
-		number: 'singular'
-	},
-	that: {
-		n: 'that',
-		person: 3,
-		number: 'singular'	
-	},
-	which: {
-		n: 'which',
-		person: 3,
-		number: 'singular'
-	}
-}
+import uuid from 'uuid';
+
+const pronouns = [
+  {
+    base: "there"      
+  },
+  {
+    base: 'he',
+    a: 'him',
+    p: 'his',
+    r: 'himself',
+    person: 3,
+    number: 'singular'
+  },
+  {
+    base: 'I',
+    a: 'me',
+    p: 'my',
+    pp: 'mine',
+    r: 'myself',
+    person: 1,
+    number: 'singular'
+  },
+  {
+    base: 'you',
+    a: 'you',
+    p: 'your',
+    pp: 'yours',
+    r: 'yourself',
+    person: 2,
+    number: 'singular' 
+  },
+  {
+    base: 'what',
+    person: 3,
+    number: 'singular'
+  },
+  {
+    base: 'who',
+    person: 3,
+    number: 'singular'
+  },
+  {
+    base: 'that',
+    person: 3,
+    number: 'singular'
+  },
+  {
+    base: 'which',
+    person: 3,
+    number: 'singular'
+  },
+].map(o => {
+  return {
+    ...o,
+    id: uuid.v4(),
+    pos: 'Pronoun'
+  };
+});
+
+export default pronouns;

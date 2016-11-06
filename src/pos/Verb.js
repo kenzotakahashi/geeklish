@@ -18,7 +18,7 @@ const Verb = function(v) {
   this.prepositions = v.prepositions;
 
   this.toString = function() {
-    const verb = this.get_list([this.word[this.mode]]);
+    const verb = this.getList([this.word[this.mode]]);
     return verb.join(' ');
   };
 
@@ -37,7 +37,7 @@ const Verb = function(v) {
     }
     return [...before, ...verb, ...after];
   };
-  this.get_list = function(word) {
+  this.getList = function(word) {
     let verb = word.concat(this.complements);
     verb = this.predicate ? verb.concat(this.predicate) : verb;
     verb = this.str_adverbs(verb, this.adverbs);
