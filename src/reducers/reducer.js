@@ -2,23 +2,56 @@ import Dictionary from '../dictionary/dictionary.js'
 import uuid from 'uuid';
 
 const factory = {
-  Pronoun: function(w, mode='n', is_wh=false) {
+  Pronoun: function(w, mode='n', isWh=false) {
     const init = {
       id: uuid.v4(),
       pos: 'Pronoun',
       word: {
         n: w.base,
-        a: w.a || w.n,
+        a: w.a || w.base,
         p: w.p || null,
         r: w.r || null,
       },
       person: w.person || null,
       number: w.number || 'singular',
       mode: mode,
-      is_wh: is_wh
+      isWh: isWh
     };
     init.word.pp = w.pp || init.word.p;
     return init;
+  },
+  Noun: function(w, number='singular', mode=null, isWh=false) {
+    const init = {
+      id: uuid.v4(),
+      pos: 'Noun',
+      type: w.type,
+      word: {
+        singular: w.base,
+        plural: w.plural || w.base, 
+      },
+      person: null,
+      number: number,
+      mode: mode === 'p' ? 'p' : number,
+      isWh: isWh,
+      adjectives: [],
+      adjectivesAfter: [],
+      determiners: [],
+      prepositions: [],
+      nouns: []
+    };
+    init.word.p = init.number === 'singular' ? `${init.word.singular}'s` :
+                  `${init.word.plural}${init.word.plural[-1] === 's' ? "'" : "'s"}`;
+    return init;
+  },
+  Determiner: function(w, isWh=false) {
+    return {
+      id: uuid.v4(),
+      pos: 'Determiner',
+      word: w.base,
+      number: w.number,
+      independent: w.independent,
+      isWh: isWh
+    };
   },
   Verb: function(w, mode='base') {
     const init = {
@@ -52,22 +85,47 @@ const takeWord = {
   Clause: {
     Pronoun: function(word_base, target) {
       const initialized = factory.Pronoun(word_base);
-      const updated = initialized.id;
-      return [updated, initialized];
+      return [initialized.id, initialized];
+    },
+    Noun: function(word_base, target) {
+      const initialized = factory.Noun(word_base);
+      return [initialized.id, initialized];
+    },
+    Determiner: function(word_base, target) {
+      const initialized = factory.Determiner(word_base);
+      return [initialized.id, initialized];
     },
     Verb: function(word_base, target) {
       const initialized = factory.Verb(word_base);
-      const updated = initialized.id;
-      return [updated, initialized];        
+      return [initialized.id, initialized];
     },
   },
   Verb: {
     Pronoun: function(word_base, target) {
       const initialized = factory.Pronoun(word_base, 'a');
-      const updated = target.concat(initialized.id);
+      const updated = Array.isArray(target) ?
+                      target.concat(initialized.id): initialized.id;
       return [updated, initialized];
-    }
+    },
+    Noun: function(word_base, target) {
+      const initialized = factory.Noun(word_base);
+      const updated = Array.isArray(target) ?
+                      target.concat(initialized.id): initialized.id;
+      return [updated, initialized];
+    },
+    Determiner: function(word_base, target) {
+      const initialized = factory.Determiner(word_base);
+      const updated = Array.isArray(target) ?
+                      target.concat(initialized.id): initialized.id;
+      return [updated, initialized];
+    },
   },
+  Noun: {
+    Determiner: function(word_base, target) {
+      const initialized = factory.Determiner(word_base);
+      return [target.concat(initialized.id), initialized];
+    },
+  }
 };
 
 function reducer(state, action) {
@@ -75,7 +133,7 @@ function reducer(state, action) {
     case 'SHOW_OPTIONS': {
       return {
         ...state,
-        activeWord: action.id       
+        activeWord: state.activeWord === action.id ? 1 : action.id
       }
     }
     case 'SHOW_WORD_FACTORY': {
@@ -96,6 +154,8 @@ function reducer(state, action) {
 
       return {
         ...state,
+        activeWord: state.Sentence,
+        target: false,
         Words: [
           ...state.Words.slice(0, wordIndex),
           newWord,
@@ -110,6 +170,33 @@ function reducer(state, action) {
       const newWord = {
         ...oldWord,
         [action.attr]: action.change_to,
+      };
+      return {
+        ...state,
+        Words: [
+          ...state.Words.slice(0, wordIndex),
+          newWord,
+          ...state.Words.slice(wordIndex + 1, state.Words.length),
+        ],
+      }
+    }
+    case 'CHANGE_NUMBER': {
+      const wordIndex = state.Words.findIndex(t => t.id === action.id);
+      const oldWord = state.Words[wordIndex];
+
+      const number = oldWord.number === 'singular' ? 'plural' : 'singular';
+      const p = number === 'singular' ? `${oldWord.word.singular}'s` :
+                `${oldWord.word.plural}${oldWord.word.plural[-1] === 's' ? "'" : "'s"}`;
+
+
+      const newWord = {
+        ...oldWord,
+        number: number,
+        word: {
+          ...oldWord.word,
+          p: p,
+        },
+        mode: oldWord.mode === 'p' ? 'p' : number
       };
       return {
         ...state,

@@ -22,3 +22,12 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.word {
+  margin-right: 20px;
+  cursor: pointer; 
+}
+
+.list-group-item {
+  cursor: pointer;   
+}

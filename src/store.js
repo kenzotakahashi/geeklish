@@ -2,7 +2,7 @@ import reducer from './reducers/reducer.js';
 import { createStore } from 'redux';
 
 let initialState = {
-  activeWord: false,
+  activeWord: 1,
   target: false,
   Sentence: 1,
   Words: [
@@ -12,7 +12,7 @@ let initialState = {
       c_type: 'statement',
       subject: 2,
       verb: 4,
-      adjective_clause: null,
+      adjectiveClause: null,
       adverbs: [],
       conjunction: null,
     },
@@ -29,7 +29,7 @@ let initialState = {
       person: 1,
       number: 'singular',
       mode: 'n',
-      is_wh: false
+      isWh: false
     },
     {
       id: 3,
@@ -44,7 +44,7 @@ let initialState = {
       person: 2,
       number: 'singular',
       mode: 'n',
-      is_wh: false
+      isWh: false
     },
     {
       id: 4,
@@ -84,7 +84,7 @@ initialState = {
       c_type: 'statement',
       subject: null,
       verb: null,
-      adjective_clause: null,
+      adjectiveClause: null,
       adverbs: [],
       conjunction: null,
     },
