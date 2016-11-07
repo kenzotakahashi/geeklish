@@ -3,35 +3,35 @@ import uuid from 'uuid';
 const adverbs = [
 	{
 		base: "really",
-		can_modify: ["verb","adj","adv","clause"]
+		canModify: ["verb","adj","adv","clause"]
 	},
 	{
 		base: "quickly",
-		can_modify: ["verb","adj","adv","clause"]
+		canModify: ["verb","adj","adv","clause"]
 	},
 	{
 		base: "hopefully",
-		can_modify: ["verb","adj","adv","clause"]
+		canModify: ["verb","adj","adv","clause"]
 	},
 	{
 		base: "why",
-		can_modify: ["verb"]
+		canModify: ["verb"]
 	},
 	{
 		base: "how",
-		can_modify: ["verb", "adj", "adv"]
+		canModify: ["verb", "adj", "adv"]
 	},
 	{
 		base: "when",
-		can_modify: ["verb", "adj", "adv"]
+		canModify: ["verb", "adj", "adv"]
 	},
 	{
 		base: "where",
-		can_modify: ["verb", "adj"]
+		canModify: ["verb", "adj"]
 	},
 	{
 		base: "nearly",
-		can_modify: ["verb","adj","adv","det","clause"]
+		canModify: ["verb","adj","adv","det","clause"]
 	}
 ].map(o => {
   return {

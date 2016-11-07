@@ -4,6 +4,9 @@ import Pronoun from './Pronoun.jsx';
 import Sentence from './Sentence.jsx'
 import Noun from './Noun.jsx'
 import Determiner from './Determiner.jsx'
+import Adjective from './Adjective.jsx'
+import Adverb from './Adverb.jsx'
+import Preposition from './Preposition.jsx'
 
 const components = {
 	Verb,
@@ -11,7 +14,10 @@ const components = {
 	Pronoun,
 	Sentence,
 	Noun,
-	Determiner
+	Determiner,
+	Adjective,
+	Adverb,
+	Preposition
 };
 
 export default components;

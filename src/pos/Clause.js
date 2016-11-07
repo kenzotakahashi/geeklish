@@ -177,9 +177,12 @@ const Clause = function(c) {
     if (typeof(c) === 'string') {
       return c;
     }
+    // console.log(c);
     const beginnings = this.verb.adverbs.filter(o => o && o.position === 'beginning'); 
     c = [...beginnings, ...c];
+    // console.log(c);
     c = this.reorderWh(c);
+    // console.log(c);
     c = this.checkArticle(c);
     c = c.map(o => o.toString()).join(' ');
     c = !!this.adjectiveClause ? `${this.adjectiveClause}, ${c}` : c;

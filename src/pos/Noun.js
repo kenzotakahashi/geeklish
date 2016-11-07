@@ -30,6 +30,7 @@ const Noun = function(p) {
   };
 
   this.is3s = () => this.number === 'singular' && ![1,2].includes(this.person);
+  
   this.getWh = () => {
     if (this.isWh) return (this, true);
     for (const attr of ['adjectives','adjectivesAfter','determiners','prepositions']) {

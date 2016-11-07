@@ -78,7 +78,46 @@ const factory = {
     };
     init.word.passive = w.passive || init.word.past;
     return init;
-  }
+  },
+  Adjective: function(w, mode='base', isWh=false) {
+    return {
+      id: uuid.v4(),
+      pos: 'Adjective',
+      word: {
+        base: w.base,
+        comparative: w.comparative || w.base,
+        superlative: w.superlative || w.base
+      },
+      mode: mode,
+      adverbs: [],
+      prepositions: [],
+      isWh: isWh
+    }
+  },
+  Adverb: function(w, position='before', isWh=false) {
+    return {
+      id: uuid.v4(),
+      pos: 'Adverb',
+      word: w.base,
+      canModifyVerb: w.canModify.includes('verb'),
+      canModifyAdj: w.canModify.includes('adj'),
+      canModifyAdv: w.canModify.includes('adv'),
+      canModifyDet: w.canModify.includes('det'),
+      canModifyClause: w.canModify.includes('clause'),
+      position: position,
+      adverb: null,
+      isWh: isWh
+    }
+  },
+  Preposition: function(w, isWh=false) {
+    return {
+      id: uuid.v4(),
+      pos: 'Preposition',
+      word: w.base,
+      complement: null,
+      isWh: isWh
+    }
+  },
 };
 
 const takeWord = {
@@ -119,12 +158,58 @@ const takeWord = {
                       target.concat(initialized.id): initialized.id;
       return [updated, initialized];
     },
+    Adverb: function(word_base, target) {
+      const initialized = factory.Adverb(word_base);
+      return [target.concat(initialized.id), initialized];      
+    },
+    Preposition: function(word_base, target) {
+      const initialized = factory.Preposition(word_base);
+      return [target.concat(initialized.id), initialized];      
+    },
   },
   Noun: {
     Determiner: function(word_base, target) {
       const initialized = factory.Determiner(word_base);
       return [target.concat(initialized.id), initialized];
     },
+    Adjective: function(word_base, target) {
+      const initialized = factory.Adjective(word_base);
+      return [target.concat(initialized.id), initialized];      
+    },
+    Preposition: function(word_base, target) {
+      const initialized = factory.Preposition(word_base);
+      return [target.concat(initialized.id), initialized];      
+    },
+  },
+  Adjective: {
+    Adverb: function(word_base, target) {
+      const initialized = factory.Adverb(word_base);
+      return [target.concat(initialized.id), initialized];      
+    },
+    Preposition: function(word_base, target) {
+      const initialized = factory.Preposition(word_base);
+      return [target.concat(initialized.id), initialized];      
+    },
+  },
+  Adverb: {
+    Adverb: function(word_base, target) {
+      const initialized = factory.Adverb(word_base);
+      return [target.concat(initialized.id), initialized];      
+    },    
+  },
+  Preposition: {
+    Pronoun: function(word_base, target) {
+     const initialized = factory.Pronoun(word_base, 'a');
+     return [initialized.id, initialized];
+    },
+    Noun: function(word_base, target) {
+     const initialized = factory.Noun(word_base);
+     return [initialized.id, initialized];
+    },
+    Determiner: function(word_base, target) {
+     const initialized = factory.Determiner(word_base);
+     return [initialized.id, initialized];
+    }, 
   }
 };
 
@@ -133,12 +218,14 @@ function reducer(state, action) {
     case 'SHOW_OPTIONS': {
       return {
         ...state,
-        activeWord: state.activeWord === action.id ? 1 : action.id
+        activeWord: state.activeWord === action.id ? 1 : action.id,
+        target: null
       }
     }
     case 'SHOW_WORD_FACTORY': {
       return {
         ...state,
+        activeWord: action.id,        
         target: action.target
       }
     }
@@ -187,7 +274,6 @@ function reducer(state, action) {
       const number = oldWord.number === 'singular' ? 'plural' : 'singular';
       const p = number === 'singular' ? `${oldWord.word.singular}'s` :
                 `${oldWord.word.plural}${oldWord.word.plural[-1] === 's' ? "'" : "'s"}`;
-
 
       const newWord = {
         ...oldWord,

@@ -13,9 +13,9 @@ const Verb = function(v) {
   this.passive = v.passive;
   this.modal = v.modal;
   this.complements = v.complements.map(o => createWord(o));
-  this.predicate = v.predicate;
-  this.adverbs = v.adverbs;
-  this.prepositions = v.prepositions;
+  this.predicate = createWord(v.predicate);
+  this.adverbs = v.adverbs.map(o => createWord(o));;
+  this.prepositions = v.prepositions.map(o => createWord(o));;
 
   this.toString = function() {
     const verb = this.getList([this.word[this.mode]]);
@@ -29,7 +29,7 @@ const Verb = function(v) {
     const before = [];
     const after = [];
     for (const adv of adverbs) {
-      if (adv.position === 'before_verb') {
+      if (adv.position === 'before') {
         before.push(adv);
       } else {
         after.push(adv);

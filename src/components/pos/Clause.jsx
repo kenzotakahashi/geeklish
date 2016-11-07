@@ -30,8 +30,13 @@ const Clause = React.createClass({
     const state = store.getState();
     const clause = state.Words.find(o => o.id === this.props.id);
     const list = ['subject', 'verb'].map(w => (
-      !!clause[w] ? e(pos_components[state.Words.find(o => o.id === clause[w]).pos], {id: clause[w],  key: w}) :
-                    <div key={w} className="list-group-item" onClick={() => this.showWordFacotory(w)}>{w}</div>
+      !!clause[w] ?
+      e(pos_components[state.Words.find(o => o.id === clause[w]).pos], {id: clause[w],  key: w}) :
+      e('div', {
+        className: `list-group-item ${state.target === w ? 'active' : 'list-group-item-info'}`,
+        key: w,
+        onClick: () => this.showWordFacotory(w)
+      }, w)
     ));
 
     const attributes = ['statement','question','command'].map(o => (

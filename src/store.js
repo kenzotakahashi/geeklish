@@ -3,7 +3,7 @@ import { createStore } from 'redux';
 
 let initialState = {
   activeWord: 1,
-  target: false,
+  target: null,
   Sentence: 1,
   Words: [
     {
@@ -75,7 +75,7 @@ let initialState = {
 
 initialState = {
   activeWord: 1,
-  target: false,
+  target: null,
   Sentence: 1,
   Words: [
     {
