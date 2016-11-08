@@ -79,6 +79,34 @@ const factory = {
     init.word.passive = w.passive || init.word.past;
     return init;
   },
+  Be: function(mode='base') {
+    return {
+      id: uuid.v4(),
+      pos: 'Be',
+      word: {
+        base: 'be',
+        '1s': 'am',
+        '3s': 'is',
+        'plural': 'are',
+        'past_s': 'was',
+        'past_p': 'were',
+        'past': null,
+        'passive': 'been',
+        'gerund': 'being'
+      },
+      valid_complements: [],
+      mode: mode,
+      negative: false,
+      modal: null,
+      past: false,
+      perfect: false,
+      continuous: false,
+      complements: [],
+      adverbs: [],
+      predicate: null,
+      prepositions: []
+    }
+  },
   Adjective: function(w, mode='base', isWh=false) {
     return {
       id: uuid.v4(),
@@ -118,6 +146,14 @@ const factory = {
       isWh: isWh
     }
   },
+  To: function() {
+    return {
+      id: uuid.v4(),
+      pos: 'To',
+      word: 'to',
+      verb: null
+    }
+  }
 };
 
 const takeWord = {
@@ -136,6 +172,10 @@ const takeWord = {
     },
     Verb: function(word_base, target) {
       const initialized = factory.Verb(word_base);
+      return [initialized.id, initialized];
+    },
+    Be: function(word_base, target) {
+      const initialized = factory.Be();
       return [initialized.id, initialized];
     },
   },
@@ -165,6 +205,50 @@ const takeWord = {
     Preposition: function(word_base, target) {
       const initialized = factory.Preposition(word_base);
       return [target.concat(initialized.id), initialized];      
+    },
+    To: function(word_base, target) {
+      const initialized = factory.To();
+      return [target.concat(initialized.id), initialized];      
+    },
+    Adjective: function(word_base, target) {
+     const initialized = factory.Adjective(word_base);
+     return [initialized.id, initialized];
+    },
+  },
+  Be: {
+    Pronoun: function(word_base, target) {
+      const initialized = factory.Pronoun(word_base, 'a');
+      const updated = Array.isArray(target) ?
+                      target.concat(initialized.id): initialized.id;
+      return [updated, initialized];
+    },
+    Noun: function(word_base, target) {
+      const initialized = factory.Noun(word_base);
+      const updated = Array.isArray(target) ?
+                      target.concat(initialized.id): initialized.id;
+      return [updated, initialized];
+    },
+    Determiner: function(word_base, target) {
+      const initialized = factory.Determiner(word_base);
+      const updated = Array.isArray(target) ?
+                      target.concat(initialized.id): initialized.id;
+      return [updated, initialized];
+    },
+    Adverb: function(word_base, target) {
+      const initialized = factory.Adverb(word_base);
+      return [target.concat(initialized.id), initialized];      
+    },
+    Preposition: function(word_base, target) {
+      const initialized = factory.Preposition(word_base);
+      return [target.concat(initialized.id), initialized];      
+    },
+    To: function(word_base, target) {
+      const initialized = factory.To();
+      return [target.concat(initialized.id), initialized];      
+    },
+    Adjective: function(word_base, target) {
+     const initialized = factory.Adjective(word_base);
+     return [initialized.id, initialized];
     },
   },
   Noun: {
@@ -210,6 +294,12 @@ const takeWord = {
      const initialized = factory.Determiner(word_base);
      return [initialized.id, initialized];
     }, 
+  },
+  To: {
+    Verb: function(word_base, target) {
+     const initialized = factory.Verb(word_base);
+     return [initialized.id, initialized];
+    },    
   }
 };
 

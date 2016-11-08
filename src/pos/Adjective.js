@@ -13,7 +13,7 @@ const Adjective = function(p) {
     ...this.adverbs,
     this.word[this.mode],
     ...this.prepositions
-  ].map(o => o.toString()).join(' ');          
+  ].map(o => o.toString()).join(' ');
 
   this.getWh = () => {
     if (this.isWh) return (this, true);

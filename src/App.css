@@ -29,5 +29,42 @@
 }
 
 .list-group-item {
-  cursor: pointer;   
+  cursor: pointer;
 }
+
+.list-group-item.Noun {
+  color: #fff;
+  background-color: #88725D;
+}
+
+.list-group-item.Pronoun {
+  color: #fff;
+  background-color: #845A31;
+}
+
+.list-group-item.Determiner {
+  color: #fff;
+  background-color: #603F39;
+}
+
+.list-group-item.Verb {
+  color: #fff;
+  background-color: #C6744F;
+}
+
+.list-group-item.Adjective {
+  color: #fff;
+  background-color: #9AB4A8;
+}
+
+.list-group-item.Adverb {
+  color: #fff;
+  background-color: #7CADA8;
+}
+
+.list-group-item.Preposition {
+  color: #fff;
+  background-color: #56C9BF;
+}
+
+

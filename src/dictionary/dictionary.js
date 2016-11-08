@@ -5,6 +5,7 @@ import pronoun from './nouns/pronouns.js';
 import adjective from './adjectives.js';
 import preposition from './prepositions.js';
 import adverb from './adverbs.js';
+import others from './others.js';
 
 const Dictionary = [
   ...verb,
@@ -13,7 +14,8 @@ const Dictionary = [
   ...pronoun,
   ...adjective,
   ...preposition,
-  ...adverb
+  ...adverb,
+  ...others
 ]
 
 export default Dictionary;
