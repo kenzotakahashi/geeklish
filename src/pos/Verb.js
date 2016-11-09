@@ -24,16 +24,13 @@ const getList = function(word) {
   return verb;
 };
 
-const makeVerb = function() {
-  const negative = this.negative ? ['not'] : [];
-  return this.perfect ? [...negative, 'have', this.word.passive] :
-         this.passive ? [...negative, 'be', this.word.passive] :
-         this.continuous ? [...negative, 'be', this.word.gerund] :
-         [...negative, this.word.base];
-}
-
 const verbAfterTo = function() {
-  return this.getList(makeVerb(this));
+  const negative = this.negative ? ['not'] : [];
+  const verb = this.perfect ? [...negative, 'have', this.word.passive] :
+               this.passive ? [...negative, 'be', this.word.passive] :
+               this.continuous ? [...negative, 'be', this.word.gerund] :
+               [...negative, this.word.base];
+  return this.getList(verb)
 };
 
 
@@ -62,7 +59,6 @@ export const Verb = function(v) {
 
 Verb.prototype.str_adverbs = str_adverbs;
 Verb.prototype.getList = getList;
-Verb.prototype.makeVerb = makeVerb;
 Verb.prototype.verbAfterTo = verbAfterTo;
 
 export const Be = function(v) {
@@ -84,5 +80,4 @@ export const Be = function(v) {
 
 Be.prototype.str_adverbs = str_adverbs;
 Be.prototype.getList = getList;
-Be.prototype.makeVerb = makeVerb;
 Be.prototype.verbAfterTo = verbAfterTo;
