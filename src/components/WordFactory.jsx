@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 import store from '../store.js'
-import Dictionary from '../dictionary/dictionary.js';
+import Dictionary from '../dictionary/dictionary.js'
 
-const e = React.createElement;
+const e = React.createElement
 
 const nouns = ['Noun', 'Pronoun'] //'Determiner'
 const valid_pos = {
@@ -50,12 +50,12 @@ const WordFactory = React.createClass({
       id: id,
       activeWord: activeWord,
       target: target,
-    });
+    })
   },
   render: function() {
-    const state = store.getState();
-    const pos = state.Words.find(o => o.id === state.activeWord).pos;
-    const valid = valid_pos[pos][state.target];
+    const state = store.getState()
+    const pos = state.Words.find(o => o.id === state.activeWord).pos
+    const valid = valid_pos[pos][state.target]
 
     const words = Dictionary.filter(t => (
         valid.includes(t.pos)
@@ -65,13 +65,13 @@ const WordFactory = React.createClass({
         key: o.id,
         onClick: () => this.createNewWord(o.id, state.activeWord, state.target)
       }, o.base)
-    ));
+    ))
     return (
       <ul className='list-group row'>
         {words}
       </ul>
-    );
+    )
   }
-});
+})
 
-export default WordFactory;
+export default WordFactory

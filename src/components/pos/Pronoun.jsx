@@ -1,5 +1,6 @@
 import React from 'react';
 import store from '../../store.js'
+import { changeAttribute } from '../../actions'
 
 const e = React.createElement;
 
@@ -14,16 +15,16 @@ const Pronoun = React.createClass({
   },
   render: function() {
     const state = store.getState();
-    const pronoun = state.Words.find(o => o.id === this.props.id);
+    const word = state.Words.find(o => o.id === this.props.id);
     
     return (
       <div className="list-group-item">
       	<div>
-	        <span className='word'>{pronoun.word.n}</span>
+	        <span className='word'>{word.word.n}</span>
 	        {e('button', {
-            className: `btn btn-sm btn-${pronoun.isWh ? 'success' : 'default'}`,
+            className: `button is-active ${word.isWh ? 'is-primary' : ''}`,
             type: 'button',
-            onClick: () => this.changeAttribute('isWh', this.props.id, !pronoun.isWh)
+            onClick: () => store.dispatch(changeAttribute(this.props.id, 'isWh', !word.isWh))
        		}, 'WH question')}
 	      </div>
       </div>

@@ -1,31 +1,11 @@
 import React from 'react';
 import store from '../../store.js'
 import pos_components from './pos_components';
+import { showOptions, showWordFactory, changeAttribute } from '../../actions'
 
 const e = React.createElement;
 
 const Adjective = React.createClass({
-  showOptions: function () {
-    store.dispatch({
-      type: 'SHOW_OPTIONS',
-      id: this.props.id,
-    });
-  },
-  showWordFacotory: function(target) {
-    store.dispatch({
-      type: 'SHOW_WORD_FACTORY',
-      id: this.props.id,
-      target: target,
-    });
-  },
-  changeAttribute: function(attr, id, change_to) {
-    store.dispatch({
-      type: 'CHANGE_ATTRIBUTE',
-      id,
-      attr,
-      change_to,
-    });
-  },
   render: function() {
     const state = store.getState();
     const word = state.Words.find(o => o.id === this.props.id);
@@ -39,10 +19,10 @@ const Adjective = React.createClass({
 
     const attributes = ['base','comparative','superlative'].map(o => (
       e('button', {
-        className: `btn btn-sm btn-${word.mode === o ? 'success' : 'default'}`,
+        className: `button is-active ${word.mode === o? 'is-primary' : ''}`,
         key: o,
         type: 'button',
-        onClick: () => this.changeAttribute('mode', this.props.id, o)
+        onClick: () => store.dispatch(changeAttribute(this.props.id, 'mode', o))
       }, o)
     ));
 
@@ -51,19 +31,19 @@ const Adjective = React.createClass({
       e('div', {
         className: `list-group-item ${state.target === o ? 'active' : 'list-group-item-info'}`,
         key: i,
-        onClick: () => this.showWordFacotory(o)
+        onClick: () => store.dispatch(showWordFactory(this.props.id, o))
       }, o)
     )) : '';
 
     return (
       <div className="list-group-item">
         <div>
-          <span className='word' onClick={this.showOptions}>{word.word.base}</span>
+          <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{word.word.base}</span>
           {attributes}
           {e('button', {
-            className: `btn btn-sm btn-${word.isWh ? 'success' : 'default'}`,
+            className: `button is-active ${word.isWh ? 'is-primary' : ''}`,
             type: 'button',
-            onClick: () => this.changeAttribute('isWh', this.props.id, !word.isWh)
+            onClick: () => store.dispatch(changeAttribute(this.props.id, 'isWh', !word.isWh))
           }, 'WH question')}
         </div>
         {adverbs}

@@ -1,37 +1,46 @@
 import { createWord } from './util.js';
 
-const Noun = function(p) {
-  this.id = p.id;
-  this.pos = p.pos;
-  this.word = p.word;
-  this.person = p.person;
-  this.number = p.number;
-  this.mode = p.mode;
-  this.isWh = p.isWh;
-  this.adjectives = p.adjectives.map(o => createWord(o));
-  this.adjectivesAfter = p.adjectivesAfter.map(o => createWord(o));
-  this.determiners = p.determiners.map(o => createWord(o));
-  this.prepositions = p.prepositions.map(o => createWord(o));
-  this.nouns = p.nouns.map(o => createWord(o));
-  
-  this.toString = () => this.getList().map(o => o.toString()).join(' ');
-
-  this.getList = () => this.getRest(this.word[this.mode]);
-
-  this.getRest = (noun) => [...this.determiners, ...this.adjectives, ...this.nouns, 
-                            noun, ...this.adjectivesAfter, ...this.prepositions];
-
-  this.getBe = (past) => {
+const Noun = {
+  init: function(w) {
+    this.id = w.id;
+    this.pos = w.pos;
+    this.word = w.word;
+    this.person = w.person;
+    this.number = w.number;
+    this.mode = w.mode;
+    this.isWh = w.isWh;
+    this.adjectives = w.adjectives.map(o => createWord(o));
+    this.adjectivesAfter = w.adjectivesAfter.map(o => createWord(o));
+    this.determiners = w.determiners.map(o => createWord(o));
+    this.prepositions = w.prepositions.map(o => createWord(o));
+    this.nouns = w.nouns.map(o => createWord(o));
+    return this
+  },
+  toString: function() {
+    return this.getList().map(o => o.toString()).join(' ')
+  },
+  getList: function() {
+    return this.getRest(this.word[this.mode])
+  },
+  getRest: function(noun) {
+    return [...this.determiners,
+            ...this.adjectives,
+            ...this.nouns, 
+            noun,
+            ...this.adjectivesAfter,
+            ...this.prepositions]
+  },
+  getBe: function(past) {
     if (this.number === 'plural' || this.person === 2) {
       return past ? 'were' : 'are'
     } else {
       return past ? 'was' : 'is';
     }
-  };
-
-  this.is3s = () => this.number === 'singular' && ![1,2].includes(this.person);
-  
-  this.getWh = () => {
+  },
+  is3s: function() {
+    return this.number === 'singular' && ![1,2].includes(this.person)
+  },
+  getWh: function() {
     if (this.isWh) return (this, true);
     for (const attr of ['adjectives','adjectivesAfter','determiners','prepositions']) {
       for (let i = 0; i < this[attr].length; i++) {
@@ -44,6 +53,6 @@ const Noun = function(p) {
     }
     return [null, false];
   }
-};
+}
 
 export default Noun;

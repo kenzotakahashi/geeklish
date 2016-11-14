@@ -1,31 +1,11 @@
 import React from 'react';
 import store from '../../store.js'
 import pos_components from './pos_components';
+import { showOptions, showWordFactory } from '../../actions'
 
 const e = React.createElement;
 
 export const To = React.createClass({
-  showOptions: function () {
-    store.dispatch({
-      type: 'SHOW_OPTIONS',
-      id: this.props.id,
-    });
-  },
-  showWordFacotory: function(target) {
-    store.dispatch({
-      type: 'SHOW_WORD_FACTORY',
-      id: this.props.id,
-      target: target,
-    });
-  },
-  changeAttribute: function(attr, id, change_to) {
-    store.dispatch({
-      type: 'CHANGE_ATTRIBUTE',
-      id,
-      attr,
-      change_to,
-    });
-  },
   render: function() {
     const state = store.getState();
     const word = state.Words.find(o => o.id === this.props.id);
@@ -38,13 +18,13 @@ export const To = React.createClass({
           e('div', {
             className: `list-group-item ${state.target === w ? 'active' : 'list-group-item-info'}`,
             key: w,
-            onClick: () => this.showWordFacotory(w)
+            onClick: () => store.dispatch(showWordFactory(this.props.id, w))
           }, w) : '';
 
     return (
       <div className="list-group-item">
         <div>
-          <span className='word' onClick={this.showOptions}>{word.word}</span>
+          <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{word.word}</span>
         </div>
         {verb}
       </div>

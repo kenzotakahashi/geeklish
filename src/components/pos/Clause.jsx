@@ -1,65 +1,63 @@
-import React from 'react';
+import React from 'react'
 import store from '../../store.js'
-import pos_components from './pos_components';
+import pos_components from './pos_components'
+import { showOptions, showWordFactory, changeAttribute } from '../../actions'
 
-const e = React.createElement;
+const e = React.createElement
 
 const Clause = React.createClass({
-  showOptions: function () {
-    store.dispatch({
-      type: 'SHOW_OPTIONS',
-      id: this.props.id,
-    });
-  },
-  showWordFacotory: function(target) {
-    store.dispatch({
-      type: 'SHOW_WORD_FACTORY',
-      id: this.props.id,
-      target: target,
-    });
-  },
-  changeAttribute: function(attr, id, change_to) {
-    store.dispatch({
-      type: 'CHANGE_ATTRIBUTE',
-      id,
-      attr,
-      change_to,
-    });
-  },
   render: function() {
-    const state = store.getState();
-    const clause = state.Words.find(o => o.id === this.props.id);
-    const list = ['subject', 'verb'].map(w => (
+    const state = store.getState()
+    const clause = state.Words.find(o => o.id === this.props.id)
+    const options = ['subject', 'verb'].map(w => (
       !!clause[w] ?
       e(pos_components[state.Words.find(o => o.id === clause[w]).pos], {id: clause[w],  key: w}) :
       e('div', {
         className: `list-group-item ${state.target === w ? 'active' : 'list-group-item-info'}`,
         key: w,
-        onClick: () => this.showWordFacotory(w)
+        onClick: () => store.dispatch(showWordFactory(this.props.id, w))
       }, w)
-    ));
+    ))
 
-    const attributes = ['statement','question','command'].map(o => (
+    // const options = ['subject', 'verb'].map(w => (
+    //   !!clause[w] ?
+    //   {
+    //     pos: pos_components[state.Words.find(o => o.id === clause[w]).pos],
+    //     id: clause[w],
+    //   } :
+    //   {
+    //     target: state.target
+    //   }
+    // ))
+
+    const attr = ['statement','question','command'].map(o => (
       e('button', {
-        className: `btn btn-sm btn-${clause.c_type === o ? 'success' : 'default'}`,
+        className: `button is-active ${clause.c_type === o? 'is-primary' : ''}`,
         key: o,
         type: 'button',
-        onClick: () => this.changeAttribute('c_type', this.props.id, o)
+        onClick: () => store.dispatch(changeAttribute(this.props.id, 'c_type', o))
       }, o)
-    ));   
+    ))
 
     return (
+      // <ClauseView
+      //   clause={clause}
+      //   options={options}
+      //   attr=['statement','question','command']
+      //   showWordFactory={this.showWordFactory}
+      //   changeAttribute={this.changeAttribute}
+
       <div className='list-group-item'>
         <div>
-          <span className='word' onClick={this.showOptions}>Clause</span>
-          {attributes}
+          <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>Clause</span>
+          {attr}
         </div>
         <div>
-          {list}
+          {options}
         </div>
       </div>
-    );
+    )
   },
-});
+})
 
-export default Clause;
+export default Clause

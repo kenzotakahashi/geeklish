@@ -24,7 +24,7 @@
 }
 
 .word {
-  margin-right: 20px;
+  margin-right: 10px;
   cursor: pointer; 
 }
 
@@ -67,4 +67,6 @@
   background-color: #56C9BF;
 }
 
-
+button.button {
+  margin-left: 5px;
+}
