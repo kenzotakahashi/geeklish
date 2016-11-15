@@ -4,8 +4,11 @@ import Dictionary from '../dictionary/dictionary.js'
 
 const e = React.createElement
 
-const nouns = ['Noun', 'Pronoun'] //'Determiner'
+const nouns = ['Noun', 'Pronoun', 'NounContainer'] //'Determiner'
 const valid_pos = {
+  Sentence: {
+    clause: ['Clause']
+  },
   Clause: {
     subject: nouns,
     verb: ['Verb', 'Be']
@@ -27,6 +30,13 @@ const valid_pos = {
     prepositions: ['Preposition'],
     determiners: ['Determiner'],
     nouns: nouns
+  },
+  NounContainer: {
+    adjectives: ['Adjective'],
+    prepositions: ['Preposition'],
+    determiners: ['Determiner'],
+    nouns: nouns,
+    conjunction: ['Conjunction']
   },
   Adjective: {
     adverbs: ['Adverb'],
@@ -66,6 +76,17 @@ const WordFactory = React.createClass({
         onClick: () => this.createNewWord(o.id, state.activeWord, state.target)
       }, o.base)
     ))
+
+    // const words = Dictionary.filter(t => (
+    //     valid.includes(t.pos)
+    //   )).map(o => (
+    //   e('li', {
+    //     className: `list-group-item col-md-3 ${o.pos}`,
+    //     key: o.id,
+    //     onClick: () => this.createNewWord(o.id, state.activeWord, state.target)
+    //   }, o.base)
+    // ))
+
     return (
       <ul className='list-group row'>
         {words}

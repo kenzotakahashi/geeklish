@@ -32,7 +32,7 @@ const Clause = React.createClass({
 
     const attr = ['statement','question','command'].map(o => (
       e('button', {
-        className: `button is-active ${clause.c_type === o? 'is-primary' : ''}`,
+        className: `button is-active ${clause.c_type === o ? 'is-primary' : ''}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(this.props.id, 'c_type', o))

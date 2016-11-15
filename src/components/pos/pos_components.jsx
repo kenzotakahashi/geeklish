@@ -2,7 +2,7 @@ import { Verb, Be } from './Verb.jsx';
 import Clause from './Clause.jsx';
 import Pronoun from './Pronoun.jsx';
 import Sentence from './Sentence.jsx';
-import Noun from './Noun.jsx';
+import { Noun, NounContainer } from './Noun.jsx';
 import Determiner from './Determiner.jsx';
 import Adjective from './Adjective.jsx';
 import Adverb from './Adverb.jsx';
@@ -16,6 +16,7 @@ const components = {
 	Pronoun,
 	Sentence,
 	Noun,
+	NounContainer,
 	Determiner,
 	Adjective,
 	Adverb,

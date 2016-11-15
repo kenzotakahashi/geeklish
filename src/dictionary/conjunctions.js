@@ -1,14 +1,24 @@
-{
-	"and": {
-		"base": "and",
-		"type": "coordinating"
+import uuid from 'uuid'
+
+const conjunctions = [
+	{
+		base: "and",
+		type: "coordinating"
 	},
-	"if": {
-		"base": "if",
-		"type": "subordinating"
+	{
+		base: "if",
+		type: "subordinating"
 	},
-	"when": {
-		"base": "when",
-		"type": "subordinating"
-	}
-}
+	{
+		base: "when",
+		type: "subordinating"
+	},
+].map(o => {
+  return {
+    ...o,
+    id: uuid.v4(),
+    pos: 'Conjunction'
+  }
+})
+
+export default conjunctions

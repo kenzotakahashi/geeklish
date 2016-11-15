@@ -8,6 +8,14 @@ const others = [
 	{
 		pos: 'Be',
 		base: 'be'
+	},
+	{
+		pos: 'Clause',
+		base: 'Clause'
+	},
+	{
+		pos: 'NounContainer',
+		base: 'NounContainer'
 	}
 ].map(o => {
   return {

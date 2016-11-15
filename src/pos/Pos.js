@@ -1,7 +1,7 @@
 import { Verb, Be } from './Verb.js';
 import Clause from './Clause.js';
 import Pronoun from './Pronoun.js';
-import Noun from './Noun.js';
+import { Noun, NounContainer } from './Noun.js';
 import Determiner from './Determiner.js';
 import Adjective from './Adjective.js';
 import Adverb from './Adverb.js'
@@ -13,6 +13,7 @@ const Pos = {
 	Clause,
 	Pronoun,
 	Noun,
+	NounContainer,
 	Determiner,
 	Adjective,
 	Adverb,
