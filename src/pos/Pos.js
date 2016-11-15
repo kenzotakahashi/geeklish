@@ -1,12 +1,13 @@
-import { Verb, Be } from './Verb.js';
-import Clause from './Clause.js';
-import Pronoun from './Pronoun.js';
-import { Noun, NounContainer } from './Noun.js';
-import Determiner from './Determiner.js';
-import Adjective from './Adjective.js';
+import { Verb, Be } from './Verb.js'
+import Clause from './Clause.js'
+import Pronoun from './Pronoun.js'
+import { Noun, NounContainer } from './Noun.js'
+import Determiner from './Determiner.js'
+import Adjective from './Adjective.js'
 import Adverb from './Adverb.js'
-import Preposition from './Preposition.js';
-import { To } from './others'; 
+import Preposition from './Preposition.js'
+import Conjunction from  './Conjunction.js'
+import { To } from './others'
 
 const Pos = {
 	Verb,
@@ -18,8 +19,9 @@ const Pos = {
 	Adjective,
 	Adverb,
 	Preposition,
+	Conjunction,
 	Be,
 	To,
-};
+}
 
-export default Pos; 
+export default Pos 

@@ -74,13 +74,17 @@ export const NounContainer = {
     return this.getList().map(o => o.toString()).join(' ')
   },
   getList: function() {
-    return this.getRest(this.nouns.map(o => o.toString()).join(this.conjunction))
+    let with_conj = []
+    for (let i = 0; i < this.nouns.length; i++) {
+      with_conj = with_conj.concat(i === this.nouns.length - 1 ?
+                                   this.nouns[i] : [this.nouns[i], this.conjunction])
+    }
+    return this.getRest(with_conj)
   },
   getRest: function(noun) {
     return [...this.determiners,
             ...this.adjectives,
-            ...this.nouns, 
-            noun,
+            ...noun,
             ...this.adjectivesAfter,
             ...this.prepositions]
   },

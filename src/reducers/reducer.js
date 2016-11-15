@@ -1,203 +1,75 @@
 import Dictionary from '../dictionary/dictionary.js'
 import factory from '../factory.js'
 
-const takeWord = {
+const words = {
   Sentence: {
-    Clause: function() {
-      const initialized = factory.Clause()
-      return [initialized.id, initialized]
-    }
+    Clause: () => factory.Clause()
   },
   Clause: {
-    Pronoun: function(word_base, target) {
-      const initialized = factory.Pronoun(word_base)
-      return [initialized.id, initialized]
-    },
-    Noun: function(word_base, target) {
-      const initialized = factory.Noun(word_base)
-      return [initialized.id, initialized]
-    },
-    Determiner: function(word_base, target) {
-      const initialized = factory.Determiner(word_base)
-      return [initialized.id, initialized]
-    },
-    NounContainer: function(word_base, target) {
-      const initialized = factory.NounContainer()
-      return [initialized.id, initialized]
-    },
-    Verb: function(word_base, target) {
-      const initialized = factory.Verb(word_base)
-      return [initialized.id, initialized]
-    },
-    Be: function(word_base, target) {
-      const initialized = factory.Be()
-      return [initialized.id, initialized]
-    },
+    Pronoun: (w) => factory.Pronoun(w),
+    Noun: (w) => factory.Noun(w),
+    Determiner: (w) => factory.Determiner(w),
+    NounContainer: (w) => factory.NounContainer(),
+    Verb: (w) => factory.Verb(w),
+    Be: (w) => factory.Be()
   },
   Verb: {
-    Pronoun: function(word_base, target) {
-      const initialized = factory.Pronoun(word_base, 'a')
-      const updated = Array.isArray(target) ?
-                      target.concat(initialized.id): initialized.id
-      return [updated, initialized]
-    },
-    Noun: function(word_base, target) {
-      const initialized = factory.Noun(word_base)
-      const updated = Array.isArray(target) ?
-                      target.concat(initialized.id): initialized.id
-      return [updated, initialized]
-    },
-    NounContainer: function(word_base, target) {
-      const initialized = factory.NounContainer()
-      const updated = Array.isArray(target) ?
-                      target.concat(initialized.id): initialized.id
-      return [updated, initialized]
-    },
-    Determiner: function(word_base, target) {
-      const initialized = factory.Determiner(word_base)
-      const updated = Array.isArray(target) ?
-                      target.concat(initialized.id): initialized.id
-      return [updated, initialized]
-    },
-    Adverb: function(word_base, target) {
-      const initialized = factory.Adverb(word_base)
-      return [target.concat(initialized.id), initialized]      
-    },
-    Preposition: function(word_base, target) {
-      const initialized = factory.Preposition(word_base)
-      return [target.concat(initialized.id), initialized]      
-    },
-    To: function(word_base, target) {
-      const initialized = factory.To()
-      return [target.concat(initialized.id), initialized]      
-    },
-    Adjective: function(word_base, target) {
-     const initialized = factory.Adjective(word_base)
-     return [initialized.id, initialized]
-    },
+    Pronoun: (w) => factory.Pronoun(w, 'a'),
+    Noun: (w) => factory.Noun(w),
+    NounContainer: (w) => factory.NounContainer(),
+    Determiner: (w) => factory.Determiner(w),
+    Adverb: (w) => factory.Adverb(w),
+    Preposition: (w) => factory.Preposition(w),
+    To: (w) => factory.To(),
+    Adjective: (w) => factory.Adjective(w),
   },
   Be: {
-    Pronoun: function(word_base, target) {
-      const initialized = factory.Pronoun(word_base, 'a')
-      const updated = Array.isArray(target) ?
-                      target.concat(initialized.id): initialized.id
-      return [updated, initialized]
-    },
-    Noun: function(word_base, target) {
-      const initialized = factory.Noun(word_base)
-      const updated = Array.isArray(target) ?
-                      target.concat(initialized.id): initialized.id
-      return [updated, initialized]
-    },
-    NounContainer: function(word_base, target) {
-      const initialized = factory.NounContainer()
-      const updated = Array.isArray(target) ?
-                      target.concat(initialized.id): initialized.id
-      return [updated, initialized]
-    },
-    Determiner: function(word_base, target) {
-      const initialized = factory.Determiner(word_base)
-      const updated = Array.isArray(target) ?
-                      target.concat(initialized.id): initialized.id
-      return [updated, initialized]
-    },
-    Adverb: function(word_base, target) {
-      const initialized = factory.Adverb(word_base)
-      return [target.concat(initialized.id), initialized]      
-    },
-    Preposition: function(word_base, target) {
-      const initialized = factory.Preposition(word_base)
-      return [target.concat(initialized.id), initialized]      
-    },
-    To: function(word_base, target) {
-      const initialized = factory.To()
-      return [target.concat(initialized.id), initialized]      
-    },
-    Adjective: function(word_base, target) {
-     const initialized = factory.Adjective(word_base)
-     return [initialized.id, initialized]
-    },
+    Pronoun: (w) => factory.Pronoun(w, 'a'),
+    Noun: (w) => factory.Noun(w),
+    NounContainer: (w) => factory.NounContainer(),
+    Determiner: (w) => factory.Determiner(w),
+    Adverb: (w) => factory.Adverb(w),
+    Preposition: (w) => factory.Preposition(w),
+    To: (w) => factory.To(),
+    Adjective: (w) => factory.Adjective(w),
   },
   Noun: {
-    Determiner: function(word_base, target) {
-      const initialized = factory.Determiner(word_base)
-      return [target.concat(initialized.id), initialized]
-    },
-    Adjective: function(word_base, target) {
-      const initialized = factory.Adjective(word_base)
-      return [target.concat(initialized.id), initialized]      
-    },
-    Preposition: function(word_base, target) {
-      const initialized = factory.Preposition(word_base)
-      return [target.concat(initialized.id), initialized]      
-    },
+    Determiner: (w) => factory.Determiner(w),
+    Adjective: (w) => factory.Adjective(w),
+    Preposition: (w) => factory.Preposition(w),
   },
   NounContainer: {
-    Pronoun: function(word_base, target) {
-      const initialized = factory.Pronoun(word_base)
-      return [target.concat(initialized.id), initialized]
-    },
-    Noun: function(word_base, target) {
-      const initialized = factory.Noun(word_base)
-      return [target.concat(initialized.id), initialized]
-    },
-    NounContainer: function(word_base, target) {
-      const initialized = factory.NounContainer()
-      return [target.concat(initialized.id), initialized]
-    },
-    Determiner: function(word_base, target) {
-      const initialized = factory.Determiner(word_base)
-      return [target.concat(initialized.id), initialized]
-    },
-    Adjective: function(word_base, target) {
-      const initialized = factory.Adjective(word_base)
-      return [target.concat(initialized.id), initialized]      
-    },
-    Preposition: function(word_base, target) {
-      const initialized = factory.Preposition(word_base)
-      return [target.concat(initialized.id), initialized]      
-    },
+    Pronoun: (w) => factory.Pronoun(w),
+    Noun: (w) => factory.Noun(w),
+    NounContainer: (w) => factory.NounContainer(),
+    Determiner: (w) => factory.Determiner(w),
+    Adjective: (w) => factory.Adjective(w),
+    Preposition: (w) => factory.Preposition(w),
+    Conjunction: (w) => factory.Conjunction(w),
   },
   Adjective: {
-    Adverb: function(word_base, target) {
-      const initialized = factory.Adverb(word_base)
-      return [target.concat(initialized.id), initialized]      
-    },
-    Preposition: function(word_base, target) {
-      const initialized = factory.Preposition(word_base)
-      return [target.concat(initialized.id), initialized]      
-    },
+    Adverb: (w) => factory.Adverb(w),
+    Preposition: (w) => factory.Preposition(w),
   },
   Adverb: {
-    Adverb: function(word_base, target) {
-      const initialized = factory.Adverb(word_base)
-      return [target.concat(initialized.id), initialized]      
-    },    
+    Adverb: (w) => factory.Adverb(w),
   },
   Preposition: {
-    Pronoun: function(word_base, target) {
-     const initialized = factory.Pronoun(word_base, 'a')
-     return [initialized.id, initialized]
-    },
-    Noun: function(word_base, target) {
-     const initialized = factory.Noun(word_base)
-     return [initialized.id, initialized]
-    },
-    Determiner: function(word_base, target) {
-     const initialized = factory.Determiner(word_base)
-     return [initialized.id, initialized]
-    }, 
-    NounContainer: function(word_base, target) {
-      const initialized = factory.NounContainer()
-      return [initialized.id, initialized]
-    },
+    Pronoun: (w) => factory.Pronoun(w),
+    Noun: (w) => factory.Noun(w),
+    NounContainer: (w) => factory.NounContainer(),
+    Determiner: (w) => factory.Determiner(w),
   },
   To: {
-    Verb: function(word_base, target) {
-     const initialized = factory.Verb(word_base)
-     return [initialized.id, initialized]
-    },    
+    Verb: (w) => factory.Verb(w), 
   }
+}
+
+const takeWord = function(oldWord, wordBase, action_target) {
+  const target = oldWord[action_target]
+  const init = words[oldWord.pos][wordBase.pos](wordBase)
+  const updated = Array.isArray(target) ? target.concat(init.id) : init.id
+  return [updated, init]
 }
 
 function reducer(state, action) {
@@ -219,8 +91,8 @@ function reducer(state, action) {
     case 'CREATE_WORD': {
       const wordIndex = state.Words.findIndex(t => t.id === action.activeWord)
       const oldWord = state.Words[wordIndex]
-      const word_base = Dictionary.find(o => o.id === action.id)
-      const [updated, initialized] = takeWord[oldWord.pos][word_base.pos](word_base, oldWord[action.target])  
+      const wordBase = Dictionary.find(o => o.id === action.id)
+      const [updated, initialized] = takeWord(oldWord, wordBase, action.target)  
       const newWord = {
         ...oldWord,
         [action.target]: updated,
