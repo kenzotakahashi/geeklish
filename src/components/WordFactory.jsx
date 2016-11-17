@@ -5,13 +5,19 @@ import Dictionary from '../dictionary/dictionary.js'
 const e = React.createElement
 
 const nouns = ['Noun', 'Pronoun', 'NounContainer'] //'Determiner'
+const verbs = ['Verb', 'Be', 'VerbContainer']
 const valid_pos = {
   Sentence: {
-    clause: ['Clause']
+    clause: ['Clause', 'ClauseContainer']
   },
   Clause: {
     subject: nouns,
-    verb: ['Verb', 'Be']
+    verb: verbs,
+    conjunction: ['Conjunction']
+  },
+  ClauseContainer: {
+    clauses: ['Clause'],
+    conjunction: ['Conjunction']
   },
   Verb: {
     complements: [...nouns, 'To'],
@@ -24,6 +30,14 @@ const valid_pos = {
     predicate: [...nouns, 'Adjective', 'Adverb', 'Preposition'],
     adverbs: ['Adverb'],
     prepositions: ['Preposition']
+  },
+  VerbContainer: {
+    complements: [...nouns, 'To'],
+    predicate: [...nouns, 'Adjective', 'Adverb', 'Preposition'],
+    adverbs: ['Adverb'],
+    prepositions: ['Preposition'],
+    verbs: ['Verb', 'Be'],
+    conjunction: ['Conjunction']
   },
   Noun: {
     adjectives: ['Adjective'],
@@ -49,7 +63,7 @@ const valid_pos = {
     complement: nouns
   },
   To: {
-    verb: ['Verb', 'Be']
+    verb: verbs
   }
 }
 

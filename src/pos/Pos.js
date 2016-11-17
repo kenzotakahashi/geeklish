@@ -1,5 +1,5 @@
-import { Verb, Be } from './Verb.js'
-import Clause from './Clause.js'
+import { Verb, Be, VerbContainer } from './Verb.js'
+import { Clause, ClauseContainer } from './Clause.js'
 import Pronoun from './Pronoun.js'
 import { Noun, NounContainer } from './Noun.js'
 import Determiner from './Determiner.js'
@@ -7,11 +7,14 @@ import Adjective from './Adjective.js'
 import Adverb from './Adverb.js'
 import Preposition from './Preposition.js'
 import Conjunction from  './Conjunction.js'
-import { To } from './others'
+import { To, Sentence} from './others'
 
 const Pos = {
+	Sentence,
 	Verb,
+	VerbContainer,
 	Clause,
+	ClauseContainer,
 	Pronoun,
 	Noun,
 	NounContainer,

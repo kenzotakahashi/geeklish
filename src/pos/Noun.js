@@ -16,6 +16,7 @@ export const Noun = {
     this.nouns = w.nouns.map(o => createWord(o))
     return this
   },
+  isValid: () => true,
   toString: function() {
     return this.getList().map(o => o.toString()).join(' ')
   },
@@ -69,6 +70,9 @@ export const NounContainer = {
     this.nouns = w.nouns.map(o => createWord(o))
     this.conjunction = createWord(w.conjunction)
     return this
+  },
+  isValid: function() {
+    return this.nouns.length > 0 && this.conjunction
   },
   toString: function() {
     return this.getList().map(o => o.toString()).join(' ')

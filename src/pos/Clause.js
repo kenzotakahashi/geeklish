@@ -1,15 +1,15 @@
 import { createWord } from './util.js'
 
-const Clause = {
+export const Clause = {
   init: function(c) {
     this.id = c.id
     this.pos = c.pos
-    this.c_type = c.c_type
+    this.cType = c.cType
     this.subject = createWord(c.subject)
     this.verb = createWord(c.verb)
-    this.adjectiveClause = c.adjectiveClause
-    this.adverbs = c.adverbs
-    this.conjunction = c.conjunction
+    this.adjectiveClause = createWord(c.adjectiveClause)
+    this.adverbs = c.adverbs.map(o => createWord(o))
+    this.conjunction = createWord(c.conjunction)
     return this
   },
   getVerbForQuestion: function(v) {
@@ -140,41 +140,85 @@ const Clause = {
     let s = this.subject
     let v = this.verb
 
-    if (this.c_type === 'command') {
-      if (!v) return '(You need a verb)'
+    if (this.cType === 'command') {
+      if (!(v && v.isValid())) return [false, '(You need a verb)']
       const negative = v.negative ? ['do not '] : []
-      return negative.concat(v.getList([v.word.base]))
+      if (v.pos === "VerbContainer") {
+        const last = v.verbs.length - 1
+        let c = negative
+        for (let i = 0; i < v.verbs.length; i++) {
+          c.concat(v.verbs[i].getList([v.verbs[i].base]))
+          if (i !== last) {
+            c = c.concat(v.conjunction)
+          }
+        }
+        return c
+      } else {
+        return negative.concat(v.getList([v.word.base]))
+      }
     }
-    if (!s || !v) return '(You need a subject and a verb)'
+    if (!(s && s.isValid() && v && v.isValid())) return [false, '(You need a subject and a verb)']
 
     let c = s.getList()
     if (v.pos === "Be") {
       const [head, rest] = this.getBeVerb(v)
-      return this.c_type === 'question' && !s.isWh ?
+      return this.cType === 'question' && !s.isWh ?
             [...head, ...c, ...v.getList(rest)] :
             [...c, ...v.getList([...head, ...rest])]
     }
     if (v.pos === "Verb") {
-      if (this.c_type === 'question' && !s.isWh) {
+      if (this.cType === 'question' && !s.isWh) {
         const [head, rest] = this.getVerbForQuestion(v)
         return [head, ...c, ...v.getList(rest)]
       } else {
         return c.concat(v.getList(this.getVerb(v)))
       }
     }
+    if (v.pos === "VerbContainer") {
+      const last = v.verbs.length - 1
+      if (this.cType === 'question' && !s.isWh) {
+        const vType = v.verbs.map(o => o.pos)
+        if (vType.includes('Be') && vType.includes('Verb')) {
+          return [false, "We do not support Be verb and non-Be verb in a question"]
+        }
+        if (vType.includes('Be')) {
+          return [false, "We do not support multiple Be verbs in a question"]
+        }
+        const heads = []
+        for (let i = 0; i < v.verbs.length; i++) {
+          const [head, rest] = this.getVerbForQuestion(v.verbs[i])
+          heads.push(head)
+          c = c.concat(rest)
+          if (i !== last) {
+            c = c.concat(v.conjunction)
+          }
+        }
+        return [heads[0], ...c]
+      } else {
+        for (let i = 0; i < v.verbs.length; i++) {
+          let verb
+          if (v.verbs[i].pos === 'Be') {
+            const [head, rest] = this.getBeVerb(v.verbs[i])
+            verb = v.verbs[i].getList([...head, ...rest])                 
+          } else {
+            verb = v.verbs[i].getList(this.getVerb(v.verbs[i]))
+          }
+          c = c.concat(verb)
+          if (i !== last) {
+            c = c.concat(v.conjunction)
+          }
+        }
+        return c
+      }
+    }
   },
-  capitalize: function(s) {
-    return s[0].toUpperCase() + s.slice(1)
-  },
-  punctuation: function() {
-    return this.c_type === 'question' ? '?' : '.'
-  },
-  sentence: function(c) {
-    return this.capitalize(c + this.punctuation())
-  },
+  // isValid: function() {
+  //   let c = this.getClause()
+  //   return Array.isArray(c) && c[0] !== false
+  // },
   print: function() {
     let c = this.getClause()
-    if (typeof(c) === 'string') {
+    if (Array.isArray(c) && c[0] === false) {
       return c
     }
     // console.log(c)
@@ -189,8 +233,46 @@ const Clause = {
     if (this.adverbs.length > 0) {
       c = `${this.adverbs.map(o => o.toString()).join(', ')}, ${c}`
     }
-    return this.sentence(c)
+    return c
   },
 }
 
-export default Clause
+export const ClauseContainer = {
+  init: function(c) {
+    this.id = c.id
+    this.pos = c.pos
+    this.conjunction = createWord(c.conjunction)
+    this.clauses = c.clauses.map(o => createWord(o))
+    this.cType = this.clauses.map(o => o.cType).includes('question') ?
+                 'question' : 'statement'
+    return this
+  },
+  print: function() {
+    // console.log(this.clauses.map(o => o.isValid()))
+
+    if ( !(this.conjunction || this.clauses.map(o => !!o.conjunction).includes(true)) ) {
+      return [false, "(You need a conjunction)"]
+    }
+    const clauses = this.clauses.map(o => o.print())
+    if (this.clauses.length < 2 || clauses.some(o => Array.isArray(o))) {
+      return [false, "(You need at least 2 clauses)"]
+    }
+    if (this.conjunction) {
+      if (['and', 'or'].includes(this.conjunction.word)) {
+        return this.clauses.map(o => o.print()).join(` ${this.conjunction} `)
+      } else {
+        return // TODO
+      }
+    }
+    // subordinting
+    if (!!this.clauses[0].conjunction) {
+      const [dependent, independent] = this.clauses
+      return `${dependent.conjunction} ${dependent.print()}, ${independent.print()}`
+    } else if (!!this.clauses[1].conjunction) {
+      const [independent, dependent] = this.clauses
+      return `${independent.print()} ${dependent.conjunction}, ${dependent.print()}`
+    } else {
+      return [false, "(You need a subordinating clause)"]
+    }
+  }
+}

@@ -13,7 +13,7 @@ let initialState = {
     {
       id: 2,
       pos: 'Clause',
-      c_type: 'statement',
+      cType: 'statement',
       subject: null,
       verb: null,
       adjectiveClause: null,
@@ -23,17 +23,17 @@ let initialState = {
   ],
 }
 
-// initialState = {
-//   activeWord: 1,
-//   target: null,
-//   Words: [
-//     {
-//       id: 1,
-//       pos: 'Sentence',
-//       clause: null,
-//     },
-//   ],
-// }
+initialState = {
+  activeWord: 1,
+  target: null,
+  Words: [
+    {
+      id: 1,
+      pos: 'Sentence',
+      clause: null,
+    },
+  ],
+}
 
 const store = createStore(reducer, initialState)
 

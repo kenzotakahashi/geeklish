@@ -1,5 +1,5 @@
-import { Verb, Be } from './Verb.jsx'
-import Clause from './Clause.jsx'
+import { Verb, Be, VerbContainer } from './Verb.jsx'
+import { Clause, ClauseContainer } from './Clause.jsx'
 import Pronoun from './Pronoun.jsx'
 import Sentence from './Sentence.jsx'
 import { Noun, NounContainer } from './Noun.jsx'
@@ -13,7 +13,9 @@ import { To } from './others.jsx'
 const components = {
 	Verb,
 	Be,
+	VerbContainer,
 	Clause,
+	ClauseContainer,
 	Pronoun,
 	Sentence,
 	Noun,

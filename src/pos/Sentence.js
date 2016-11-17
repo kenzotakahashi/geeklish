@@ -1,19 +1,6 @@
 import { createWord } from './util.js'
 
-export const To = {
-  init: function(p) {
-    this.id = p.id
-    this.pos = p.pos
-    this.verb = createWord(p.verb)
-    return this    
-  },
-  toString: function() {
-    const phrase = !!this.verb ? this.verb.verbAfterTo() : []
-    return ['to', ...phrase.map(o => o.toString())].join(' ')
-  }
-}
-
-export const Sentence = {
+const Sentence = {
   init: function(p) {
     this.id = p.id
     this.pos = p.pos
@@ -24,14 +11,15 @@ export const Sentence = {
     return s[0].toUpperCase() + s.slice(1)
   },
   punctuation: function() {
-    return this.clause.cType === 'question' ? '?' : '.'
+    return this.cType === 'question' ? '?' : '.'
   },
   sentence: function(c) {
     return this.capitalize(c + this.punctuation())
   },
   toString: function() {
-    if (!this.clause) return
     const result = this.clause.print()
     return Array.isArray(result) ? result[1] : this.sentence(result)
   }
 }
+
+export default Sentence

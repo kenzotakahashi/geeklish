@@ -9,6 +9,7 @@ const Pronoun = {
     this.isWh = p.isWh
     return this    
   },
+  isValid: () => true,
   toString: function() {
     return this.word[this.mode]
   },

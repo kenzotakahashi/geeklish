@@ -121,6 +121,26 @@ const factory = {
       prepositions: []
     }
   },
+  VerbContainer: function() {
+    return {
+      id: uuid.v4(),
+      pos: 'VerbContainer',
+      valid_complements: null,
+      mode: null,
+      negative: false,
+      past: false,
+      continuous: false,
+      perfect: false,
+      passive: false,
+      modal: '',
+      complements: [],
+      predicate: null,
+      adverbs: [],
+      prepositions: [],
+      verbs: [],
+      conjunction: null
+    }
+  },
   Adjective: function(w, mode='base', isWh=false) {
     return {
       id: uuid.v4(),
@@ -172,12 +192,20 @@ const factory = {
     return {
       id: uuid.v4(),
       pos: 'Clause',
-      c_type: 'statement',
+      cType: 'statement',
       subject: null,
       verb: null,
       adjectiveClause: null,
       adverbs: [],
       conjunction: null,
+    }
+  },
+  ClauseContainer: function() {
+    return {
+      id: uuid.v4(),
+      pos: 'ClauseContainer',
+      conjunction: null,
+      clauses: [],
     }
   },
   Conjunction: function(w) {

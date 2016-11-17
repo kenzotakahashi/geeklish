@@ -3,7 +3,8 @@ import factory from '../factory.js'
 
 const words = {
   Sentence: {
-    Clause: () => factory.Clause()
+    Clause: () => factory.Clause(),
+    ClauseContainer: () => factory.ClauseContainer()
   },
   Clause: {
     Pronoun: (w) => factory.Pronoun(w),
@@ -11,7 +12,13 @@ const words = {
     Determiner: (w) => factory.Determiner(w),
     NounContainer: (w) => factory.NounContainer(),
     Verb: (w) => factory.Verb(w),
-    Be: (w) => factory.Be()
+    Be: (w) => factory.Be(),
+    VerbContainer: (w) => factory.VerbContainer(),
+    Conjunction: (w) => factory.Conjunction(w),
+  },
+  ClauseContainer: {
+    Clause: () => factory.Clause(),
+    Conjunction: (w) => factory.Conjunction(w),
   },
   Verb: {
     Pronoun: (w) => factory.Pronoun(w, 'a'),
@@ -32,6 +39,19 @@ const words = {
     Preposition: (w) => factory.Preposition(w),
     To: (w) => factory.To(),
     Adjective: (w) => factory.Adjective(w),
+  },
+  VerbContainer: {
+    Pronoun: (w) => factory.Pronoun(w, 'a'),
+    Noun: (w) => factory.Noun(w),
+    NounContainer: (w) => factory.NounContainer(),
+    Determiner: (w) => factory.Determiner(w),
+    Adverb: (w) => factory.Adverb(w),
+    Preposition: (w) => factory.Preposition(w),
+    To: (w) => factory.To(),
+    Adjective: (w) => factory.Adjective(w),
+    Verb: (w) => factory.Verb(w),
+    Be: (w) => factory.Be(),
+    Conjunction: (w) => factory.Conjunction(w),
   },
   Noun: {
     Determiner: (w) => factory.Determiner(w),
@@ -61,7 +81,9 @@ const words = {
     Determiner: (w) => factory.Determiner(w),
   },
   To: {
-    Verb: (w) => factory.Verb(w), 
+    Verb: (w) => factory.Verb(w),
+    Be: (w) => factory.Be(),
+    VerbContainer: (w) => factory.VerbContainer(),
   }
 }
 
