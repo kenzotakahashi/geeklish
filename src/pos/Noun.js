@@ -1,5 +1,33 @@
 import { createWord } from './util.js'
 
+const getWh = function() {
+  if (this.isWh) return (this, true)
+  for (const attr of ['adjectives','adjectivesAfter','determiners','prepositions']) {
+    for (let i = 0; i < this[attr].length; i++) {
+      const [wh, isWh] = this[attr][i].getWh()
+      if (isWh) {
+        this[attr].splice(i, 1)
+      }
+      if (wh) return [wh, false]
+    }
+  }
+  return [null, false]
+}
+
+const beforeOrAfter = function(adjs) {
+  const adjectives = []
+  const adjectivesAfter = []
+  const base = adjs.map(o => createWord(o))
+  for (let adj of base) {
+    if (adj.pos === 'Adjective') {
+      adjectives.push(adj)
+    } else {
+      adjectivesAfter.push(adj)
+    }
+  }
+  return [adjectives, adjectivesAfter]
+}
+
 export const Noun = {
   init: function(w) {
     this.id = w.id
@@ -8,14 +36,14 @@ export const Noun = {
     this.person = w.person
     this.number = w.number
     this.mode = w.mode
-    this.isWh = w.isWh
-    this.adjectives = w.adjectives.map(o => createWord(o))
-    this.adjectivesAfter = w.adjectivesAfter.map(o => createWord(o))
+    this.isWh = w.isWh;
+    [this.adjectives, this.adjectivesAfter] = this.beforeOrAfter(w.adjectives)
     this.determiners = w.determiners.map(o => createWord(o))
     this.prepositions = w.prepositions.map(o => createWord(o))
     this.nouns = w.nouns.map(o => createWord(o))
     return this
   },
+  beforeOrAfter: beforeOrAfter,
   isValid: () => true,
   toString: function() {
     return this.getList().map(o => o.toString()).join(' ')
@@ -41,19 +69,7 @@ export const Noun = {
   is3s: function() {
     return this.number === 'singular' && ![1,2].includes(this.person)
   },
-  getWh: function() {
-    if (this.isWh) return (this, true)
-    for (const attr of ['adjectives','adjectivesAfter','determiners','prepositions']) {
-      for (let i = 0; i < this[attr].length; i++) {
-        const [wh, isWh] = this[attr][i].getWh()
-        if (isWh) {
-          this[attr].splice(i, 1)
-        }
-        if (wh) return [wh, false]
-      }
-    }
-    return [null, false]
-  }
+  getWh: getWh
 }
 
 export const NounContainer = {
@@ -62,15 +78,15 @@ export const NounContainer = {
     this.pos = w.pos
     this.person = w.person
     this.number = w.number
-    this.isWh = w.isWh
-    this.adjectives = w.adjectives.map(o => createWord(o))
-    this.adjectivesAfter = w.adjectivesAfter.map(o => createWord(o))
+    this.isWh = w.isWh;
+    [this.adjectives, this.adjectivesAfter] = this.beforeOrAfter(w.adjectives)
     this.determiners = w.determiners.map(o => createWord(o))
     this.prepositions = w.prepositions.map(o => createWord(o))
     this.nouns = w.nouns.map(o => createWord(o))
     this.conjunction = createWord(w.conjunction)
     return this
   },
+  beforeOrAfter: beforeOrAfter,
   isValid: function() {
     return this.nouns.length > 0 && this.conjunction
   },
@@ -98,17 +114,49 @@ export const NounContainer = {
   is3s: function() {
     return false
   },
-  getWh: function() {
-    if (this.isWh) return (this, true)
-    for (const attr of ['adjectives','adjectivesAfter','determiners','prepositions']) {
-      for (let i = 0; i < this[attr].length; i++) {
-        const [wh, isWh] = this[attr][i].getWh()
-        if (isWh) {
-          this[attr].splice(i, 1)
-        }
-        if (wh) return [wh, false]
-      }
-    }
-    return [null, false]
-  }
+  getWh: getWh,
+}
+
+export const NounClause = {
+  init: function(w) {
+    this.id = w.id
+    this.pos = w.pos
+    this.person = w.person
+    this.number = w.number
+    this.clause = createWord(w.clause)
+    this.isWh = w.isWh;
+    [this.adjectives, this.adjectivesAfter] = this.beforeOrAfter(w.adjectives)
+    this.determiners = w.determiners.map(o => createWord(o))
+    this.prepositions = w.prepositions.map(o => createWord(o))
+    this.nouns = w.nouns.map(o => createWord(o))
+    return this
+  },
+  beforeOrAfter: beforeOrAfter,
+  isValid: function() {
+    return this.clause && !Array.isArray(this.clause.print())
+  },
+  toString: function() {
+    const list = this.getList()
+    return !!list ? list.map(o => o.toString()).join(' ') : ''
+  },
+  getList: function() {
+    if (!this.clause) return
+    const result = this.clause.print()
+    return Array.isArray(result) ? '' : this.getRest(result)
+  },
+  getRest: function(noun) {
+    return [...this.determiners,
+            ...this.adjectives,
+            ...this.nouns, 
+            noun,
+            ...this.adjectivesAfter,
+            ...this.prepositions]
+  },
+  getBe: function(mode) {
+    return mode === 'past' ? 'was' : 'is'
+  },
+  is3s: function() {
+    return true
+  },
+  getWh: getWh,
 }

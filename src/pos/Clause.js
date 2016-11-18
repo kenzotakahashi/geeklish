@@ -216,6 +216,9 @@ export const Clause = {
   //   let c = this.getClause()
   //   return Array.isArray(c) && c[0] !== false
   // },
+  toString: function() {
+    return this.print()
+  },
   print: function() {
     let c = this.getClause()
     if (Array.isArray(c) && c[0] === false) {
@@ -246,6 +249,9 @@ export const ClauseContainer = {
     this.cType = this.clauses.map(o => o.cType).includes('question') ?
                  'question' : 'statement'
     return this
+  },
+  toString: function() {
+    return this.print()
   },
   print: function() {
     // console.log(this.clauses.map(o => o.isValid()))

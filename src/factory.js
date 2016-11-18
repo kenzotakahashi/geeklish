@@ -57,6 +57,21 @@ const factory = {
       conjunction: null,
     }
   },
+  NounClause: function(isWh=false) {
+    return {
+      id: uuid.v4(),
+      pos: 'NounClause',
+      person: null,
+      number: 'singular',
+      isWh: isWh,
+      clause: null,
+      adjectives: [],
+      adjectivesAfter: [],
+      determiners: [],
+      prepositions: [],
+      nouns: [],
+    }
+  },
   Determiner: function(w, isWh=false) {
     return {
       id: uuid.v4(),
@@ -153,6 +168,14 @@ const factory = {
       mode: mode,
       adverbs: [],
       prepositions: [],
+      isWh: isWh
+    }
+  },
+  AdjectiveClause: function(w, isWh=false) {
+    return {
+      id: uuid.v4(),
+      pos: 'AdjectiveClause',
+      clause: null,
       isWh: isWh
     }
   },

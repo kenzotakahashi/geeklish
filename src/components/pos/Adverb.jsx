@@ -39,7 +39,7 @@ const Adverb = React.createClass({
             className: `button is-active ${word.isWh ? 'is-primary' : ''}`,
             type: 'button',
             onClick: () => store.dispatch(changeAttribute(this.props.id, 'isWh', !word.isWh))
-          }, 'WH question')}
+          }, 'WH')}
         </div>
         {adverb}
       </div>

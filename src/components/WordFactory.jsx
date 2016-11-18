@@ -4,11 +4,14 @@ import Dictionary from '../dictionary/dictionary.js'
 
 const e = React.createElement
 
-const nouns = ['Noun', 'Pronoun', 'NounContainer'] //'Determiner'
+const nouns = ['Noun', 'Pronoun', 'NounContainer', 'NounClause'] //'Determiner'
 const verbs = ['Verb', 'Be', 'VerbContainer']
+const adjectives = ['Adjective', 'AdjectiveClause']
+const clauses = ['Clause', 'ClauseContainer']
+
 const valid_pos = {
   Sentence: {
-    clause: ['Clause', 'ClauseContainer']
+    clause: clauses
   },
   Clause: {
     subject: nouns,
@@ -21,7 +24,7 @@ const valid_pos = {
   },
   Verb: {
     complements: [...nouns, 'To'],
-    predicate: [...nouns, 'Adjective', 'Adverb', 'Preposition'],
+    predicate: [...nouns, ...adjectives, 'Adverb', 'Preposition'],
     adverbs: ['Adverb'],
     prepositions: ['Preposition']
   },
@@ -33,28 +36,38 @@ const valid_pos = {
   },
   VerbContainer: {
     complements: [...nouns, 'To'],
-    predicate: [...nouns, 'Adjective', 'Adverb', 'Preposition'],
+    predicate: [...nouns, ...adjectives, 'Adverb', 'Preposition'],
     adverbs: ['Adverb'],
     prepositions: ['Preposition'],
     verbs: ['Verb', 'Be'],
     conjunction: ['Conjunction']
   },
   Noun: {
-    adjectives: ['Adjective'],
+    adjectives: adjectives,
     prepositions: ['Preposition'],
     determiners: ['Determiner'],
     nouns: nouns
   },
   NounContainer: {
-    adjectives: ['Adjective'],
+    adjectives: adjectives,
     prepositions: ['Preposition'],
     determiners: ['Determiner'],
     nouns: nouns,
     conjunction: ['Conjunction']
   },
+  NounClause: {
+    clause: clauses,
+    nouns: nouns,
+    determiners: ['Determiner'],
+    adjectives: adjectives,
+    prepositions: ['Preposition'],
+  },
   Adjective: {
     adverbs: ['Adverb'],
     prepositions: ['Preposition'] 
+  },
+  AdjectiveClause: {
+    clause: clauses
   },
   Adverb: {
     adverbs: ['Adverb']

@@ -1,6 +1,6 @@
 import { createWord } from './util.js'
 
-const Adjective = {
+export const Adjective = {
   init: function(p) {
     this.id = p.id
     this.pos = p.pos
@@ -33,4 +33,20 @@ const Adjective = {
   }
 }
 
-export default Adjective
+export const AdjectiveClause = {
+  init: function(p) {
+    this.id = p.id
+    this.pos = p.pos
+    this.clause = createWord(p.clause)
+    this.isWh = p.isWh
+    return this
+  },
+  toString: function() {
+    if (!this.clause) return ''
+    const result = this.clause.print()
+    return Array.isArray(result) ? '' : result
+  },
+  getWh: function() {
+    return [null, false]
+  }
+}

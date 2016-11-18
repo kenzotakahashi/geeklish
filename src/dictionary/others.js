@@ -18,6 +18,14 @@ const others = [
 		base: 'NounContainer'
 	},
 	{
+		pos: 'NounClause',
+		base: 'NounClause'
+	},
+	{
+		pos: 'AdjectiveClause',
+		base: 'AdjectiveClause'
+	},
+	{
 		pos: 'ClauseContainer',
 		base: 'ClauseContainer'
 	},
