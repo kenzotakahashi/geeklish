@@ -35,7 +35,7 @@ export const Noun = {
     this.word = w.word
     this.person = w.person
     this.number = w.number
-    this.mode = w.mode
+    this.form = w.form
     this.isWh = w.isWh;
     [this.adjectives, this.adjectivesAfter] = this.beforeOrAfter(w.adjectives)
     this.determiners = w.determiners.map(o => createWord(o))
@@ -49,7 +49,7 @@ export const Noun = {
     return this.getList().map(o => o.toString()).join(' ')
   },
   getList: function() {
-    return this.getRest(this.word[this.mode])
+    return this.getRest(this.word[this.form])
   },
   getRest: function(noun) {
     return [...this.determiners,
@@ -108,8 +108,8 @@ export const NounContainer = {
             ...this.adjectivesAfter,
             ...this.prepositions]
   },
-  getBe: function(mode) {
-    return mode === 'past' ? 'were' : 'are'
+  getBe: function(form) {
+    return form === 'past' ? 'were' : 'are'
   },
   is3s: function() {
     return false
@@ -152,8 +152,8 @@ export const NounClause = {
             ...this.adjectivesAfter,
             ...this.prepositions]
   },
-  getBe: function(mode) {
-    return mode === 'past' ? 'was' : 'is'
+  getBe: function(form) {
+    return form === 'past' ? 'was' : 'is'
   },
   is3s: function() {
     return true

@@ -25,25 +25,25 @@ const valid_pos = {
   Verb: {
     complements: [...nouns, 'To'],
     predicate: [...nouns, ...adjectives, 'Adverb', 'Preposition'],
-    adverbs: ['Adverb'],
+    adverbs: ['Adverb', 'To'],
     prepositions: ['Preposition']
   },
   Be: {
     complements: [...nouns, 'To'],
     predicate: [...nouns, 'Adjective', 'Adverb', 'Preposition'],
-    adverbs: ['Adverb'],
+    adverbs: ['Adverb', 'To'],
     prepositions: ['Preposition']
   },
   VerbContainer: {
     complements: [...nouns, 'To'],
     predicate: [...nouns, ...adjectives, 'Adverb', 'Preposition'],
-    adverbs: ['Adverb'],
+    adverbs: ['Adverb', 'To'],
     prepositions: ['Preposition'],
     verbs: ['Verb', 'Be'],
     conjunction: ['Conjunction']
   },
   Noun: {
-    adjectives: adjectives,
+    adjectives: [...adjectives, 'To'],
     prepositions: ['Preposition'],
     determiners: ['Determiner'],
     nouns: nouns
@@ -81,11 +81,15 @@ const valid_pos = {
 }
 
 const getArgument = function(activeWordPos, target, wordPos) {
-  if (wordPos === 'Pronoun' && ['Verb','Be','VerbContainer'].includes(activeWordPos)) {
-    return {mode: 'a'}
+  if (wordPos === 'Pronoun') {
+    if (['Verb','Be','VerbContainer'].includes(activeWordPos)) {
+      return {form: 'accusative'}
+    } else if (target === 'nouns') {
+      return {form: 'possessive'}
+    }
   } else if (['Verb','Be'].includes(wordPos) &&
              ['subject','complement','complements','nouns','predicate'].includes(target)) {
-    return {mode: 'gerund'}
+    return {form: 'gerund'}
   }
 }
 

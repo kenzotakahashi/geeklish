@@ -12,11 +12,12 @@ export const Clause = React.createClass({
     const options = ['subject', 'verb', 'conjunction'].map(w => (
       !!clause[w] ?
       e(pos_components[state.Words.find(o => o.id === clause[w]).pos], {id: clause[w],  key: w}) :
+      state.activeWord === this.props.id ?
       e('div', {
         className: `list-group-item ${state.target === w ? 'active' : 'list-group-item-info'}`,
         key: w,
         onClick: () => store.dispatch(showWordFactory(this.props.id, w))
-      }, w)
+      }, w) : ''
     ))
 
     const attr = ['statement','question','command'].map(o => (

@@ -5,13 +5,13 @@ const Pronoun = {
     this.word = p.word
     this.person = p.person
     this.number = p.number
-    this.mode = p.mode
+    this.form = p.form
     this.isWh = p.isWh
     return this    
   },
   isValid: () => true,
   toString: function() {
-    return this.word[this.mode]
+    return this.word[this.form]
   },
   getList: function() {
     return [this]

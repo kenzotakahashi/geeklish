@@ -6,17 +6,17 @@ const factory = {
       id: uuid.v4(),
       pos: 'Pronoun',
       word: {
-        n: w.base,
-        a: w.a || w.base,
-        p: w.p || null,
-        r: w.r || null,
+        nominative: w.base,
+        accusative: w.a || w.base,
+        possessive: w.p || null,
+        reflexive: w.r || null,
       },
       person: w.person || null,
       number: w.number || 'singular',
-      mode: arg ? arg.mode : 'n',
+      form: arg ? arg.form : 'nominative',
       isWh: ['what','who','which'].includes(w.base) ? true : false
     }
-    init.word.pp = w.pp || init.word.p
+    init.word['possessive pronoun'] = w.pp || init.word.possessive
     return init
   },
   Noun: function(w) {
@@ -30,7 +30,7 @@ const factory = {
       },
       person: null,
       number: 'singular',
-      mode: 'singular',
+      form: 'singular',
       isWh: false,
       adjectives: [],
       adjectivesAfter: [],
@@ -38,8 +38,8 @@ const factory = {
       prepositions: [],
       nouns: []
     }
-    init.word.p = init.number === 'singular' ? `${init.word.singular}'s` :
-                  `${init.word.plural}${init.word.plural[-1] === 's' ? "'" : "'s"}`
+    init.word.possessive = init.number === 'singular' ? `${init.word.singular}'s` :
+                    `${init.word.plural}${init.word.plural[-1] === 's' ? "'" : "'s"}`
     return init
   },
   NounContainer: function() {
@@ -93,7 +93,7 @@ const factory = {
         gerund: w.gerund 
       },
       valid_complements: w.complements,
-      mode: arg ? arg.mode : 'base',
+      form: arg ? arg.form : 'base',
       negative: false,
       past: false,
       continuous: false,
@@ -124,7 +124,7 @@ const factory = {
         'gerund': 'being'
       },
       valid_complements: [],
-      mode: arg ? arg.mode : 'base',
+      form: arg ? arg.form : 'base',
       negative: false,
       modal: '',
       past: false,
@@ -141,7 +141,7 @@ const factory = {
       id: uuid.v4(),
       pos: 'VerbContainer',
       valid_complements: null,
-      mode: null,
+      form: null,
       negative: false,
       past: false,
       continuous: false,
@@ -165,7 +165,7 @@ const factory = {
         comparative: w.comparative || w.base,
         superlative: w.superlative || w.base
       },
-      mode: 'base',
+      form: 'base',
       adverbs: [],
       prepositions: [],
       isWh: false

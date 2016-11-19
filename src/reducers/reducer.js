@@ -67,17 +67,17 @@ function reducer(state, action) {
       const oldWord = state.Words[wordIndex]
 
       const number = oldWord.number === 'singular' ? 'plural' : 'singular'
-      const p = number === 'singular' ? `${oldWord.word.singular}'s` :
-                `${oldWord.word.plural}${oldWord.word.plural[-1] === 's' ? "'" : "'s"}`
+      const possessive = number === 'singular' ? `${oldWord.word.singular}'s` :
+                        `${oldWord.word.plural}${oldWord.word.plural[-1] === 's' ? "'" : "'s"}`
 
       const newWord = {
         ...oldWord,
         number: number,
         word: {
           ...oldWord.word,
-          p: p,
+          possessive: possessive,
         },
-        mode: oldWord.mode === 'p' ? 'p' : number
+        form: oldWord.form === 'possessive' ? 'possessive' : number
       }
       return {
         ...state,

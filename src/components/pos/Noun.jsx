@@ -41,6 +41,12 @@ export const Noun = React.createClass({
             onClick: () => this.changeNumber(this.props.id)
           }, word.number)}
           {e('button', {
+            className: `button is-active ${word.form === 'possessive' ? 'is-primary' : ''}`,
+            type: 'button',
+            onClick: () => store.dispatch(changeAttribute(
+              this.props.id, 'form', word.form === 'possessive' ? word.number : 'possessive'))
+          }, 'possessive')}          
+          {e('button', {
             className: `button is-active ${word.isWh ? 'is-primary' : ''}`,
             type: 'button',
             onClick: () => store.dispatch(changeAttribute(this.props.id, 'isWh', !word.isWh))

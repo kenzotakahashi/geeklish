@@ -53,11 +53,11 @@ export const Verb = React.createClass({
       <option key={o} value={o === 'modal' ?  '' : o}>{o}</option>
     ))
 
-    return word.mode === 'gerund' ? (
+    return word.form === 'gerund' ? (
       <div className="list-group-item">
         <div>
           <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>
-            {word.word[word.mode]}
+            {word.word[word.form]}
           </span>
         </div>
         {children}
@@ -133,7 +133,7 @@ export const Be = React.createClass({
       <div className="list-group-item">
         <div>
           <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{word.word.base}</span>
-          <span className="select" value={word.modal} onChange={this.handleChange}><select>{modals}</select></span>
+          <span className="select"><select value={word.modal} onChange={this.handleChange}>{modals}</select></span>
           {attributes}
         </div>
         {children}
@@ -190,7 +190,7 @@ export const VerbContainer = React.createClass({
       <div className="list-group-item">
         <div>
           <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>VerbContainer</span>
-          <span className="select" value={word.modal} onChange={this.handleChange}><select>{modals}</select></span>
+          <span className="select"><select value={word.modal} onChange={this.handleChange}>{modals}</select></span>
         </div>
         {children}
         {children2}

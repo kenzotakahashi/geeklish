@@ -16,7 +16,7 @@ const str_adverbs = function(verb, adverbs) {
   return [...before, ...verb, ...after]
 }
 const getList = function(v) {
-  let word = v || [this.word[this.mode]] // gerund
+  let word = v || [this.word[this.form]] // gerund
   let verb = word.concat(this.complements)
   verb = this.predicate ? verb.concat(this.predicate) : verb
   verb = this.str_adverbs(verb, this.adverbs)
@@ -32,7 +32,7 @@ const verbAfterTo = function() {
   return this.getList(verb)
 }
 const toString = function() {
-  const verb = this.getList([this.word[this.mode]])
+  const verb = this.getList([this.word[this.form]])
   return verb.join(' ')
 }
 
@@ -41,7 +41,7 @@ const initVerb = function(v) {
   this.pos = v.pos
   this.word = v.word
   this.valid_complements = v.valid_complements
-  this.mode = v.mode
+  this.form = v.form
   this.modal = v.modal
   this.past = v.past
   this.negative = v.negative
@@ -63,7 +63,7 @@ export const Verb = {
   toString: toString,
   isValid: () => true,
   is3s: () => true,
-  getBe: (mode) => mode === 'past' ? 'was' : 'is'
+  getBe: (form) => form === 'past' ? 'was' : 'is'
 }
 
 export const Be = Verb
@@ -73,7 +73,7 @@ export const VerbContainer = {
     this.id = v.id
     this.pos = v.pos
     this.valid_complements = v.valid_complements
-    this.mode = v.mode
+    this.form = v.form
     this.modal = v.modal
     this.past = v.past
     this.negative = v.negative
@@ -100,5 +100,5 @@ export const VerbContainer = {
     return this.verbs.length > 0 && this.conjunction
   },
   is3s: () => false,
-  getBe: (mode) => mode === 'past' ? 'were' : 'was'
+  getBe: (form) => form === 'past' ? 'were' : 'was'
 }

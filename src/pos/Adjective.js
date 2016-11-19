@@ -5,7 +5,7 @@ export const Adjective = {
     this.id = p.id
     this.pos = p.pos
     this.word = p.word
-    this.mode = p.mode
+    this.form = p.form
     this.adverbs = p.adverbs.map(o => createWord(o))
     this.prepositions = p.prepositions.map(o => createWord(o))
     this.isWh = p.isWh
@@ -14,7 +14,7 @@ export const Adjective = {
   toString: function() {
    return [
      ...this.adverbs,
-     this.word[this.mode],
+     this.word[this.form],
      ...this.prepositions
    ].map(o => o.toString()).join(' ') 
   },
