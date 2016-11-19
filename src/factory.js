@@ -162,8 +162,8 @@ const factory = {
       pos: 'Adjective',
       word: {
         base: w.base,
-        comparative: w.comparative || w.base,
-        superlative: w.superlative || w.base
+        comparative: w.comparative || `more ${w.base}`,
+        superlative: w.superlative || `most ${w.base}`
       },
       form: 'base',
       adverbs: [],
@@ -203,10 +203,10 @@ const factory = {
       isWh: false
     }
   },
-  To: function() {
+  Infinitive: function() {
     return {
       id: uuid.v4(),
-      pos: 'To',
+      pos: 'Infinitive',
       word: 'to',
       verb: null
     }

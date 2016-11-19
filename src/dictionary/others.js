@@ -2,8 +2,8 @@ import uuid from 'uuid';
 
 const others = [
 	{
-		pos: 'To',
-		base: "to",
+		pos: 'Infinitive',
+		base: 'Infinitive',
 	},
 	{
 		pos: 'Be',

@@ -23,27 +23,27 @@ const valid_pos = {
     conjunction: ['Conjunction']
   },
   Verb: {
-    complements: [...nouns, 'To'],
+    complements: [...nouns, 'Infinitive'],
     predicate: [...nouns, ...adjectives, 'Adverb', 'Preposition'],
-    adverbs: ['Adverb', 'To'],
+    adverbs: ['Adverb', 'Infinitive'],
     prepositions: ['Preposition']
   },
   Be: {
-    complements: [...nouns, 'To'],
+    complements: [...nouns, 'Infinitive'],
     predicate: [...nouns, 'Adjective', 'Adverb', 'Preposition'],
-    adverbs: ['Adverb', 'To'],
+    adverbs: ['Adverb', 'Infinitive'],
     prepositions: ['Preposition']
   },
   VerbContainer: {
-    complements: [...nouns, 'To'],
+    complements: [...nouns, 'Infinitive'],
     predicate: [...nouns, ...adjectives, 'Adverb', 'Preposition'],
-    adverbs: ['Adverb', 'To'],
+    adverbs: ['Adverb', 'Infinitive'],
     prepositions: ['Preposition'],
     verbs: ['Verb', 'Be'],
     conjunction: ['Conjunction']
   },
   Noun: {
-    adjectives: [...adjectives, 'To'],
+    adjectives: [...adjectives, 'Infinitive'],
     prepositions: ['Preposition'],
     determiners: ['Determiner'],
     nouns: nouns
@@ -75,14 +75,14 @@ const valid_pos = {
   Preposition: {
     complement: nouns
   },
-  To: {
+  Infinitive: {
     verb: verbs
   }
 }
 
 const getArgument = function(activeWordPos, target, wordPos) {
   if (wordPos === 'Pronoun') {
-    if (['Verb','Be','VerbContainer'].includes(activeWordPos)) {
+    if (['Verb','Be','VerbContainer','Preposition'].includes(activeWordPos)) {
       return {form: 'accusative'}
     } else if (target === 'nouns') {
       return {form: 'possessive'}

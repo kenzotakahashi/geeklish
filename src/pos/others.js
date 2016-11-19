@@ -1,6 +1,6 @@
 import { createWord } from './util.js'
 
-export const To = {
+export const Infinitive = {
   init: function(p) {
     this.id = p.id
     this.pos = p.pos

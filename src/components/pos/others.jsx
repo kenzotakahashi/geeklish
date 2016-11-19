@@ -5,7 +5,7 @@ import { showOptions, showWordFactory } from '../../actions'
 
 const e = React.createElement;
 
-export const To = React.createClass({
+export const Infinitive = React.createClass({
   render: function() {
     const state = store.getState();
     const word = state.Words.find(o => o.id === this.props.id);

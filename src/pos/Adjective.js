@@ -19,7 +19,7 @@ export const Adjective = {
    ].map(o => o.toString()).join(' ') 
   },
   getWh: function() {
-    if (this.isWh) return (this, true)
+    if (this.isWh) return [this, true]
     for (const attr of ['adverbs','prepositions']) {
       for (let i = 0; i < this[attr].length; i++) {
         const [wh, isWh] = this[attr][i].getWh()

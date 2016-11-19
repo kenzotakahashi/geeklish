@@ -35,7 +35,17 @@ const verbs = [
 		gerund: 'having',
 		complements: [
 			['N'],
-			['To']
+			['Infinitive']
+		]
+	},
+	{
+		base: 'want',
+		'3s': 'wants',
+		past: 'wanted',
+		gerund: 'wanting',
+		complements: [
+			['N'],
+			['Infinitive']
 		]
 	},
 	{

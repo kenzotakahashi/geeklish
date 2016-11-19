@@ -8,7 +8,7 @@ import { Adjective, AdjectiveClause } from './Adjective.jsx'
 import Adverb from './Adverb.jsx'
 import Preposition from './Preposition.jsx'
 import Conjunction from './Conjunction.jsx'
-import { To } from './others.jsx'
+import { Infinitive } from './others.jsx'
 
 const components = {
 	Verb,
@@ -27,7 +27,7 @@ const components = {
 	Adverb,
 	Preposition,
 	Conjunction,
-	To,
+	Infinitive,
 }
 
 export default components

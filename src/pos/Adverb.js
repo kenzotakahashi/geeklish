@@ -20,7 +20,7 @@ const Adverb = {
             this.word
   },
   getWh: function() {
-    if (this.isWh) return (this, true)
+    if (this.isWh) return [this, true]
     if (this.adverb) {
       const [wh, isWh] = this.adverb.getWh()
       if (isWh) {

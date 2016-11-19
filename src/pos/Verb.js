@@ -63,7 +63,8 @@ export const Verb = {
   toString: toString,
   isValid: () => true,
   is3s: () => true,
-  getBe: (form) => form === 'past' ? 'was' : 'is'
+  getWh: () => [null, false],
+  getBe: (form) => form === 'past' ? 'was' : 'is',
 }
 
 export const Be = Verb
@@ -100,5 +101,6 @@ export const VerbContainer = {
     return this.verbs.length > 0 && this.conjunction
   },
   is3s: () => false,
+  getWh: () => [null, false],
   getBe: (form) => form === 'past' ? 'were' : 'was'
 }

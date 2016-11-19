@@ -15,7 +15,7 @@ const Preposition = {
             this.word
   },
   getWh: function() {
-    if (this.isWh) return (this, true)
+    if (this.isWh) return [this, true]
     if (this.complement) {
       const [wh, isWh] = this.complement.getWh()
       if (isWh) {

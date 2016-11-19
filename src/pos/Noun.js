@@ -1,7 +1,7 @@
 import { createWord } from './util.js'
 
 const getWh = function() {
-  if (this.isWh) return (this, true)
+  if (this.isWh) return [this, true]
   for (const attr of ['adjectives','adjectivesAfter','determiners','prepositions']) {
     for (let i = 0; i < this[attr].length; i++) {
       const [wh, isWh] = this[attr][i].getWh()

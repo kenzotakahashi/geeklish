@@ -36,7 +36,7 @@ function reducer(state, action) {
 
       return {
         ...state,
-        activeWord: state.Sentence,
+        activeWord: initialized.id,
         target: false,
         Words: [
           ...state.Words.slice(0, wordIndex),
