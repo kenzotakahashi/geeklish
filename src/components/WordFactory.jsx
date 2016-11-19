@@ -4,7 +4,7 @@ import Dictionary from '../dictionary/dictionary.js'
 
 const e = React.createElement
 
-const nouns = ['Noun', 'Pronoun', 'NounContainer', 'NounClause'] //'Determiner'
+const nouns = ['Noun', 'Pronoun', 'NounContainer', 'NounClause', 'Verb', 'Be'] //'Determiner'
 const verbs = ['Verb', 'Be', 'VerbContainer']
 const adjectives = ['Adjective', 'AdjectiveClause']
 const clauses = ['Clause', 'ClauseContainer']
@@ -80,13 +80,23 @@ const valid_pos = {
   }
 }
 
+const getArgument = function(activeWordPos, target, wordPos) {
+  if (wordPos === 'Pronoun' && ['Verb','Be','VerbContainer'].includes(activeWordPos)) {
+    return {mode: 'a'}
+  } else if (['Verb','Be'].includes(wordPos) &&
+             ['subject','complement','complements','nouns','predicate'].includes(target)) {
+    return {mode: 'gerund'}
+  }
+}
+
 const WordFactory = React.createClass({
-  createNewWord: function (id, activeWord, target) {
+  createNewWord: function (id, activeWord, target, arg) {
     store.dispatch({
       type: 'CREATE_WORD',
-      id: id,
-      activeWord: activeWord,
-      target: target,
+      id,
+      activeWord,
+      target,
+      arg
     })
   },
   render: function() {
@@ -100,7 +110,10 @@ const WordFactory = React.createClass({
       e('li', {
         className: `list-group-item col-md-3 ${o.pos}`,
         key: o.id,
-        onClick: () => this.createNewWord(o.id, state.activeWord, state.target)
+        onClick: () => this.createNewWord(
+          o.id, state.activeWord, state.target,
+          getArgument(pos, state.target, o.pos)
+        )
       }, o.base)
     ))
 

@@ -15,7 +15,8 @@ const str_adverbs = function(verb, adverbs) {
   }
   return [...before, ...verb, ...after]
 }
-const getList = function(word) {
+const getList = function(v) {
+  let word = v || [this.word[this.mode]] // gerund
   let verb = word.concat(this.complements)
   verb = this.predicate ? verb.concat(this.predicate) : verb
   verb = this.str_adverbs(verb, this.adverbs)
@@ -60,7 +61,9 @@ export const Verb = {
   getList: getList,
   verbAfterTo: verbAfterTo,
   toString: toString,
-  isValid: () => true
+  isValid: () => true,
+  is3s: () => true,
+  getBe: (mode) => mode === 'past' ? 'was' : 'is'
 }
 
 export const Be = Verb
@@ -95,5 +98,7 @@ export const VerbContainer = {
   },
   isValid: function() {
     return this.verbs.length > 0 && this.conjunction
-  }
+  },
+  is3s: () => false,
+  getBe: (mode) => mode === 'past' ? 'were' : 'was'
 }

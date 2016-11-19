@@ -1,120 +1,9 @@
 import Dictionary from '../dictionary/dictionary.js'
 import factory from '../factory.js'
 
-const words = {
-  Sentence: {
-    Clause: () => factory.Clause(),
-    ClauseContainer: () => factory.ClauseContainer()
-  },
-  Clause: {
-    Pronoun: (w) => factory.Pronoun(w),
-    Noun: (w) => factory.Noun(w),
-    Determiner: (w) => factory.Determiner(w),
-    NounContainer: (w) => factory.NounContainer(),
-    NounClause: (w) => factory.NounClause(),
-    Verb: (w) => factory.Verb(w),
-    Be: (w) => factory.Be(),
-    VerbContainer: (w) => factory.VerbContainer(),
-    Conjunction: (w) => factory.Conjunction(w),
-  },
-  ClauseContainer: {
-    Clause: () => factory.Clause(),
-    Conjunction: (w) => factory.Conjunction(w),
-  },
-  Verb: {
-    Pronoun: (w) => factory.Pronoun(w, 'a'),
-    Noun: (w) => factory.Noun(w),
-    NounContainer: (w) => factory.NounContainer(),
-    NounClause: (w) => factory.NounClause(),
-    Determiner: (w) => factory.Determiner(w),
-    Adverb: (w) => factory.Adverb(w),
-    Preposition: (w) => factory.Preposition(w),
-    To: (w) => factory.To(),
-    Adjective: (w) => factory.Adjective(w),
-    AdjectiveClause: (w) => factory.AdjectiveClause(w),
-  },
-  Be: {
-    Pronoun: (w) => factory.Pronoun(w, 'a'),
-    Noun: (w) => factory.Noun(w),
-    NounContainer: (w) => factory.NounContainer(),
-    NounClause: (w) => factory.NounClause(),
-    Determiner: (w) => factory.Determiner(w),
-    Adverb: (w) => factory.Adverb(w),
-    Preposition: (w) => factory.Preposition(w),
-    To: (w) => factory.To(),
-    Adjective: (w) => factory.Adjective(w),
-  },
-  VerbContainer: {
-    Pronoun: (w) => factory.Pronoun(w, 'a'),
-    Noun: (w) => factory.Noun(w),
-    NounContainer: (w) => factory.NounContainer(),
-    NounClause: (w) => factory.NounClause(),
-    Determiner: (w) => factory.Determiner(w),
-    Adverb: (w) => factory.Adverb(w),
-    Preposition: (w) => factory.Preposition(w),
-    To: (w) => factory.To(),
-    Adjective: (w) => factory.Adjective(w),
-    AdjectiveClause: (w) => factory.AdjectiveClause(w),
-    Verb: (w) => factory.Verb(w),
-    Be: (w) => factory.Be(),
-    Conjunction: (w) => factory.Conjunction(w),
-  },
-  Noun: {
-    Noun: (w) => factory.Noun(w),
-    NounContainer: (w) => factory.NounContainer(),
-    Determiner: (w) => factory.Determiner(w),
-    Adjective: (w) => factory.Adjective(w),
-    AdjectiveClause: (w) => factory.AdjectiveClause(w),
-    Preposition: (w) => factory.Preposition(w),
-  },
-  NounContainer: {
-    Pronoun: (w) => factory.Pronoun(w),
-    Noun: (w) => factory.Noun(w),
-    NounContainer: (w) => factory.NounContainer(),
-    NounClause: (w) => factory.NounClause(),
-    Determiner: (w) => factory.Determiner(w),
-    Adjective: (w) => factory.Adjective(w),
-    AdjectiveClause: (w) => factory.AdjectiveClause(w),
-    Preposition: (w) => factory.Preposition(w),
-    Conjunction: (w) => factory.Conjunction(w),
-  },
-  NounClause: {
-    Clause: () => factory.Clause(),
-    ClauseContainer: () => factory.ClauseContainer(),
-    Noun: (w) => factory.Noun(w),
-    Determiner: (w) => factory.Determiner(w),
-    Adjective: (w) => factory.Adjective(w),
-    AdjectiveClause: (w) => factory.AdjectiveClause(w),
-    Preposition: (w) => factory.Preposition(w),
-  },
-  Adjective: {
-    Adverb: (w) => factory.Adverb(w),
-    Preposition: (w) => factory.Preposition(w),
-  },
-  AdjectiveClause: {
-    Clause: () => factory.Clause(),
-    ClauseContainer: () => factory.ClauseContainer(),
-  },
-  Adverb: {
-    Adverb: (w) => factory.Adverb(w),
-  },
-  Preposition: {
-    Pronoun: (w) => factory.Pronoun(w),
-    Noun: (w) => factory.Noun(w),
-    NounContainer: (w) => factory.NounContainer(),
-    NounClause: (w) => factory.NounClause(),
-    Determiner: (w) => factory.Determiner(w),
-  },
-  To: {
-    Verb: (w) => factory.Verb(w),
-    Be: (w) => factory.Be(),
-    VerbContainer: (w) => factory.VerbContainer(),
-  }
-}
-
-const takeWord = function(oldWord, wordBase, action_target) {
+const takeWord = function(oldWord, wordBase, action_target, arg) {
   const target = oldWord[action_target]
-  const init = words[oldWord.pos][wordBase.pos](wordBase)
+  const init = factory[wordBase.pos](wordBase, arg)
   const updated = Array.isArray(target) ? target.concat(init.id) : init.id
   return [updated, init]
 }
@@ -139,7 +28,7 @@ function reducer(state, action) {
       const wordIndex = state.Words.findIndex(t => t.id === action.activeWord)
       const oldWord = state.Words[wordIndex]
       const wordBase = Dictionary.find(o => o.id === action.id)
-      const [updated, initialized] = takeWord(oldWord, wordBase, action.target)  
+      const [updated, initialized] = takeWord(oldWord, wordBase, action.target, action.arg)  
       const newWord = {
         ...oldWord,
         [action.target]: updated,

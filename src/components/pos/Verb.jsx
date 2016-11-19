@@ -53,7 +53,19 @@ export const Verb = React.createClass({
       <option key={o} value={o === 'modal' ?  '' : o}>{o}</option>
     ))
 
-    return (
+    return word.mode === 'gerund' ? (
+      <div className="list-group-item">
+        <div>
+          <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>
+            {word.word[word.mode]}
+          </span>
+        </div>
+        {children}
+        {predicateChild}
+        {options}
+        {predicateOption}
+      </div>
+    ) : (
       <div className="list-group-item">
         <div>
           <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{word.word.base}</span>

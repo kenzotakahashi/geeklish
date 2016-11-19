@@ -1,7 +1,7 @@
 import uuid from 'uuid'
 
 const factory = {
-  Pronoun: function(w, mode='n', isWh=false) {
+  Pronoun: function(w, arg) {
     const init = {
       id: uuid.v4(),
       pos: 'Pronoun',
@@ -13,13 +13,13 @@ const factory = {
       },
       person: w.person || null,
       number: w.number || 'singular',
-      mode: mode,
-      isWh: isWh
+      mode: arg ? arg.mode : 'n',
+      isWh: ['what','who','which'].includes(w.base) ? true : false
     }
     init.word.pp = w.pp || init.word.p
     return init
   },
-  Noun: function(w, number='singular', mode=null, isWh=false) {
+  Noun: function(w) {
     const init = {
       id: uuid.v4(),
       pos: 'Noun',
@@ -29,9 +29,9 @@ const factory = {
         plural: w.plural || w.base, 
       },
       person: null,
-      number: number,
-      mode: mode === 'p' ? 'p' : number,
-      isWh: isWh,
+      number: 'singular',
+      mode: 'singular',
+      isWh: false,
       adjectives: [],
       adjectivesAfter: [],
       determiners: [],
@@ -42,13 +42,13 @@ const factory = {
                   `${init.word.plural}${init.word.plural[-1] === 's' ? "'" : "'s"}`
     return init
   },
-  NounContainer: function(isWh=false) {
+  NounContainer: function() {
     return {
       id: uuid.v4(),
       pos: 'NounContainer',
       person: null,
       number: 'plural',
-      isWh: isWh,
+      isWh: false,
       adjectives: [],
       adjectivesAfter: [],
       determiners: [],
@@ -57,13 +57,13 @@ const factory = {
       conjunction: null,
     }
   },
-  NounClause: function(isWh=false) {
+  NounClause: function() {
     return {
       id: uuid.v4(),
       pos: 'NounClause',
       person: null,
       number: 'singular',
-      isWh: isWh,
+      isWh: false,
       clause: null,
       adjectives: [],
       adjectivesAfter: [],
@@ -72,17 +72,17 @@ const factory = {
       nouns: [],
     }
   },
-  Determiner: function(w, isWh=false) {
+  Determiner: function(w) {
     return {
       id: uuid.v4(),
       pos: 'Determiner',
       word: w.base,
       number: w.number,
       independent: w.independent,
-      isWh: isWh
+      isWh: ['what','whose','which'].includes(w.base) ? true : false
     }
   },
-  Verb: function(w, mode='base') {
+  Verb: function(w, arg) {
     const init = {
       id: uuid.v4(),
       pos: 'Verb',
@@ -93,7 +93,7 @@ const factory = {
         gerund: w.gerund 
       },
       valid_complements: w.complements,
-      mode: mode,
+      mode: arg ? arg.mode : 'base',
       negative: false,
       past: false,
       continuous: false,
@@ -108,7 +108,7 @@ const factory = {
     init.word.passive = w.passive || init.word.past
     return init
   },
-  Be: function(mode='base') {
+  Be: function(w, arg) {
     return {
       id: uuid.v4(),
       pos: 'Be',
@@ -124,7 +124,7 @@ const factory = {
         'gerund': 'being'
       },
       valid_complements: [],
-      mode: mode,
+      mode: arg ? arg.mode : 'base',
       negative: false,
       modal: '',
       past: false,
@@ -156,7 +156,7 @@ const factory = {
       conjunction: null
     }
   },
-  Adjective: function(w, mode='base', isWh=false) {
+  Adjective: function(w) {
     return {
       id: uuid.v4(),
       pos: 'Adjective',
@@ -165,21 +165,21 @@ const factory = {
         comparative: w.comparative || w.base,
         superlative: w.superlative || w.base
       },
-      mode: mode,
+      mode: 'base',
       adverbs: [],
       prepositions: [],
-      isWh: isWh
+      isWh: false
     }
   },
-  AdjectiveClause: function(w, isWh=false) {
+  AdjectiveClause: function(w) {
     return {
       id: uuid.v4(),
       pos: 'AdjectiveClause',
       clause: null,
-      isWh: isWh
+      isWh: false
     }
   },
-  Adverb: function(w, position='before', isWh=false) {
+  Adverb: function(w) {
     return {
       id: uuid.v4(),
       pos: 'Adverb',
@@ -189,18 +189,18 @@ const factory = {
       canModifyAdv: w.canModify.includes('adv'),
       canModifyDet: w.canModify.includes('det'),
       canModifyClause: w.canModify.includes('clause'),
-      position: position,
+      position: 'before',
       adverb: null,
-      isWh: isWh
+      isWh: false
     }
   },
-  Preposition: function(w, isWh=false) {
+  Preposition: function(w) {
     return {
       id: uuid.v4(),
       pos: 'Preposition',
       word: w.base,
       complement: null,
-      isWh: isWh
+      isWh: false
     }
   },
   To: function() {
