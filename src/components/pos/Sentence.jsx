@@ -13,21 +13,23 @@ const Sentence = React.createClass({
     const w ='clause'
     const option = !!word[w] ?
       e(pos_components[state.Words.find(o => o.id === word[w]).pos], {id: word[w]}) :
-      e('div', {
-        className: `list-group-item ${state.target === w ? 'active' : 'list-group-item-info'}`,
+      e('li', {
+        className: `tree ${state.target === w ? 'active' : 'list-group-item-info2'}`,
         key: w,
         onClick: () => store.dispatch(showWordFactory(word.id, w))
       }, w)
 
     return (
-      <div className='list-group'>
-        <div>
-          <span className='word'>Sentence</span>
-        </div>
-        <div>
-          {option}
-        </div>
-      </div>
+      <ul className='list-group2'>
+        <li>
+          <div className='tree-box'>
+            <span className='word'>Sentence</span>
+          </div>
+          <ul>
+            {option}
+          </ul>
+        </li>
+      </ul>
     )
   },
 })

@@ -24,37 +24,42 @@ export const Noun = React.createClass({
     ))
 
     const options = state.activeWord === this.props.id ? attrs.map((o, i) => (
-      e('div', {
-        className: `list-group-item ${state.target === o ? 'active' : 'list-group-item-info'}`,
+      e('li', {
+        className: `tree ${state.target === o ? 'active' : 'tree-info'}`,
         key: i,
         onClick: () => store.dispatch(showWordFactory(this.props.id, o))
       }, o)
     )) : ''
 
     return (
-      <div className="list-group-item">
-        <div>
-          <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{word.word.singular}</span>
-          {e('button', {
-            className: `button is-active ${word.number === 'plural' ? 'is-primary' : ''}`,
-            type: 'button',
-            onClick: () => this.changeNumber(this.props.id)
-          }, word.number)}
-          {e('button', {
-            className: `button is-active ${word.form === 'possessive' ? 'is-primary' : ''}`,
-            type: 'button',
-            onClick: () => store.dispatch(changeAttribute(
-              this.props.id, 'form', word.form === 'possessive' ? word.number : 'possessive'))
-          }, 'possessive')}          
-          {e('button', {
-            className: `button is-active ${word.isWh ? 'is-primary' : ''}`,
-            type: 'button',
-            onClick: () => store.dispatch(changeAttribute(this.props.id, 'isWh', !word.isWh))
-          }, 'WH')}
-        </div>
-        {children}
-        {options}
-      </div>
+      <ul className="tree">
+        <li className='tree'>
+          <div className='tree-box'>
+            <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{word.word.singular}</span>
+            <span className="label label-default">{this.props.role}</span>
+            {e('button', {
+              className: `button is-active ${word.number === 'plural' ? 'is-primary' : ''}`,
+              type: 'button',
+              onClick: () => this.changeNumber(this.props.id)
+            }, word.number)}
+            {e('button', {
+              className: `button is-active ${word.form === 'possessive' ? 'is-primary' : ''}`,
+              type: 'button',
+              onClick: () => store.dispatch(changeAttribute(
+                this.props.id, 'form', word.form === 'possessive' ? word.number : 'possessive'))
+            }, 'possessive')}          
+            {e('button', {
+              className: `button is-active ${word.isWh ? 'is-primary' : ''}`,
+              type: 'button',
+              onClick: () => store.dispatch(changeAttribute(this.props.id, 'isWh', !word.isWh))
+            }, 'WH')}
+          </div>
+          <ul>
+            {children}
+            {options}
+          </ul>
+        </li>
+      </ul>
     )
   },
 })
@@ -71,7 +76,7 @@ export const NounContainer = React.createClass({
 
     const conjunctionOption = !word[w] && state.activeWord === this.props.id ?
           e('div', {
-            className: `list-group-item ${state.target === w ? 'active' : 'list-group-item-info'}`,
+            className: `tree ${state.target === w ? 'active' : 'tree-info'}`,
             key: w,
             onClick: () => store.dispatch(showWordFactory(this.props.id, w))
           }, w) : ''
@@ -84,14 +89,14 @@ export const NounContainer = React.createClass({
     ))
     const options = state.activeWord === this.props.id ? attrs.map((o, i) => (
       e('div', {
-        className: `list-group-item ${state.target === o ? 'active' : 'list-group-item-info'}`,
+        className: `tree ${state.target === o ? 'active' : 'tree-info'}`,
         key: i,
         onClick: () => store.dispatch(showWordFactory(this.props.id, o))
       }, o)
     )) : ''
 
     return (
-      <div className="list-group-item">
+      <div className="tree">
         <div>
           <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>NounContainer</span>
           {e('button', {
@@ -121,7 +126,7 @@ export const NounClause = React.createClass({
 
     const clauseOption = !word[w] && state.activeWord === this.props.id ?
           e('div', {
-            className: `list-group-item ${state.target === w ? 'active' : 'list-group-item-info'}`,
+            className: `tree ${state.target === w ? 'active' : 'tree-info'}`,
             key: w,
             onClick: () => store.dispatch(showWordFactory(this.props.id, w))
           }, w) : ''
@@ -135,14 +140,14 @@ export const NounClause = React.createClass({
 
     const options = state.activeWord === this.props.id ? attrs.map((o, i) => (
       e('div', {
-        className: `list-group-item ${state.target === o ? 'active' : 'list-group-item-info'}`,
+        className: `tree ${state.target === o ? 'active' : 'tree-info'}`,
         key: i,
         onClick: () => store.dispatch(showWordFactory(this.props.id, o))
       }, o)
     )) : ''
 
     return (
-      <div className="list-group-item">
+      <div className="tree">
         <div>
           <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>Noun Clause</span>
           {e('button', {

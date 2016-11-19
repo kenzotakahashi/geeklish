@@ -21,21 +21,21 @@ export const Verb = React.createClass({
     ))
 
     const options = state.activeWord === this.props.id ? attrs.map((o, i) => (
-      e('div', {
-        className: `list-group-item ${state.target === o ? 'active' : 'list-group-item-info'}`,
+      e('li', {
+        className: `tree ${state.target === o ? 'active' : 'tree-info'}`,
         key: i,
         onClick: () => store.dispatch(showWordFactory(this.props.id, o))
       }, o)
     )) : ''
 
     const w = 'predicate'
-    const predicateChild =  !!word[w] ?
+    const predicateChild = !!word[w] ?
           e(pos_components[state.Words.find(o => o.id === word[w]).pos],
             {id: word[w],  key:w}) : ''
 
     const predicateOption = !word[w] && state.activeWord === this.props.id ?
-          e('div', {
-            className: `list-group-item ${state.target === w ? 'active' : 'list-group-item-info'}`,
+          e('li', {
+            className: `tree ${state.target === w ? 'active' : 'tree-info'}`,
             key: w,
             onClick: () => store.dispatch(showWordFactory(this.props.id, w))
           }, w) : ''
@@ -54,7 +54,7 @@ export const Verb = React.createClass({
     ))
 
     return word.form === 'gerund' ? (
-      <div className="list-group-item">
+      <div className="tree">
         <div>
           <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>
             {word.word[word.form]}
@@ -66,17 +66,21 @@ export const Verb = React.createClass({
         {predicateOption}
       </div>
     ) : (
-      <div className="list-group-item">
-        <div>
-          <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{word.word.base}</span>
-          <span className="select" value={word.modal} onChange={this.handleChange}><select>{modals}</select></span>
-          {attributes}
-        </div>
-        {children}
-        {predicateChild}
-        {options}
-        {predicateOption}
-      </div>
+      <ul>
+        <li className="tree">
+          <div className='tree-box'>
+            <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{word.word.base}</span>
+            <span className="select" value={word.modal} onChange={this.handleChange}><select>{modals}</select></span>
+            {attributes}
+          </div>
+          <ul>
+            {children}
+            {predicateChild}
+            {options}
+            {predicateOption}
+          </ul>
+        </li>
+      </ul>
     )
   },
 })
@@ -98,7 +102,7 @@ export const Be = React.createClass({
 
     const options = state.activeWord === this.props.id ? attrs.map((o, i) => (
       e('div', {
-        className: `list-group-item ${state.target === o ? 'active' : 'list-group-item-info'}`,
+        className: `tree ${state.target === o ? 'active' : 'tree-info'}`,
         key: i,
         onClick: () => store.dispatch(showWordFactory(this.props.id, o))
       }, o)
@@ -111,7 +115,7 @@ export const Be = React.createClass({
 
     const predicateOption = !word[w] && state.activeWord === this.props.id ?
           e('div', {
-            className: `list-group-item ${state.target === w ? 'active' : 'list-group-item-info'}`,
+            className: `tree ${state.target === w ? 'active' : 'tree-info'}`,
             key: w,
             onClick: () => store.dispatch(showWordFactory(this.props.id, w))
           }, w) : ''
@@ -130,7 +134,7 @@ export const Be = React.createClass({
     ))
  
     return (
-      <div className="list-group-item">
+      <div className="tree">
         <div>
           <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{word.word.base}</span>
           <span className="select"><select value={word.modal} onChange={this.handleChange}>{modals}</select></span>
@@ -162,7 +166,7 @@ export const VerbContainer = React.createClass({
 
     const options = state.activeWord === this.props.id ? attrs.map((o, i) => (
       e('div', {
-        className: `list-group-item ${state.target === o ? 'active' : 'list-group-item-info'}`,
+        className: `tree ${state.target === o ? 'active' : 'tree-info'}`,
         key: i,
         onClick: () => store.dispatch(showWordFactory(this.props.id, o))
       }, o)
@@ -176,7 +180,7 @@ export const VerbContainer = React.createClass({
     const options2 = attrs2.map(w => (
       !word[w] && state.activeWord === this.props.id ?
       e('div', {
-        className: `list-group-item ${state.target === w ? 'active' : 'list-group-item-info'}`,
+        className: `tree ${state.target === w ? 'active' : 'tree-info'}`,
         key: w,
         onClick: () => store.dispatch(showWordFactory(this.props.id, w))
       }, w) : ''
@@ -187,7 +191,7 @@ export const VerbContainer = React.createClass({
     ))
 
     return (
-      <div className="list-group-item">
+      <div className="tree">
         <div>
           <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>VerbContainer</span>
           <span className="select"><select value={word.modal} onChange={this.handleChange}>{modals}</select></span>

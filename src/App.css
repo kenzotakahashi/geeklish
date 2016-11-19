@@ -28,7 +28,7 @@
   cursor: pointer; 
 }
 
-.list-group-item {
+.list-group-item, .tree{
   cursor: pointer;
 }
 
@@ -69,4 +69,27 @@
 
 button.button {
   margin-left: 5px;
+  padding: 0px 5px 0px 5px;
 }
+
+li.tree {
+  padding-left: 30px;
+}
+
+div.tree-box {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  border-color: #ddd;
+  margin: 4px;
+  padding: 4px;
+  max-width: 600px;
+}
+
+/*span.label {
+  position: relative;
+  right: 40px;
+}
+*/
+
+
