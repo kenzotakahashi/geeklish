@@ -1,8 +1,7 @@
 import React from 'react'
 import store from '../../store.js'
+import { WH } from './Tree'
 import { changeAttribute } from '../../actions'
-
-const e = React.createElement
 
 const Pronoun = React.createClass({
   handleChange: function(e){
@@ -10,30 +9,29 @@ const Pronoun = React.createClass({
   },
   render: function() {
     const state = store.getState()
-    const word = state.Words.find(o => o.id === this.props.id)
+    const element = state.Words.find(o => o.id === this.props.id)
     
     const forms = ['nominative','accusative','possessive','possessive pronoun','reflexive'].map(o => (
       <option key={o} value={o}>{o}</option>
     ))
 
-    const formSelect = word.word.possessive ? (
+    const formSelect = element.word.possessive ? (
       <span className="select">
-        <select value={word.form} onChange={this.handleChange}>{forms}</select>
+        <select value={element.form} onChange={this.handleChange}>{forms}</select>
       </span>
     ) : ''
 
     return (
-      <div className="list-group-item">
-      	<div>
-	        <span className='word'>{word.word[word.form]}</span>
-          {formSelect}
-	        {e('button', {
-            className: `button is-active ${word.isWh ? 'is-primary' : ''}`,
-            type: 'button',
-            onClick: () => store.dispatch(changeAttribute(this.props.id, 'isWh', !word.isWh))
-       		}, 'WH')}
-	      </div>
-      </div>
+      <ul>
+        <li className='tree-top'>
+          <div className='tree-box'>
+            <span className='word'>{element.word[element.form]}</span>
+            <span className="label label-default">{this.props.role}</span>
+            {formSelect}
+            <WH id={element.id} isWh={element.isWh} />
+          </div>
+        </li>
+      </ul>
     )
   },
 })

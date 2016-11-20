@@ -101,7 +101,6 @@ const factory = {
       passive: false,
       modal: '',
       complements: [],
-      predicate: null,
       adverbs: [],
       prepositions: [],
     }
@@ -132,7 +131,6 @@ const factory = {
       continuous: false,
       complements: [],
       adverbs: [],
-      predicate: null,
       prepositions: []
     }
   },
@@ -149,7 +147,6 @@ const factory = {
       passive: false,
       modal: '',
       complements: [],
-      predicate: null,
       adverbs: [],
       prepositions: [],
       verbs: [],

@@ -1,50 +1,40 @@
-import React from 'react';
+import React from 'react'
 import store from '../../store.js'
-import pos_components from './pos_components';
-import { showOptions, showWordFactory, changeAttribute } from '../../actions'
+import { Children, WH } from './Tree'
+import { showOptions, changeAttribute } from '../../actions'
 
-const e = React.createElement;
+const e = React.createElement
 
 const Adverb = React.createClass({
   render: function() {
-    const state = store.getState();
-    const word = state.Words.find(o => o.id === this.props.id);
+    const state = store.getState()
+    const element = state.Words.find(o => o.id === this.props.id)
+    const attrs = ['adverb']
 
     const attributes = ['beginning','before','after'].map(o => (
       e('button', {
-        className: `button is-active ${word.position === o ? 'is-primary' : ''}`,
+        className: `button is-active ${element.position === o ? 'is-primary' : ''}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(this.props.id, 'position', o))
       }, o)
-    ));
-
-    const w = 'adverb'
-    const adverb = !!word[w] ?
-          e(pos_components[state.Words.find(o => o.id === word[w]).pos],
-            {id: word[w],  key: w}) :
-          state.activeWord === this.props.id ?
-          e('div', {
-            className: `list-group-item ${state.target === w ? 'active' : 'list-group-item-info'}`,
-            key: w,
-            onClick: () => store.dispatch(showWordFactory(this.props.id, w))
-          }, w) : '';
+    ))
 
     return (
-      <div className="list-group-item">
-        <div>
-          <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{word.word}</span>
-          {attributes}
-          {e('button', {
-            className: `button is-active ${word.isWh ? 'is-primary' : ''}`,
-            type: 'button',
-            onClick: () => store.dispatch(changeAttribute(this.props.id, 'isWh', !word.isWh))
-          }, 'WH')}
-        </div>
-        {adverb}
-      </div>
-    );
+      <ul>
+        <li className='tree-top'>
+          <div className='tree-box'>
+            <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{element.word}</span>
+            <span className="label label-default">{this.props.role}</span>
+            {attributes}
+            <WH id={this.props.id} isWh={element.isWh} />
+          </div>
+          <Children element={element} attrs={attrs} id={this.props.id} words={state.Words}
+                    target={state.target} activeWord={state.activeWord} />
+        </li>
+      </ul>
+    )
   },
-});
+})
 
-export default Adverb;
+export default Adverb

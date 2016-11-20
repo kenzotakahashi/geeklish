@@ -1,33 +1,25 @@
 import React from 'react';
 import store from '../../store.js'
-import pos_components from './pos_components';
-import { showOptions, showWordFactory } from '../../actions'
-
-const e = React.createElement;
+import { Children } from './Tree'
+import { showOptions } from '../../actions'
 
 export const Infinitive = React.createClass({
   render: function() {
     const state = store.getState();
-    const word = state.Words.find(o => o.id === this.props.id);
-
-    const w = 'verb'
-    const verb = !!word[w] ?
-          e(pos_components[state.Words.find(o => o.id === word[w]).pos],
-            {id: word[w],  key: w}) :
-          state.activeWord === this.props.id ?
-          e('div', {
-            className: `list-group-item ${state.target === w ? 'active' : 'list-group-item-info'}`,
-            key: w,
-            onClick: () => store.dispatch(showWordFactory(this.props.id, w))
-          }, w) : '';
+    const element = state.Words.find(o => o.id === this.props.id);
+    const attrs = ['verb']
 
     return (
-      <div className="list-group-item">
-        <div>
-          <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{word.word}</span>
-        </div>
-        {verb}
-      </div>
+      <ul>
+        <li className="tree-top">
+          <div className='tree-box'>
+            <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word}</span>
+            <span className="label label-default">{this.props.role}</span>
+          </div>
+          <Children element={element} attrs={attrs} id={element.id} words={state.Words}
+                    target={state.target} activeWord={state.activeWord} />
+        </li>
+      </ul>
     );
   },
 });

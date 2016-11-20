@@ -23,20 +23,17 @@ const valid_pos = {
     conjunction: ['Conjunction']
   },
   Verb: {
-    complements: [...nouns, 'Infinitive'],
-    predicate: [...nouns, ...adjectives, 'Adverb', 'Preposition'],
+    complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
     adverbs: ['Adverb', 'Infinitive'],
     prepositions: ['Preposition']
   },
   Be: {
-    complements: [...nouns, 'Infinitive'],
-    predicate: [...nouns, 'Adjective', 'Adverb', 'Preposition'],
+    complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
     adverbs: ['Adverb', 'Infinitive'],
     prepositions: ['Preposition']
   },
   VerbContainer: {
-    complements: [...nouns, 'Infinitive'],
-    predicate: [...nouns, ...adjectives, 'Adverb', 'Preposition'],
+    complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
     adverbs: ['Adverb', 'Infinitive'],
     prepositions: ['Preposition'],
     verbs: ['Verb', 'Be'],
@@ -88,7 +85,7 @@ const getArgument = function(activeWordPos, target, wordPos) {
       return {form: 'possessive'}
     }
   } else if (['Verb','Be'].includes(wordPos) &&
-             ['subject','complement','complements','nouns','predicate'].includes(target)) {
+             ['subject','complement','complements','nouns'].includes(target)) {
     return {form: 'gerund'}
   }
 }

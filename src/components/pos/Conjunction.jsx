@@ -4,14 +4,17 @@ import store from '../../store.js'
 const Conjunction = React.createClass({
   render: function() {
     const state = store.getState()
-    const word = state.Words.find(o => o.id === this.props.id)
+    const element = state.Words.find(o => o.id === this.props.id)
 
     return (
-      <div className="list-group-item">
-        <div>
-          <span className='word'>{word.word}</span>
-        </div>
-      </div>
+      <ul>
+        <li className='tree-top'>
+          <div className='tree-box'>
+            <span className='word'>{element.word}</span>
+            <span className="label label-default">{this.props.role}</span>
+          </div>
+        </li>
+      </ul>
     )
   },
 })

@@ -18,7 +18,6 @@ const str_adverbs = function(verb, adverbs) {
 const getList = function(v) {
   let word = v || [this.word[this.form]] // gerund
   let verb = word.concat(this.complements)
-  verb = this.predicate ? verb.concat(this.predicate) : verb
   verb = this.str_adverbs(verb, this.adverbs)
   verb = verb.concat(this.prepositions)
   return verb
@@ -49,7 +48,6 @@ const initVerb = function(v) {
   this.perfect = v.perfect
   this.passive = v.passive
   this.complements = v.complements.map(o => createWord(o))
-  this.predicate = createWord(v.predicate)
   this.adverbs = v.adverbs.map(o => createWord(o))
   this.prepositions = v.prepositions.map(o => createWord(o))
   return this
@@ -82,7 +80,6 @@ export const VerbContainer = {
     this.perfect = v.perfect
     this.passive = v.passive
     this.complements = v.complements.map(o => createWord(o))
-    this.predicate = createWord(v.predicate)
     this.adverbs = v.adverbs.map(o => createWord(o))
     this.prepositions = v.prepositions.map(o => createWord(o))
     this.verbs = v.verbs.map(o => createWord(o))
