@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, WH } from './Tree'
+import { Children, WH, DeleteButton } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
@@ -28,6 +28,7 @@ const Adverb = React.createClass({
             <span className="label label-default">{this.props.role}</span>
             {attributes}
             <WH id={this.props.id} isWh={element.isWh} />
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={this.props.id} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />

@@ -16,7 +16,14 @@ export const changeAttribute = (id, attr, change_to) => ({
   change_to,
 })
 
-export const deleteElement = (id) => ({
+export const deleteElement = (id, role, parentId) => ({
 	type: 'DELETE_ELEMENT',
-	id
+	id,
+  role,
+  parentId
+})
+
+export const changeNumber = (id) => ({
+  type: 'CHANGE_NUMBER',
+  id
 })

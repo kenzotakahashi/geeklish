@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children } from './Tree'
+import { Children, DeleteButton } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
@@ -35,6 +35,7 @@ export const Verb = React.createClass({
               {element.word[element.form]}
             </span>
             <span className="label label-default">{this.props.role}</span>
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
@@ -48,6 +49,7 @@ export const Verb = React.createClass({
             <span className="label label-default">{this.props.role}</span>
             <span className="select" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>
             {attributes}
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
@@ -68,7 +70,7 @@ export const Be = React.createClass({
 
     const attributes = ['past','negative','continuous','perfect'].map(o => (
       e('button', {
-        className: `button is-active ${element.isWh ? 'is-primary' : ''}`,
+        className: `button is-active ${element[o] ? 'is-primary' : ''}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(element.id, o, !element[o]))
@@ -87,6 +89,7 @@ export const Be = React.createClass({
             <span className="label label-default">{this.props.role}</span>
             <span className="select" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>
             {attributes}
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
@@ -116,6 +119,7 @@ export const VerbContainer = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>VerbContainer</span>
             <span className="label label-default">{this.props.role}</span>
             <span className="select" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />

@@ -29,7 +29,7 @@ function reducer(state, action) {
       const oldElement = state.Words[elementIndex]
       const wordBase = Dictionary.find(o => o.id === action.id)
       const [updated, initialized] = takeWord(oldElement, wordBase, action.target, action.arg)  
-      const newWord = {
+      const newElement = {
         ...oldElement,
         [action.target]: updated,
       }
@@ -40,7 +40,7 @@ function reducer(state, action) {
         target: false,
         Words: [
           ...state.Words.slice(0, elementIndex),
-          newWord,
+          newElement,
           ...state.Words.slice(elementIndex + 1, state.Words.length),
           initialized,
         ],
@@ -49,7 +49,7 @@ function reducer(state, action) {
     case 'CHANGE_ATTRIBUTE': {
       const elementIndex = state.Words.findIndex(t => t.id === action.id)
       const oldElement = state.Words[elementIndex]
-      const newWord = {
+      const newElement = {
         ...oldElement,
         [action.attr]: action.change_to,
       }
@@ -57,7 +57,7 @@ function reducer(state, action) {
         ...state,
         Words: [
           ...state.Words.slice(0, elementIndex),
-          newWord,
+          newElement,
           ...state.Words.slice(elementIndex + 1, state.Words.length),
         ],
       }
@@ -70,7 +70,7 @@ function reducer(state, action) {
       const possessive = number === 'singular' ? `${oldElement.word.singular}'s` :
                         `${oldElement.word.plural}${oldElement.word.plural[-1] === 's' ? "'" : "'s"}`
 
-      const newWord = {
+      const newElement = {
         ...oldElement,
         number: number,
         word: {
@@ -83,17 +83,28 @@ function reducer(state, action) {
         ...state,
         Words: [
           ...state.Words.slice(0, elementIndex),
-          newWord,
+          newElement,
           ...state.Words.slice(elementIndex + 1, state.Words.length),
         ],
       }
     }
     case 'DELETE_ELEMENT': {
-      console.log(state)
-      console.log(action.id)
+      const filtered = state.Words.filter(o => o.id !== action.id)
+      const elementIndex = filtered.findIndex(t => t.id === action.parentId)
+      const oldElement = state.Words[elementIndex]
+      const newRole = action.role.slice(-1) === 's' ?
+                      oldElement[action.role].filter(o => o !== action.id) : null   
+      const newElement = {
+        ...oldElement,
+        [action.role]: newRole
+      }
       return {
         ...state,
-        Words: state.Words.filter(o => o.id !== action.id)
+        Words: [
+          ...filtered.slice(0, elementIndex),
+          newElement,
+          ...filtered.slice(elementIndex + 1, filtered.length)
+        ]
       }
     }
     default: {

@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { WH } from './Tree'
+import { WH, DeleteButton } from './Tree'
 import { showOptions } from '../../actions'
 
 const Determiner = React.createClass({
@@ -15,6 +15,7 @@ const Determiner = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word}</span>
             <span className="label label-default">{this.props.role}</span>
             <WH id={element.id} isWh={element.isWh} />
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
         </li>
       </ul>

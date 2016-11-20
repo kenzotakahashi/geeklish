@@ -1,7 +1,7 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children } from './Tree'
-import { showOptions, changeAttribute, deleteElement } from '../../actions'
+import { Children, DeleteButton } from './Tree'
+import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
 
@@ -27,9 +27,7 @@ export const Clause = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>Clause</span>
             <span className="label label-default">{this.props.role}</span>
             {attr}
-            <button type="button" className="btn btn-default trash" onClick={() => store.dispatch(deleteElement(element.id))}>
-              <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            </button>
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
@@ -51,6 +49,7 @@ export const ClauseContainer = React.createClass({
           <div className='tree-box'>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>ClauseContainer</span>
             <span className="label label-default">{this.props.role}</span>
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />

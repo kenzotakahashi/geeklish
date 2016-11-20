@@ -1,6 +1,6 @@
 import React from 'react';
 import store from '../../store.js'
-import { Children } from './Tree'
+import { Children, DeleteButton } from './Tree'
 import { showOptions } from '../../actions'
 
 export const Infinitive = React.createClass({
@@ -15,6 +15,7 @@ export const Infinitive = React.createClass({
           <div className='tree-box'>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word}</span>
             <span className="label label-default">{this.props.role}</span>
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />

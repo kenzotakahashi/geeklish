@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, WH } from './Tree'
+import { Children, WH, DeleteButton } from './Tree'
 import { showOptions } from '../../actions'
 
 const Preposition = React.createClass({
@@ -16,6 +16,7 @@ const Preposition = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{element.word}</span>
             <span className="label label-default">{this.props.role}</span>
             <WH id={element.id} isWh={element.isWh} />
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />

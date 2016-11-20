@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { WH } from './Tree'
+import { WH, DeleteButton } from './Tree'
 import { changeAttribute } from '../../actions'
 
 const Pronoun = React.createClass({
@@ -29,6 +29,7 @@ const Pronoun = React.createClass({
             <span className="label label-default">{this.props.role}</span>
             {formSelect}
             <WH id={element.id} isWh={element.isWh} />
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
         </li>
       </ul>
