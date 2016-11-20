@@ -120,3 +120,7 @@ div.tree-box {
   padding: 4px;
   max-width: 600px;
 }
+
+button.trash {
+  float: right;
+}

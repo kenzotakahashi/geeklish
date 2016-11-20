@@ -81,7 +81,7 @@ const getArgument = function(activeWordPos, target, wordPos) {
   if (wordPos === 'Pronoun') {
     if (['Verb','Be','VerbContainer','Preposition'].includes(activeWordPos)) {
       return {form: 'accusative'}
-    } else if (target === 'nouns') {
+    } else if (activeWordPos === 'Noun') {
       return {form: 'possessive'}
     }
   } else if (['Verb','Be'].includes(wordPos) &&

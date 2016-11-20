@@ -15,3 +15,8 @@ export const changeAttribute = (id, attr, change_to) => ({
   attr,
   change_to,
 })
+
+export const deleteElement = (id) => ({
+	type: 'DELETE_ELEMENT',
+	id
+})

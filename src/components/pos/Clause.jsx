@@ -1,7 +1,7 @@
 import React from 'react'
 import store from '../../store.js'
 import { Children } from './Tree'
-import { showOptions, changeAttribute } from '../../actions'
+import { showOptions, changeAttribute, deleteElement } from '../../actions'
 
 const e = React.createElement
 
@@ -27,6 +27,9 @@ export const Clause = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>Clause</span>
             <span className="label label-default">{this.props.role}</span>
             {attr}
+            <button type="button" className="btn btn-default trash" onClick={() => store.dispatch(deleteElement(element.id))}>
+              <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />

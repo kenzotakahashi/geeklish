@@ -13,13 +13,13 @@ export const Children = (props) => (
       		// attribute is a list(ex. complements)
       		props.element[w].map((t, j) => (
       		  e(pos_components[props.words.find(o => o.id === t).pos],
-      		  	{key: w+j, id: t, role: w}
+      		  	{key: w+j, id: t, role: w.slice(-1) === 's' ? w.slice(0,-1) : w}
       		  )
       		))
       	) : (props.element[w] &&
 	      	// attribute is a non-list(ex. subject)	      	
       		e(pos_components[props.words.find(o => o.id === props.element[w]).pos],
-      			{key: w, id: props.element[w], role: w}
+      			{key: w, id: props.element[w], role: w.slice(-1) === 's' ? w.slice(0,-1) : w}
       		)
       	)
       ))
