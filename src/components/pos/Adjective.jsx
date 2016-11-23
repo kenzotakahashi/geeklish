@@ -13,7 +13,7 @@ export const Adjective = React.createClass({
 
     const attributes = ['base','comparative','superlative'].map(o => (
       e('button', {
-        className: `button is-active ${element.form === o? 'is-primary' : ''}`,
+        className: `button is-small is-active ${element.form === o? 'is-primary' : ''}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(this.props.id, 'form', o))

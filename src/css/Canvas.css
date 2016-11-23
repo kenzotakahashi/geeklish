@@ -1,26 +1,16 @@
-.App {
-  text-align: center;
+.main-box {
+  background-color: #fff;
+  border-color: #fff;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px;
+  min-height: 500px; 
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.small-font {
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .word {
@@ -29,11 +19,12 @@
 }
 
 span.select {
-  margin-left: 10px;
+  margin-left: 3px;
 }
 
-.list-group-item, .tree{
+li.list-group-item, .tree{
   cursor: pointer;
+  padding: 5px;
 }
 
 .list-group-item.Noun {
@@ -72,7 +63,7 @@ span.select {
 }
 
 button.button {
-  margin-left: 5px;
+  margin-left: 3px;
   padding: 0px 5px 0px 5px;
 }
 
@@ -83,7 +74,7 @@ li.tree {
   border-style: solid;
   border-width: 1px;
   border-color: #ddd;
-  max-width: 600px;
+  max-width: 550px;
 }
 
 li.tree:first-child {
@@ -98,13 +89,12 @@ li.tree:last-child {
 }
 
 li.tree-info {
-  color: #31708f;
-  background-color: #d9edf7;
+  background-color: whitesmoke;
 }
 
 li.tree-active {
   color: #fff;
-  background-color: #286090;
+  background-color: gray;
 }
 
 li.tree-top {
@@ -112,13 +102,15 @@ li.tree-top {
 }
 
 div.tree-box {
+  font-size: 12px;
+  font-weight: bold;
   border-style: solid;
   border-width: 1px;
   border-radius: 3px;
   border-color: #ddd;
   margin: 4px 4px 4px 0; 
   padding: 4px;
-  max-width: 600px;
+  max-width: 550px;
 }
 
 button.trash {

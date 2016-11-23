@@ -16,7 +16,7 @@ export const Verb = React.createClass({
 
     const attributes = ['past','negative','continuous','perfect','passive'].map(o => (
       e('button', {
-        className: `button is-active ${element[o] ? 'is-primary' : ''}`,
+        className: `button is-small is-active ${element[o] ? 'is-primary' : ''}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(element.id, o, !element[o]))
@@ -47,7 +47,7 @@ export const Verb = React.createClass({
           <div className='tree-box'>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
             <span className="label label-default">{this.props.role}</span>
-            <span className="select" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>
+            <span className="select is-small" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>
             {attributes}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
@@ -70,7 +70,7 @@ export const Be = React.createClass({
 
     const attributes = ['past','negative','continuous','perfect'].map(o => (
       e('button', {
-        className: `button is-active ${element[o] ? 'is-primary' : ''}`,
+        className: `button is-small is-active ${element[o] ? 'is-primary' : ''}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(element.id, o, !element[o]))
@@ -87,7 +87,7 @@ export const Be = React.createClass({
           <div className='tree-box'>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
             <span className="label label-default">{this.props.role}</span>
-            <span className="select" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>
+            <span className="select is-small" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>
             {attributes}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>

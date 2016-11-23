@@ -67,7 +67,7 @@ const valid_pos = {
     clause: clauses
   },
   Adverb: {
-    adverbs: ['Adverb']
+    adverb: ['Adverb']
   },
   Preposition: {
     complement: nouns
@@ -109,7 +109,7 @@ const WordFactory = React.createClass({
         valid.includes(t.pos)
       )).map(o => (
       e('li', {
-        className: `list-group-item col-md-3 ${o.pos}`,
+        className: `list-group-item col-md-6 ${o.pos}`,
         key: o.id,
         onClick: () => this.createNewWord(
           o.id, state.activeWord, state.target,
@@ -129,9 +129,11 @@ const WordFactory = React.createClass({
     // ))
 
     return (
-      <ul className='list-group row'>
-        {words}
-      </ul>
+      <div>
+        <ul className='list-group'>
+          {words}
+        </ul>
+      </div>
     )
   }
 })

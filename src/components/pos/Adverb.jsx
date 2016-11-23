@@ -13,7 +13,7 @@ const Adverb = React.createClass({
 
     const attributes = ['beginning','before','after'].map(o => (
       e('button', {
-        className: `button is-active ${element.position === o ? 'is-primary' : ''}`,
+        className: `button is-small is-active ${element.position === o ? 'is-primary' : ''}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(this.props.id, 'position', o))

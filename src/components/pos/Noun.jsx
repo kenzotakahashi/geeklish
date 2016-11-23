@@ -18,12 +18,12 @@ export const Noun = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.singular}</span>
             <span className="label label-default">{this.props.role}</span>
             {e('button', {
-              className: `button is-active ${element.number === 'plural' && 'is-primary'}`,
+              className: `button is-small is-active ${element.number === 'plural' && 'is-primary'}`,
               type: 'button',
               onClick: () => store.dispatch(changeNumber(element.id))
             }, element.number)}
             {e('button', {
-              className: `button is-active ${element.form === 'possessive' && 'is-primary'}`,
+              className: `button is-small is-active ${element.form === 'possessive' && 'is-primary'}`,
               type: 'button',
               onClick: () => store.dispatch(changeAttribute(
                 element.id, 'form', element.form === 'possessive' ? element.number : 'possessive'))
