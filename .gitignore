@@ -2,6 +2,7 @@
 
 # dependencies
 node_modules
+client/node_modules
 
 # testing
 coverage
@@ -13,3 +14,8 @@ build
 .DS_Store
 .env
 npm-debug.log
+
+# python
+env
+__pycache__/
+*.py[cod]
