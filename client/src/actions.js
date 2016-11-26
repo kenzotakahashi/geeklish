@@ -3,10 +3,11 @@ export const showOptions = (id) => ({
   id
 })
 
-export const showWordFactory = (id, target) => ({
+export const showWordFactory = (id, target, dictionary) => ({
   type: 'SHOW_WORD_FACTORY',
   id,
-  target
+  target,
+  dictionary
 })
 
 export const changeAttribute = (id, attr, change_to) => ({

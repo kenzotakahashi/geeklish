@@ -1,5 +1,6 @@
-import Dictionary from '../dictionary/dictionary.js'
+// import Dictionary from '../dictionary/dictionary.js'
 import factory from '../factory.js'
+// import Client from '../Client'
 
 const takeWord = function(oldElement, wordBase, action_target, arg) {
   const target = oldElement[action_target]
@@ -17,23 +18,29 @@ function reducer(state, action) {
         target: null
       }
     }
+    case 'INSERT_DICTIONARY': {
+      return {
+        ...state,
+        dictionary: action.dictionary
+      }
+    }
     case 'SHOW_WORD_FACTORY': {
       return {
         ...state,
         activeWord: action.id,        
-        target: action.target
+        target: action.target,
+        dictionary: action.dictionary
       }
     }
     case 'CREATE_WORD': {
       const elementIndex = state.Words.findIndex(t => t.id === action.activeWord)
       const oldElement = state.Words[elementIndex]
-      const wordBase = Dictionary.find(o => o.id === action.id)
-      const [updated, initialized] = takeWord(oldElement, wordBase, action.target, action.arg)  
+      // const wordBase = Dictionary.find(o => o.id === action.id)
+      const [updated, initialized] = takeWord(oldElement, action.wordBase, action.target, action.arg)  
       const newElement = {
         ...oldElement,
         [action.target]: updated,
       }
-
       return {
         ...state,
         activeWord: initialized.id,

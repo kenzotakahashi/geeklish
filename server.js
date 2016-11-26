@@ -1,40 +1,30 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import { Dictionary, PronounDic } from './models/models'
+import mongo from 'mongodb'
+import { Dictionary, PronounDic, NounDic, DeterminerDic, VerbDic, AdjectiveDic,
+         AdverbDic, ConjunctionDic, PrepositionDic, InfinitiveDic, BeDic, ClauseDic, NounContainerDic,
+         NounClauseDic, AdjectiveClauseDic, ClauseContainerDic, VerbContainerDic } from './models/models'
 
 const app = express()
 
-mongoose.connect('mongodb://localhost/test')
+mongoose.connect('mongodb://localhost/geeklish')
 mongoose.Promise = global.Promise
-
-// const db = mongoose.connection
-// db.on('error', console.error.bind(console, 'connection error:'))
-// db.once('open', function() {
-//   const kittySchema = mongoose.Schema({
-//       name: String
-//   })
-//   kittySchema.methods.speak = function () {
-//     const greeting = this.name ? "Meow name is " + this.name : "I don't have a name"
-//     console.log(greeting)
-//   }
-//   const Kitten = mongoose.model('Kitten', kittySchema)
-//   const fluffy = new Kitten({ name: 'fluffy' })
-//   fluffy.speak()
-//   fluffy.save(function (err, fluffy) {
-//     if (err) return console.error(err)
-//     fluffy.speak()
-//   })
-//   Kitten.find(function (err, kittens) {
-//     if (err) return console.error(err)
-//     console.log(kittens)
-//   })
-// })
-
 
 app.set('port', (process.env.API_PORT || 3001))
 
-app.get('/api/', (req, res) => {
-	response.end("Welcome to my homepage!")
+app.get('/api/dictionary', (req, res) => {
+	Dictionary.find({}).sort({'order': 1}).exec((err, dics) => {
+	// Dictionary.find({}).select('_id base pos').exec((err, dics) => {
+		if (err) {return next(err)}
+		res.json({ result: dics })
+	})
+})
+
+app.get('/api/dictionary/:id', (req, res) => {	
+	Dictionary.findById(req.params.id).exec((err, dic) => {
+		if (err) {return next(err)}
+		res.json({ result: dic })
+	})
 })
 
 app.listen(app.get('port'), () => {

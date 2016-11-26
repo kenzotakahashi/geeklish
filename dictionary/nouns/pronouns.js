@@ -48,6 +48,9 @@ const pronouns = [
     person: 3,
     number: 'singular'
   },
-]
+].map(o => ({
+  ...o,
+  order: 2
+}))
 
 export default pronouns

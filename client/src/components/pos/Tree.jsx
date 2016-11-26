@@ -1,11 +1,83 @@
 import React from 'react'
 import store from '../../store.js'
+import Client from '../../Client'
 import pos_components from './pos_components'
 import { showWordFactory, changeAttribute, deleteElement } from '../../actions'
 
 const e = React.createElement
 
-// w.slice(-1) === 's' ? w.slice(0,-1) : w
+const nouns = ['Noun', 'Pronoun', 'NounContainer', 'NounClause', 'Verb', 'Be'] //'Determiner'
+const verbs = ['Verb', 'Be', 'VerbContainer']
+const adjectives = ['Adjective', 'AdjectiveClause']
+const clauses = ['Clause', 'ClauseContainer']
+
+const valid_pos = {
+  Sentence: {
+    clause: clauses
+  },
+  Clause: {
+    subject: nouns,
+    verb: verbs,
+    conjunction: ['Conjunction']
+  },
+  ClauseContainer: {
+    clauses: ['Clause'],
+    conjunction: ['Conjunction']
+  },
+  Verb: {
+    complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
+    adverbs: ['Adverb', 'Infinitive'],
+    prepositions: ['Preposition']
+  },
+  Be: {
+    complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
+    adverbs: ['Adverb', 'Infinitive'],
+    prepositions: ['Preposition']
+  },
+  VerbContainer: {
+    complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
+    adverbs: ['Adverb', 'Infinitive'],
+    prepositions: ['Preposition'],
+    verbs: ['Verb', 'Be'],
+    conjunction: ['Conjunction']
+  },
+  Noun: {
+    adjectives: [...adjectives, 'Infinitive'],
+    prepositions: ['Preposition'],
+    determiners: ['Determiner'],
+    nouns: nouns
+  },
+  NounContainer: {
+    adjectives: adjectives,
+    prepositions: ['Preposition'],
+    determiners: ['Determiner'],
+    nouns: nouns,
+    conjunction: ['Conjunction']
+  },
+  NounClause: {
+    clause: clauses,
+    nouns: nouns,
+    determiners: ['Determiner'],
+    adjectives: adjectives,
+    prepositions: ['Preposition'],
+  },
+  Adjective: {
+    adverbs: ['Adverb'],
+    prepositions: ['Preposition'] 
+  },
+  AdjectiveClause: {
+    clause: clauses
+  },
+  Adverb: {
+    adverb: ['Adverb']
+  },
+  Preposition: {
+    complement: nouns
+  },
+  Infinitive: {
+    verb: verbs
+  }
+}
 
 export const Children = (props) => (
 	<ul>
@@ -34,7 +106,15 @@ export const Children = (props) => (
 	      	{
 	          className: `tree tree-${props.target === o ? 'active' : 'info'}`,
 	          key: o,
-	          onClick: () => store.dispatch(showWordFactory(props.id, o))
+	          // onClick: () => store.dispatch(showWordFactory(props.id, o))
+	          onClick: function() {
+	          	Client.getDics(json => {
+	          	  const pos = props.words.find(o => o.id === props.activeWord).pos
+	          	  const valid = valid_pos[pos][o]
+	          	  const dictionary = json.result.filter(t => valid.includes(t.pos))
+	          	  store.dispatch(showWordFactory(props.id, o, dictionary))
+	          	})
+	          }
 	        },
 	        o
 	      )

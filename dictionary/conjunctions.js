@@ -11,6 +11,9 @@ const conjunctions = [
 		base: "when",
 		type: "subordinating"
 	},
-]
+].map(o => ({
+	...o,
+	order: 6
+}))
 
 export default conjunctions

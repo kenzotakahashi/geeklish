@@ -88,7 +88,7 @@ const factory = {
       pos: 'Verb',
       word: {
         base: w.base,
-        '3s': w['3s'],
+        tps: w.tps,
         past: w.past,
         gerund: w.gerund 
       },
@@ -113,8 +113,8 @@ const factory = {
       pos: 'Be',
       word: {
         base: 'be',
-        '1s': 'am',
-        '3s': 'is',
+        first: 'am',
+        tps: 'is',
         'plural': 'are',
         'past_s': 'was',
         'past_p': 'were',

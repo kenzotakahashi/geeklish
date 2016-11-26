@@ -81,7 +81,7 @@ export const Clause = {
     if (v.past) {
       return [v.word['past']]
     }
-    return this.subject.is3s() ? [v.word['3s']] : [v.word['base']]
+    return this.subject.is3s() ? [v.word.tps] : [v.word.base]
   },
   getBeVerb: function(v) {
     const s = this.subject
@@ -106,7 +106,7 @@ export const Clause = {
     let wh
     let newClause = []
     const list = ['Adjective','Adverb','Preposition','Noun','Pronoun','Determiner']
-    for (const p of clause) {
+    for (let p of clause) {
       if (list.includes(p.pos)) {
         let [wh_, isWh] = p.getWh()
         if (!!wh_) {

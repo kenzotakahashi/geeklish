@@ -107,6 +107,9 @@ const verbs = [
 		// 	['N']
 		// ]
 	}
-]
+].map(o => ({
+	...o,
+	order: 3
+}))
 
 export default verbs

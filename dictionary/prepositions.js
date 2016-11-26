@@ -14,6 +14,9 @@ const prepositions = [
 	{
 		"base": "with"
 	}
-]
+].map(o => ({
+	...o,
+	order: 7
+}))
 
 export default prepositions

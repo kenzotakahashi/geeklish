@@ -14,6 +14,9 @@ const determiners = [
 		number: "both",
 		independent: false			
 	}
-]
+].map(o => ({
+	...o,
+	order: 0
+}))
 
 export default determiners

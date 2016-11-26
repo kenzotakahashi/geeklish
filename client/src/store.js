@@ -4,6 +4,7 @@ import { createStore } from 'redux'
 let initialState = {
   activeWord: 1,
   target: null,
+  dictionary: [],
   Words: [
     {
       id: 1,
@@ -26,6 +27,7 @@ let initialState = {
 initialState = {
   activeWord: 1,
   target: null,
+  dictionary: [],
   Words: [
     {
       id: 1,

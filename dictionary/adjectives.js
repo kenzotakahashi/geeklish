@@ -15,6 +15,9 @@ const adjectives = [
 		"comparative": "older",
 		"superlative": "oldest"
 	}
-]
+].map(o => ({
+	...o,
+	order: 4
+}))
 
 export default adjectives

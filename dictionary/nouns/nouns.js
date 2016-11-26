@@ -38,6 +38,9 @@ const nouns = [
 		base: 'lunch',
 		plural: 'lunches'
 	}
-]
+].map(o => ({
+	...o,
+	order: 1
+}))
 
 export default nouns
