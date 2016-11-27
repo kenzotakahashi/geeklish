@@ -14,7 +14,7 @@ app.use(express.static(buildPath))
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.Promise = global.Promise
 
-app.set('port', (process.env.API_PORT || 3001))
+app.set('port', (process.env.PORT || 3001))
 
 app.get('/api/dictionary', (req, res) => {
 	Dictionary.find({}).sort({'order': 1}).exec((err, dics) => {
