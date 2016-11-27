@@ -31,6 +31,13 @@ app.get('/api/dictionary/:id', (req, res) => {
 	})
 })
 
-app.listen(app.get('port'), () => {
-  console.log(`Find the server at: http://localhost:${app.get('port')}/`) 
+app.get('/', (req, res) => {
+    res.send('App is running')
+}).listen(app.get('port'), () => {
+    console.log('App is running, server is listening on port ', app.get('port'))
 })
+
+
+// app.listen(app.get('port'), () => {
+//   console.log(`Find the server at: http://localhost:${app.get('port')}/`) 
+// })
