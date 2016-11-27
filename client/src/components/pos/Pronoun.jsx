@@ -16,7 +16,7 @@ const Pronoun = React.createClass({
     ))
 
     const formSelect = element.word.possessive ? (
-      <span className="select">
+      <span className="select is-small">
         <select value={element.form} onChange={this.handleChange}>{forms}</select>
       </span>
     ) : ''

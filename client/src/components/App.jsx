@@ -1,5 +1,6 @@
 import React from 'react'
 import store from '../store.js'
+import { Link } from 'react-router'
 
 const App = React.createClass({
   componentDidMount: function () {
@@ -18,15 +19,15 @@ const App = React.createClass({
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <a className="navbar-brand" href="#">Geeklish</a>
+              <Link to='/' className="navbar-brand">Geeklish</Link>
             </div>
 
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav">
-                <li><a href="#">Link</a></li>
+                <li><Link to='/' className="navbar-brand">Home</Link></li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
+                <li><Link to='/' className="navbar-brand">Home</Link></li>
               </ul>
             </div>
           </div>
