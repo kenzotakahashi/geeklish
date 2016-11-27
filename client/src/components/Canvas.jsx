@@ -27,6 +27,7 @@ const Canvas = React.createClass({
   },
   checkRoute: function() {
     const state = store.getState()
+    if (this.props.params === undefined) return
     const index = this.props.params.index
     if (index !== undefined && parseInt(index, 10) !== state.example) {
       this.changeExample(exampleStates[parseInt(index, 10)])

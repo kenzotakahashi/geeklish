@@ -42,7 +42,7 @@ export const Clause = {
       }
     } else {
       if (v.perfect) {
-        head = v.past ? 'had' : s.is3s ? 'has' : 'have'
+        head = v.past ? 'had' : s.is3s() ? 'has' : 'have'
         if (v.passive) {
           rest = [negative, 'been', v.word.passive]
         } else {
