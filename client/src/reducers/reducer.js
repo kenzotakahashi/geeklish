@@ -115,7 +115,6 @@ function reducer(state, action) {
       }
     }
     case 'CHANGE_EXAMPLE': {
-      console.log('change example')
       return action.state
     }
     default: {

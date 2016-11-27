@@ -24,10 +24,7 @@ const App = React.createClass({
 
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav">
-                <li><Link to='/' className="navbar-brand">Home</Link></li>
-              </ul>
-              <ul className="nav navbar-nav navbar-right">
-                <li><Link to='/' className="navbar-brand">Home</Link></li>
+                <li><Link to='/'>Home</Link></li>
               </ul>
             </div>
           </div>
