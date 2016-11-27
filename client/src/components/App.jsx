@@ -7,7 +7,6 @@ const App = React.createClass({
     store.subscribe(() => this.forceUpdate())
   },
   render: function() {
-    // const state = store.getState()
     return (
       <div>
         <nav className="navbar navbar-default">

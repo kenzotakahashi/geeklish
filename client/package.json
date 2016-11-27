@@ -2,7 +2,6 @@
   "name": "geeklish",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
   "devDependencies": {
     "react-scripts": "0.7.0"
   },
