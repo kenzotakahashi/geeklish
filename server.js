@@ -11,7 +11,7 @@ const app = express()
 const buildPath = path.resolve(__dirname, 'client/build')
 app.use(express.static(buildPath))
 
-mongoose.connect(`${process.env.MONGODB_URI}/geeklish`)
+mongoose.connect(process.env.MONGODB_URI)
 mongoose.Promise = global.Promise
 
 app.set('port', (process.env.API_PORT || 3001))
