@@ -81,7 +81,7 @@ function insertDics() {
   }
 }
 
-mongoose.connect('mongodb://localhost/geeklish')
+mongoose.connect(process.env.MONGODB_URI)
 mongoose.Promise = global.Promise
 
 const db = mongoose.connection
