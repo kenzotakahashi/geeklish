@@ -13,7 +13,19 @@ const prepositions = [
 	},
 	{
 		"base": "with"
-	}
+	},
+	{
+		"base": "on"
+	},
+	{
+		"base": "for"
+	},
+	{
+		"base": "by"
+	},
+	{
+		"base": "about"
+	},
 ].map(o => ({
 	...o,
 	order: 7

@@ -11,6 +11,15 @@ const pronouns = [
     number: 'singular'
   },
   {
+    base: 'she',
+    a: 'her',
+    p: 'her',
+    pp: 'hers',
+    r: 'herself',
+    person: 3,
+    number: 'singular'
+  },
+  {
     base: 'I',
     a: 'me',
     p: 'my',
@@ -27,6 +36,11 @@ const pronouns = [
     r: 'yourself',
     person: 2,
     number: 'singular' 
+  },
+  {
+    base: 'it',
+    person: 3,
+    number: 'singular'
   },
   {
     base: 'what',

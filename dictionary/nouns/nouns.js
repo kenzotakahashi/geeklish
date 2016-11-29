@@ -37,6 +37,11 @@ const nouns = [
 		type: 'both',
 		base: 'lunch',
 		plural: 'lunches'
+	},
+	{
+		type: 'both',
+		base: 'time',
+		plural: 'times'
 	}
 ].map(o => ({
 	...o,

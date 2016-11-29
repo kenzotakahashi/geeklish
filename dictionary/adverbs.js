@@ -1,5 +1,9 @@
 const adverbs = [
 	{
+		base: "hard",
+		canModify: ["verb","adj"]
+	},
+	{
 		base: "really",
 		canModify: ["verb","adj","adv","clause"]
 	},

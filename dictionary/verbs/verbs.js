@@ -106,7 +106,27 @@ const verbs = [
 		// 	[],
 		// 	['N']
 		// ]
-	}
+	},
+	{
+		base: 'tell',
+		tps: 'tells',
+		past: 'told',
+		gerund: 'telling',
+	},
+	{
+		base: 'go',
+		tps: 'goes',
+		past: 'went',
+		passive: 'gone',
+		gerund: 'going',
+	},
+	{
+		base: 'do',
+		tps: 'does',
+		past: 'did',
+		passive: 'done',
+		gerund: 'doing',
+	},
 ].map(o => ({
 	...o,
 	order: 3
