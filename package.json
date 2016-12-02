@@ -24,7 +24,8 @@
   },
   "scripts": {
     "start": "nf start -p 3000",
-    "server": "./node_modules/.bin/babel-node server.js",
+    "dev": "nf start -f Procfile.dev -p 3000",
+    "server": "API_PORT=3001 ./node_modules/.bin/babel-node server.js",
     "db": "./node_modules/.bin/babel-node script.js"
   }
 }

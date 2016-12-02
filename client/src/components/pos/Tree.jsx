@@ -106,14 +106,19 @@ export const Children = (props) => (
 	      	{
 	          className: `tree tree-${props.target === o ? 'active' : 'info'}`,
 	          key: o,
-	          // onClick: () => store.dispatch(showWordFactory(props.id, o))
 	          onClick: function() {
-	          	Client.getDics(json => {
-	          	  const pos = props.words.find(o => o.id === props.activeWord).pos
-	          	  const valid = valid_pos[pos][o]
-	          	  const dictionary = json.result.filter(t => valid.includes(t.pos))
-	          	  store.dispatch(showWordFactory(props.id, o, dictionary))
-	          	})
+              const pos = props.words.find(o => o.id === props.activeWord).pos
+              const valid = valid_pos[pos][o]              
+	          	if (sessionStorage.dictionary) {
+                const data = JSON.parse(sessionStorage.dictionary)
+                const dictionary = data.filter(t => valid.includes(t.pos))
+                store.dispatch(showWordFactory(props.id, o, dictionary))
+              } else {
+                Client.getDics(data => {
+                  const dictionary = data.filter(t => valid.includes(t.pos))
+                  store.dispatch(showWordFactory(props.id, o, dictionary))
+                })
+              }
 	          }
 	        },
 	        o

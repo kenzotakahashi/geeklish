@@ -116,3 +116,14 @@ div.tree-box {
 button.trash {
   float: right;
 }
+
+.dictionary-box {
+  height: 500px;
+  /*border:1px solid #ccc;*/
+  overflow: scroll;
+}
+
+
+
+
+

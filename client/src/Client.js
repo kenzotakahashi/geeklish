@@ -1,10 +1,12 @@
 // import fetch from 'whatwg-fetch'
 
 function getDics(result) {
-  return fetch('/api/dictionary', {
+  const uri = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : ''
+  return fetch(`${uri}/api/dictionary`, {
     accept: 'application/json',
   }).then(checkStatus)
     .then(parseJSON)
+    .then(storeToSession)
     .then(result)
 }
 
@@ -26,6 +28,11 @@ function checkStatus(response) {
     console.log(error)
     throw error
   }
+}
+
+function storeToSession(response) {
+  sessionStorage.dictionary = JSON.stringify(response.result)
+  return response.result
 }
 
 function parseJSON(response) {

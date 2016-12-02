@@ -38,7 +38,7 @@ const Canvas = React.createClass({
   render: function() {
     const state = store.getState()
 
-    const wordFactory = !!state.target && <WordFactory />
+    const wordFactory = !!state.target && <WordFactory dictionary={state.dictionary} />
     return (
       <div className='container small-font'>
         <div className='columns'>
