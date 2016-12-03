@@ -48,6 +48,7 @@ const WordFactory = React.createClass({
     return (
       <div>
         <input
+          placeholder='search'
           type='text'
           value={state.search}
           onChange={this.onInputChange}

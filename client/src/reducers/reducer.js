@@ -75,7 +75,7 @@ function reducer(state, action) {
 
       const number = oldElement.number === 'singular' ? 'plural' : 'singular'
       const possessive = number === 'singular' ? `${oldElement.word.singular}'s` :
-                        `${oldElement.word.plural}${oldElement.word.plural[-1] === 's' ? "'" : "'s"}`
+                        `${oldElement.word.plural}${oldElement.word.plural.slice(-1) === 's' ? "'" : "'s"}`
 
       const newElement = {
         ...oldElement,

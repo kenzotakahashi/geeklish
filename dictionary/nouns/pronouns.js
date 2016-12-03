@@ -43,17 +43,22 @@ const pronouns = [
     number: 'singular'
   },
   {
+   base: 'this',
+   person: 3,
+   number: 'singular'
+  },
+  {
+    base: 'that',
+    person: 3,
+    number: 'singular'
+  },
+  {
     base: 'what',
     person: 3,
     number: 'singular'
   },
   {
     base: 'who',
-    person: 3,
-    number: 'singular'
-  },
-  {
-    base: 'that',
     person: 3,
     number: 'singular'
   },

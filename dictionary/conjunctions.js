@@ -4,6 +4,18 @@ const conjunctions = [
 		type: "coordinating"
 	},
 	{
+		base: "or",
+		type: "coordinating"
+	},
+	{
+		base: "but",
+		type: "coordinating"
+	},
+	{
+		base: "so",
+		type: "coordinating"
+	},
+	{
 		base: "if",
 		type: "subordinating"
 	},

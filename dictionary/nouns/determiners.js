@@ -1,18 +1,19 @@
 const determiners = [
 	{
 		base: "this",
-		number: "singular",
-		independent: true
+		number: "singular"
 	},
 	{
 		base: "a",
-		number: "singular",
-		independent: false	
+		number: "singular"
 	},
 	{
+	  base: 'those',
+	  number: 'plural'
+	}, 
+	{
 		base: "the",
-		number: "both",
-		independent: false			
+		number: "both"
 	}
 ].map(o => ({
 	...o,

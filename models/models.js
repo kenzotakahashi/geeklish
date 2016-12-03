@@ -27,8 +27,7 @@ const NounDicSchema = new Schema({
 export const NounDic = Dictionary.discriminator('Noun', NounDicSchema)
 
 const DeterminerDicSchema = new Schema({
-	number: {type: String, required: true},
-	independent: {type: String, required: true}
+	number: {type: String, required: true}
 }, options)
 export const DeterminerDic = Dictionary.discriminator('Determiner', DeterminerDicSchema)
 

@@ -78,7 +78,6 @@ const factory = {
       pos: 'Determiner',
       word: w.base,
       number: w.number,
-      independent: w.independent,
       isWh: ['what','whose','which'].includes(w.base) ? true : false
     }
   },

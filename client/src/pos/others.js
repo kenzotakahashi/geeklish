@@ -10,6 +10,9 @@ export const Infinitive = {
   toString: function() {
     const phrase = !!this.verb ? this.verb.verbAfterTo() : []
     return ['to', ...phrase.map(o => o.toString())].join(' ')
+  },
+  getWh: function() {
+    return [null, false]
   }
 }
 
