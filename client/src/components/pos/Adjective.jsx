@@ -23,7 +23,7 @@ export const Adjective = React.createClass({
     return (
       <ul>
         <li className='tree-top'>
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{element.word.base}</span>
             <span className="label label-default">{this.props.role}</span>
             {attributes}
@@ -47,7 +47,7 @@ export const AdjectiveClause = React.createClass({
     return (
       <ul>
         <li className='tree-top'>
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>Adjective Clause</span>            
             <span className="label label-default">{this.props.role}</span>
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />

@@ -23,7 +23,7 @@ const Adverb = React.createClass({
     return (
       <ul>
         <li className='tree-top'>
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{element.word}</span>
             <span className="label label-default">{this.props.role}</span>
             {attributes}

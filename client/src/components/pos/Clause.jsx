@@ -23,7 +23,7 @@ export const Clause = React.createClass({
     return (
       <ul>
         <li className='tree-top'>
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>Clause</span>
             <span className="label label-default">{this.props.role}</span>
             {attr}
@@ -46,7 +46,7 @@ export const ClauseContainer = React.createClass({
     return (
       <ul>
         <li className='tree-top'>
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>ClauseContainer</span>
             <span className="label label-default">{this.props.role}</span>
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />

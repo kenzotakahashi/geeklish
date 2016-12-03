@@ -14,7 +14,7 @@ export const Noun = React.createClass({
     return (
       <ul>
         <li className='tree-top'>
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.singular}</span>
             <span className="label label-default">{this.props.role}</span>
             {e('button', {
@@ -48,7 +48,7 @@ export const NounContainer = React.createClass({
     return (
       <ul>
         <li className='tree-top'>
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>NounContainer</span>
             <span className="label label-default">{this.props.role}</span>
             <WH id={element.id} isWh={element.isWh} />
@@ -71,7 +71,7 @@ export const NounClause = React.createClass({
     return (
       <ul>
         <li className='tree-top'>
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>Noun Clause</span>
             <span className="label label-default">{this.props.role}</span>
             <WH id={element.id} isWh={element.isWh} />

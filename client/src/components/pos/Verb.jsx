@@ -30,7 +30,7 @@ export const Verb = React.createClass({
     return element.form === 'gerund' ? (
       <ul>
         <li className="tree-top">
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>
               {element.word[element.form]}
             </span>
@@ -44,7 +44,7 @@ export const Verb = React.createClass({
     ) : (
       <ul>
         <li className="tree-top">
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
             <span className="label label-default">{this.props.role}</span>
             <span className="select is-small" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>
@@ -84,7 +84,7 @@ export const Be = React.createClass({
     return (
       <ul>
         <li className="tree-top">
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
             <span className="label label-default">{this.props.role}</span>
             <span className="select is-small" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>
@@ -115,7 +115,7 @@ export const VerbContainer = React.createClass({
     return (
       <ul>
         <li className="tree-top">
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>VerbContainer</span>
             <span className="label label-default">{this.props.role}</span>
             <span className="select" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>

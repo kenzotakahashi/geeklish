@@ -24,7 +24,7 @@ const Pronoun = React.createClass({
     return (
       <ul>
         <li className='tree-top'>
-          <div className='tree-box'>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word'>{element.word[element.form]}</span>
             <span className="label label-default">{this.props.role}</span>
             {formSelect}

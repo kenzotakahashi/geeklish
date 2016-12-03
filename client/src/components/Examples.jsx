@@ -7,8 +7,8 @@ const Examples = React.createClass({
   render: function() {
     // const state = store.getState()
     const examples = exampleOutputs.map(o => (
-      <li key={o.index}>
-        <Link to={`/examples/${o.index}`}>{o.output}</Link>
+      <li key={o.index} className='example'>
+        <Link to={`/examples/${o.index}`} activeClassName="active-link">{o.output}</Link>
       </li>
     ))
 

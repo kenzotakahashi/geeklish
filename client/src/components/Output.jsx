@@ -12,9 +12,6 @@ const Output = React.createClass({
 
     return (
       <div className="panel panel-default">
-        <div className="panel-heading">
-          <h3 className="panel-title">Output</h3>
-        </div>
         <div className="panel-body">
           {sentence}
         </div>

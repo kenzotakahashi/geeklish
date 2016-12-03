@@ -23,6 +23,10 @@ const conjunctions = [
 		base: "when",
 		type: "subordinating"
 	},
+	{
+		base: "because",
+		type: "subordinating"
+	},
 ].map(o => ({
 	...o,
 	order: 6

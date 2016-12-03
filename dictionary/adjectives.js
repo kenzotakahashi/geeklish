@@ -20,6 +20,12 @@ const adjectives = [
 		"comparative": "harder",
 		"superlative": "hardest"
 	},
+	{
+		"base": 'hungry'
+	},
+	{
+		'base': 'tired'
+	}
 ].map(o => ({
 	...o,
 	order: 4

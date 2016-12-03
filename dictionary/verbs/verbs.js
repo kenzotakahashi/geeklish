@@ -127,6 +127,12 @@ const verbs = [
 		passive: 'done',
 		gerund: 'doing',
 	},
+	{
+		base: 'buy',
+		tps: 'buys',
+		past: 'bought',
+		gerund: 'buying',
+	}
 ].map(o => ({
 	...o,
 	order: 3
