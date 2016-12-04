@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../store.js'
-import Canvas from './Canvas'
+import Examples from './Examples'
 
 const Admin = React.createClass({
   componentDidMount: function () {
@@ -16,7 +16,7 @@ const Admin = React.createClass({
     const state = store.getState()
     return (
       <div>
-        <Canvas />
+        <Examples />
         <div className='container'>
           <button type="button" className="btn btn-default"
                   // onClick={() => store.dispatch(this.saveSentence(state))}>

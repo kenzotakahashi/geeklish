@@ -1,3 +1,8 @@
+.container.small-font {
+  padding-right: 0;
+  padding-left: 0;  
+}
+
 .main-box {
   background-color: #fff;
   border-color: #fff;
@@ -6,6 +11,10 @@
   border-width: 1px;
   padding: 7px;
   min-height: 500px; 
+}
+
+div.row > div {
+  padding: 0 8px;
 }
 
 .small-font {
@@ -145,4 +154,8 @@ button.trash {
 
 .example {
   margin: 3px 0;
+}
+
+.form-inline.project-form {
+  margin-bottom: 5px;
 }

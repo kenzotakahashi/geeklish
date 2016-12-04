@@ -1,6 +1,7 @@
-// import Dictionary from '../dictionary/dictionary.js'
 import factory from '../factory.js'
 // import Client from '../Client'
+import uuid from 'uuid'
+import { initialState } from '../examples'
 
 const takeWord = function(oldElement, wordBase, action_target, arg) {
   const target = oldElement[action_target]
@@ -115,7 +116,57 @@ function reducer(state, action) {
       }
     }
     case 'CHANGE_EXAMPLE': {
-      return action.state
+      return {
+        ...action.state,
+        projects: state.projects
+      }
+    }
+    case 'SAVE_SENTENCE': {
+      let id, newProjects
+
+      if (!action.id) {
+        id = uuid.v4()
+
+        if (!localStorage.projects) {
+          localStorage.projects = '[]'
+        }
+        const projects = JSON.parse(localStorage.projects)
+        newProjects = [{id: id, title: action.title}, ...projects]
+        localStorage.projects = JSON.stringify(newProjects)     
+      } else {
+        id = action.id
+
+        const projects = JSON.parse(localStorage.projects)
+        newProjects = projects.map(o => o.id === id ? {id: id, title: action.title} : o)
+        localStorage.projects = JSON.stringify(newProjects)  
+      }
+      const data = {
+        id,
+        title: action.title,
+        state: {
+          ...action.state,
+          example: id
+        }
+      }
+      localStorage[`project_${id}`] = JSON.stringify(data)
+
+      return {
+        ...state,
+        example: id,
+        projects: newProjects
+      }   
+    }
+    case 'DELETE_PROJECT': {
+      localStorage.removeItem(`project_${action.id}`)
+      const projects = JSON.parse(localStorage.projects)
+      const newProjects = projects.filter(o => o.id !== action.id)
+      localStorage.projects = JSON.stringify(newProjects)
+
+      return {
+        ...initialState,
+        example: null,
+        projects: state.projects.filter(o => o.id !== action.id)
+      }
     }
     default: {
       return state

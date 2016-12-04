@@ -1,21 +1,21 @@
 
 export const exampleOutputs = [
-  {index: 0, output: "I am eating."},
-  {index: 1, output: "She likes you."},
-  {index: 2, output: "I live with John."},
-  {index: 3, output: "Do you want to talk to him?"},
-  {index: 4, output: "You gave him the dog."},
-  {index: 5, output: "You are what you eat."},
-  {index: 6, output: "I am at the park."},
-  {index: 7, output: "Walking is good for you."},
-  {index: 8, output: "She really does not have time."},
-  {index: 9, output: "Tell me about yourself."},
-  {index: 10, output: "I have not had lunch."},
-  {index: 11, output: "The child has been found."},
-  {index: 12, output: "You should not have done that."},
-  {index: 13, output: "How did you find me?"},
-  {index: 14, output: "What do you want?"},
-  {index: 15, output: "Who told you that?"},
+  {id: 0, title: "I am eating."},
+  {id: 1, title: "She likes you."},
+  {id: 2, title: "I live with John."},
+  {id: 3, title: "Do you want to talk to him?"},
+  {id: 4, title: "You gave him the dog."},
+  {id: 5, title: "You are what you eat."},
+  {id: 6, title: "I am at the park."},
+  {id: 7, title: "Walking is good for you."},
+  {id: 8, title: "She really does not have time."},
+  {id: 9, title: "Tell me about yourself."},
+  {id: 10, title: "I have not had lunch."},
+  {id: 11, title: "The child has been found."},
+  {id: 12, title: "You should not have done that."},
+  {id: 13, title: "How did you find me?"},
+  {id: 14, title: "What do you want?"},
+  {id: 15, title: "Who told you that?"},
 ]
 
 export const exampleStates = [
@@ -42,6 +42,7 @@ export const initialState = {
   activeWord: 1,
   target: null,
   dictionary: [],
+  projects: !!localStorage.projects ? JSON.parse(localStorage.projects) : [],
   Words: [
     {
       id: 1,
