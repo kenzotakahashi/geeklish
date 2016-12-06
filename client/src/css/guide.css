@@ -1,0 +1,45 @@
+p + h4 {
+	margin-top: 20px;
+}
+
+div.guide {
+	padding: 10px 50px;
+	/*background-color: #fff;*/
+}
+
+.wrapper {
+	padding: 10px 0 2px 0;;
+}
+
+h3 > .pos {
+	padding: 5px 10px;
+}
+
+li > .pos {
+	padding: 2px 4px;
+	margin: 2px;
+}
+
+/*h3 > .basic {
+	border-width: 2px;
+	border-style: solid;
+}
+
+li > .basic {
+	border-width: 1px;
+	border-style: solid;	
+}*/
+
+.examples {
+	font-weight: 600;
+}
+
+.function {
+	margin: 6px;
+}
+
+.function-title {
+	font-weight: 600;
+	width: 40px;
+	margin: 6px 0 3px 0;
+}

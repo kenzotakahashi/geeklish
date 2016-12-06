@@ -37,51 +37,55 @@ li.list-group-item, .tree{
   padding: 5px;
 }
 
-.list-group-item.Noun, .tree-box.Noun {
+.list-group-item.Noun, .tree-box.Noun, .Noun {
   color: #fff;
   background-color: #88725D;
 }
 
-.list-group-item.Pronoun, .tree-box.Pronoun {
+.list-group-item.Pronoun, .tree-box.Pronoun, .Pronoun {
   color: #fff;
   background-color: #845A31;
 }
 
-.list-group-item.Determiner, .tree-box.Determiner {
+.list-group-item.Determiner, .tree-box.Determiner, .Determiner {
   color: #fff;
   background-color: #603F39;
 }
 
-.list-group-item.Verb, .tree-box.Verb {
+.list-group-item.Verb, .tree-box.Verb, .Verb {
   color: #fff;
-  background-color: #C6744F;
+  background-color: #E80046;
 }
 
-.list-group-item.Be, .tree-box.Be {
+.list-group-item.Be, .tree-box.Be, .Be {
   color: #fff;
   background-color: #FF4900;
 }
 
-.list-group-item.Adjective, .tree-box.Adjective {
+.list-group-item.Adjective, .tree-box.Adjective, .Adjective {
   color: #fff;
-  background-color: #9AB4A8;
+  background-color: #890089;
 }
 
-.list-group-item.Adverb, .tree-box.Adverb {
+.list-group-item.Adverb, .tree-box.Adverb, .Adverb {
   color: #fff;
   background-color: #7CADA8;
 }
 
-.list-group-item.Preposition, .tree-box.Preposition {
+.list-group-item.Preposition, .tree-box.Preposition, .Preposition {
   color: #fff;
   background-color: #2C7EB4;
 }
 
-.list-group-item.Conjunction, .tree-box.Conjunction {
+.list-group-item.Conjunction, .tree-box.Conjunction, .Conjunction {
   color: #fff;
-  background-color: #3EB300;
+  background-color: #0C980C;
 }
 
+.basic {
+  color: #fff;
+  background-color: grey;
+}
 
 button.button {
   margin-left: 3px;
@@ -138,7 +142,7 @@ button.trash {
   float: right;
 }
 
-.dictionary-box {
+.fixed-box {
   height: 500px;
   /*border:1px solid #ccc;*/
   overflow: scroll;
@@ -149,7 +153,8 @@ button.trash {
 }
 
 .active-link {
-  color: #2f6f9f;
+  color: #23527c;
+  text-decoration: underline;
 }
 
 .example {
@@ -158,4 +163,9 @@ button.trash {
 
 .form-inline.project-form {
   margin-bottom: 5px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
 }

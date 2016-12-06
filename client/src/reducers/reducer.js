@@ -123,6 +123,7 @@ function reducer(state, action) {
     }
     case 'SAVE_SENTENCE': {
       let id, newProjects
+      const title = action.title === '' ? 'Untitled' : action.title
 
       if (!action.id) {
         id = uuid.v4()
@@ -131,18 +132,18 @@ function reducer(state, action) {
           localStorage.projects = '[]'
         }
         const projects = JSON.parse(localStorage.projects)
-        newProjects = [{id: id, title: action.title}, ...projects]
+        newProjects = [{id: id, title: title}, ...projects]
         localStorage.projects = JSON.stringify(newProjects)     
       } else {
         id = action.id
 
         const projects = JSON.parse(localStorage.projects)
-        newProjects = projects.map(o => o.id === id ? {id: id, title: action.title} : o)
+        newProjects = projects.map(o => o.id === id ? {id: id, title: title} : o)
         localStorage.projects = JSON.stringify(newProjects)  
       }
       const data = {
         id,
-        title: action.title,
+        title: title,
         state: {
           ...action.state,
           example: id

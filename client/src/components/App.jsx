@@ -22,11 +22,19 @@ const App = React.createClass({
               <ul className="nav navbar-nav">
                 <li><Link to='/projects'>My Projects</Link></li>
               </ul>
+              <ul className="nav navbar-nav">
+                <li><Link to='/guide'>Guide</Link></li>
+              </ul>
             </div>
           </div>
         </nav>
 
         {this.props.children}
+
+        <footer>
+          <p>© 2016 Geeklish. All Rights Reserved. 
+          <a href="mailto:kenzotakahashi2@gmail.com" target="_top">kenzotakahashi2@gmail.com</a></p>
+        </footer>
       </div>
     )
   }

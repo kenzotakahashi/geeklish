@@ -29,7 +29,7 @@ const conjunctions = [
 	},
 ].map(o => ({
 	...o,
-	order: 6
+	order: 7
 }))
 
 export default conjunctions

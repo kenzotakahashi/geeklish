@@ -107,10 +107,12 @@ const Projects = React.createClass({
         <div className='row'>
           <div className='col-md-2'>
             <div className='main-box'>
-              <ul className='list-group'>
-                <button type="button" className="btn btn-default btn-block">
-                  <Link to='/projects'>New Project</Link>
-                </button>
+              <ul className='list-group'>                
+                <Link to='/projects'>
+                  <button type="button" className="btn btn-default btn-block">
+                    New Project
+                  </button>
+                </Link>
                 {projects}
               </ul>
             </div>

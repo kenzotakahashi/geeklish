@@ -54,7 +54,7 @@ const WordFactory = React.createClass({
           onChange={this.onInputChange}
           ref={input => input && input.focus()}
         />
-        <ul className='list-group dictionary-box'>
+        <ul className='list-group fixed-box'>
           {
             this.state.dictionary.map(o => (
               e('li', {

@@ -11,6 +11,11 @@ const adjectives = [
 		"base": "honest"
 	},
 	{
+		"base": "young",
+		"comparative": "younger",
+		"superlative": "youngest"
+	},
+	{
 		"base": "old",
 		"comparative": "older",
 		"superlative": "oldest"
@@ -28,7 +33,7 @@ const adjectives = [
 	}
 ].map(o => ({
 	...o,
-	order: 4
+	order: 5
 }))
 
 export default adjectives

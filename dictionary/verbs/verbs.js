@@ -132,7 +132,32 @@ const verbs = [
 		tps: 'buys',
 		past: 'bought',
 		gerund: 'buying',
-	}
+	},
+	{
+		base: 'think',
+		tps: 'thinks',
+		past: 'thought',
+		gerund: 'thinking',
+	},
+	{
+		base: 'know',
+		tps: 'knows',
+		past: 'knew',
+		passive: 'known',
+		gerund: 'knowing',
+	},
+	{
+		base: 'drink',
+		tps: 'drinks',
+		past: 'drunk',
+		gerund: 'drinking',
+	},
+	{
+		base: 'need',
+		tps: 'needs',
+		past: 'needed',
+		gerund: 'needing',
+	},
 ].map(o => ({
 	...o,
 	order: 3

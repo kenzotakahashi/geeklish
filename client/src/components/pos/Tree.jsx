@@ -6,7 +6,7 @@ import { showWordFactory, changeAttribute, deleteElement } from '../../actions'
 
 const e = React.createElement
 
-const nouns = ['Noun', 'Pronoun', 'NounContainer', 'NounClause', 'Verb', 'Be'] //'Determiner'
+const nouns = ['Noun', 'Pronoun', 'NounContainer', 'NounClause', 'Verb', 'Be']
 const verbs = ['Verb', 'Be', 'VerbContainer']
 const adjectives = ['Adjective', 'AdjectiveClause']
 const clauses = ['Clause', 'ClauseContainer']
@@ -42,10 +42,10 @@ const valid_pos = {
     conjunction: ['Conjunction']
   },
   Noun: {
-    adjectives: [...adjectives, 'Infinitive'],
-    prepositions: ['Preposition'],
     determiners: ['Determiner'],
-    nouns: nouns
+    adjectives: [...adjectives, 'Infinitive'],
+    nouns: nouns,
+    prepositions: ['Preposition'],
   },
   NounContainer: {
     adjectives: adjectives,

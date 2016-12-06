@@ -7,7 +7,7 @@ const others = [
 	{
 		pos: 'Be',
 		base: 'be',
-		order: 10
+		order: 4
 	},
 	{
 		pos: 'Clause',

@@ -276,7 +276,7 @@ export const ClauseContainer = {
       return `${dependent.conjunction} ${dependent.print()}, ${independent.print()}`
     } else if (!!this.clauses[1].conjunction) {
       const [independent, dependent] = this.clauses
-      return `${independent.print()} ${dependent.conjunction}, ${dependent.print()}`
+      return `${independent.print()} ${dependent.conjunction} ${dependent.print()}`
     } else {
       return [false, "(You need a subordinating clause)"]
     }

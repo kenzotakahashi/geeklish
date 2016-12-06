@@ -35,7 +35,25 @@ const pronouns = [
     pp: 'yours',
     r: 'yourself',
     person: 2,
-    number: 'singular' 
+    number: 'plural' 
+  },
+  {
+    base: 'we',
+    a: 'us',
+    p: 'our',
+    pp: 'ours',
+    r: 'ourselves',
+    person: 1,
+    number: 'plural' 
+  },
+  {
+    base: 'they',
+    a: 'them',
+    p: 'their',
+    pp: 'theirs',
+    r: 'themselves',
+    person: 3,
+    number: 'plural' 
   },
   {
     base: 'it',

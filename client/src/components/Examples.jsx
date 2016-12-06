@@ -22,7 +22,12 @@ const Examples = React.createClass({
   },
   checkRoute: function() {
     const state = store.getState()
-    const id = this.props.params.id
+    
+    // Just for admin
+    const params = this.props.params
+    if (!params) return
+
+    const id = params.id
     if (id !== undefined && parseInt(id, 10) !== state.example) {
       this.changeExample(exampleStates[parseInt(id, 10)])
     } else if (id === undefined && state.example !== null) {
@@ -41,7 +46,7 @@ const Examples = React.createClass({
         <div className='row'>
           <div className='col-md-2'>
             <div className='main-box'>
-              <ul className='list-group'>
+              <ul className='list-group fixed-box'>
                 {examples}
               </ul>
             </div>

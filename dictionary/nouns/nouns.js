@@ -42,7 +42,16 @@ const nouns = [
 		type: 'both',
 		base: 'time',
 		plural: 'times'
-	}
+	},
+	{
+		type: 'uncountable',
+		base: 'water',
+	},
+	{
+		type: "countable",
+		base: 'friend',
+		plural: 'friends'
+	},
 ].map(o => ({
 	...o,
 	order: 1

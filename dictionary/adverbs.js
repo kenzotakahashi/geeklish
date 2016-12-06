@@ -34,10 +34,30 @@ const adverbs = [
 	{
 		base: "nearly",
 		canModify: ["verb","adj","adv","det","clause"]
-	}
+	},
+	{
+		base: "so",
+		canModify: ["adj","adv"]
+	},
+	{
+		base: "much",
+		canModify: ["verb","adj","adv"]
+	},
+	{
+		base: "today",
+		canModify: ["verb","clause"]
+	},
+	{
+		base: "yesterday",
+		canModify: ["verb","clause"]
+	},
+	{
+		base: "just",
+		canModify: ["verb", "adj", "adv"]
+	},
 ].map(o => ({
 	...o,
-	order: 5
+	order: 6
 }))
 
 export default adverbs
