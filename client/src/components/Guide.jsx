@@ -32,7 +32,6 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>nouns</div>
               <span className='pos Noun'>Noun</span>
-              <span className='pos Pronoun'>Pronoun</span>
               <span className='pos basic'>Noun Container</span>
               <span className='pos basic'>Noun Clause</span>
               <span className='pos Verb'>Verb</span>(gerund)
@@ -285,7 +284,6 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>nouns</div>
               <span className='pos Noun'>Noun</span>
-              <span className='pos Pronoun'>Pronoun</span>
               <span className='pos basic'>Noun Container</span>
               <span className='pos basic'>Noun Clause</span>
               <span className='pos Verb'>Verb</span>(gerund)
@@ -351,12 +349,30 @@ const Guide = React.createClass({
 
           <ul>
             <li className='function-group'>
-              <div className='function-title'>clauses</div>
-              <span className='pos basic'>Clause</span>
-            </li>
-            <li className='function-group'>
               <div className='function-title'>conjunction</div>
               <span className='pos Conjunction'>Conjunction</span>
+            </li>
+            <li className='function-group'>
+              <div className='function-title'>determiners</div>
+              <span className='pos Determiner'>Determiner</span>
+            </li>
+            <li className='function-group'>
+              <div className='function-title'>adjectives</div>
+              <span className='pos Adjective'>Adjective</span>
+              <span className='pos basic'>Adjective Clause</span>
+              <span className='pos basic'>Infinitive</span>
+            </li>
+            <li className='function-group'>
+              <div className='function-title'>nouns</div>
+              <span className='pos Noun'>Noun</span>
+              <span className='pos basic'>Noun Container</span>
+              <span className='pos basic'>Noun Clause</span>
+              <span className='pos Verb'>Verb</span>(gerund)
+              <span className='pos Be'>Be</span>(gerund)
+            </li>
+            <li className='function-group'>
+              <div className='function-title'>prepositions</div>
+              <span className='pos Preposition'>Preposition</span>            
             </li>
           </ul>
         </div>

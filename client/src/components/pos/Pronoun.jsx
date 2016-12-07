@@ -11,11 +11,11 @@ const Pronoun = React.createClass({
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
     
-    const forms = ['nominative','accusative','possessive','possessive pronoun','reflexive'].map(o => (
+    const forms = ['nominative','accusative','possessive pronoun','reflexive'].map(o => (
       <option key={o} value={o}>{o}</option>
     ))
 
-    const formSelect = element.word.possessive ? (
+    const formSelect = element.word.reflexive ? (
       <span className="select is-small">
         <select value={element.form} onChange={this.handleChange}>{forms}</select>
       </span>

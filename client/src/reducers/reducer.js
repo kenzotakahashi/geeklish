@@ -35,16 +35,30 @@ function reducer(state, action) {
     }
     case 'CREATE_WORD': {
       const elementIndex = state.Words.findIndex(t => t.id === action.activeWord)
-      const oldElement = state.Words[elementIndex]
+      const parent = state.Words[elementIndex]
       // const wordBase = Dictionary.find(o => o.id === action.id)
-      const [updated, initialized] = takeWord(oldElement, action.wordBase, action.target, action.arg)  
+      const [updated, initialized] = takeWord(parent, action.wordBase, action.target, action.arg)  
       const newElement = {
-        ...oldElement,
+        ...parent,
         [action.target]: updated,
       }
+
+      let newActiveWord
+      if (parent.pos === 'Clause') {
+        if (action.target === 'subject' && parent.verb === null) {
+          newActiveWord = parent.id
+        } else if (action.target === 'verb' && parent.subject === null) {
+          newActiveWord = parent.id
+        } else {
+          newActiveWord = initialized.id
+        }
+      } else {
+        newActiveWord = initialized.id
+      }
+
       return {
         ...state,
-        activeWord: initialized.id,
+        activeWord: newActiveWord,
         target: false,
         Words: [
           ...state.Words.slice(0, elementIndex),
@@ -56,9 +70,9 @@ function reducer(state, action) {
     }
     case 'CHANGE_ATTRIBUTE': {
       const elementIndex = state.Words.findIndex(t => t.id === action.id)
-      const oldElement = state.Words[elementIndex]
+      const parent = state.Words[elementIndex]
       const newElement = {
-        ...oldElement,
+        ...parent,
         [action.attr]: action.change_to,
       }
       return {
@@ -145,7 +159,7 @@ function reducer(state, action) {
         id,
         title: title,
         state: {
-          ...action.state,
+          ...state,
           example: id
         }
       }

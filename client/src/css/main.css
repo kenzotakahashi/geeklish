@@ -165,6 +165,10 @@ button.trash {
   margin-bottom: 5px;
 }
 
+input.form-control.title-form {
+  width: 500px;
+}
+
 footer {
   text-align: center;
   margin-top: 20px;

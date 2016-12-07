@@ -44,19 +44,19 @@ const valid_pos = {
   Noun: {
     determiners: ['Determiner'],
     adjectives: [...adjectives, 'Infinitive'],
-    nouns: nouns,
+    nouns: ['Noun', 'NounContainer', 'NounClause', 'Verb', 'Be'],
     prepositions: ['Preposition'],
   },
   NounContainer: {
     adjectives: adjectives,
     prepositions: ['Preposition'],
     determiners: ['Determiner'],
-    nouns: nouns,
+    nouns: ['Noun', 'NounContainer', 'NounClause', 'Verb', 'Be'],
     conjunction: ['Conjunction']
   },
   NounClause: {
     clause: clauses,
-    nouns: nouns,
+    nouns: ['Noun', 'NounContainer', 'NounClause', 'Verb', 'Be'],
     determiners: ['Determiner'],
     adjectives: adjectives,
     prepositions: ['Preposition'],

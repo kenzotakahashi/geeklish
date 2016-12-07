@@ -17,17 +17,17 @@ const Projects = React.createClass({
       field: e.target.value,
     })
   },
-  onFormSubmit(e) {
-    e.preventDefault()
-    const title = this.state.field
-    const id = this.props.params.id
+  saveSentence: function(title, id) {
     store.dispatch({
       type: 'SAVE_SENTENCE',
-      title: title,
-      state: store.getState(),
-      id: id
+      title,
+      id
     })
     if (!id) browserHistory.push(`/projects/${store.getState().projects[0].id}`)
+  },
+  onFormSubmit(e) {
+    e.preventDefault()
+    this.saveSentence(this.state.field, this.props.params.id)
   },
   componentDidMount: function () {
     store.subscribe(() => this.forceUpdate())
@@ -62,13 +62,20 @@ const Projects = React.createClass({
     // Do nothing 
   },
   deleteProject: function(id) {
-    browserHistory.push('/projects')
     store.dispatch({
       type: 'DELETE_PROJECT',
       id
-    }) 
+    })
+    const projects = store.getState().projects
+    if (projects.length > 0) {
+      browserHistory.push(`/projects/${projects[0].id}`)
+    } else {
+      this.setState({
+        field: 'Untitled'
+      })
+      browserHistory.push('/projects')
+    }
   },
-
   render: function() {
     const state = store.getState()
 
@@ -91,8 +98,8 @@ const Projects = React.createClass({
         <form className="form-inline project-form" onSubmit={this.onFormSubmit}>
           <div className="form-group">
             <input
-              placeholder='name'
-              className="form-control"
+              placeholder='title'
+              className="form-control title-form"
               type='text'
               value={this.state.field}
               onChange={this.onInputChange}
@@ -107,18 +114,17 @@ const Projects = React.createClass({
         <div className='row'>
           <div className='col-md-2'>
             <div className='main-box'>
-              <ul className='list-group'>                
-                <Link to='/projects'>
-                  <button type="button" className="btn btn-default btn-block">
-                    New Project
-                  </button>
-                </Link>
+              <ul className='list-group'>              
+                <button type="button" className="btn btn-default btn-block"
+                        onClick={() => this.saveSentence('Untitled', null)}>
+                  New Project
+                </button>
                 {projects}
               </ul>
             </div>
           </div>
           <div className='col-md-10'>
-            <Canvas />
+            {projects.length > 0 && <Canvas />}
           </div>
         </div>
       </div>

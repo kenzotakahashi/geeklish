@@ -45,6 +45,7 @@ const WordFactory = React.createClass({
     const state = store.getState()
     const pos = state.Words.find(o => o.id === state.activeWord).pos
 
+    // ref={input => input && input.focus()}
     return (
       <div>
         <input
@@ -52,7 +53,7 @@ const WordFactory = React.createClass({
           type='text'
           value={state.search}
           onChange={this.onInputChange}
-          ref={input => input && input.focus()}
+          autoFocus
         />
         <ul className='list-group fixed-box'>
           {
