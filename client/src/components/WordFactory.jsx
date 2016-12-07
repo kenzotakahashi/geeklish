@@ -4,12 +4,9 @@ import store from '../store.js'
 const e = React.createElement
 
 const getArgument = function(activeWordPos, target, wordPos) {
-  if (wordPos === 'Pronoun') {
-    if (['Verb','Be','VerbContainer','Preposition'].includes(activeWordPos)) {
-      return {form: 'accusative'}
-    } else if (activeWordPos === 'Noun') {
-      return {form: 'possessive'}
-    }
+  if (wordPos === 'Pronoun' &&
+      ['Verb','Be','VerbContainer','Preposition'].includes(activeWordPos)) {
+    return {form: 'accusative'}
   } else if (['Verb','Be'].includes(wordPos) &&
              ['subject','complement','complements','nouns'].includes(target)) {
     return {form: 'gerund'}

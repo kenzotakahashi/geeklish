@@ -88,7 +88,8 @@ export const NounContainer = {
   },
   beforeOrAfter: beforeOrAfter,
   isValid: function() {
-    return this.nouns.length > 0 && this.conjunction
+    console.log(this.nouns.length > 0 && !!this.conjunction)
+    return this.nouns.length > 0 && !!this.conjunction
   },
   toString: function() {
     return this.getList().map(o => o.toString()).join(' ')
