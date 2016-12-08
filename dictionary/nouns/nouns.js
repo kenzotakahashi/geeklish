@@ -52,6 +52,11 @@ const nouns = [
 		base: 'friend',
 		plural: 'friends'
 	},
+	{
+		type: "countable",
+		base: 'dogma',
+		plural: 'dogmas'
+	},
 ].map(o => ({
 	...o,
 	order: 1

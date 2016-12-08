@@ -158,6 +158,12 @@ const verbs = [
 		past: 'needed',
 		gerund: 'needing',
 	},
+	{
+		base: 'trap',
+		tps: 'traps',
+		past: 'trapped',
+		gerund: 'trapping',
+	},
 ].map(o => ({
 	...o,
 	order: 3

@@ -147,27 +147,27 @@ function reducer(state, action) {
         }
         const projects = JSON.parse(localStorage.projects)
         newProjects = [{id: id, title: title}, ...projects]
-        localStorage.projects = JSON.stringify(newProjects)     
       } else {
         id = action.id
 
         const projects = JSON.parse(localStorage.projects)
         newProjects = projects.map(o => o.id === id ? {id: id, title: title} : o)
-        localStorage.projects = JSON.stringify(newProjects)  
       }
+      localStorage.projects = JSON.stringify(newProjects)  
+
       const data = {
         id,
         title: title,
         state: {
-          ...state,
+          ...action.state,
           example: id
         }
       }
       localStorage[`project_${id}`] = JSON.stringify(data)
 
       return {
-        ...state,
-        example: id,
+        ...action.state,
+        example: action.id,
         projects: newProjects
       }   
     }

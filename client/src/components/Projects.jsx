@@ -17,17 +17,18 @@ const Projects = React.createClass({
       field: e.target.value,
     })
   },
-  saveSentence: function(title, id) {
+  saveSentence: function(title, id, state) {
     store.dispatch({
       type: 'SAVE_SENTENCE',
       title,
-      id
+      id,
+      state
     })
     if (!id) browserHistory.push(`/projects/${store.getState().projects[0].id}`)
   },
   onFormSubmit(e) {
     e.preventDefault()
-    this.saveSentence(this.state.field, this.props.params.id)
+    this.saveSentence(this.state.field, this.props.params.id, store.getState())
   },
   componentDidMount: function () {
     store.subscribe(() => this.forceUpdate())
@@ -40,7 +41,7 @@ const Projects = React.createClass({
     store.dispatch({
       type: 'CHANGE_EXAMPLE',
       state
-    }) 
+    })
   },
   checkRoute: function() {
     const state = store.getState()
@@ -116,7 +117,7 @@ const Projects = React.createClass({
             <div className='main-box'>
               <ul className='list-group'>              
                 <button type="button" className="btn btn-default btn-block"
-                        onClick={() => this.saveSentence('Untitled', null)}>
+                        onClick={() => this.saveSentence('Untitled', null, initialState)}>
                   New Project
                 </button>
                 {projects}

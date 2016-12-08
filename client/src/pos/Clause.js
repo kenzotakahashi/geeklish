@@ -154,7 +154,8 @@ export const Clause = {
         }
         return c
       } else {
-        return negative.concat(v.getList([v.word.base]))
+        
+        return negative.concat(v.getList(v.passive ? ['be', v.word.passive] : [v.word.base]))
       }
     }
     if (!(s && s.isValid() && v && v.isValid())) return [false, '(You need a subject and a verb)']
