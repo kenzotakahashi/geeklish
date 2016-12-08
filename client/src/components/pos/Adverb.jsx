@@ -5,7 +5,7 @@ import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
 
-const Adverb = React.createClass({
+export const Adverb = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
@@ -38,4 +38,24 @@ const Adverb = React.createClass({
   },
 })
 
-export default Adverb
+export const AdverbClause = React.createClass({
+  render: function() {
+    const state = store.getState()
+    const element = state.Words.find(o => o.id === this.props.id)
+    const attrs = ['conjunction', 'clause']
+
+    return (
+      <ul>
+        <li className='tree-top'>
+          <div className={`tree-box ${element.pos}`}>
+            <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>Adverb Clause</span>            
+            <span className="label label-default">{this.props.role}</span>
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+          </div>
+          <Children element={element} attrs={attrs} id={this.props.id} words={state.Words}
+                    target={state.target} activeWord={state.activeWord} />
+        </li>
+      </ul>
+    )
+  },
+})

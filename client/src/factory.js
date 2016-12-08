@@ -190,6 +190,16 @@ const factory = {
       isWh: false
     }
   },
+  AdverbClause: function(w) {
+    return {
+      id: uuid.v4(),
+      pos: 'AdverbClause',
+      conjunction: null,
+      clause: null,
+      position: 'after',
+      isWh: false
+    }
+  },
   Preposition: function(w) {
     return {
       id: uuid.v4(),

@@ -1,6 +1,6 @@
 import { createWord } from './util.js'
 
-const Adverb = {
+export const Adverb = {
   init: function(p) {
     this.id = p.id
     this.pos = p.pos
@@ -32,4 +32,24 @@ const Adverb = {
   }
 }
 
-export default Adverb
+export const AdverbClause = {
+  init: function(p) {
+    this.id = p.id
+    this.pos = p.pos
+    this.conjunction = createWord(p.conjunction)
+    this.clause = createWord(p.clause)
+    this.position = p.position
+    this.isWh = p.isWh
+    return this
+  },
+  toString: function() {
+    if (!this.clause) return ''
+    const result = this.clause.print()
+    return Array.isArray(result) ? '' : `${this.conjunction} ${result}`
+  },
+  getWh: function() {
+    return [null, false]
+  }
+}
+
+

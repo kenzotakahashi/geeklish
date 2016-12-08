@@ -9,6 +9,7 @@ const e = React.createElement
 const nouns = ['Noun', 'Pronoun', 'NounContainer', 'NounClause', 'Verb', 'Be']
 const verbs = ['Verb', 'Be', 'VerbContainer']
 const adjectives = ['Adjective', 'AdjectiveClause']
+const adverbs = ['Adverb', 'AdverbClause']
 const clauses = ['Clause', 'ClauseContainer']
 
 const valid_pos = {
@@ -26,17 +27,17 @@ const valid_pos = {
   },
   Verb: {
     complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
-    adverbs: ['Adverb', 'Infinitive'],
+    adverbs: [...adverbs, 'Infinitive'],
     prepositions: ['Preposition']
   },
   Be: {
     complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
-    adverbs: ['Adverb', 'Infinitive'],
+    adverbs: [...adverbs, 'Infinitive'],
     prepositions: ['Preposition']
   },
   VerbContainer: {
     complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
-    adverbs: ['Adverb', 'Infinitive'],
+    adverbs: [...adverbs, 'Infinitive'],
     prepositions: ['Preposition'],
     verbs: ['Verb', 'Be'],
     conjunction: ['Conjunction']
@@ -70,6 +71,10 @@ const valid_pos = {
   },
   Adverb: {
     adverb: ['Adverb']
+  },
+  AdverbClause: {
+    conjunction: ['Conjunction'],
+    clause: clauses
   },
   Preposition: {
     complement: nouns

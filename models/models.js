@@ -76,6 +76,9 @@ export const NounClauseDic = Dictionary.discriminator('NounClause', NounClauseDi
 const AdjectiveClauseDicSchema = new Schema({}, options)
 export const AdjectiveClauseDic = Dictionary.discriminator('AdjectiveClause', AdjectiveClauseDicSchema)
 
+const AdverbClauseDicSchema = new Schema({}, options)
+export const AdverbClauseDic = Dictionary.discriminator('AdverbClause', AdverbClauseDicSchema)
+
 const ClauseContainerDicSchema = new Schema({}, options)
 export const ClauseContainerDic = Dictionary.discriminator('ClauseContainer', ClauseContainerDicSchema)
 

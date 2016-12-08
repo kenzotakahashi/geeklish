@@ -30,6 +30,11 @@ const others = [
 		order: 18
 	},
 	{
+		pos: 'AdverbClause',
+		base: 'AdverbClause',
+		order: 18
+	},
+	{
 		pos: 'ClauseContainer',
 		base: 'ClauseContainer',
 		order: 20

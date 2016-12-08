@@ -4,7 +4,7 @@ import Pronoun from './Pronoun.js'
 import { Noun, NounContainer, NounClause } from './Noun.js'
 import Determiner from './Determiner.js'
 import { Adjective, AdjectiveClause } from './Adjective.js'
-import Adverb from './Adverb.js'
+import { Adverb, AdverbClause } from './Adverb.js'
 import Preposition from './Preposition.js'
 import Conjunction from  './Conjunction.js'
 import { Infinitive, Sentence} from './others'
@@ -23,6 +23,7 @@ const Pos = {
 	Adjective,
 	AdjectiveClause,
 	Adverb,
+	AdverbClause,
 	Preposition,
 	Conjunction,
 	Be,
