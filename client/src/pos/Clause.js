@@ -9,7 +9,6 @@ export const Clause = {
     this.verb = createWord(c.verb)
     this.adjectiveClause = createWord(c.adjectiveClause)
     this.adverbs = c.adverbs.map(o => createWord(o))
-    this.conjunction = createWord(c.conjunction)
     return this
   },
   getVerbForQuestion: function(v) {
@@ -268,18 +267,11 @@ export const ClauseContainer = {
       if (['and', 'or'].includes(this.conjunction.word)) {
         return this.clauses.map(o => o.print()).join(` ${this.conjunction} `)
       } else {
-        return // TODO
+        if (this.clauses.length > 2) {
+          return [false, "(Conjunctions except 'and' and 'or' cannot join more than 2 clauses)"]
+        }
+        return this.clauses.map(o => o.print()).join(`, ${this.conjunction} `)
       }
-    }
-    // subordinting
-    if (!!this.clauses[0].conjunction) {
-      const [dependent, independent] = this.clauses
-      return `${dependent.conjunction} ${dependent.print()}, ${independent.print()}`
-    } else if (!!this.clauses[1].conjunction) {
-      const [independent, dependent] = this.clauses
-      return `${independent.print()} ${dependent.conjunction} ${dependent.print()}`
-    } else {
-      return [false, "(You need a subordinating clause)"]
     }
   }
 }

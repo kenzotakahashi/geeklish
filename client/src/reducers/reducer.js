@@ -10,6 +10,19 @@ const takeWord = function(oldElement, wordBase, action_target, arg) {
   return [updated, init]
 }
 
+function getContainer(pos) {
+  if (pos === 'Clause') {
+    return {pos: 'ClauseContainer'}   
+  }
+  if (['Pronoun','Noun','NounContainer','NounClause'].includes(pos)) {
+    return {pos: 'NounContainer'}
+  }
+  if (['Verb','Be'].includes(pos)) {
+    return {pos: 'VerbContainer'}
+  }
+}
+
+
 function reducer(state, action) {
   switch (action.type) {
     case 'SHOW_OPTIONS': {
@@ -36,7 +49,6 @@ function reducer(state, action) {
     case 'CREATE_WORD': {
       const elementIndex = state.Words.findIndex(t => t.id === action.activeWord)
       const parent = state.Words[elementIndex]
-      // const wordBase = Dictionary.find(o => o.id === action.id)
       const [updated, initialized] = takeWord(parent, action.wordBase, action.target, action.arg)  
       const newElement = {
         ...parent,
@@ -113,7 +125,7 @@ function reducer(state, action) {
     case 'DELETE_ELEMENT': {
       const filtered = state.Words.filter(o => o.id !== action.id)
       const elementIndex = filtered.findIndex(t => t.id === action.parentId)
-      const oldElement = state.Words[elementIndex]
+      const oldElement = filtered[elementIndex]
       const newRole = action.role.slice(-1) === 's' ?
                       oldElement[action.role].filter(o => o !== action.id) : null   
       const newElement = {
@@ -129,6 +141,34 @@ function reducer(state, action) {
         ]
       }
     }
+    case 'USE_CONJUNCTION': {
+      const elementIndex = state.Words.findIndex(t => t.id === action.parentId)
+      const parent = state.Words[elementIndex]
+      const [updated, initialized] = takeWord(
+        parent,
+        getContainer(action.element.pos),
+        action.target,
+        {child: action.element.id}
+      )  
+      const newElement = {
+        ...parent,
+        [action.target]: updated,
+      }
+
+      return {
+        ...state,
+        activeWord: initialized.id,
+        target: false,
+        Words: [
+          ...state.Words.slice(0, elementIndex),
+          newElement,
+          ...state.Words.slice(elementIndex + 1, state.Words.length),
+          initialized,
+        ],
+      }
+    }
+
+    // ======================= Project ================================
     case 'CHANGE_EXAMPLE': {
       return {
         ...action.state,

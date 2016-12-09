@@ -7,6 +7,9 @@ export const Infinitive = React.createClass({
   render: function() {
     const state = store.getState();
     const element = state.Words.find(o => o.id === this.props.id);
+    // if (!element.verb) {
+
+    // }
     const attrs = ['verb']
 
     return (

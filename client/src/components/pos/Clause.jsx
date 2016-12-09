@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, DeleteButton } from './Tree'
+import { Children, DeleteButton, ConjunctionButton } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
@@ -9,11 +9,11 @@ export const Clause = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
-    const attrs = ['conjunction', 'subject', 'verb']
+    const attrs = ['subject', 'verb']
 
     const attr = ['statement','question','command'].map(o => (
       e('button', {
-        className: `button is-small is-active ${element.cType === o ? 'is-primary' : ''}`,
+        className: `button is-small is-active ${element.cType === o && 'is-primary'}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(element.id, 'cType', o))
@@ -27,6 +27,8 @@ export const Clause = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>Clause</span>
             <span className="label label-default">{this.props.role}</span>
             {attr}
+            {state.Words.find(o => o.id === this.props.parentId).pos !== 'ClauseContainer' &&
+             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}

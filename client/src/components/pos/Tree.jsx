@@ -2,15 +2,16 @@ import React from 'react'
 import store from '../../store.js'
 import Client from '../../Client'
 import pos_components from './pos_components'
-import { showWordFactory, changeAttribute, deleteElement } from '../../actions'
+import { showWordFactory, changeAttribute, deleteElement, useConjunction } from '../../actions'
 
 const e = React.createElement
 
-const nouns = ['Noun', 'Pronoun', 'NounContainer', 'NounClause', 'Verb', 'Be']
-const verbs = ['Verb', 'Be', 'VerbContainer']
+const nouns = ['Noun', 'Pronoun', 'NounClause', 'Verb', 'Be']
+const verbs = ['Verb', 'Be']
 const adjectives = ['Adjective', 'AdjectiveClause']
 const adverbs = ['Adverb', 'AdverbClause']
-const clauses = ['Clause', 'ClauseContainer']
+const clauses = ['Clause']
+const coordinating = [{pos: 'Conjunction', attr: ['type', 'coordinating']}]
 
 const valid_pos = {
   Sentence: {
@@ -19,11 +20,10 @@ const valid_pos = {
   Clause: {
     subject: nouns,
     verb: verbs,
-    conjunction: ['Conjunction']
   },
   ClauseContainer: {
     clauses: ['Clause'],
-    conjunction: ['Conjunction']
+    conjunction: coordinating
   },
   Verb: {
     complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
@@ -40,24 +40,24 @@ const valid_pos = {
     adverbs: [...adverbs, 'Infinitive'],
     prepositions: ['Preposition'],
     verbs: ['Verb', 'Be'],
-    conjunction: ['Conjunction']
+    conjunction: coordinating
   },
   Noun: {
     determiners: ['Determiner'],
     adjectives: [...adjectives, 'Infinitive'],
-    nouns: ['Noun', 'NounContainer', 'NounClause', 'Verb', 'Be'],
+    nouns: ['Noun', 'NounClause', 'Verb', 'Be'],
     prepositions: ['Preposition'],
   },
   NounContainer: {
+    nouns: nouns,
     adjectives: adjectives,
     prepositions: ['Preposition'],
     determiners: ['Determiner'],
-    nouns: ['Noun', 'NounContainer', 'NounClause', 'Verb', 'Be'],
-    conjunction: ['Conjunction']
+    conjunction: coordinating
   },
   NounClause: {
     clause: clauses,
-    nouns: ['Noun', 'NounContainer', 'NounClause', 'Verb', 'Be'],
+    nouns: ['Noun', 'NounClause', 'Verb', 'Be'],
     determiners: ['Determiner'],
     adjectives: adjectives,
     prepositions: ['Preposition'],
@@ -73,7 +73,7 @@ const valid_pos = {
     adverb: ['Adverb']
   },
   AdverbClause: {
-    conjunction: ['Conjunction'],
+    conjunction: [{pos: 'Conjunction', attr: ['type', 'subordinating']}],
     clause: clauses
   },
   Preposition: {
@@ -81,6 +81,36 @@ const valid_pos = {
   },
   Infinitive: {
     verb: verbs
+  }
+}
+
+function valid_check(valid_list, word) {
+  for (let valid of valid_list) {
+    if (typeof(valid) === 'string') {
+      if (valid === word.pos) {
+        return true
+      }
+    } else {
+      if (valid.pos === word.pos && word[valid.attr[0]] === valid.attr[1]) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
+function wordDictionary(props, o) {
+  const pos = props.words.find(t => t.id === props.activeWord).pos
+  const valid = valid_pos[pos][o]              
+  if (sessionStorage.dictionary) {
+    const data = JSON.parse(sessionStorage.dictionary)
+    const dictionary = data.filter(t => valid_check(valid, t))
+    store.dispatch(showWordFactory(props.id, o, dictionary))
+  } else {
+    Client.getDics(data => {
+      const dictionary = data.filter(t => valid_check(valid, t))
+      store.dispatch(showWordFactory(props.id, o, dictionary))
+    })
   }
 }
 
@@ -111,20 +141,7 @@ export const Children = (props) => (
 	      	{
 	          className: `tree tree-${props.target === o ? 'active' : 'info'}`,
 	          key: o,
-	          onClick: function() {
-              const pos = props.words.find(o => o.id === props.activeWord).pos
-              const valid = valid_pos[pos][o]              
-	          	if (sessionStorage.dictionary) {
-                const data = JSON.parse(sessionStorage.dictionary)
-                const dictionary = data.filter(t => valid.includes(t.pos))
-                store.dispatch(showWordFactory(props.id, o, dictionary))
-              } else {
-                Client.getDics(data => {
-                  const dictionary = data.filter(t => valid.includes(t.pos))
-                  store.dispatch(showWordFactory(props.id, o, dictionary))
-                })
-              }
-	          }
+	          onClick: () => wordDictionary(props, o)
 	        },
 	        o
 	      )
@@ -150,4 +167,22 @@ export const DeleteButton = (props) => (
 	        onClick={() => store.dispatch(deleteElement(props.id, props.role, props.parentId))}>
 	  <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
 	</button>
+)
+
+export const ConjunctionButton = (props) => (
+  <button type="button" className="button is-small is-active"
+          onClick={() => store.dispatch(useConjunction(props.element, props.role, props.parentId))}>
+    C
+  </button>
+)
+
+export const ModalSelect = (props) => (
+  <span className="select is-small" value={props.value} onChange={props.onChange}>
+    <select>
+      {['modal','can','could','should','may','might','must','will','would'].map(o => (
+         <option key={o} value={o === 'modal' ? '' : o}>{o}</option>
+        ))
+      }
+    </select>
+  </span>
 )

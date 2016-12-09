@@ -88,12 +88,19 @@ export const VerbContainer = {
   },
   str_adverbs: str_adverbs,
   getList: getList,
-  verbAfterTo: verbAfterTo,
-  toString: function() {
-    return this.getList(
-      this.verbs.map(o => o.toString()).join(` ${this.conjunction} `))
-      .map(o => o.toString()).join(' ')
+  verbAfterTo: function() {
+    if (!this.conjunction) return []
+    const negative = this.negative ? ['not'] : []
+    const verb = this.perfect ? [...negative, 'have', this.word.passive] :
+                 this.passive ? [...negative, 'be', this.word.passive] :
+                 this.continuous ? [...negative, 'be', this.word.gerund] :
+                 [...negative, this.verbs.map(o => o.toString()).join(` ${this.conjunction} `)]
+    return this.getList(verb)
   },
+  // toString: function() {
+  //   return this.getList(this.verbs.map(o => o.toString()).join(` ${this.conjunction} `))
+  //         .map(o => o.toString()).join(' ')
+  // },
   isValid: function() {
     return this.verbs.length > 0 && this.conjunction
   },

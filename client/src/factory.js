@@ -42,7 +42,7 @@ const factory = {
                     `${init.word.plural}${init.word.plural[-1] === 's' ? "'" : "'s"}`
     return init
   },
-  NounContainer: function() {
+  NounContainer: function(w, arg) {
     return {
       id: uuid.v4(),
       pos: 'NounContainer',
@@ -53,7 +53,7 @@ const factory = {
       adjectivesAfter: [],
       determiners: [],
       prepositions: [],
-      nouns: [],
+      nouns: [arg.child],
       conjunction: null,
     }
   },
@@ -133,7 +133,7 @@ const factory = {
       prepositions: []
     }
   },
-  VerbContainer: function() {
+  VerbContainer: function(w, arg) {
     return {
       id: uuid.v4(),
       pos: 'VerbContainer',
@@ -148,7 +148,7 @@ const factory = {
       complements: [],
       adverbs: [],
       prepositions: [],
-      verbs: [],
+      verbs: arg ? [arg.child] : [],
       conjunction: null
     }
   },
@@ -226,15 +226,14 @@ const factory = {
       verb: null,
       adjectiveClause: null,
       adverbs: [],
-      conjunction: null,
     }
   },
-  ClauseContainer: function() {
+  ClauseContainer: function(w, arg) {
     return {
       id: uuid.v4(),
       pos: 'ClauseContainer',
       conjunction: null,
-      clauses: [],
+      clauses: [arg.child],
     }
   },
   Conjunction: function(w) {

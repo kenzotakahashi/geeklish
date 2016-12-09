@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, DeleteButton } from './Tree'
+import { Children, DeleteButton, ConjunctionButton, ModalSelect } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
@@ -23,10 +23,6 @@ export const Verb = React.createClass({
       }, o)
     ))
 
-    const modals = ['modal','can','could','should','may','might','must','will','would'].map(o => (
-      <option key={o} value={o === 'modal' ? '' : o}>{o}</option>
-    ))
-
     return element.form === 'gerund' ? (
       <ul>
         <li className="tree-top">
@@ -47,8 +43,10 @@ export const Verb = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
             <span className="label label-default">{this.props.role}</span>
-            <span className="select is-small" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>
+            <ModalSelect value={element.modal} onChange={this.handleChange} />
             {attributes}
+            {state.Words.find(o => o.id === this.props.parentId).pos !== 'VerbContainer' &&
+             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
@@ -76,10 +74,6 @@ export const Be = React.createClass({
         onClick: () => store.dispatch(changeAttribute(element.id, o, !element[o]))
       }, o)
     ))
-
-    const modals = ['modal','can','could','should','may','might','must','will','would'].map(o => (
-      <option key={o} value={o === 'modal' ?  '' : o}>{o}</option>
-    ))
  
     return (
       <ul>
@@ -87,8 +81,10 @@ export const Be = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
             <span className="label label-default">{this.props.role}</span>
-            <span className="select is-small" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>
+            <ModalSelect value={element.modal} onChange={this.handleChange} />
             {attributes}
+            {state.Words.find(o => o.id === this.props.parentId).pos !== 'VerbContainer' &&
+             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
@@ -107,10 +103,6 @@ export const VerbContainer = React.createClass({
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
     const attrs = ['conjunction', 'verbs', 'complements','adverbs','prepositions']
-  
-    const modals = ['modal','can','could','should','may','might','must','will','would'].map(o => (
-      <option key={o} value={o === 'modal' ?  '' : o}>{o}</option>
-    ))
 
     return (
       <ul>
@@ -118,7 +110,7 @@ export const VerbContainer = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>VerbContainer</span>
             <span className="label label-default">{this.props.role}</span>
-            <span className="select" value={element.modal} onChange={this.handleChange}><select>{modals}</select></span>
+            <ModalSelect value={element.modal} onChange={this.handleChange} />
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}

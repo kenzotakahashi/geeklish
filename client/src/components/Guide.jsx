@@ -89,6 +89,7 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>adverbs</div>
               <span className='pos Adverb'>Adverb</span>
+              <span className='pos basic'>Adverb Clause</span>
               <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
@@ -127,6 +128,7 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>adverbs</div>
               <span className='pos Adverb'>Adverb</span>
+              <span className='pos basic'>Adverb Clause</span>
               <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
@@ -250,10 +252,6 @@ const Guide = React.createClass({
               <span className='pos Be'>Be</span>
               <span className='pos basic'>Verb Container</span>
             </li>
-            <li className='function-group'>
-              <div className='function-title'>conjunction</div>
-              <span className='pos Conjunction'>Conjunction</span>
-            </li>
           </ul>
         </div>
 
@@ -301,11 +299,32 @@ const Guide = React.createClass({
 
         <div className='wrapper'>
           <h3><span className='pos basic'>Adjective Clause</span></h3>
-          <p><span className='examples'>Examples:</span></p>
+          <p>An adjective clause is a clause that acts as an adjective.</p>
 
           <h4>Functions</h4>
 
           <ul>
+            <li className='function-group'>
+              <div className='function-title'>clause</div>
+              <span className='pos basic'>Clause</span>
+              <span className='pos basic'>Clause Container</span>
+            </li>
+          </ul>
+        </div>
+
+        <hr />
+
+        <div className='wrapper'>
+          <h3><span className='pos basic'>Adverb Clause</span></h3>
+          <p>An adverb clause is a clause that acts as an adverb.</p>
+
+          <h4>Functions</h4>
+
+          <ul>
+            <li className='function-group'>
+              <div className='function-title'>conjunction</div>
+              <span className='pos Conjunction'>Conjunction</span>
+            </li>
             <li className='function-group'>
               <div className='function-title'>clause</div>
               <span className='pos basic'>Clause</span>
@@ -413,6 +432,7 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>adverbs</div>
               <span className='pos Adverb'>Adverb</span>
+              <span className='pos basic'>Adverb Clause</span>
               <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>

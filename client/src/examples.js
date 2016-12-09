@@ -91,11 +91,12 @@ export const initialState = {
   ],
 }
 
-// let initialState = {
+// export const initialState = {
 //   example: null,
-//   activeWord: 1,
+//   activeWord: 2,
 //   target: null,
 //   dictionary: [],
+//   projects: !!localStorage.projects ? JSON.parse(localStorage.projects) : [],
 //   Words: [
 //     {
 //       id: 1,
@@ -110,7 +111,6 @@ export const initialState = {
 //       verb: null,
 //       adjectiveClause: null,
 //       adverbs: [],
-//       conjunction: null,
 //     },
 //   ],
 // }
