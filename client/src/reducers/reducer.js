@@ -181,6 +181,25 @@ function reducer(state, action) {
       }
     }
 
+    case 'UNDO_CONJUNCTION': {
+      const filtered = state.Words.filter(o => o.id !== action.element.id)
+      const elementIndex = filtered.findIndex(t => t.id === action.parentId)
+      const parent = filtered[elementIndex]
+      const childId = action.element[action.childRole][0]
+      const newParent = {
+        ...parent,
+        [action.thisRole]: action.thisRole.slice(-1) === 's' ? [childId] : childId
+      }
+      return {
+        ...state,
+        Words: [
+          ...filtered.slice(0, elementIndex),
+          newParent,
+          ...filtered.slice(elementIndex + 1, filtered.length)
+        ]
+      }
+    }
+
     // ======================= Project ================================
     case 'CHANGE_EXAMPLE': {
       return {

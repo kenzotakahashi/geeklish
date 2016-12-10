@@ -118,8 +118,8 @@ export const Clause = {
         newClause.push(p)
       }
     }
-    const s = newClause.map(o => o.toString())
-    return wh ? [wh, ...s] : s
+    // const s = newClause.map(o => o.toString())
+    return wh ? [wh, ...newClause] : newClause
   },
   shouldUseAn: function(word) {
     const a_specials = ['us','uni','one','once','eu']
@@ -212,10 +212,10 @@ export const Clause = {
       }
     }
   },
-  // isValid: function() {
-  //   let c = this.getClause()
-  //   return Array.isArray(c) && c[0] !== false
-  // },
+  convertToString: function(c) {
+    return c.map(o => o.pos === 'AdverbClause' && o.position === 'beginning' ?
+                      `${o}, ` : o.toString())
+  },
   toString: function() {
     return this.print()
   },
@@ -230,6 +230,7 @@ export const Clause = {
     // console.log(c)
     c = this.reorderWh(c)
     // console.log(c)
+    c = this.convertToString(c)
     c = this.checkArticle(c)
     c = c.map(o => o.toString()).join(' ')
     c = !!this.adjectiveClause ? `${this.adjectiveClause}, ${c}` : c

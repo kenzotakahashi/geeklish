@@ -1,7 +1,7 @@
 import React from 'react'
 import store from '../../store.js'
 import pos_components from './pos_components'
-import { changeAttribute, deleteElement, useConjunction } from '../../actions'
+import { changeAttribute, deleteElement, useConjunction, undoConjunction } from '../../actions'
 import { getWordDictionary } from '../../wordDictionary'
 
 const e = React.createElement
@@ -64,6 +64,14 @@ export const DeleteButton = (props) => (
 export const ConjunctionButton = (props) => (
   <button type="button" className="button is-small is-active"
           onClick={() => store.dispatch(useConjunction(props.element, props.role, props.parentId))}>
+    C
+  </button>
+)
+
+export const UndoConjunctionButton = (props) => (
+  <button type="button" className="button is-small is-active is-primary"
+          onClick={() => store.dispatch(undoConjunction(
+                          props.element, props.thisRole, props.childRole, props.parentId))}>
     C
   </button>
 )

@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, DeleteButton, ConjunctionButton, ModalSelect } from './Tree'
+import { Children, DeleteButton, ConjunctionButton, UndoConjunctionButton, ModalSelect } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
@@ -184,6 +184,9 @@ export const VerbContainer = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>VerbContainer</span>
             <span className="label label-default">{this.props.role}</span>
             <ModalSelect value={element.modal} onChange={this.handleChange} />
+            {element.verbs.length > 0 &&
+            <UndoConjunctionButton element={element} thisRole={this.props.role}
+                                   childRole='verbs' parentId={this.props.parentId} />}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}

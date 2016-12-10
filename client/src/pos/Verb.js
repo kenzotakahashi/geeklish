@@ -9,7 +9,7 @@ const str_adverbs = function(verb, adverbs) {
   for (const adv of adverbs) {
     if (adv.position === 'before') {
       before.push(adv)
-    } else if (adv.position === 'after') {
+    } else if (adv.position === 'after' || adv.pos === 'Infinitive') {
       after.push(adv)
     }
   }

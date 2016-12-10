@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, DeleteButton, ConjunctionButton } from './Tree'
+import { Children, DeleteButton, ConjunctionButton, UndoConjunctionButton } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
@@ -51,6 +51,9 @@ export const ClauseContainer = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>ClauseContainer</span>
             <span className="label label-default">{this.props.role}</span>
+            {element.clauses.length > 0 &&
+            <UndoConjunctionButton element={element} thisRole={this.props.role}
+                                   childRole='clauses' parentId={this.props.parentId} />}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}

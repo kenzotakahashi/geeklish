@@ -35,3 +35,11 @@ export const useConjunction = (element, target, parentId) => ({
   target,
   parentId
 })
+
+export const undoConjunction = (element, thisRole, childRole, parentId) => ({
+  type: 'UNDO_CONJUNCTION',
+  element,
+  thisRole,
+  childRole,
+  parentId
+})
