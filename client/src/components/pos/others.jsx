@@ -1,15 +1,20 @@
-import React from 'react';
+import React from 'react'
 import store from '../../store.js'
 import { Children, DeleteButton } from './Tree'
 import { showOptions } from '../../actions'
+import { getWordDictionary } from '../../wordDictionary'
 
 export const Infinitive = React.createClass({
+  componentDidMount: function () {
+    const state = store.getState()
+    const element = state.Words.find(o => o.id === this.props.id)
+    if (!element.verb) {
+      getWordDictionary(state.Words, state.activeWord, element.id, 'verb')
+    }
+  },
   render: function() {
-    const state = store.getState();
-    const element = state.Words.find(o => o.id === this.props.id);
-    // if (!element.verb) {
-
-    // }
+    const state = store.getState()
+    const element = state.Words.find(o => o.id === this.props.id)
     const attrs = ['verb']
 
     return (
@@ -24,6 +29,6 @@ export const Infinitive = React.createClass({
                     target={state.target} activeWord={state.activeWord} />
         </li>
       </ul>
-    );
+    )
   },
-});
+})
