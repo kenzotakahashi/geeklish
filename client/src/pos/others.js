@@ -11,9 +11,26 @@ export const Infinitive = {
     const phrase = !!this.verb ? this.verb.verbAfterTo() : []
     return ['to', ...phrase.map(o => o.toString())].join(' ')
   },
-  getWh: function() {
-    return [null, false]
-  }
+  getWh: () => [null, false],
+}
+
+export const Gerund = {
+  init: function(p) {
+    this.id = p.id
+    this.pos = p.pos
+    this.verb = createWord(p.verb)
+    return this    
+  },
+  getList: function() {
+    return !!this.verb ? this.verb.getList() : []
+  },
+  toString: function() {
+    return this.getList().map(o => o.toString()).join(' ')
+  },
+  getBe: (past) => past ? 'was' : 'is',
+  getWh: () => [null, false],
+  isValid: () => true,
+  is3s: () => true,
 }
 
 export const Sentence = {

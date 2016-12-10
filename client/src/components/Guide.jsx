@@ -9,7 +9,7 @@ const Guide = React.createClass({
 
         <h2>Part of Speech</h2>
 
-        <p>Part of speech(or POS for short) is a category of a word.</p>
+        <p>Part of speech(or POS for short) is a category of the word.</p>
 
         <div className='wrapper'>
           <h3><span className='pos Noun'>Noun</span></h3>
@@ -32,10 +32,8 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>nouns</div>
               <span className='pos Noun'>Noun</span>
-              <span className='pos basic'>Noun Container</span>
               <span className='pos basic'>Noun Clause</span>
-              <span className='pos Verb'>Verb</span>(gerund)
-              <span className='pos Be'>Be</span>(gerund)
+              <span className='pos basic'>Gerund</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>prepositions</div>
@@ -65,8 +63,7 @@ const Guide = React.createClass({
 
         <div className='wrapper'>
           <h3><span className='pos Verb'>Verb</span></h3>
-          <p>A verb is a word that describes an action or state.
-             When a verb is used in a gerund form(ex. talking), it acts as a noun.</p>
+          <p>A verb is a word that describes an action or state.</p>
           <p><span className='examples'>Examples:</span> love, like, find, have, want, give, talk, live, work, walk, eat, tell, go, do, buy</p>
         
           <h4>Functions</h4>
@@ -76,10 +73,8 @@ const Guide = React.createClass({
               <div className='function-title'>complements</div>
               <span className='pos Noun'>Noun</span>
               <span className='pos Pronoun'>Pronoun</span>
-              <span className='pos basic'>Noun Container</span>
               <span className='pos basic'>Noun Clause</span>
-              <span className='pos Verb'>Verb</span>(gerund)
-              <span className='pos Be'>Be</span>(gerund)
+              <span className='pos basic'>Gerund</span>
               <span className='pos Adjective'>Adjective</span>
               <span className='pos basic'>Adjective Clause</span>
               <span className='pos Adverb'>Adverb</span>
@@ -104,8 +99,7 @@ const Guide = React.createClass({
 
         <div className='wrapper'>
           <h3><span className='pos Be'>Be</span></h3>
-          <p>Be is a special linking verb.
-             When it is used in a gerund form(being), it acts as a noun.</p>
+          <p>Be is a special linking verb.</p>
           <p><span className='examples'>Examples:</span> be, am, is, are</p>
 
           <h4>Functions</h4>
@@ -115,10 +109,8 @@ const Guide = React.createClass({
               <div className='function-title'>complements</div>
               <span className='pos Noun'>Noun</span>
               <span className='pos Pronoun'>Pronoun</span>
-              <span className='pos basic'>Noun Container</span>
               <span className='pos basic'>Noun Clause</span>
-              <span className='pos Verb'>Verb</span>(gerund)
-              <span className='pos Be'>Be</span>(gerund)
+              <span className='pos basic'>Gerund</span>
               <span className='pos Adjective'>Adjective</span>
               <span className='pos basic'>Adjective Clause</span>
               <span className='pos Adverb'>Adverb</span>
@@ -192,10 +184,8 @@ const Guide = React.createClass({
               <div className='function-title'>complement</div>
               <span className='pos Noun'>Noun</span>
               <span className='pos Pronoun'>Pronoun</span>
-              <span className='pos basic'>Noun Container</span>
               <span className='pos basic'>Noun Clause</span>
-              <span className='pos Verb'>Verb</span>(gerund)
-              <span className='pos Be'>Be</span>(gerund)
+              <span className='pos basic'>Gerund</span>
             </li>
           </ul>
         </div>
@@ -210,7 +200,7 @@ const Guide = React.createClass({
 
         <hr />
 
-        <h2>A sentence and clause</h2>
+        <h2>A Sentence and Clause</h2>
 
         <div className='wrapper'>
           <h3><span className='pos basic'>Sentence</span></h3>
@@ -223,7 +213,6 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>clause</div>
               <span className='pos basic'>Clause</span>
-              <span className='pos basic'>Clause Container</span>
             </li>
           </ul>
         </div>
@@ -241,16 +230,13 @@ const Guide = React.createClass({
               <div className='function-title'>subject</div>
               <span className='pos Noun'>Noun</span>
               <span className='pos Pronoun'>Pronoun</span>
-              <span className='pos basic'>Noun Container</span>
               <span className='pos basic'>Noun Clause</span>
-              <span className='pos Verb'>Verb</span>(gerund)
-              <span className='pos Be'>Be</span>(gerund)
+              <span className='pos basic'>Gerund</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>verb</div>
               <span className='pos Verb'>Verb</span>
               <span className='pos Be'>Be</span>
-              <span className='pos basic'>Verb Container</span>
             </li>
           </ul>
         </div>
@@ -267,7 +253,6 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>clause</div>
               <span className='pos basic'>Clause</span>
-              <span className='pos basic'>Clause Container</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>determiners</div>
@@ -282,10 +267,8 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>nouns</div>
               <span className='pos Noun'>Noun</span>
-              <span className='pos basic'>Noun Container</span>
               <span className='pos basic'>Noun Clause</span>
-              <span className='pos Verb'>Verb</span>(gerund)
-              <span className='pos Be'>Be</span>(gerund)
+              <span className='pos basic'>Gerund</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>prepositions</div>
@@ -307,7 +290,6 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>clause</div>
               <span className='pos basic'>Clause</span>
-              <span className='pos basic'>Clause Container</span>
             </li>
           </ul>
         </div>
@@ -328,7 +310,6 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>clause</div>
               <span className='pos basic'>Clause</span>
-              <span className='pos basic'>Clause Container</span>
             </li>
           </ul>
         </div>
@@ -347,12 +328,12 @@ const Guide = React.createClass({
 
           <ul>
             <li className='function-group'>
-              <div className='function-title'>clauses</div>
-              <span className='pos basic'>Clause</span>
-            </li>
-            <li className='function-group'>
               <div className='function-title'>conjunction</div>
               <span className='pos Conjunction'>Conjunction</span>
+            </li>
+            <li className='function-group'>
+              <div className='function-title'>clauses</div>
+              <span className='pos basic'>Clause</span>
             </li>
           </ul>
         </div>
@@ -384,10 +365,8 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>nouns</div>
               <span className='pos Noun'>Noun</span>
-              <span className='pos basic'>Noun Container</span>
               <span className='pos basic'>Noun Clause</span>
-              <span className='pos Verb'>Verb</span>(gerund)
-              <span className='pos Be'>Be</span>(gerund)
+              <span className='pos basic'>Gerund</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>prepositions</div>
@@ -407,22 +386,20 @@ const Guide = React.createClass({
 
           <ul>
             <li className='function-group'>
+              <div className='function-title'>conjunction</div>
+              <span className='pos Conjunction'>Conjunction</span>            
+            </li>
+            <li className='function-group'>
               <div className='function-title'>verbs</div>
               <span className='pos Verb'>Verb</span>
               <span className='pos Be'>Be</span>         
             </li>
             <li className='function-group'>
-              <div className='function-title'>conjunction</div>
-              <span className='pos Conjunction'>Conjunction</span>            
-            </li>
-            <li className='function-group'>
               <div className='function-title'>complements</div>
               <span className='pos Noun'>Noun</span>
               <span className='pos Pronoun'>Pronoun</span>
-              <span className='pos basic'>Noun Container</span>
               <span className='pos basic'>Noun Clause</span>
-              <span className='pos Verb'>Verb</span>(gerund)
-              <span className='pos Be'>Be</span>(gerund)
+              <span className='pos basic'>Gerund</span>
               <span className='pos Adjective'>Adjective</span>
               <span className='pos basic'>Adjective Clause</span>
               <span className='pos Adverb'>Adverb</span>
@@ -444,7 +421,9 @@ const Guide = React.createClass({
 
         <hr />
 
-        <h2>Other POSes</h2>
+        <h2>Verbals</h2>
+
+        <p>Words that are formed from verbs but don't act as verbs are called verbals.</p>
 
         <div className='wrapper'>
           <h3><span className='pos basic'>Infinitive</span></h3>
@@ -458,12 +437,30 @@ const Guide = React.createClass({
               <div className='function-title'>verb</div>
               <span className='pos Verb'>Verb</span>
               <span className='pos Be'>Be</span>
-              <span className='pos basic'>Verb Container</span>
             </li>
           </ul>
         </div>
 
         <hr />
+
+        <div className='wrapper'>
+          <h3><span className='pos basic'>Gerund</span></h3>
+          <p>A gerund is in the "verb + ing" form. It acts as a noun.</p>
+          <p><span className='examples'>Examples:</span>walking, doing, being</p>
+
+          <h4>Functions</h4>
+
+          <ul>
+            <li className='function-group'>
+              <div className='function-title'>verb</div>
+              <span className='pos Verb'>Verb</span>
+              <span className='pos Be'>Be</span>
+            </li>
+          </ul>
+        </div>
+
+        <hr />
+
 
       </div>
     )

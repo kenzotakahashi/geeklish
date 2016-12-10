@@ -1,17 +1,8 @@
 import React from 'react'
 import store from '../store.js'
+// import { getArgument } from '../wordDictionary'
 
 const e = React.createElement
-
-const getArgument = function(activeWordPos, target, wordPos) {
-  if (wordPos === 'Pronoun' &&
-      ['Verb','Be','VerbContainer','Preposition'].includes(activeWordPos)) {
-    return {form: 'accusative'}
-  } else if (['Verb','Be'].includes(wordPos) &&
-             ['subject','complement','complements','nouns'].includes(target)) {
-    return {form: 'gerund'}
-  }
-}
 
 const WordFactory = React.createClass({
   createNewWord: function (wordBase, activeWord, target, arg) {
@@ -40,7 +31,6 @@ const WordFactory = React.createClass({
   },
   render: function() {
     const state = store.getState()
-    const pos = state.Words.find(o => o.id === state.activeWord).pos
 
     // ref={input => input && input.focus()}
     return (
@@ -58,10 +48,7 @@ const WordFactory = React.createClass({
               e('li', {
                 className: `list-group-item col-md-6 ${o.pos}`,
                 key: o._id,
-                onClick: () => this.createNewWord(
-                  o, state.activeWord, state.target,
-                  getArgument(pos, state.target, o.pos)
-                )
+                onClick: () => this.createNewWord(o, state.activeWord, state.target)
               }, o.base)
             ))
           }

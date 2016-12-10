@@ -3,9 +3,22 @@ import factory from '../factory.js'
 import uuid from 'uuid'
 import { initialState } from '../examples'
 
-const takeWord = function(oldElement, wordBase, action_target, arg) {
-  const target = oldElement[action_target]
-  const init = factory[wordBase.pos](wordBase, arg)
+const getArgument = function(parent, wordPos, target) {
+  if (wordPos === 'Pronoun' &&
+      ['Verb','Be','VerbContainer','Preposition'].includes(parent.pos)) {
+    return {form: 'accusative'}
+  } else if ((parent.pos === 'Gerund' && ['Verb','Be','VerbContainer'].includes(wordPos)) ||
+             (parent.pos === 'VerbContainer' && parent.form === 'gerund' &&
+              ['Verb','Be'].includes(wordPos))) {
+    return {form: 'gerund'}
+  }
+  return {}
+}
+
+const takeWord = function(parent, wordBase, action_target, child={}) {
+  const arg = getArgument(parent, wordBase.pos, action_target)
+  const init = factory[wordBase.pos](wordBase, {...arg, ...child})
+  const target = parent[action_target]
   const updated = Array.isArray(target) ? target.concat(init.id) : init.id
   return [updated, init]
 }
@@ -49,7 +62,7 @@ function reducer(state, action) {
     case 'CREATE_WORD': {
       const elementIndex = state.Words.findIndex(t => t.id === action.activeWord)
       const parent = state.Words[elementIndex]
-      const [updated, initialized] = takeWord(parent, action.wordBase, action.target, action.arg)  
+      const [updated, initialized] = takeWord(parent, action.wordBase, action.target)  
       const newElement = {
         ...parent,
         [action.target]: updated,

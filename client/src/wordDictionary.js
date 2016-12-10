@@ -2,7 +2,7 @@ import store from './store.js'
 import Client from './Client'
 import { showWordFactory } from './actions'
 
-const nouns = ['Noun', 'Pronoun', 'NounClause', 'Verb', 'Be']
+const nouns = ['Noun', 'Pronoun', 'NounClause', 'Gerund']
 const verbs = ['Verb', 'Be']
 const adjectives = ['Adjective', 'AdjectiveClause']
 const adverbs = ['Adverb', 'AdverbClause']
@@ -41,7 +41,7 @@ const valid_pos = {
   Noun: {
     determiners: ['Determiner'],
     adjectives: [...adjectives, 'Infinitive'],
-    nouns: ['Noun', 'NounClause', 'Verb', 'Be'],
+    nouns: ['Noun', 'NounClause'],
     prepositions: ['Preposition'],
   },
   NounContainer: {
@@ -53,7 +53,7 @@ const valid_pos = {
   },
   NounClause: {
     clause: clauses,
-    nouns: ['Noun', 'NounClause', 'Verb', 'Be'],
+    nouns: ['Noun', 'NounClause'],
     determiners: ['Determiner'],
     adjectives: adjectives,
     prepositions: ['Preposition'],
@@ -77,6 +77,9 @@ const valid_pos = {
   },
   Infinitive: {
     verb: verbs
+  },
+  Gerund: {
+  	verb: verbs
   }
 }
 

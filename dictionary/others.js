@@ -5,6 +5,11 @@ const others = [
 		order: 8
 	},
 	{
+		pos: 'Gerund',
+		base: 'Gerund',
+		order: 9
+	},
+	{
 		pos: 'Be',
 		base: 'be',
 		order: 4

@@ -23,6 +23,8 @@ export const Verb = React.createClass({
       }, o)
     ))
 
+    // getArgument(parent, props.role, props.element.pos)
+
     return element.form === 'gerund' ? (
       <ul>
         <li className="tree-top">
@@ -31,6 +33,8 @@ export const Verb = React.createClass({
               {element.word[element.form]}
             </span>
             <span className="label label-default">{this.props.role}</span>
+            {state.Words.find(o => o.id === this.props.parentId).pos !== 'VerbContainer' &&
+             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}

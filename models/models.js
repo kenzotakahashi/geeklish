@@ -61,6 +61,9 @@ export const PrepositionDic = Dictionary.discriminator('Preposition', Prepositio
 const InfinitiveDicSchema = new Schema({}, options)
 export const InfinitiveDic = Dictionary.discriminator('Infinitive', InfinitiveDicSchema)
 
+const GerundDicSchema = new Schema({}, options)
+export const GerundDic = Dictionary.discriminator('Gerund', GerundDicSchema)
+
 const BeDicSchema = new Schema({}, options)
 export const BeDic = Dictionary.discriminator('Be', BeDicSchema)
 

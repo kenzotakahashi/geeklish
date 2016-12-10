@@ -13,7 +13,7 @@ const factory = {
       },
       person: w.person || null,
       number: w.number || 'singular',
-      form: arg ? arg.form : 'nominative',
+      form: arg.form || 'nominative',
       isWh: ['what','who','which'].includes(w.base) ? true : false
     }
     init.word['possessive pronoun'] = w.pp || init.word.possessive
@@ -92,7 +92,7 @@ const factory = {
         gerund: w.gerund 
       },
       valid_complements: w.complements,
-      form: arg ? arg.form : 'base',
+      form: arg.form || 'base',
       negative: false,
       past: false,
       continuous: false,
@@ -122,7 +122,7 @@ const factory = {
         'gerund': 'being'
       },
       valid_complements: [],
-      form: arg ? arg.form : 'base',
+      form: arg.form || 'base',
       negative: false,
       modal: '',
       past: false,
@@ -138,7 +138,7 @@ const factory = {
       id: uuid.v4(),
       pos: 'VerbContainer',
       valid_complements: null,
-      form: null,
+      form: arg.form || null,
       negative: false,
       past: false,
       continuous: false,
@@ -148,7 +148,7 @@ const factory = {
       complements: [],
       adverbs: [],
       prepositions: [],
-      verbs: arg ? [arg.child] : [],
+      verbs: arg.child ? [arg.child] : [],
       conjunction: null
     }
   },
@@ -215,6 +215,13 @@ const factory = {
       pos: 'Infinitive',
       word: 'to',
       verb: null
+    }
+  },
+  Gerund: function() {
+    return {
+      id: uuid.v4(),
+      pos: 'Gerund',
+      verb: null   
     }
   },
   Clause: function() {
