@@ -7,7 +7,7 @@ import { Adjective, AdjectiveClause } from './Adjective.js'
 import { Adverb, AdverbClause } from './Adverb.js'
 import Preposition from './Preposition.js'
 import Conjunction from  './Conjunction.js'
-import { Infinitive, Gerund, Sentence} from './others'
+import { Infinitive, Gerund, Participle, Sentence} from './others'
 
 const Pos = {
 	Sentence,
@@ -28,7 +28,8 @@ const Pos = {
 	Conjunction,
 	Be,
 	Infinitive,
-	Gerund
+	Gerund,
+	Participle,
 }
 
 export default Pos 

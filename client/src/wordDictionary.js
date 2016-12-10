@@ -4,10 +4,11 @@ import { showWordFactory } from './actions'
 
 const nouns = ['Noun', 'Pronoun', 'NounClause', 'Gerund']
 const verbs = ['Verb', 'Be']
-const adjectives = ['Adjective', 'AdjectiveClause']
+const adjectives = ['Adjective', 'AdjectiveClause', 'Participle']
 const adverbs = ['Adverb', 'AdverbClause']
 const clauses = ['Clause']
 const coordinating = [{pos: 'Conjunction', attr: ['type', 'coordinating']}]
+const complements = [...nouns, 'Adjective', 'Adverb', 'Preposition', 'Infinitive']
 
 const valid_pos = {
   Sentence: {
@@ -22,20 +23,20 @@ const valid_pos = {
     conjunction: coordinating
   },
   Verb: {
-    complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
+    complements: complements,
     adverbs: [...adverbs, 'Infinitive'],
     prepositions: ['Preposition']
   },
   Be: {
-    complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
+    complements: complements,
     adverbs: [...adverbs, 'Infinitive'],
     prepositions: ['Preposition']
   },
   VerbContainer: {
-    complements: [...nouns, ...adjectives, 'Adverb', 'Preposition', 'Infinitive'],
+    complements: complements,
     adverbs: [...adverbs, 'Infinitive'],
     prepositions: ['Preposition'],
-    verbs: ['Verb', 'Be'],
+    verbs: verbs,
     conjunction: coordinating
   },
   Noun: {
@@ -80,6 +81,9 @@ const valid_pos = {
   },
   Gerund: {
   	verb: verbs
+  },
+  Participle: {
+  	verb: ['Verb']
   }
 }
 

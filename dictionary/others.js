@@ -10,6 +10,11 @@ const others = [
 		order: 9
 	},
 	{
+		pos: 'Participle',
+		base: 'Participle',
+		order: 9
+	},
+	{
 		pos: 'Be',
 		base: 'be',
 		order: 4

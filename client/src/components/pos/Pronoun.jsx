@@ -1,7 +1,8 @@
 import React from 'react'
 import store from '../../store.js'
-import { WH, DeleteButton } from './Tree'
+import { WH, DeleteButton, ConjunctionButton } from './Tree'
 import { changeAttribute } from '../../actions'
+
 
 const Pronoun = React.createClass({
   handleChange: function(e){
@@ -29,6 +30,8 @@ const Pronoun = React.createClass({
             <span className="label label-default">{this.props.role}</span>
             {formSelect}
             <WH id={element.id} isWh={element.isWh} />
+            {state.Words.find(o => o.id === this.props.parentId).pos !== 'NounContainer' &&
+             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
         </li>

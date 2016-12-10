@@ -221,7 +221,15 @@ const factory = {
     return {
       id: uuid.v4(),
       pos: 'Gerund',
-      verb: null   
+      verb: null
+    }
+  },
+  Participle: function() {
+    return {
+      id: uuid.v4(),
+      pos: 'Participle',
+      verb: null,
+      form: 'present',
     }
   },
   Clause: function() {

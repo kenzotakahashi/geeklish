@@ -87,13 +87,7 @@ export const VerbContainer = {
     return this
   },
   str_adverbs: str_adverbs,
-  getList: function(v) {
-    let word = v || [this.verbs.map(o => o.toString()).join(` ${this.conjunction} `)] // gerund
-    let verb = word.concat(this.complements)
-    verb = this.str_adverbs(verb, this.adverbs)
-    verb = verb.concat(this.prepositions)
-    return verb
-  },
+  getList: getList,
   verbAfterTo: function() {
     if (!this.conjunction) return []
     const negative = this.negative ? ['not'] : []
@@ -110,7 +104,5 @@ export const VerbContainer = {
   isValid: function() {
     return this.verbs.length > 0 && this.conjunction
   },
-  is3s: () => false,
   getWh: () => [null, false],
-  getBe: (form) => form === 'past' ? 'were' : 'was'
 }

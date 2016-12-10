@@ -13,8 +13,11 @@ export const Verb = React.createClass({
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
     const attrs = ['complements','adverbs','prepositions']
+    const parent = state.Words.find(o => o.id === this.props.parentId)
 
-    const attributes = ['past','negative','continuous','perfect','passive'].map(o => (
+    const list = parent.pos === 'Infinitive' ? ['negative','continuous','passive'] :
+                 ['past','negative','continuous','perfect','passive']
+    const attributes = list.map(o => (
       e('button', {
         className: `button is-small is-active ${element[o] ? 'is-primary' : ''}`,
         key: o,
@@ -23,41 +26,71 @@ export const Verb = React.createClass({
       }, o)
     ))
 
-    // getArgument(parent, props.role, props.element.pos)
+    const children = <Children element={element} attrs={attrs} id={element.id} words={state.Words}
+                      target={state.target} activeWord={state.activeWord} />
 
-    return element.form === 'gerund' ? (
-      <ul>
-        <li className="tree-top">
-          <div className={`tree-box ${element.pos}`}>
-            <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>
-              {element.word[element.form]}
-            </span>
-            <span className="label label-default">{this.props.role}</span>
-            {state.Words.find(o => o.id === this.props.parentId).pos !== 'VerbContainer' &&
-             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
-          </div>
-          <Children element={element} attrs={attrs} id={element.id} words={state.Words}
-                    target={state.target} activeWord={state.activeWord} />
-        </li>
-      </ul>
-    ) : (
-      <ul>
-        <li className="tree-top">
-          <div className={`tree-box ${element.pos}`}>
-            <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
-            <span className="label label-default">{this.props.role}</span>
-            <ModalSelect value={element.modal} onChange={this.handleChange} />
-            {attributes}
-            {state.Words.find(o => o.id === this.props.parentId).pos !== 'VerbContainer' &&
-             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
-          </div>
-          <Children element={element} attrs={attrs} id={element.id} words={state.Words}
-                    target={state.target} activeWord={state.activeWord} />
-        </li>
-      </ul>
-    )
+    if (parent.pos === 'Gerund') {
+      return (
+        <ul>
+          <li className="tree-top">
+            <div className={`tree-box ${element.pos}`}>
+              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>
+                {element.word[element.form]}
+              </span>
+              <span className="label label-default">{this.props.role}</span>
+              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            </div>
+            {children}
+          </li>
+        </ul>
+      )
+    } else if (parent.pos === 'Participle') {
+      return (
+        <ul>
+          <li className="tree-top">
+            <div className={`tree-box ${element.pos}`}>
+              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className="label label-default">{this.props.role}</span>
+              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            </div>
+            {children}
+          </li>
+        </ul>
+      ) 
+    } else if (parent.pos === 'Infinitive') {
+      return (
+        <ul>
+          <li className="tree-top">
+            <div className={`tree-box ${element.pos}`}>
+              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className="label label-default">{this.props.role}</span>
+              {attributes}
+              {parent.pos !== 'VerbContainer' &&
+               <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
+              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            </div>
+            {children}
+          </li>
+        </ul>
+      ) 
+    } else {
+      return (
+        <ul>
+          <li className="tree-top">
+            <div className={`tree-box ${element.pos}`}>
+              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className="label label-default">{this.props.role}</span>
+              <ModalSelect value={element.modal} onChange={this.handleChange} />
+              {attributes}
+              {parent.pos !== 'VerbContainer' &&
+               <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
+              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            </div>
+            {children}
+          </li>
+        </ul>
+      )
+    }
   },
 })
 
@@ -69,8 +102,11 @@ export const Be = React.createClass({
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
     const attrs = ['complements','adverbs','prepositions']
+    const parent = state.Words.find(o => o.id === this.props.parentId)
 
-    const attributes = ['past','negative','continuous','perfect'].map(o => (
+    const list = parent.pos === 'Infinitive' ? ['negative','continuous','passive'] :
+                 ['past','negative','continuous','perfect','passive']
+    const attributes = list.map(o => (
       e('button', {
         className: `button is-small is-active ${element[o] ? 'is-primary' : ''}`,
         key: o,
@@ -78,24 +114,57 @@ export const Be = React.createClass({
         onClick: () => store.dispatch(changeAttribute(element.id, o, !element[o]))
       }, o)
     ))
- 
-    return (
-      <ul>
-        <li className="tree-top">
-          <div className={`tree-box ${element.pos}`}>
-            <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
-            <span className="label label-default">{this.props.role}</span>
-            <ModalSelect value={element.modal} onChange={this.handleChange} />
-            {attributes}
-            {state.Words.find(o => o.id === this.props.parentId).pos !== 'VerbContainer' &&
-             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
-          </div>
-          <Children element={element} attrs={attrs} id={element.id} words={state.Words}
-                    target={state.target} activeWord={state.activeWord} />
-        </li>
-      </ul>
-    )
+
+    const children = <Children element={element} attrs={attrs} id={element.id} words={state.Words}
+                      target={state.target} activeWord={state.activeWord} />
+
+    if (parent.pos === 'Gerund') {
+      return (
+        <ul>
+          <li className="tree-top">
+            <div className={`tree-box ${element.pos}`}>
+              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className="label label-default">{this.props.role}</span>
+              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            </div>
+            {children}
+          </li>
+        </ul>
+      )
+    } else if (parent.pos === 'Infinitive') {
+      return (
+        <ul>
+          <li className="tree-top">
+            <div className={`tree-box ${element.pos}`}>
+              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className="label label-default">{this.props.role}</span>
+              {attributes}
+              {parent.pos !== 'VerbContainer' &&
+               <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
+              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            </div>
+            {children}
+          </li>
+        </ul>
+      )
+    } else {
+      return (
+        <ul>
+          <li className="tree-top">
+            <div className={`tree-box ${element.pos}`}>
+              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className="label label-default">{this.props.role}</span>
+              <ModalSelect value={element.modal} onChange={this.handleChange} />
+              {attributes}
+              {parent.pos !== 'VerbContainer' &&
+               <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
+              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            </div>
+            {children}
+          </li>
+        </ul>
+      )
+    }
   },
 })
 

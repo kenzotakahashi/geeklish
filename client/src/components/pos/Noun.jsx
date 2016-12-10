@@ -54,8 +54,6 @@ export const NounContainer = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>NounContainer</span>
             <span className="label label-default">{this.props.role}</span>
             <WH id={element.id} isWh={element.isWh} />
-            {state.Words.find(o => o.id === this.props.parentId).pos !== 'NounContainer' &&
-             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}

@@ -27,6 +27,7 @@ const Guide = React.createClass({
               <div className='function-title'>adjectives</div>
               <span className='pos Adjective'>Adjective</span>
               <span className='pos basic'>Adjective Clause</span>
+              <span className='pos basic'>Participle</span>
               <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
@@ -76,7 +77,6 @@ const Guide = React.createClass({
               <span className='pos basic'>Noun Clause</span>
               <span className='pos basic'>Gerund</span>
               <span className='pos Adjective'>Adjective</span>
-              <span className='pos basic'>Adjective Clause</span>
               <span className='pos Adverb'>Adverb</span>
               <span className='pos Preposition'>Preposition</span>
               <span className='pos basic'>Infinitive</span>
@@ -112,7 +112,6 @@ const Guide = React.createClass({
               <span className='pos basic'>Noun Clause</span>
               <span className='pos basic'>Gerund</span>
               <span className='pos Adjective'>Adjective</span>
-              <span className='pos basic'>Adjective Clause</span>
               <span className='pos Adverb'>Adverb</span>
               <span className='pos Preposition'>Preposition</span>
               <span className='pos basic'>Infinitive</span>
@@ -262,6 +261,7 @@ const Guide = React.createClass({
               <div className='function-title'>adjectives</div>
               <span className='pos Adjective'>Adjective</span>
               <span className='pos basic'>Adjective Clause</span>
+              <span className='pos basic'>Participle</span>
               <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
@@ -343,7 +343,7 @@ const Guide = React.createClass({
         <div className='wrapper'>
           <h3><span className='pos basic'>Noun Container</span></h3>
           <p>A noun container is used for combining nouns and pronouns.</p>
-          <p><span className='examples'>Examples:</span> he and I, cats and dogs</p>
+          <p><span className='examples'>Examples: </span>he and I, cats and dogs</p>
         
           <h4>Functions</h4>
 
@@ -360,6 +360,7 @@ const Guide = React.createClass({
               <div className='function-title'>adjectives</div>
               <span className='pos Adjective'>Adjective</span>
               <span className='pos basic'>Adjective Clause</span>
+              <span className='pos basic'>Participle</span>
               <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
@@ -380,7 +381,7 @@ const Guide = React.createClass({
         <div className='wrapper'>
           <h3><span className='pos basic'>Verb Container</span></h3>
           <p>A verb container is used for combining verbs.</p>
-          <p><span className='examples'>Examples:</span></p>
+          <p><span className='examples'>Examples: </span></p>
 
           <h4>Functions</h4>
 
@@ -401,7 +402,6 @@ const Guide = React.createClass({
               <span className='pos basic'>Noun Clause</span>
               <span className='pos basic'>Gerund</span>
               <span className='pos Adjective'>Adjective</span>
-              <span className='pos basic'>Adjective Clause</span>
               <span className='pos Adverb'>Adverb</span>
               <span className='pos Preposition'>Preposition</span>
               <span className='pos basic'>Infinitive</span>
@@ -423,12 +423,12 @@ const Guide = React.createClass({
 
         <h2>Verbals</h2>
 
-        <p>Words that are formed from verbs but don't act as verbs are called verbals.</p>
+        <p>Verbals are words that are formed from verbs but don't act as verbs.</p>
 
         <div className='wrapper'>
           <h3><span className='pos basic'>Infinitive</span></h3>
           <p>When a verb is used with "to", it is called an infinitive and acts as something else.</p>
-          <p><span className='examples'>Examples:</span> to go, to do, to talk</p>
+          <p><span className='examples'>Examples: </span>to go, to do, to talk</p>
 
           <h4>Functions</h4>
 
@@ -446,7 +446,7 @@ const Guide = React.createClass({
         <div className='wrapper'>
           <h3><span className='pos basic'>Gerund</span></h3>
           <p>A gerund is in the "verb + ing" form. It acts as a noun.</p>
-          <p><span className='examples'>Examples:</span>walking, doing, being</p>
+          <p><span className='examples'>Examples: </span>walking, doing, being</p>
 
           <h4>Functions</h4>
 
@@ -461,6 +461,22 @@ const Guide = React.createClass({
 
         <hr />
 
+        <div className='wrapper'>
+          <h3><span className='pos basic'>Participle</span></h3>
+          <p>A participle is a verb that acts as an adjective.</p>
+          <p><span className='examples'>Examples: </span>winning game, used car</p>
+
+          <h4>Functions</h4>
+
+          <ul>
+            <li className='function-group'>
+              <div className='function-title'>verb</div>
+              <span className='pos Verb'>Verb</span>
+            </li>
+          </ul>
+        </div>
+
+        <hr />
 
       </div>
     )

@@ -33,6 +33,28 @@ export const Gerund = {
   is3s: () => true,
 }
 
+export const Participle = {
+  init: function(p) {
+    this.id = p.id
+    this.pos = p.pos
+    this.verb = createWord(p.verb)
+    this.form = p.form
+    return this
+  },
+  isPhrase: function() {
+    return !!this.verb && this.verb.getList([]).length > 0
+  },
+  toString: function() {
+    if (!this.verb) return ''
+    if (this.form === 'present') {
+      return this.verb.getList([this.verb.word.gerund]).join(' ')
+    } else if (this.form === 'past') {
+      return this.verb.getList([this.verb.word.passive]).join(' ')
+    }
+  },
+  getWh: () => [null, false], 
+}
+
 export const Sentence = {
   init: function(p) {
     this.id = p.id

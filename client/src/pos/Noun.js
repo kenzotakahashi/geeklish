@@ -19,7 +19,7 @@ const beforeOrAfter = function(adjs) {
   const adjectivesAfter = []
   const base = adjs.map(o => createWord(o))
   for (let adj of base) {
-    if (adj.pos === 'Adjective') {
+    if (adj.pos === 'Adjective' || (adj.pos === 'Participle' && !adj.isPhrase())) {
       adjectives.push(adj)
     } else {
       adjectivesAfter.push(adj)

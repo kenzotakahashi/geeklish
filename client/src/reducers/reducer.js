@@ -27,7 +27,7 @@ function getContainer(pos) {
   if (pos === 'Clause') {
     return {pos: 'ClauseContainer'}   
   }
-  if (['Pronoun','Noun','NounContainer','NounClause'].includes(pos)) {
+  if (['Pronoun','Noun','Gerund','NounClause','NounContainer'].includes(pos)) {
     return {pos: 'NounContainer'}
   }
   if (['Verb','Be'].includes(pos)) {
