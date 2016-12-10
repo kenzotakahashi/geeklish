@@ -1,35 +1,35 @@
 const adjectives = [
 	{
-		"base": "good",
-		"comparative": "better",
-		"superlative": "best"
+		base: "good",
+		comparative: "better",
+		superlative: "best"
 	},
 	{
-		"base": "important"
+		base: "important"
 	},
 	{
-		"base": "honest"
+		base: "honest"
 	},
 	{
-		"base": "young",
-		"comparative": "younger",
-		"superlative": "youngest"
+		base: "young",
+		comparative: "younger",
+		superlative: "youngest"
 	},
 	{
-		"base": "old",
-		"comparative": "older",
-		"superlative": "oldest"
+		base: "old",
+		comparative: "older",
+		superlative: "oldest"
 	},
 	{
-		"base": "hard",
-		"comparative": "harder",
-		"superlative": "hardest"
+		base: "hard",
+		comparative: "harder",
+		superlative: "hardest"
 	},
 	{
-		"base": 'hungry'
+		base: 'hungry'
 	},
 	{
-		'base': 'tired'
+		base: 'tired'
 	}
 ].map(o => ({
 	...o,

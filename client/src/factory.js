@@ -179,7 +179,12 @@ const factory = {
     return {
       id: uuid.v4(),
       pos: 'Adverb',
-      word: w.base,
+      word: {
+        base: w.base,
+        comparative: w.comparative === false ? false : w.comparative || `more ${w.base}`,
+        superlative: w.superlative || `most ${w.base}`
+      },
+      form: 'base',
       canModifyVerb: w.canModify.includes('verb'),
       canModifyAdj: w.canModify.includes('adj'),
       canModifyAdv: w.canModify.includes('adv'),
@@ -187,7 +192,7 @@ const factory = {
       canModifyClause: w.canModify.includes('clause'),
       position: 'before',
       adverb: null,
-      isWh: false
+      isWh: ['when','where','how','why'].includes(w.base) ? true : false
     }
   },
   AdverbClause: function(w) {

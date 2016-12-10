@@ -16,11 +16,11 @@ const Pronoun = React.createClass({
       <option key={o} value={o}>{o}</option>
     ))
 
-    const formSelect = element.word.reflexive ? (
+    const formSelect = element.word.reflexive && (
       <span className="select is-small">
         <select value={element.form} onChange={this.handleChange}>{forms}</select>
       </span>
-    ) : ''
+    )
 
     return (
       <ul>

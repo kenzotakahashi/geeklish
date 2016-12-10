@@ -5,6 +5,7 @@ export const Adverb = {
     this.id = p.id
     this.pos = p.pos
     this.word = p.word
+    this.form = p.form
     this.canModifyVerb = p.canModifyVerb
     this.canModifyAdj = p.canModifyAdj
     this.canModifyAdv = p.canModifAdvb
@@ -15,9 +16,9 @@ export const Adverb = {
     return this
   },
   toString: function() {
-    return !!this.word.adverb ?
-            `${this.word.adverb.toString()} ${this.word}`:
-            this.word
+    return !!this.adverb ?
+            `${this.adverb.toString()} ${this.word[this.form]}`:
+            this.word[this.form]
   },
   getWh: function() {
     if (this.isWh) return [this, true]

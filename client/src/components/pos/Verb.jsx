@@ -19,7 +19,7 @@ export const Verb = React.createClass({
                  ['past','negative','continuous','perfect','passive']
     const attributes = list.map(o => (
       e('button', {
-        className: `button is-small is-active ${element[o] ? 'is-primary' : ''}`,
+        className: `button is-small is-active ${element[o] && 'is-primary'}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(element.id, o, !element[o]))
@@ -108,7 +108,7 @@ export const Be = React.createClass({
                  ['past','negative','continuous','perfect','passive']
     const attributes = list.map(o => (
       e('button', {
-        className: `button is-small is-active ${element[o] ? 'is-primary' : ''}`,
+        className: `button is-small is-active ${element[o] && 'is-primary'}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(element.id, o, !element[o]))

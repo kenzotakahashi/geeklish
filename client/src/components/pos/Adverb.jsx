@@ -10,23 +10,37 @@ export const Adverb = React.createClass({
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
     const attrs = ['adverb']
+    const parent = state.Words.find(o => o.id === this.props.parentId)
+    const modifyVerb = ['Verb','Be','VerbContainer'].includes(parent.pos) && this.props.role === 'adverbs'
 
-    const attributes = ['beginning','before','after'].map(o => (
+    const attributes = modifyVerb &&
+    (['beginning','before','after'].map(o => (
       e('button', {
-        className: `button is-small is-active ${element.position === o ? 'is-primary' : ''}`,
+        className: `button is-small is-active ${element.position === o && 'is-primary'}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(this.props.id, 'position', o))
       }, o)
-    ))
+    )))
+
+    const comparison = modifyVerb && !!element.comparative &&
+    (['base','comparative','superlative'].map(o => (
+      e('button', {
+        className: `button is-small is-active ${element.form === o && 'is-primary'}`,
+        key: o,
+        type: 'button',
+        onClick: () => store.dispatch(changeAttribute(this.props.id, 'form', o))
+      }, o)
+    )))
 
     return (
       <ul>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
-            <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{element.word}</span>
+            <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{element.word.base}</span>
             <span className="label label-default">{this.props.role}</span>
             {attributes}
+            {comparison}
             <WH id={this.props.id} isWh={element.isWh} />
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
