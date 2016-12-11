@@ -60,6 +60,9 @@ const valid_pos = {
     adjectives: adjectives,
     prepositions: ['Preposition'],
   },
+  Pronoun: {
+    adjective: ['Infinitive'], 
+  },
   Adjective: {
     adverbs: ['Adverb'],
     prepositions: ['Preposition'] 

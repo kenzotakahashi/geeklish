@@ -62,7 +62,7 @@ function reducer(state, action) {
     case 'CREATE_WORD': {
       const elementIndex = state.Words.findIndex(t => t.id === action.activeWord)
       const parent = state.Words[elementIndex]
-      const [updated, initialized] = takeWord(parent, action.wordBase, action.target)  
+      const [updated, initialized] = takeWord(parent, action.wordBase, action.target)
       const newElement = {
         ...parent,
         [action.target]: updated,

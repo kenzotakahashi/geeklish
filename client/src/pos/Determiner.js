@@ -6,15 +6,11 @@ export const Determiner = {
     this.pos = p.pos
     this.word = p.word
     this.number = p.number
-    // this.isWh = p.isWh
     return this
   },
   toString: function() {
     return this.word
   },
-  // getWh: function() {
-  //   return this.isWh ? [this, true] : [null, false]
-  // },
 }
 
 export const Possessive = {

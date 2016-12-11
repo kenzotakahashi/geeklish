@@ -10,6 +10,7 @@ export const Noun = React.createClass({
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
     const attrs = ['determiners','adjectives','nouns','prepositions']
+    const parent = state.Words.find(o => o.id === this.props.parentId)
 
     return (
       <ul>
@@ -23,8 +24,8 @@ export const Noun = React.createClass({
               onClick: () => store.dispatch(changeAttribute(
                              element.id, 'number', element.number === 'plural' ? 'singular' : 'plural'))
             }, element.number)}
-            <WH id={element.id} isWh={element.isWh} />
-            {state.Words.find(o => o.id === this.props.parentId).pos !== 'NounContainer' &&
+            {parent.pos !== 'Possessive' && <WH id={element.id} isWh={element.isWh} />}
+            {parent.pos !== 'NounContainer' &&
              <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>

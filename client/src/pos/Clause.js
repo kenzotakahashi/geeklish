@@ -231,7 +231,7 @@ export const Clause = {
     c = this.reorderWh(c)
     // console.log(c)
     c = this.convertToString(c)
-    console.log(c)
+    // console.log(c)
     c = this.checkArticle(c)
     c = c.map(o => o.toString()).join(' ')
     c = !!this.adjectiveClause ? `${this.adjectiveClause}, ${c}` : c

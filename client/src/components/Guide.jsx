@@ -26,6 +26,7 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>determiners</div>
               <span className='pos Determiner'>Determiner</span>
+              <span className='pos basic'>Possessive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>adjectives</div>
@@ -54,6 +55,15 @@ const Guide = React.createClass({
           <h3><span className='pos Pronoun'>Pronoun</span></h3>
           <p>A pronoun is a word that takes the place of a noun.</p>
           <p><span className='examples'>Examples:</span> he, she, I, you, we, it, this, that, what, who, which</p>
+        
+          <h4>Functions</h4>
+
+          <ul>
+            <li className='function-group'>
+              <div className='function-title'>adjectives</div>
+              <span className='pos basic'>Infinitive</span>
+            </li>
+          </ul>
         </div>
 
         <hr />
@@ -261,6 +271,7 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>determiners</div>
               <span className='pos Determiner'>Determiner</span>
+              <span className='pos basic'>Possessive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>adjectives</div>
@@ -360,6 +371,7 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>determiners</div>
               <span className='pos Determiner'>Determiner</span>
+              <span className='pos basic'>Possessive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>adjectives</div>
@@ -477,6 +489,26 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>verb</div>
               <span className='pos Verb'>Verb</span>
+            </li>
+          </ul>
+        </div>
+
+        <hr />
+
+        <h2>Other Classes</h2>
+
+        <div className='wrapper'>
+          <h3><span className='pos basic'>Possessive</span></h3>
+          <p>A possessive is used before a noun to show ownership of the noun. It acts as a determiner.</p>
+          <p><span className='examples'>Examples: </span>my, your, our, John's</p>
+
+          <h4>Functions</h4>
+
+          <ul>
+            <li className='function-group'>
+              <div className='function-title'>noun</div>
+              <span className='pos Noun'>Noun</span>
+              <span className='pos Pronoun'>Pronoun</span>
             </li>
           </ul>
         </div>

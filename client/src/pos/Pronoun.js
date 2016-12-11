@@ -1,3 +1,5 @@
+import { createWord } from './util.js'
+
 const Pronoun = {
   init: function(p) {
     this.id = p.id
@@ -6,15 +8,17 @@ const Pronoun = {
     this.person = p.person
     this.number = p.number
     this.form = p.form
+    this.adjective = createWord(p.adjective)
     this.isWh = p.isWh
     return this    
   },
   isValid: () => true,
   toString: function() {
-    return this.word[this.form]
+    return this.getList().map(o => o.toString()).join(' ')
   },
   getList: function() {
-    return [this]
+    const adj = this.adjective || []
+    return [this.word[this.form], adj]
   },
   getBe: function(past) {
     if (this.number === 'plural' || this.person === 2) {
