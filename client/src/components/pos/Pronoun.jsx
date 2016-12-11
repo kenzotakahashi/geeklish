@@ -11,13 +11,12 @@ const Pronoun = React.createClass({
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
     const attrs = ['adjectives']
-    const parent = state.Words.find(o => o.id === this.props.parentId)
 
     const forms = ['nominative','accusative','possessive pronoun','reflexive'].map(o => (
       <option key={o} value={o}>{o}</option>
     ))
 
-    const formSelect = element.word.reflexive && parent.pos !== 'Possessive' && (
+    const formSelect = element.word.reflexive && this.props.parent.pos !== 'Possessive' && (
       <span className="select is-small">
         <select value={element.form} onChange={this.handleChange}>{forms}</select>
       </span>
@@ -30,13 +29,13 @@ const Pronoun = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word[element.form]}</span>
             <span className="label label-default">{this.props.role}</span>
             {formSelect}
-            {parent.pos !== 'Possessive' && 
+            {this.props.parent.pos !== 'Possessive' && 
              <WH id={element.id} isWh={element.isWh} />}
-            {parent.pos !== 'NounContainer' &&
-             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            {this.props.parent.pos !== 'NounContainer' &&
+             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent.id} />}
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
-          <Children element={element} attrs={attrs} id={element.id} words={state.Words}
+          <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
 
         </li>

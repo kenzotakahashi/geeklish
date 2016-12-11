@@ -28,9 +28,9 @@ export const Adjective = React.createClass({
             <span className="label label-default">{this.props.role}</span>
             {attributes}
             <WH id={this.props.id} isWh={element.isWh} />
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
-          <Children element={element} attrs={attrs} id={this.props.id} words={state.Words}
+          <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
         </li>
       </ul>
@@ -50,9 +50,9 @@ export const AdjectiveClause = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>Adjective Clause</span>            
             <span className="label label-default">{this.props.role}</span>
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
-          <Children element={element} attrs={attrs} id={this.props.id} words={state.Words}
+          <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
         </li>
       </ul>

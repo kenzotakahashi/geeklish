@@ -16,9 +16,9 @@ const Preposition = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{element.word}</span>
             <span className="label label-default">{this.props.role}</span>
             <WH id={element.id} isWh={element.isWh} />
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
-          <Children element={element} attrs={attrs} id={element.id} words={state.Words}
+          <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
         </li>
       </ul>

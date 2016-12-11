@@ -13,7 +13,7 @@ const Conjunction = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word'>{element.word}</span>
             <span className="label label-default">{this.props.role}</span>
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
         </li>
       </ul>

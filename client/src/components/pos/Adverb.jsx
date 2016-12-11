@@ -10,8 +10,8 @@ export const Adverb = React.createClass({
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
     const attrs = ['adverb']
-    const parent = state.Words.find(o => o.id === this.props.parentId)
-    const modifyVerb = ['Verb','Be','VerbContainer'].includes(parent.pos) && this.props.role === 'adverbs'
+    const modifyVerb = ['Verb','Be','VerbContainer'].includes(this.props.parent.pos) &&
+                        this.props.role === 'adverbs'
 
     const attributes = modifyVerb &&
     (['beginning','before','after'].map(o => (
@@ -42,9 +42,9 @@ export const Adverb = React.createClass({
             {attributes}
             {comparison}
             <WH id={this.props.id} isWh={element.isWh} />
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
-          <Children element={element} attrs={attrs} id={this.props.id} words={state.Words}
+          <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
         </li>
       </ul>
@@ -70,9 +70,9 @@ export const AdverbClause = React.createClass({
               onClick: () => store.dispatch(changeAttribute(this.props.id, 'position',
                              element.position === 'before' ? 'after' : 'before'))
             }, element.position)}
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
-          <Children element={element} attrs={attrs} id={this.props.id} words={state.Words}
+          <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
         </li>
       </ul>

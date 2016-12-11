@@ -27,11 +27,11 @@ export const Clause = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>Clause</span>
             <span className="label label-default">{this.props.role}</span>
             {attr}
-            {state.Words.find(o => o.id === this.props.parentId).pos !== 'ClauseContainer' &&
-             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            {this.props.parent.pos !== 'ClauseContainer' &&
+             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent.id} />}
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
-          <Children element={element} attrs={attrs} id={element.id} words={state.Words}
+          <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
         </li>
       </ul>
@@ -53,10 +53,10 @@ export const ClauseContainer = React.createClass({
             <span className="label label-default">{this.props.role}</span>
             {element.clauses.length > 0 &&
             <UndoConjunctionButton element={element} thisRole={this.props.role}
-                                   childRole='clauses' parentId={this.props.parentId} />}
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+                                   childRole='clauses' parentId={this.props.parent.id} />}
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
-          <Children element={element} attrs={attrs} id={element.id} words={state.Words}
+          <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
         </li>
       </ul>

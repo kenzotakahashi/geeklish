@@ -32,9 +32,9 @@ export const Infinitive = React.createClass({
               type: 'button',
               onClick: () => store.dispatch(changeAttribute(element.id, 'omit', !element.omit))
             }, 'omit to')}
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
-          <Children element={element} attrs={attrs} id={element.id} words={state.Words}
+          <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
         </li>
       </ul>
@@ -55,11 +55,11 @@ export const Gerund = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>Gerund</span>
             <span className="label label-default">{this.props.role}</span>
-            {state.Words.find(o => o.id === this.props.parentId).pos !== 'NounContainer' &&
-             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            {this.props.parent.pos !== 'NounContainer' &&
+             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent.id} />}
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
-          <Children element={element} attrs={attrs} id={element.id} words={state.Words}
+          <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
         </li>
       </ul>
@@ -95,9 +95,9 @@ export const Participle = React.createClass({
               type: 'button',
               onClick: () => store.dispatch(changeAttribute(element.id, 'beginning', !element.beginning))
             }, 'beginning')}
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
-          <Children element={element} attrs={attrs} id={element.id} words={state.Words}
+          <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
         </li>
       </ul>

@@ -14,18 +14,18 @@ export const Children = (props) => (
       		// attribute is a list(ex. complements)
       		props.element[w].map((t, j) => (
       		  e(pos_components[props.words.find(o => o.id === t).pos],
-      		  	{key: w+j, parentId: props.id, id: t, role: w}
+      		  	{key: w+j, parent: props.element, id: t, role: w}
       		  )
       		))
       	) : (props.element[w] &&
 	      	// attribute is a non-list(ex. subject)	      	
       		e(pos_components[props.words.find(o => o.id === props.element[w]).pos],
-      			{key: w, parentId: props.id, id: props.element[w], role: w}
+      			{key: w, parent: props.element, id: props.element[w], role: w}
       		)
       	)
       ))
     }
-    {props.activeWord === props.id &&
+    {props.activeWord === props.element.id &&
 	    props.attrs.map(o => (
 	    	(o.slice(-1) === 's' || !props.element[o]) &&
 	      e(
@@ -33,7 +33,7 @@ export const Children = (props) => (
 	      	{
 	          className: `tree tree-${props.target === o ? 'active' : 'info'}`,
 	          key: o,
-	          onClick: () => getWordDictionary(props.words, props.activeWord, props.id, o)
+	          onClick: () => getWordDictionary(props.words, props.activeWord, props.element.id, o)
 	        },
 	        o
 	      )
