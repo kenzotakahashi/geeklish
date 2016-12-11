@@ -48,7 +48,7 @@ const Projects = React.createClass({
     const id = this.props.params.id
     // Switch to different project
     if (id !== undefined && id !== state.example) {
-      const data = JSON.parse(localStorage[`project_${id}`])
+      const data = JSON.parse(sessionStorage[`project_${id}`])
       this.changeExample(data.state)
       this.setState({
         field: data.title,

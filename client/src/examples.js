@@ -81,7 +81,7 @@ export const initialState = {
   activeWord: 1,
   target: null,
   dictionary: [],
-  projects: !!localStorage.projects ? JSON.parse(localStorage.projects) : [],
+  projects: !!sessionStorage.projects ? JSON.parse(sessionStorage.projects) : [],
   Words: [
     {
       id: 1,
@@ -96,7 +96,7 @@ export const initialState = {
 //   activeWord: 2,
 //   target: null,
 //   dictionary: [],
-//   projects: !!localStorage.projects ? JSON.parse(localStorage.projects) : [],
+//   projects: !!sessionStorage.projects ? JSON.parse(sessionStorage.projects) : [],
 //   Words: [
 //     {
 //       id: 1,

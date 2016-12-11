@@ -188,18 +188,18 @@ function reducer(state, action) {
       if (!action.id) {
         id = uuid.v4()
 
-        if (!localStorage.projects) {
-          localStorage.projects = '[]'
+        if (!sessionStorage.projects) {
+          sessionStorage.projects = '[]'
         }
-        const projects = JSON.parse(localStorage.projects)
+        const projects = JSON.parse(sessionStorage.projects)
         newProjects = [{id: id, title: title}, ...projects]
       } else {
         id = action.id
 
-        const projects = JSON.parse(localStorage.projects)
+        const projects = JSON.parse(sessionStorage.projects)
         newProjects = projects.map(o => o.id === id ? {id: id, title: title} : o)
       }
-      localStorage.projects = JSON.stringify(newProjects)  
+      sessionStorage.projects = JSON.stringify(newProjects)  
 
       const data = {
         id,
@@ -209,7 +209,7 @@ function reducer(state, action) {
           example: id
         }
       }
-      localStorage[`project_${id}`] = JSON.stringify(data)
+      sessionStorage[`project_${id}`] = JSON.stringify(data)
 
       return {
         ...action.state,
@@ -218,10 +218,10 @@ function reducer(state, action) {
       }   
     }
     case 'DELETE_PROJECT': {
-      localStorage.removeItem(`project_${action.id}`)
-      const projects = JSON.parse(localStorage.projects)
+      sessionStorage.removeItem(`project_${action.id}`)
+      const projects = JSON.parse(sessionStorage.projects)
       const newProjects = projects.filter(o => o.id !== action.id)
-      localStorage.projects = JSON.stringify(newProjects)
+      sessionStorage.projects = JSON.stringify(newProjects)
 
       return {
         ...initialState,
