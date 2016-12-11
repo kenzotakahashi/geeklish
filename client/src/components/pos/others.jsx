@@ -74,7 +74,9 @@ export const Participle = React.createClass({
     const element = state.Words.find(o => o.id === this.props.id)
     const attrs = ['verb']
 
-    const attr = ['present','past','perfect'].map(o => (
+    const verb = !!element.verb && state.Words.find(o => o.id === element.verb)
+    const list = !!verb && verb.pos === 'Be' ? ['present','perfect'] : ['present','past','perfect']
+    const attr = list.map(o => (
       e('button', {
         className: `button is-small is-active ${element.form === o && 'is-primary'}`,
         key: o,

@@ -129,6 +129,19 @@ export const Be = React.createClass({
           </li>
         </ul>
       )
+    } else if (this.props.parent.pos === 'Participle') {
+      return (
+        <ul>
+          <li className="tree-top">
+            <div className={`tree-box ${element.pos}`}>
+              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className="label label-default">{this.props.role}</span>
+              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+            </div>
+            {children}
+          </li>
+        </ul>
+      )
     } else if (this.props.parent.pos === 'Infinitive') {
       return (
         <ul>

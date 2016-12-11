@@ -490,6 +490,7 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>verb</div>
               <span className='pos Verb'>Verb</span>
+              <span className='pos Be'>Be</span>
             </li>
           </ul>
         </div>

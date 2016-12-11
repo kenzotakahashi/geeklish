@@ -87,7 +87,7 @@ const valid_pos = {
   	verb: verbs
   },
   Participle: {
-  	verb: ['Verb']
+  	verb: verbs
   },
   Possessive: {
     noun: [{pos: 'Pronoun', attr: (w) => !!w.p }, 'Noun'],
