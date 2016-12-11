@@ -15,17 +15,20 @@ const getWh = function() {
 }
 
 const beforeOrAfter = function(adjs) {
+  const adjBeginning = []
   const adjectives = []
   const adjectivesAfter = []
   const base = adjs.map(o => createWord(o))
   for (let adj of base) {
-    if (adj.pos === 'Adjective' || (adj.pos === 'Participle' && !adj.isPhrase())) {
+    if (adj.pos === 'Participle' && adj.beginning) {
+      adjBeginning.push(adj)
+    } else if (adj.pos === 'Adjective' || (adj.pos === 'Participle' && !adj.isPhrase())) {
       adjectives.push(adj)
     } else {
       adjectivesAfter.push(adj)
-    }
+    } 
   }
-  return [adjectives, adjectivesAfter]
+  return [adjBeginning, adjectives, adjectivesAfter]
 }
 
 export const Noun = {
@@ -36,7 +39,7 @@ export const Noun = {
     this.person = w.person
     this.number = w.number
     this.isWh = w.isWh;
-    [this.adjectives, this.adjectivesAfter] = this.beforeOrAfter(w.adjectives)
+    [this.adjBeginning, this.adjectives, this.adjectivesAfter] = this.beforeOrAfter(w.adjectives)
     this.determiners = w.determiners.map(o => createWord(o))
     this.prepositions = w.prepositions.map(o => createWord(o))
     this.nouns = w.nouns.map(o => createWord(o))

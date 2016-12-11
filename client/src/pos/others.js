@@ -41,6 +41,7 @@ export const Participle = {
     this.pos = p.pos
     this.verb = createWord(p.verb)
     this.form = p.form
+    this.beginning = p.beginning
     return this
   },
   isPhrase: function() {
@@ -52,6 +53,8 @@ export const Participle = {
       return this.verb.getList([this.verb.word.gerund]).join(' ')
     } else if (this.form === 'past') {
       return this.verb.getList([this.verb.word.passive]).join(' ')
+    } else {
+      return this.verb.getList(['having', this.verb.word.passive]).join(' ')
     }
   },
   getWh: () => [null, false], 

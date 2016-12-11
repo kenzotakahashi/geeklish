@@ -14,7 +14,7 @@ const factory = {
       person: w.person || null,
       number: w.number || 'singular',
       form: arg.form || 'nominative',
-      adjective: null,
+      adjectives: [],
       isWh: ['what','who','which'].includes(w.base) ? true : false
     }
     init.word['possessive pronoun'] = w.pp || init.word.possessive
@@ -241,6 +241,7 @@ const factory = {
       pos: 'Participle',
       verb: null,
       form: 'present',
+      beginning: false,
     }
   },
   Clause: function() {

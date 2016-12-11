@@ -7,18 +7,31 @@ const Pronoun = {
     this.word = p.word
     this.person = p.person
     this.number = p.number
-    this.form = p.form
-    this.adjective = createWord(p.adjective)
+    this.form = p.form;
+    [this.adjBeginning, this.adjectives] = this.beforeOrAfter(p.adjectives)
     this.isWh = p.isWh
     return this    
+  },
+  beforeOrAfter: function(adjs) {
+    const adjBeginning = []
+    const adjectives = []
+    const base = adjs.map(o => createWord(o))
+    for (let adj of base) {
+      if (adj.pos === 'Participle' && adj.beginning) {
+        adjBeginning.push(adj)
+      } else {
+        adjectives.push(adj)
+      } 
+    }
+    return [adjBeginning, adjectives]
   },
   isValid: () => true,
   toString: function() {
     return this.getList().map(o => o.toString()).join(' ')
   },
   getList: function() {
-    const adj = this.adjective || []
-    return [this.word[this.form], adj]
+    const adj = this.adjectives || []
+    return [this.word[this.form], ...adj]
   },
   getBe: function(past) {
     if (this.number === 'plural' || this.person === 2) {

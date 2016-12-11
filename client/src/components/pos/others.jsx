@@ -74,7 +74,7 @@ export const Participle = React.createClass({
     const element = state.Words.find(o => o.id === this.props.id)
     const attrs = ['verb']
 
-    const attr = ['present','past'].map(o => (
+    const attr = ['present','past','perfect'].map(o => (
       e('button', {
         className: `button is-small is-active ${element.form === o && 'is-primary'}`,
         key: o,
@@ -90,6 +90,11 @@ export const Participle = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>Participle</span>
             <span className="label label-default">{this.props.role}</span>
             {attr}
+            {e('button', {
+              className: `button is-small is-active ${element.beginning && 'is-primary'}`,
+              type: 'button',
+              onClick: () => store.dispatch(changeAttribute(element.id, 'beginning', !element.beginning))
+            }, 'beginning')}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}

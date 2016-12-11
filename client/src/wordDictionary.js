@@ -61,7 +61,7 @@ const valid_pos = {
     prepositions: ['Preposition'],
   },
   Pronoun: {
-    adjective: ['Infinitive'], 
+    adjectives: ['Infinitive', 'Participle'], 
   },
   Adjective: {
     adverbs: ['Adverb'],

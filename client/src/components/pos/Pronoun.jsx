@@ -10,7 +10,7 @@ const Pronoun = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
-    const attrs = ['adjective']
+    const attrs = ['adjectives']
     const parent = state.Words.find(o => o.id === this.props.parentId)
 
     const forms = ['nominative','accusative','possessive pronoun','reflexive'].map(o => (
@@ -36,9 +36,8 @@ const Pronoun = React.createClass({
              <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
-          {element.word.possessive === null &&
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
-                    target={state.target} activeWord={state.activeWord} />}
+                    target={state.target} activeWord={state.activeWord} />
 
         </li>
       </ul>

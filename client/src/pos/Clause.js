@@ -213,20 +213,27 @@ export const Clause = {
     }
   },
   convertToString: function(c) {
-    return c.map(o => o.pos === 'AdverbClause' && o.position === 'beginning' ?
+    return c.filter(t => t !== '')
+            .map(o => o.pos === 'AdverbClause' && o.position === 'beginning' ?
                       `${o}, ` : o.toString())
   },
   toString: function() {
     return this.print()
   },
+  addComma: function(list) {
+    return list.map(o => `${o.toString()},`).join(' ')
+  },
   print: function() {
+    const s = this.subject
     let c = this.getClause()
     if (Array.isArray(c) && c[0] === false) {
       return c
     }
     // console.log(c)
-    const beginnings = this.verb.adverbs.filter(o => o && o.position === 'beginning') 
-    c = [...beginnings, ...c]
+    const beginningAdvs = this.verb.adverbs.filter(o => o && o.position === 'beginning') 
+    c = [this.addComma(beginningAdvs),
+         !!s && !!s.adjBeginning ? this.addComma(s.adjBeginning) : '',
+         ...c]
     // console.log(c)
     c = this.reorderWh(c)
     // console.log(c)
