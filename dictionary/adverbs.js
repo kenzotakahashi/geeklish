@@ -76,6 +76,11 @@ const adverbs = [
 		canModify: ["verb"],
 		comparative: false,
 	},
+	{
+		base: 'as',
+		canModify: ["adj"],
+		comparative: false,
+	},
 ].map(o => ({
 	...o,
 	order: 6

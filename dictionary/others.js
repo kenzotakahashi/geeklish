@@ -12,7 +12,12 @@ const others = [
 	{
 		pos: 'Participle',
 		base: 'Participle',
-		order: 9
+		order: 10
+	},
+	{
+		pos: 'Possessive',
+		base: 'Possessive',
+		order: 10
 	},
 	{
 		pos: 'Be',

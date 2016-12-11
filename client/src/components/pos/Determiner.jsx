@@ -1,9 +1,10 @@
 import React from 'react'
 import store from '../../store.js'
-import { WH, DeleteButton } from './Tree'
+import { Children, DeleteButton } from './Tree'
 import { showOptions } from '../../actions'
+import { getWordDictionary } from '../../wordDictionary'
 
-const Determiner = React.createClass({
+export const Determiner = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
@@ -14,7 +15,6 @@ const Determiner = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word}</span>
             <span className="label label-default">{this.props.role}</span>
-            <WH id={element.id} isWh={element.isWh} />
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
         </li>
@@ -23,4 +23,31 @@ const Determiner = React.createClass({
   },
 })
 
-export default Determiner
+export const Possessive = React.createClass({
+  componentDidMount: function() {
+    const state = store.getState()
+    const element = state.Words.find(o => o.id === this.props.id)
+    if (!element.noun) {
+      getWordDictionary(state.Words, state.activeWord, element.id, 'noun')
+    }
+  },
+  render: function() {
+    const state = store.getState()
+    const element = state.Words.find(o => o.id === this.props.id)
+    const attrs = ['noun']
+
+    return (
+      <ul>
+        <li className="tree-top">
+          <div className={`tree-box ${element.pos}`}>
+            <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>Possessive</span>
+            <span className="label label-default">{this.props.role}</span>
+            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
+          </div>
+          <Children element={element} attrs={attrs} id={element.id} words={state.Words}
+                    target={state.target} activeWord={state.activeWord} />
+        </li>
+      </ul>
+    )
+  },
+})

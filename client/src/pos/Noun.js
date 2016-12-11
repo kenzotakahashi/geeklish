@@ -2,7 +2,7 @@ import { createWord } from './util.js'
 
 const getWh = function() {
   if (this.isWh) return [this, true]
-  for (const attr of ['adjectives','adjectivesAfter','determiners','prepositions']) {
+  for (const attr of ['adjectives','adjectivesAfter','prepositions']) {
     for (let i = 0; i < this[attr].length; i++) {
       const [wh, isWh] = this[attr][i].getWh()
       if (isWh) {
@@ -35,7 +35,6 @@ export const Noun = {
     this.word = w.word
     this.person = w.person
     this.number = w.number
-    this.form = w.form
     this.isWh = w.isWh;
     [this.adjectives, this.adjectivesAfter] = this.beforeOrAfter(w.adjectives)
     this.determiners = w.determiners.map(o => createWord(o))
@@ -43,13 +42,24 @@ export const Noun = {
     this.nouns = w.nouns.map(o => createWord(o))
     return this
   },
+  possessive: function() {
+    if (this.adjectivesAfter.length > 0 || this.prepositions.length > 0) {
+      const list = this.getList()
+      const last = `${list.slice(-1)[0]}'s`
+      return [...list.slice(0,-1), last]
+    } else {
+      const possessive = this.number === 'singular' ? `${this.word.singular}'s` :
+              `${this.word.plural}${this.word.plural.slice(-1) === 's' ? "'" : "'s"}`
+      return this.getRest(possessive)
+    }
+  },
   beforeOrAfter: beforeOrAfter,
   isValid: () => true,
   toString: function() {
     return this.getList().map(o => o.toString()).join(' ')
   },
   getList: function() {
-    return this.getRest(this.word[this.form])
+    return this.getRest(this.word[this.number])
   },
   getRest: function(noun) {
     return [...this.determiners,
@@ -85,6 +95,11 @@ export const NounContainer = {
     this.nouns = w.nouns.map(o => createWord(o))
     this.conjunction = createWord(w.conjunction)
     return this
+  },
+  possessive: function() {
+    const list = this.getList()
+    const last = `${list.slice(-1)[0]}'s`
+    return [...list.slice(0,-1), last]
   },
   beforeOrAfter: beforeOrAfter,
   isValid: function() {

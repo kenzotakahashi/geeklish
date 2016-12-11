@@ -27,6 +27,10 @@ const conjunctions = [
 		base: "because",
 		type: "subordinating"
 	},
+	{
+		base: "as",
+		type: "subordinating"
+	},
 ].map(o => ({
 	...o,
 	order: 7

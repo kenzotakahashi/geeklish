@@ -2,8 +2,16 @@ import React from 'react'
 import store from '../../store.js'
 import { showOptions } from '../../actions'
 import { Children } from './Tree'
+// import { getWordDictionary } from '../../wordDictionary'
 
 const Sentence = React.createClass({
+  // componentDidMount: function() {
+  //   const state = store.getState()
+  //   const element = state.Words.find(o => o.pos === 'Sentence')
+  //   if (!element.clause) {
+  //     getWordDictionary(state.Words, state.activeWord, element.id, 'clause')
+  //   }
+  // },
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o.pos === 'Sentence')

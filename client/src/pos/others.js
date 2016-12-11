@@ -5,11 +5,13 @@ export const Infinitive = {
     this.id = p.id
     this.pos = p.pos
     this.verb = createWord(p.verb)
+    this.omit = p.omit
     return this    
   },
   toString: function() {
     const phrase = !!this.verb ? this.verb.verbAfterTo() : []
-    return ['to', ...phrase.map(o => o.toString())].join(' ')
+    const to = this.omit ? [] : ['to']
+    return [...to, ...phrase.map(o => o.toString())].join(' ')
   },
   getWh: () => [null, false],
 }

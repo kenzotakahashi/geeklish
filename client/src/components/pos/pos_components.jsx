@@ -3,7 +3,7 @@ import { Clause, ClauseContainer } from './Clause.jsx'
 import Pronoun from './Pronoun.jsx'
 import Sentence from './Sentence.jsx'
 import { Noun, NounContainer, NounClause } from './Noun.jsx'
-import Determiner from './Determiner.jsx'
+import { Determiner, Possessive } from './Determiner.jsx'
 import { Adjective, AdjectiveClause } from './Adjective.jsx'
 import { Adverb, AdverbClause } from './Adverb.jsx'
 import Preposition from './Preposition.jsx'
@@ -30,7 +30,8 @@ const components = {
 	Conjunction,
 	Infinitive,
 	Gerund,
-	Participle
+	Participle,
+	Possessive,
 }
 
 export default components

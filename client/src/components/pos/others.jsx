@@ -4,20 +4,18 @@ import { Children, DeleteButton, ConjunctionButton } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 import { getWordDictionary } from '../../wordDictionary'
 
-// function shortCut() {
-
-// }
-
 const e = React.createElement
 
+function shortCut() {
+  const state = store.getState()
+  const element = state.Words.find(o => o.id === this.props.id)
+  if (!element.verb) {
+    getWordDictionary(state.Words, state.activeWord, element.id, 'verb')
+  }
+}
+
 export const Infinitive = React.createClass({
-  componentDidMount: function () {
-    const state = store.getState()
-    const element = state.Words.find(o => o.id === this.props.id)
-    if (!element.verb) {
-      getWordDictionary(state.Words, state.activeWord, element.id, 'verb')
-    }
-  },
+  componentDidMount: shortCut,
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
@@ -29,6 +27,11 @@ export const Infinitive = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>Infinitive</span>
             <span className="label label-default">{this.props.role}</span>
+            {e('button', {
+              className: `button is-small is-active ${element.omit && 'is-primary'}`,
+              type: 'button',
+              onClick: () => store.dispatch(changeAttribute(element.id, 'omit', !element.omit))
+            }, 'omit to')}
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parentId} />
           </div>
           <Children element={element} attrs={attrs} id={element.id} words={state.Words}
@@ -40,13 +43,7 @@ export const Infinitive = React.createClass({
 })
 
 export const Gerund = React.createClass({
-  componentDidMount: function () {
-    const state = store.getState()
-    const element = state.Words.find(o => o.id === this.props.id)
-    if (!element.verb) {
-      getWordDictionary(state.Words, state.activeWord, element.id, 'verb')
-    }
-  },
+  componentDidMount: shortCut,
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
@@ -71,13 +68,7 @@ export const Gerund = React.createClass({
 })
 
 export const Participle = React.createClass({
-  componentDidMount: function () {
-    const state = store.getState()
-    const element = state.Words.find(o => o.id === this.props.id)
-    if (!element.verb) {
-      getWordDictionary(state.Words, state.activeWord, element.id, 'verb')
-    }
-  },
+  componentDidMount: shortCut,
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)

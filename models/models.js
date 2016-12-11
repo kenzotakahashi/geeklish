@@ -67,6 +67,9 @@ export const GerundDic = Dictionary.discriminator('Gerund', GerundDicSchema)
 const ParticipleDicSchema = new Schema({}, options)
 export const ParticipleDic = Dictionary.discriminator('Participle', ParticipleDicSchema)
 
+const PossessiveDicSchema = new Schema({}, options)
+export const PossessiveDic = Dictionary.discriminator('Possessive', PossessiveDicSchema)
+
 const BeDicSchema = new Schema({}, options)
 export const BeDic = Dictionary.discriminator('Be', BeDicSchema)
 

@@ -7,9 +7,13 @@ const Guide = React.createClass({
       <div className='guide'>
         <h1>Guide</h1>
 
-        <h2>Part of Speech</h2>
+        <h2>Classes</h2>
 
-        <p>Part of speech(or POS for short) is a category of the word.</p>
+        <p>A class is a category of the word, phrase, or clause.</p>
+
+        <h2>Words</h2>
+
+        <p>There are 9 word classes in Geeklish. Some words belong to more than one class.</p>
 
         <div className='wrapper'>
           <h3><span className='pos Noun'>Noun</span></h3>
@@ -76,10 +80,10 @@ const Guide = React.createClass({
               <span className='pos Pronoun'>Pronoun</span>
               <span className='pos basic'>Noun Clause</span>
               <span className='pos basic'>Gerund</span>
+              <span className='pos basic'>Infinitive</span>
               <span className='pos Adjective'>Adjective</span>
               <span className='pos Adverb'>Adverb</span>
               <span className='pos Preposition'>Preposition</span>
-              <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>adverbs</div>
@@ -111,10 +115,10 @@ const Guide = React.createClass({
               <span className='pos Pronoun'>Pronoun</span>
               <span className='pos basic'>Noun Clause</span>
               <span className='pos basic'>Gerund</span>
+              <span className='pos basic'>Infinitive</span>
               <span className='pos Adjective'>Adjective</span>
               <span className='pos Adverb'>Adverb</span>
               <span className='pos Preposition'>Preposition</span>
-              <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>adverbs</div>
@@ -231,6 +235,7 @@ const Guide = React.createClass({
               <span className='pos Pronoun'>Pronoun</span>
               <span className='pos basic'>Noun Clause</span>
               <span className='pos basic'>Gerund</span>
+              <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>verb</div>
@@ -401,10 +406,10 @@ const Guide = React.createClass({
               <span className='pos Pronoun'>Pronoun</span>
               <span className='pos basic'>Noun Clause</span>
               <span className='pos basic'>Gerund</span>
+              <span className='pos basic'>Infinitive</span>
               <span className='pos Adjective'>Adjective</span>
               <span className='pos Adverb'>Adverb</span>
               <span className='pos Preposition'>Preposition</span>
-              <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>adverbs</div>
@@ -427,7 +432,7 @@ const Guide = React.createClass({
 
         <div className='wrapper'>
           <h3><span className='pos basic'>Infinitive</span></h3>
-          <p>When a verb is used with "to", it is called an infinitive and acts as something else.</p>
+          <p>When a verb is used with "to", it is called an infinitive and acts as a noun, an adjective, or an adverb.</p>
           <p><span className='examples'>Examples: </span>to go, to do, to talk</p>
 
           <h4>Functions</h4>

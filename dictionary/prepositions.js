@@ -26,6 +26,9 @@ const prepositions = [
 	{
 		"base": "about"
 	},
+	{
+		"base": "as"
+	},
 ].map(o => ({
 	...o,
 	order: 7

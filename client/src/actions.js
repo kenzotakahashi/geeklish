@@ -24,11 +24,6 @@ export const deleteElement = (id, role, parentId) => ({
   parentId
 })
 
-export const changeNumber = (id) => ({
-  type: 'CHANGE_NUMBER',
-  id
-})
-
 export const useConjunction = (element, target, parentId) => ({
   type: 'USE_CONJUNCTION',
   element,

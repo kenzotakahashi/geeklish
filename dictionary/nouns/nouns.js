@@ -2,16 +2,14 @@ const nouns = [
 	{
 		type: "countable",
 		base: "dog",
-		plural: "dogs"
 	},
 	{
 		type: "both",
-		base: "John"
+		base: "John",
 	},
 	{
 		type: "countable",
 		base: 'park',
-		plural: 'parks'
 	},
 	{
 		type: "countable",
@@ -21,7 +19,6 @@ const nouns = [
 	{
 		type: "countable",
 		base: 'student',
-		plural: 'students'
 	},
 	{
 		type: 'both',
@@ -41,7 +38,6 @@ const nouns = [
 	{
 		type: 'both',
 		base: 'time',
-		plural: 'times'
 	},
 	{
 		type: 'uncountable',
@@ -50,12 +46,10 @@ const nouns = [
 	{
 		type: "countable",
 		base: 'friend',
-		plural: 'friends'
 	},
 	{
 		type: "countable",
 		base: 'dogma',
-		plural: 'dogmas'
 	},
 ].map(o => ({
 	...o,

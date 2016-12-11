@@ -26,11 +26,10 @@ const factory = {
       type: w.type,
       word: {
         singular: w.base,
-        plural: w.plural || w.base, 
+        plural: w.type === 'uncountable' ? w.base : w.plural || `${w.base}s`, 
       },
       person: null,
       number: 'singular',
-      form: 'singular',
       isWh: false,
       adjectives: [],
       adjectivesAfter: [],
@@ -38,8 +37,6 @@ const factory = {
       prepositions: [],
       nouns: []
     }
-    init.word.possessive = init.number === 'singular' ? `${init.word.singular}'s` :
-                    `${init.word.plural}${init.word.plural[-1] === 's' ? "'" : "'s"}`
     return init
   },
   NounContainer: function(w, arg) {
@@ -78,7 +75,14 @@ const factory = {
       pos: 'Determiner',
       word: w.base,
       number: w.number,
-      isWh: ['what','whose','which'].includes(w.base) ? true : false
+      // isWh: ['what','whose','which'].includes(w.base) ? true : false
+    }
+  },
+  Possessive: function() {
+    return {
+      id: uuid.v4(),
+      pos: 'Possessive',
+      noun: null,
     }
   },
   Verb: function(w, arg) {
@@ -219,7 +223,8 @@ const factory = {
       id: uuid.v4(),
       pos: 'Infinitive',
       word: 'to',
-      verb: null
+      verb: null,
+      omit: false,
     }
   },
   Gerund: function() {

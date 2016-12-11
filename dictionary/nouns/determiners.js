@@ -20,33 +20,21 @@ const determiners = [
 		number: "both"
 	},
 	{
-		base: "my",
-		number: "both"
+		base: "no",
+		number: "singular",
 	},
 	{
-		base: "your",
-		number: "both"
+		base: 'what',
+		number: 'both'
 	},
 	{
-		base: "our",
-		number: "both",
+		base: 'which',
+		number: 'both'
 	},
 	{
-		base: "his",
-		number: "both",
-	},
-	{
-		base: "her",
-		number: "both",
-	},
-	{
-		base: "their",
-		number: "both",
-	},
-	{
-		base: "its",
-		number: "both",
-	},
+		base: 'whose',
+		number: 'both'
+	}
 ].map(o => ({
 	...o,
 	order: 0

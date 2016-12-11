@@ -7,15 +7,16 @@ const verbs = ['Verb', 'Be']
 const adjectives = ['Adjective', 'AdjectiveClause', 'Participle']
 const adverbs = ['Adverb', 'AdverbClause']
 const clauses = ['Clause']
-const coordinating = [{pos: 'Conjunction', attr: ['type', 'coordinating']}]
+const coordinating = [{pos: 'Conjunction', attr: (w) => w.type === 'coordinating' }]
 const complements = [...nouns, 'Adjective', 'Adverb', 'Preposition', 'Infinitive']
+const determiners = ['Determiner', 'Possessive']
 
 const valid_pos = {
   Sentence: {
     clause: clauses
   },
   Clause: {
-    subject: nouns,
+    subject: [...nouns, 'Infinitive'],
     verb: verbs,
   },
   ClauseContainer: {
@@ -40,7 +41,7 @@ const valid_pos = {
     conjunction: coordinating
   },
   Noun: {
-    determiners: ['Determiner'],
+    determiners: determiners,
     adjectives: [...adjectives, 'Infinitive'],
     nouns: ['Noun', 'NounClause'],
     prepositions: ['Preposition'],
@@ -49,13 +50,13 @@ const valid_pos = {
     nouns: nouns,
     adjectives: adjectives,
     prepositions: ['Preposition'],
-    determiners: ['Determiner'],
+    determiners: determiners,
     conjunction: coordinating
   },
   NounClause: {
     clause: clauses,
     nouns: ['Noun', 'NounClause'],
-    determiners: ['Determiner'],
+    determiners: determiners,
     adjectives: adjectives,
     prepositions: ['Preposition'],
   },
@@ -70,7 +71,7 @@ const valid_pos = {
     adverb: ['Adverb']
   },
   AdverbClause: {
-    conjunction: [{pos: 'Conjunction', attr: ['type', 'subordinating']}],
+    conjunction: [{pos: 'Conjunction', attr: (w) => w.type === 'subordinating' }],
     clause: clauses
   },
   Preposition: {
@@ -84,7 +85,10 @@ const valid_pos = {
   },
   Participle: {
   	verb: ['Verb']
-  }
+  },
+  Possessive: {
+    noun: [{pos: 'Pronoun', attr: (w) => !!w.p }, 'Noun'],
+  },
 }
 
 function valid_check(valid_list, word) {
@@ -94,7 +98,7 @@ function valid_check(valid_list, word) {
         return true
       }
     } else {
-      if (valid.pos === word.pos && word[valid.attr[0]] === valid.attr[1]) {
+      if (valid.pos === word.pos && valid.attr(word)) {
         return true
       }
     }

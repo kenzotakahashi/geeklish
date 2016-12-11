@@ -109,32 +109,6 @@ function reducer(state, action) {
         ],
       }
     }
-    case 'CHANGE_NUMBER': {
-      const elementIndex = state.Words.findIndex(t => t.id === action.id)
-      const oldElement = state.Words[elementIndex]
-
-      const number = oldElement.number === 'singular' ? 'plural' : 'singular'
-      const possessive = number === 'singular' ? `${oldElement.word.singular}'s` :
-                        `${oldElement.word.plural}${oldElement.word.plural.slice(-1) === 's' ? "'" : "'s"}`
-
-      const newElement = {
-        ...oldElement,
-        number: number,
-        word: {
-          ...oldElement.word,
-          possessive: possessive,
-        },
-        form: oldElement.form === 'possessive' ? 'possessive' : number
-      }
-      return {
-        ...state,
-        Words: [
-          ...state.Words.slice(0, elementIndex),
-          newElement,
-          ...state.Words.slice(elementIndex + 1, state.Words.length),
-        ],
-      }
-    }
     case 'DELETE_ELEMENT': {
       const filtered = state.Words.filter(o => o.id !== action.id)
       const elementIndex = filtered.findIndex(t => t.id === action.parentId)

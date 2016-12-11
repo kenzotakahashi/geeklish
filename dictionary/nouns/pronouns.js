@@ -57,6 +57,10 @@ const pronouns = [
   },
   {
     base: 'it',
+    a: 'it',
+    p: 'its',
+    pp: 'its',
+    r: 'itself',
     person: 3,
     number: 'singular'
   },

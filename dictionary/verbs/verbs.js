@@ -164,6 +164,33 @@ const verbs = [
 		past: 'trapped',
 		gerund: 'trapping',
 	},
+	{
+		base: 'let',
+		tps: 'lets',
+		past: 'let',
+		gerund: 'letting',
+	},
+	{
+		base: 'see',
+		tps: 'sees',
+		past: 'saw',
+		passive: 'seen',
+		gerund: 'seeing',
+	},
+	{
+		base: 'take',
+		tps: 'takes',
+		past: 'took',
+		passive: 'taken',
+		gerund: 'taking',
+	},
+	{
+		base: 'get',
+		tps: 'gets',
+		past: 'got',
+		passive: 'got',
+		gerund: 'getting',
+	},
 ].map(o => ({
 	...o,
 	order: 3

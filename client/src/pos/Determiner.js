@@ -1,31 +1,36 @@
-// import { createWord } from './util.js'
+import { createWord } from './util.js'
 
-const Determiner = {
+export const Determiner = {
   init: function(p) {
     this.id = p.id
     this.pos = p.pos
     this.word = p.word
     this.number = p.number
-    this.isWh = p.isWh
+    // this.isWh = p.isWh
     return this
   },
-  isValid: () => true,
   toString: function() {
     return this.word
   },
-  getBe: function(past) {
-    if (this.number === 'plural' || this.person === 2) {
-      return past ? 'were' : 'are'
-    } else {
-      return past ? 'was' : 'is'
+  // getWh: function() {
+  //   return this.isWh ? [this, true] : [null, false]
+  // },
+}
+
+export const Possessive = {
+  init: function(p) {
+    this.id = p.id
+    this.pos = p.pos
+    this.noun = createWord(p.noun)
+    return this    
+  },
+  toString: function() {
+    if (!this.noun || !this.noun.isValid()) return ''
+    if (this.noun.pos === 'Pronoun') {
+      return this.noun.word.possessive
+    } else if (['Noun', 'NounContainer'].includes(this.noun.pos)) {
+      return this.noun.possessive()
     }
-  },
-  is3s: function() {
-    return this.number === 'singular'
-  },
-  getWh: function() {
-    return this.isWh ? [this, true] : [null, false]
   },
 }
 
-export default Determiner

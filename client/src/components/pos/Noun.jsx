@@ -1,7 +1,7 @@
 import React from 'react'
 import store from '../../store.js'
 import { Children, WH, DeleteButton, ConjunctionButton, UndoConjunctionButton } from './Tree'
-import { showOptions, changeAttribute, changeNumber } from '../../actions'
+import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
 
@@ -20,14 +20,9 @@ export const Noun = React.createClass({
             {e('button', {
               className: `button is-small is-active ${element.number === 'plural' && 'is-primary'}`,
               type: 'button',
-              onClick: () => store.dispatch(changeNumber(element.id))
-            }, element.number)}
-            {e('button', {
-              className: `button is-small is-active ${element.form === 'possessive' && 'is-primary'}`,
-              type: 'button',
               onClick: () => store.dispatch(changeAttribute(
-                element.id, 'form', element.form === 'possessive' ? element.number : 'possessive'))
-            }, 'possessive')}
+                             element.id, 'number', element.number === 'plural' ? 'singular' : 'plural'))
+            }, element.number)}
             <WH id={element.id} isWh={element.isWh} />
             {state.Words.find(o => o.id === this.props.parentId).pos !== 'NounContainer' &&
              <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parentId} />}

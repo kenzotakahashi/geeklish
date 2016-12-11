@@ -2,7 +2,7 @@ import { Verb, Be, VerbContainer } from './Verb.js'
 import { Clause, ClauseContainer } from './Clause.js'
 import Pronoun from './Pronoun.js'
 import { Noun, NounContainer, NounClause } from './Noun.js'
-import Determiner from './Determiner.js'
+import { Determiner, Possessive } from './Determiner.js'
 import { Adjective, AdjectiveClause } from './Adjective.js'
 import { Adverb, AdverbClause } from './Adverb.js'
 import Preposition from './Preposition.js'
@@ -20,6 +20,7 @@ const Pos = {
 	NounContainer,
 	NounClause,
 	Determiner,
+	Possessive,
 	Adjective,
 	AdjectiveClause,
 	Adverb,

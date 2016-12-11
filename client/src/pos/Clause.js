@@ -104,7 +104,7 @@ export const Clause = {
   reorderWh: function(clause) {
     let wh
     let newClause = []
-    const list = ['Adjective','Adverb','Preposition','Noun','Pronoun','Determiner']
+    const list = ['Adjective','Adverb','Preposition','Noun','Pronoun']
     for (let p of clause) {
       if (list.includes(p.pos)) {
         let [wh_, isWh] = p.getWh()
@@ -231,6 +231,7 @@ export const Clause = {
     c = this.reorderWh(c)
     // console.log(c)
     c = this.convertToString(c)
+    console.log(c)
     c = this.checkArticle(c)
     c = c.map(o => o.toString()).join(' ')
     c = !!this.adjectiveClause ? `${this.adjectiveClause}, ${c}` : c
