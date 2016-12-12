@@ -12,7 +12,7 @@ export const Verb = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
-    const attrs = ['complements','adverbs','prepositions']
+    const attrs = ['particle','complements','adverbs','prepositions']
 
     const list = this.props.parent.pos === 'Infinitive' ? ['negative','continuous','passive'] :
                  ['past','negative','continuous','perfect','passive']

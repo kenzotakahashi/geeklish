@@ -191,6 +191,19 @@ const verbs = [
 		passive: 'got',
 		gerund: 'getting',
 	},
+	{
+		base: 'wake',
+		tps: 'wakes',
+		past: 'woke',
+		passive: 'woken',
+		gerund: 'waking',
+	},
+	{
+		base: 'say',
+		tps: 'says',
+		past: 'said',
+		gerund: 'saying',
+	},
 ].map(o => ({
 	...o,
 	order: 3

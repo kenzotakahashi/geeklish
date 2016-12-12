@@ -1,9 +1,6 @@
 import { createWord } from './util.js'
 
-const str_adverbs = function(verb, adverbs) {
-  if (!adverbs) {
-    return verb
-  }
+const strAdverbs = function(verb, adverbs) {
   const before = []
   const after = []
   for (const adv of adverbs) {
@@ -16,10 +13,19 @@ const str_adverbs = function(verb, adverbs) {
   return [...before, ...verb, ...after]
 }
 
+const makePhrasalVerb = function(particle, complements) {
+  if (!particle) return complements
+  if (complements.length > 0 && particle.after) {
+    return [complements[0], particle, ...complements.slice(1)]
+  } else {
+    return [particle, ...complements]
+  }
+}
+
 const getList = function(v) {
   let word = v || [this.word[this.form]] // gerund
-  let verb = word.concat(this.complements)
-  verb = this.str_adverbs(verb, this.adverbs)
+  let verb = word.concat(makePhrasalVerb(this.particle, this.complements))
+  verb = this.strAdverbs(verb, this.adverbs)
   verb = verb.concat(this.prepositions)
   return verb
 }
@@ -49,6 +55,7 @@ const initVerb = function(v) {
   this.continuous = v.continuous
   this.perfect = v.perfect
   this.passive = v.passive
+  this.particle = createWord(v.particle)
   this.complements = v.complements.map(o => createWord(o))
   this.adverbs = v.adverbs.map(o => createWord(o))
   this.prepositions = v.prepositions.map(o => createWord(o))
@@ -57,7 +64,7 @@ const initVerb = function(v) {
 
 export const Verb = {
   init: initVerb,
-  str_adverbs: str_adverbs,
+  strAdverbs: strAdverbs,
   getList: getList,
   verbAfterTo: verbAfterTo,
   toString: toString,
@@ -86,7 +93,7 @@ export const VerbContainer = {
     this.conjunction = createWord(v.conjunction)
     return this
   },
-  str_adverbs: str_adverbs,
+  strAdverbs: strAdverbs,
   getList: getList,
   verbAfterTo: function() {
     if (!this.conjunction) return []

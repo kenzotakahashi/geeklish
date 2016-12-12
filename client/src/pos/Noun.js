@@ -141,6 +141,7 @@ export const NounClause = {
     this.pos = w.pos
     this.person = w.person
     this.number = w.number
+    this.that = w.that
     this.clause = createWord(w.clause)
     this.isWh = w.isWh;
     [this.adjectives, this.adjectivesAfter] = this.beforeOrAfter(w.adjectives)
@@ -160,7 +161,7 @@ export const NounClause = {
   getList: function() {
     if (!this.clause) return
     const result = this.clause.print()
-    return Array.isArray(result) ? '' : this.getRest(result)
+    return Array.isArray(result) ? '' : this.getRest(`${this.that && 'that '}${result}`)
   },
   getRest: function(noun) {
     return [...this.determiners,

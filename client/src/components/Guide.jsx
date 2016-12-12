@@ -86,6 +86,10 @@ const Guide = React.createClass({
 
           <ul>
             <li className='function-group'>
+              <div className='function-title'>particle</div>
+              <span className='pos Preposition'>Preposition</span>            
+            </li>
+            <li className='function-group'>
               <div className='function-title'>complements</div>
               <span className='pos Noun'>Noun</span>
               <span className='pos Pronoun'>Pronoun</span>

@@ -62,6 +62,7 @@ const factory = {
       person: null,
       number: 'singular',
       isWh: false,
+      that: false,
       clause: null,
       adjectives: [],
       adjectivesAfter: [],
@@ -104,6 +105,7 @@ const factory = {
       perfect: false,
       passive: false,
       modal: '',
+      particle: null,
       complements: [],
       adverbs: [],
       prepositions: [],
@@ -216,6 +218,7 @@ const factory = {
       pos: 'Preposition',
       word: w.base,
       complement: null,
+      after: false,
       isWh: false
     }
   },

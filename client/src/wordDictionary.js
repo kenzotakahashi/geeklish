@@ -24,6 +24,7 @@ const valid_pos = {
     conjunction: coordinating
   },
   Verb: {
+    particle: ['Preposition'],
     complements: complements,
     adverbs: [...adverbs, 'Infinitive'],
     prepositions: ['Preposition']

@@ -1,33 +1,36 @@
 const prepositions = [
 	{
-		"base": "in"
+		base: "in"
 	},
 	{
-		"base": "to"
+		base: "to"
 	},
 	{
-		"base": "at"
+		base: "at"
 	},
 	{
-		"base": "than"
+		base: "than"
 	},
 	{
-		"base": "with"
+		base: "with"
 	},
 	{
-		"base": "on"
+		base: "on"
 	},
 	{
-		"base": "for"
+		base: "for"
 	},
 	{
-		"base": "by"
+		base: "by"
 	},
 	{
-		"base": "about"
+		base: "about"
 	},
 	{
-		"base": "as"
+		base: "as"
+	},
+	{
+		base: "up"
 	},
 ].map(o => ({
 	...o,

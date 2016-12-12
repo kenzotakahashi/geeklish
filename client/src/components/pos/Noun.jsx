@@ -74,6 +74,11 @@ export const NounClause = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>Noun Clause</span>
             <span className="label label-default">{this.props.role}</span>
+            {e('button', {
+              className: `button is-small is-active ${element.that && 'is-primary'}`,
+              type: 'button',
+              onClick: () => store.dispatch(changeAttribute(element.id, 'that', !element.that))
+            }, 'that')}
             <WH id={element.id} isWh={element.isWh} />
             {this.props.parent.pos !== 'NounContainer' &&
              <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent.id} />}

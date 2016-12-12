@@ -5,8 +5,9 @@ const Preposition = {
     this.id = p.id
     this.pos = p.pos
     this.word = p.word
-    this.isWh = p.isWh
     this.complement = createWord(p.complement)
+    this.after = p.after
+    this.isWh = p.isWh
     return this    
   },
   toString: function() {
