@@ -16,14 +16,19 @@ const Admin = React.createClass({
     const state = store.getState()
     return (
       <div>
-        <Examples />
         <div className='container'>
           <button type="button" className="btn btn-default"
                   // onClick={() => store.dispatch(this.saveSentence(state))}>
-                  onClick={() => console.log(JSON.stringify(state))}>
+                  onClick={() => console.log(JSON.stringify({
+                    ...state,
+                    activeWord: 1,
+                    target: null,
+                    dictionary: [],
+                  }))}>
             Save
           </button>
         </div>
+        <Examples />
       </div>
     )
   }
