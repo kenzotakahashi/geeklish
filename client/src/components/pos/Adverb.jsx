@@ -6,6 +6,9 @@ import { showOptions, changeAttribute } from '../../actions'
 const e = React.createElement
 
 export const Adverb = React.createClass({
+  handleChange: function(e){
+    store.dispatch(changeAttribute(this.props.id, 'position', e.target.value))
+  },
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
@@ -13,17 +16,17 @@ export const Adverb = React.createClass({
     const modifyVerb = ['Verb','Be','VerbContainer'].includes(this.props.parent.pos) &&
                         this.props.role === 'adverbs'
 
-    const attributes = modifyVerb &&
-    (['beginning','before','after'].map(o => (
-      e('button', {
-        className: `button is-small is-active ${element.position === o && 'is-primary'}`,
-        key: o,
-        type: 'button',
-        onClick: () => store.dispatch(changeAttribute(this.props.id, 'position', o))
-      }, o)
-    )))
+    const forms = ['beginning','before','middle','after'].map(o => (
+      <option key={o} value={o}>{o}</option>
+    ))
 
-    const comparison = modifyVerb && !!element.comparative &&
+    const formSelect = modifyVerb &&(
+      <span className="select is-small">
+        <select value={element.position} onChange={this.handleChange}>{forms}</select>
+      </span>
+    )
+
+    const comparison = modifyVerb && !!element.word.comparative &&
     (['base','comparative','superlative'].map(o => (
       e('button', {
         className: `button is-small is-active ${element.form === o && 'is-primary'}`,
@@ -39,7 +42,7 @@ export const Adverb = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{element.word.base}</span>
             <span className="label label-default">{this.props.role}</span>
-            {attributes}
+            {formSelect}
             {comparison}
             <WH id={this.props.id} isWh={element.isWh} />
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />

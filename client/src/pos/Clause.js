@@ -13,64 +13,49 @@ export const Clause = {
   },
   getVerbForQuestion: function(v) {
     const s = this.subject
-    const negative = v.negative ? 'not' : ''
     let head, rest
 
     if (!!v.modal) {
       head = v.modal
       if (v.perfect) {
         if (v.passive) {
-          rest = [negative, 'have', 'been', v.word.passive]
+          rest = ['have', 'been', v.word.passive]
         } else {
-          if (v.continuous) {
-            rest = [negative, 'have', 'been', v.word.gerund]
-          } else {
-            rest = [negative, 'have', v.word.passive]
-          }
+          rest = v.continuous ? ['have', 'been', v.word.gerund] : ['have', v.word.passive]
         }
       } else {
         if (v.passive) {
-          rest = [negative, 'be', v.word.passive]
+          rest = ['be', v.word.passive]
         } else {
-          if (v.continuous) {
-            rest = [negative, 'be', v.word.gerund]
-          } else {
-            rest = [negative, v.word.base]
-          }
+          rest = v.continuous ? ['be', v.word.gerund] : [v.word.base]
         }
       }
     } else {
       if (v.perfect) {
         head = v.past ? 'had' : s.is3s() ? 'has' : 'have'
         if (v.passive) {
-          rest = [negative, 'been', v.word.passive]
+          rest = ['been', v.word.passive]
         } else {
-          if (v.continuous) {
-            rest = [negative, 'been', v.word.gerund]
-          } else {
-            rest = [negative, v.word.passive]
-          }
+          rest = v.continuous ? ['been', v.word.gerund] : [v.word.passive]
         }
       } else {
         if (v.passive) {
           head = s.getBe(v.past)
-          if (v.continuous) {
-            rest = [negative, 'being', v.word.passive]
-          } else {
-            rest = [negative, v.word.passive]
-          }
+          rest = v.continuous ? ['being', v.word.passive] : [v.word.passive]
         } else {
           if (v.continuous) {
             head = s.getBe(v.past)
-            rest = [negative, v.word.gerund]
+            rest = [v.word.gerund]
           } else {
             head = v.past ? 'did' : s.is3s() ? 'does' : 'do'
-            rest = [negative, v.word.base]
+            rest = [v.word.base]
           }
         }
       }
     }
-    return [head, rest]
+    const negative = v.negative ? ['not'] : []
+    const middleAdverbs = v.adverbs.filter(o => o.position === 'middle')
+    return [head, [...negative, ...middleAdverbs, ...rest]]
   },
   getVerb: function(v) {
     if (v.perfect || v.continuous || !!v.modal || v.negative || v.passive) {
@@ -153,7 +138,6 @@ export const Clause = {
         }
         return c
       } else {
-        
         return negative.concat(v.getList(v.passive ? ['be', v.word.passive] : [v.word.base]))
       }
     }
@@ -188,7 +172,7 @@ export const Clause = {
         for (let i = 0; i < v.verbs.length; i++) {
           const [head, rest] = this.getVerbForQuestion(v.verbs[i])
           heads.push(head)
-          c = c.concat(rest)
+          c = c.concat(v.verbs[i].getList(rest))
           if (i !== last) {
             c = c.concat(v.conjunction)
           }
