@@ -10,7 +10,7 @@ const Pronoun = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
-    const attrs = ['adjectives']
+    const attrs = ['adjectives','prepositions']
 
     const forms = ['nominative','accusative','possessive pronoun','reflexive'].map(o => (
       <option key={o} value={o}>{o}</option>

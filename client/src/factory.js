@@ -15,6 +15,7 @@ const factory = {
       number: w.number || 'singular',
       form: arg.form || 'nominative',
       adjectives: [],
+      prepositions: [],
       isWh: ['what','who','which'].includes(w.base) ? true : false
     }
     init.word['possessive pronoun'] = w.pp || init.word.possessive

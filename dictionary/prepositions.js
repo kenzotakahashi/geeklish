@@ -32,6 +32,9 @@ const prepositions = [
 	{
 		base: "up"
 	},
+	{
+		base: "like"
+	},
 ].map(o => ({
 	...o,
 	order: 7

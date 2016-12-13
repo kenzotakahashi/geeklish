@@ -9,6 +9,7 @@ const Pronoun = {
     this.number = p.number
     this.form = p.form;
     [this.adjBeginning, this.adjectives] = this.beforeOrAfter(p.adjectives)
+    this.prepositions = p.prepositions.map(o => createWord(o))
     this.isWh = p.isWh
     return this    
   },
@@ -31,7 +32,8 @@ const Pronoun = {
   },
   getList: function() {
     const adj = this.adjectives || []
-    return [this.word[this.form], ...adj]
+    const prep = this.prepositions || []
+    return [this.word[this.form], ...adj, ...prep]
   },
   getBe: function(past) {
     if (this.number === 'plural' || this.person === 2) {

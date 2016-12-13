@@ -89,6 +89,11 @@ const pronouns = [
     person: 3,
     number: 'singular'
   },
+  {
+    base: 'something',
+    person: 3,
+    number: 'singular',
+  }
 ].map(o => ({
   ...o,
   order: 2
