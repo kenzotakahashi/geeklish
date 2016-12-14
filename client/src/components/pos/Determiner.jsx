@@ -8,6 +8,7 @@ export const Determiner = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o.id === this.props.id)
+    const attrs = ['adverb']
 
     return (
       <ul>
@@ -17,6 +18,8 @@ export const Determiner = React.createClass({
             <span className="label label-default">{this.props.role}</span>
             <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
           </div>
+          <Children element={element} attrs={attrs} words={state.Words}
+                    target={state.target} activeWord={state.activeWord} />
         </li>
       </ul>
     )

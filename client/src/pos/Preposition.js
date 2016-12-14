@@ -6,7 +6,7 @@ const Preposition = {
     this.pos = p.pos
     this.word = p.word
     this.complement = createWord(p.complement)
-    this.after = p.after
+    this.before = p.before
     this.isWh = p.isWh
     return this    
   },

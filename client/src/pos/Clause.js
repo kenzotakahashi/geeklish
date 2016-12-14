@@ -214,8 +214,10 @@ export const Clause = {
       return c
     }
     // console.log(c)
-    const beginningAdvs = this.verb.adverbs.filter(o => o && o.position === 'beginning') 
+    const beginningAdvs = this.verb.adverbs.filter(o => o && o.position === 'beginning')
+    const beginningPreps = this.verb.prepositions.filter(o => o && o.before) 
     c = [this.addComma(beginningAdvs),
+         this.addComma(beginningPreps),
          !!s && !!s.adjBeginning ? this.addComma(s.adjBeginning) : '',
          ...c]
     // console.log(c)

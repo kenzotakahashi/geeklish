@@ -46,6 +46,8 @@ const AdjectiveDicSchema = new Schema({
 export const AdjectiveDic = Dictionary.discriminator('Adjective', AdjectiveDicSchema)
 
 const AdverbDicSchema = new Schema({
+	comparative: {type: String},
+	superlative: {type: String},
 	canModify: [{type: String}]
 }, options)
 export const AdverbDic = Dictionary.discriminator('Adverb', AdverbDicSchema)

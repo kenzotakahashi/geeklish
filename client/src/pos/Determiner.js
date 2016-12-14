@@ -6,10 +6,11 @@ export const Determiner = {
     this.pos = p.pos
     this.word = p.word
     this.number = p.number
+    this.adverb = createWord(p.adverb)
     return this
   },
   toString: function() {
-    return this.word
+    return !!this.adverb ? `${this.adverb} ${this.word}` : this.word
   },
 }
 

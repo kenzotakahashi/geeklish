@@ -77,6 +77,15 @@ const Guide = React.createClass({
           <h3><span className='pos Determiner'>Determiner</span></h3>
           <p>A determiner is a word that is used before a noun in order to show which thing you mean.</p>
           <p><span className='examples'>Examples:</span> this, that, these, those, a, the, some, many</p>
+        
+          <h4>Functions</h4>
+
+          <ul>
+            <li className='function-group'>
+              <div className='function-title'>adverb</div>
+              <span className='pos Adverb'>Adverb</span>
+            </li>
+          </ul>
         </div>
 
         <hr />

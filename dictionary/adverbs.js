@@ -20,66 +20,76 @@ const adverbs = [
 	{
 		base: "why",
 		canModify: ["verb"],
-		comparative: false,
+		comparative: "n",
 	},
 	{
 		base: "how",
 		canModify: ["verb", "adj", "adv"],
-		comparative: false,
+		comparative: "n",
 	},
 	{
 		base: "when",
 		canModify: ["verb", "adj", "adv"],
-		comparative: false,
+		comparative: "n",
 	},
 	{
 		base: "where",
 		canModify: ["verb", "adj"],
-		comparative: false,
+		comparative: "n",
+	},
+	{
+		base: "almost",
+		canModify: ["verb","adj","adv","det"]
 	},
 	{
 		base: "nearly",
-		canModify: ["verb","adj","adv","det","clause"]
+		canModify: ["verb","adj","adv","det"]
 	},
 	{
 		base: "so",
 		canModify: ["adj","adv"],
-		comparative: false,
+		comparative: "n",
 	},
 	{
 		base: "much",
 		canModify: ["verb","adj","adv"],
-		comparative: false,
+		comparative: "n",
 	},
 	{
 		base: "today",
 		canModify: ["verb","clause"],
-		comparative: false,
+		comparative: "n",
 	},
 	{
 		base: "yesterday",
 		canModify: ["verb","clause"],
-		comparative: false,
+		comparative: "n",
 	},
 	{
 		base: "just",
 		canModify: ["verb", "adj", "adv"],
-		comparative: false,
+		comparative: "n",
 	},
 	{
 		base: 'never',
 		canModify: ["verb"],
-		comparative: false,
+		comparative: "n",
 	},
 	{
 		base: 'ever',
 		canModify: ["verb"],
-		comparative: false,
+		comparative: "n",
 	},
 	{
 		base: 'as',
 		canModify: ["adj"],
-		comparative: false,
+		comparative: "n",
+	},
+	{
+		base: 'soon',
+		canModify: ["verb"],
+		comparative: "sooner",
+		superlative: "soonest"
 	},
 ].map(o => ({
 	...o,

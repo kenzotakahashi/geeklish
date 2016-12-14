@@ -10,6 +10,7 @@ const clauses = ['Clause']
 const coordinating = [{pos: 'Conjunction', attr: (w) => w.type === 'coordinating' }]
 const complements = [...nouns, 'Adjective', 'Adverb', 'Preposition', 'Infinitive']
 const determiners = ['Determiner', 'Possessive']
+// const verbAdverbs = [{pos: 'Adverb', attr: (w) =>}]
 
 const valid_pos = {
   Sentence: {
@@ -64,6 +65,9 @@ const valid_pos = {
   Pronoun: {
     adjectives: ['Infinitive', 'Participle'], 
     prepositions: ['Preposition'],
+  },
+  Determiner: {
+    adverb: ['Adverb'],
   },
   Adjective: {
     adverbs: ['Adverb'],

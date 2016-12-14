@@ -20,10 +20,10 @@ const Preposition = React.createClass({
               <span className="label label-default">{this.props.role}</span>
               {this.props.parent.complements.length > 0 &&
               e('button', {
-                className: `button is-small is-active ${element.after && 'is-primary'}`,
+                className: `button is-small is-active ${element.before && 'is-primary'}`,
                 type: 'button',
-                onClick: () => store.dispatch(changeAttribute(element.id, 'after', !element.after))
-              }, element.after ? 'after': 'before')
+                onClick: () => store.dispatch(changeAttribute(element.id, 'before', !element.before))
+              }, element.before ? 'before': 'after')
               }
               <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
             </div>
@@ -38,6 +38,12 @@ const Preposition = React.createClass({
               <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{element.word}</span>
               <span className="label label-default">{this.props.role}</span>
               <WH id={element.id} isWh={element.isWh} />
+              {['Verb','Be','VerbContainer'].includes(this.props.parent.pos) &&
+                e('button', {
+                className: `button is-small is-active ${element.before && 'is-primary'}`,
+                type: 'button',
+                onClick: () => store.dispatch(changeAttribute(element.id, 'before', !element.before))
+              }, element.before ? 'before': 'after')}
               <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
             </div>
             <Children element={element} attrs={attrs} words={state.Words}

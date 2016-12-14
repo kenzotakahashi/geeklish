@@ -15,7 +15,7 @@ const strAdverbs = function(verb, adverbs) {
 
 const makePhrasalVerb = function(particle, complements) {
   if (!particle) return complements
-  if (complements.length > 0 && particle.after) {
+  if (complements.length > 0 && !particle.before) {
     return [complements[0], particle, ...complements.slice(1)]
   } else {
     return [particle, ...complements]
@@ -26,7 +26,7 @@ const getList = function(v) {
   let word = v || [this.word[this.form]] // gerund
   let verb = word.concat(makePhrasalVerb(this.particle, this.complements))
   verb = this.strAdverbs(verb, this.adverbs)
-  verb = verb.concat(this.prepositions)
+  verb = verb.concat(this.prepositions.filter(o => !o.before))
   return verb
 }
 

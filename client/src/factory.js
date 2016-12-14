@@ -78,6 +78,7 @@ const factory = {
       pos: 'Determiner',
       word: w.base,
       number: w.number,
+      adverb: null,
       // isWh: ['what','whose','which'].includes(w.base) ? true : false
     }
   },
@@ -189,7 +190,7 @@ const factory = {
       pos: 'Adverb',
       word: {
         base: w.base,
-        comparative: w.comparative === false ? false : w.comparative || `more ${w.base}`,
+        comparative: w.comparative === 'n' ? false : w.comparative || `more ${w.base}`,
         superlative: w.superlative || `most ${w.base}`
       },
       form: 'base',
@@ -213,13 +214,13 @@ const factory = {
       isWh: false
     }
   },
-  Preposition: function(w) {
+  Preposition: function(w, arg) {
     return {
       id: uuid.v4(),
       pos: 'Preposition',
       word: w.base,
       complement: null,
-      after: false,
+      before: arg.before || false,
       isWh: false
     }
   },

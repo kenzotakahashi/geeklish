@@ -30,6 +30,9 @@ const adjectives = [
 	},
 	{
 		base: 'tired'
+	},
+	{
+		base: 'possible'
 	}
 ].map(o => ({
 	...o,

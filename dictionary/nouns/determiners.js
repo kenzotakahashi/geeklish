@@ -34,7 +34,11 @@ const determiners = [
 	{
 		base: 'whose',
 		number: 'both'
-	}
+	},
+	{
+		base: 'every',
+		number: 'singular'
+	},
 ].map(o => ({
 	...o,
 	order: 0

@@ -11,6 +11,8 @@ const getArgument = function(parent, wordPos, target) {
              (parent.pos === 'VerbContainer' && parent.form === 'gerund' &&
               ['Verb','Be'].includes(wordPos))) {
     return {form: 'gerund'}
+  } else if (target === 'particle') {
+    return {before: true}
   }
   return {}
 }
