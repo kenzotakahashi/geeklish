@@ -256,7 +256,7 @@ const factory = {
       cType: 'statement',
       subject: null,
       verb: null,
-      adjectiveClause: null,
+      adjective: null,
       adverbs: [],
     }
   },

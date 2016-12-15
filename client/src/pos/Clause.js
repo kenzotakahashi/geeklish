@@ -7,7 +7,7 @@ export const Clause = {
     this.cType = c.cType
     this.subject = createWord(c.subject)
     this.verb = createWord(c.verb)
-    this.adjectiveClause = createWord(c.adjectiveClause)
+    this.adjective = createWord(c.adjective)
     this.adverbs = c.adverbs.map(o => createWord(o))
     return this
   },
@@ -106,20 +106,6 @@ export const Clause = {
     // const s = newClause.map(o => o.toString())
     return wh ? [wh, ...newClause] : newClause
   },
-  shouldUseAn: function(word) {
-    const a_specials = ['us','uni','one','once','eu']
-    const an_specials = ['hour','honor','honest']
-    for (const s of a_specials) {
-      if (word.startsWith(s)) return false
-    }
-    for (const s of an_specials) {
-      if (word.startsWith(s)) return true
-    }
-    return 'aeiou'.includes(word[0])
-  },
-  checkArticle: function(clause) {
-    return clause.reduce((a, b) => a === 'a' && this.shouldUseAn(b) ? 'an' : a.concat(b), [])
-  },
   getClause: function() {
     let s = this.subject
     let v = this.verb
@@ -197,9 +183,23 @@ export const Clause = {
     }
   },
   convertToString: function(c) {
-    return c.filter(t => t !== '')
+    return c.filter(t => !['', null].includes(t))
             .map(o => o.pos === 'AdverbClause' && o.position === 'beginning' ?
                       `${o}, ` : o.toString())
+  },
+  shouldUseAn: function(word) {
+    const a_specials = ['us','uni','one','once','eu']
+    const an_specials = ['hour','honor','honest']
+    for (const s of a_specials) {
+      if (word.startsWith(s)) return false
+    }
+    for (const s of an_specials) {
+      if (word.startsWith(s)) return true
+    }
+    return 'aeiou'.includes(word[0])
+  },
+  checkArticle: function(clause) {
+    return clause.reduce((a, b) => a === 'a' && this.shouldUseAn(b) ? 'an' : a.concat(b), [])
   },
   toString: function() {
     return this.print()
@@ -214,23 +214,20 @@ export const Clause = {
       return c
     }
     // console.log(c)
-    const beginningAdvs = this.verb.adverbs.filter(o => o && o.position === 'beginning')
     const beginningPreps = this.verb.prepositions.filter(o => o && o.before) 
-    c = [this.addComma(beginningAdvs),
+    c = [this.addComma(this.adverbs),
          this.addComma(beginningPreps),
          !!s && !!s.adjBeginning ? this.addComma(s.adjBeginning) : '',
          ...c]
     // console.log(c)
     c = this.reorderWh(c)
     // console.log(c)
+    // c = !!this.adjective ? `${c}, ${this.adjective}` : c
+    c = [...c, this.adjective]
     c = this.convertToString(c)
-    // console.log(c)
+    console.log(c)
     c = this.checkArticle(c)
     c = c.map(o => o.toString()).join(' ')
-    c = !!this.adjectiveClause ? `${this.adjectiveClause}, ${c}` : c
-    if (this.adverbs.length > 0) {
-      c = `${this.adverbs.map(o => o.toString()).join(', ')}, ${c}`
-    }
     return c
   },
 }

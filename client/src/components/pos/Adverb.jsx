@@ -16,7 +16,7 @@ export const Adverb = React.createClass({
     const modifyVerb = ['Verb','Be','VerbContainer'].includes(this.props.parent.pos) &&
                         this.props.role === 'adverbs'
 
-    const forms = ['beginning','before','middle','after'].map(o => (
+    const forms = ['before','middle','after'].map(o => (
       <option key={o} value={o}>{o}</option>
     ))
 

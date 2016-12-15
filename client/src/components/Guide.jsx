@@ -258,6 +258,10 @@ const Guide = React.createClass({
 
           <ul>
             <li className='function-group'>
+              <div className='function-title'>adverbs</div>
+              <span className='pos Adverb'>Adverb</span>
+            </li>          
+            <li className='function-group'>
               <div className='function-title'>subject</div>
               <span className='pos Noun'>Noun</span>
               <span className='pos Pronoun'>Pronoun</span>
@@ -270,6 +274,10 @@ const Guide = React.createClass({
               <span className='pos Verb'>Verb</span>
               <span className='pos Be'>Be</span>
             </li>
+            <li className='function-group'>
+              <div className='function-title'>adjective</div>
+              <span className='pos basic'>Adjective Clause</span>
+            </li>   
           </ul>
         </div>
 

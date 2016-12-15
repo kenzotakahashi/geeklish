@@ -6,7 +6,6 @@ const nouns = ['Noun', 'Pronoun', 'NounClause', 'Gerund']
 const verbs = ['Verb', 'Be']
 const adjectives = ['Adjective', 'AdjectiveClause', 'Participle']
 const adverbs = ['Adverb', 'AdverbClause']
-const clauses = ['Clause']
 const coordinating = [{pos: 'Conjunction', attr: (w) => w.type === 'coordinating' }]
 const complements = [...nouns, 'Adjective', 'Adverb', 'Preposition', 'Infinitive']
 const determiners = ['Determiner', 'Possessive']
@@ -14,11 +13,13 @@ const determiners = ['Determiner', 'Possessive']
 
 const valid_pos = {
   Sentence: {
-    clause: clauses
+    clause: ['Clause'],
   },
   Clause: {
+    adverbs: ['Adverb'],
     subject: [...nouns, 'Infinitive'],
     verb: verbs,
+    adjective: ['AdjectiveClause'],
   },
   ClauseContainer: {
     clauses: ['Clause'],
@@ -56,7 +57,7 @@ const valid_pos = {
     conjunction: coordinating
   },
   NounClause: {
-    clause: clauses,
+    clause: ['Clause'],
     nouns: ['Noun', 'NounClause'],
     determiners: determiners,
     adjectives: adjectives,
@@ -74,14 +75,14 @@ const valid_pos = {
     prepositions: ['Preposition'] 
   },
   AdjectiveClause: {
-    clause: clauses
+    clause: ['Clause']
   },
   Adverb: {
     adverb: ['Adverb']
   },
   AdverbClause: {
     conjunction: [{pos: 'Conjunction', attr: (w) => w.type === 'subordinating' }],
-    clause: clauses
+    clause: ['Clause']
   },
   Preposition: {
     complement: nouns
