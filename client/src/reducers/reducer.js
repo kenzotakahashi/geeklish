@@ -50,6 +50,12 @@ function reducer(state, action) {
         projects: action.projects
       }
     }
+    case 'ROUTE_EXAMPLES': {
+      return {
+        ...action.state,
+        route: 'examples',
+      }
+    }
     case 'ROUTE_GUIDE': {
       return {
         ...state,
@@ -201,12 +207,6 @@ function reducer(state, action) {
     }
 
     // ======================= Project ================================
-    // case 'CHANGE_EXAMPLE': {
-    //   return {
-    //     ...action.state,
-    //     projects: state.projects
-    //   }
-    // }
     case 'UPDATE_TITLE': {
       return {
         ...state,

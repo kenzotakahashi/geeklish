@@ -1,7 +1,7 @@
 import React from 'react'
 import createHistory from 'history/createBrowserHistory'
 import store from '../store.js'
-import { initialState } from '../examples'
+import { exampleStates, initialState } from '../examples'
 
 export const history = createHistory()
 
@@ -9,9 +9,9 @@ function handleNavigation(location, action) {
   // console.log(action, location.pathname, location.state)
   const pathList = location.pathname.split('/').filter(o => o !== '')
   console.log(pathList)
+  const path = pathList[0] || 'examples'
 
-  // TODO handle /projects/
-  if (pathList[0] === 'projects') {
+  if (path === 'projects') {
     const id = pathList[1]
     let state, title
     if (!!id) {
@@ -31,10 +31,17 @@ function handleNavigation(location, action) {
       projects: sessionStorage.projects ? JSON.parse(sessionStorage.projects) : []
     })
   }
-  else if (pathList[0] === 'guide') {
+  else if (path === 'examples') {
+    const id = pathList[1]
+    store.dispatch({
+      type: 'ROUTE_EXAMPLES',
+      state: !!id ? exampleStates[parseInt(id, 10)] : initialState
+    }) 
+  }
+  else if (path === 'guide') {
     store.dispatch({type: 'ROUTE_GUIDE'})
   }
-  else if (pathList[0] === 'admin') {
+  else if (path === 'admin') {
     store.dispatch({type: 'ROUTE_ADMIN'})
   }
 }

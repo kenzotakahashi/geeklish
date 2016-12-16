@@ -2,17 +2,23 @@ import React from 'react'
 import store from '../store.js'
 import { Link } from './kenzo-router'
 
-// import Examples from './Examples'
+import Examples from './Examples'
 import Projects from './Projects'
 import Guide from './Guide'
-// import Admin from './Admin'
+import Admin from './Admin'
 
 function getChildren(state, route) {
   if (route === 'projects') {
     return <Projects/>
   }
+  if (route === 'examples') {
+    return <Examples/>
+  }
   if (route === 'guide') {
     return <Guide />
+  }
+  if (route === 'admin') {
+    return <Admin />
   }
 }
 
