@@ -7,10 +7,12 @@ export const history = createHistory()
 
 function handleNavigation(location, action) {
   // console.log(action, location.pathname, location.state)
-  const pathList = location.pathname.split('/')
+  const pathList = location.pathname.split('/').filter(o => o !== '')
+  console.log(pathList)
 
-  if (pathList[1] === 'projects') {
-    const id = pathList[2]
+  // TODO handle /projects/
+  if (pathList[0] === 'projects') {
+    const id = pathList[1]
     let state, title
     if (!!id) {
       const data = JSON.parse(sessionStorage[`project_${id}`])
@@ -29,10 +31,10 @@ function handleNavigation(location, action) {
       projects: sessionStorage.projects ? JSON.parse(sessionStorage.projects) : []
     })
   }
-  else if (pathList[1] === 'guide') {
+  else if (pathList[0] === 'guide') {
     store.dispatch({type: 'ROUTE_GUIDE'})
   }
-  else if (pathList[1] === 'admin') {
+  else if (pathList[0] === 'admin') {
     store.dispatch({type: 'ROUTE_ADMIN'})
   }
 }

@@ -9,7 +9,7 @@ import Guide from './Guide'
 
 function getChildren(state, route) {
   if (route === 'projects') {
-    return <Projects id={state.example} />
+    return <Projects/>
   }
   if (route === 'guide') {
     return <Guide />

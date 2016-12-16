@@ -252,15 +252,15 @@ function reducer(state, action) {
       }   
     }
     case 'DELETE_PROJECT': {
-      sessionStorage.removeItem(`project_${action.id}`)
+      sessionStorage.removeItem(`project_${state.example}`)
       const projects = JSON.parse(sessionStorage.projects)
-      const newProjects = projects.filter(o => o.id !== action.id)
+      const newProjects = projects.filter(o => o.id !== state.example)
       sessionStorage.projects = JSON.stringify(newProjects)
 
       return {
         ...initialState,
         example: null,
-        projects: state.projects.filter(o => o.id !== action.id)
+        projects: state.projects.filter(o => o.id !== state.example)
       }
     }    
     default: {

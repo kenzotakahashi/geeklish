@@ -7,19 +7,11 @@ import { initialState } from '../examples'
 import { history, Link } from './kenzo-router'
 
 const Projects = React.createClass({
-  // getInitialState: function () {
-  //   return {
-  //     field: 'Untitled',
-  //   }
-  // },
   onInputChange: function(e) {
     store.dispatch({
       type: 'UPDATE_TITLE',
       title: e.target.value
     })
-    // this.setState({
-    //   field: e.target.value,
-    // })
   },
   saveSentence: function(state, isNew=false) {
     store.dispatch({
@@ -33,53 +25,12 @@ const Projects = React.createClass({
     e.preventDefault()
     this.saveSentence(store.getState())
   },
-  // componentDidMount: function () {
-  //   this.checkRoute()
-  // },
-  // componentDidUpdate: function() {
-  //   this.checkRoute()
-  // },
-  // changeExample: function(state) {
-  //   store.dispatch({
-  //     type: 'CHANGE_EXAMPLE',
-  //     state
-  //   })
-  // },
-  // checkRoute: function() {
-  //   const state = store.getState()
-  //   const id = this.props.id
-  //   console.log(id)
-  //   console.log(state.example)
-  //   // Switch to different project
-  //   if (id !== undefined && id !== state.example) {
-  //     console.log('different')
-  //     const data = JSON.parse(sessionStorage[`project_${id}`])
-  //     this.setState({
-  //       field: data.title,
-  //     })
-  //   }
-  //   // Switch to 'new'
-  //   // else if (id === undefined && state.example !== null) {
-  //   //   this.setState({
-  //   //     field: 'Untitled',
-  //   //   })
-  //   // }
-  //   // Do nothing 
-  // },
-  deleteProject: function(id) {
+  deleteProject: function() {
     store.dispatch({
-      type: 'DELETE_PROJECT',
-      id
+      type: 'DELETE_PROJECT'
     })
     const projects = store.getState().projects
-    if (projects.length > 0) {
-      history.push(`/projects/${projects[0].id}`)
-    } else {
-      this.setState({
-        field: 'Untitled'
-      })
-      history.push('/projects')
-    }
+    history.push(`/projects/${projects.length > 0 ? projects[0].id : ''}`)
   },
   render: function() {
     const state = store.getState()
@@ -90,16 +41,10 @@ const Projects = React.createClass({
       </li>
     ))
 
-    const deleteButton = this.props.id !== undefined && (
-      <button type="button" className="btn btn-default"
-             onClick={() => this.deleteProject(state.example)}>
-       <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
-      </button>
-    )
-
     return (
       <div className='container small-font'>
 
+        {state.example !== undefined &&
         <form className="form-inline project-form" onSubmit={this.onFormSubmit}>
           <div className="form-group">
             <input
@@ -113,8 +58,11 @@ const Projects = React.createClass({
           <button type="submit" className="btn btn-default">
             Save
           </button>
-          {deleteButton}
-        </form>
+          <button type="button" className="btn btn-default"
+                 onClick={() => this.deleteProject()}>
+           <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          </button>
+        </form>}
 
         <div className='row'>
           <div className='col-md-2'>
