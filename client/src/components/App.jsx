@@ -1,12 +1,30 @@
 import React from 'react'
 import store from '../store.js'
-import { Link } from 'react-router'
+import { Link } from './kenzo-router'
+
+// import Examples from './Examples'
+import Projects from './Projects'
+import Guide from './Guide'
+// import Admin from './Admin'
+
+function getChildren(state, route) {
+  if (route === 'projects') {
+    return <Projects id={state.example} />
+  }
+  if (route === 'guide') {
+    return <Guide />
+  }
+}
 
 const App = React.createClass({
-  componentDidMount: function () {
+  componentDidMount: function() {
     store.subscribe(() => this.forceUpdate())
   },
   render: function() {
+    const state = store.getState()
+    const route = state.route
+    const children = getChildren(state, route)
+
     return (
       <div>
         <nav className="navbar navbar-default">
@@ -29,7 +47,7 @@ const App = React.createClass({
           </div>
         </nav>
 
-        {this.props.children}
+        {children}
 
         <footer>
           <p>© 2016 Geeklish. All Rights Reserved. 
@@ -39,5 +57,8 @@ const App = React.createClass({
     )
   }
 })
+
+
+
 
 export default App

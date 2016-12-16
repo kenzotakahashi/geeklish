@@ -8,7 +8,7 @@ import { Link } from 'react-router'
 
 const Examples = React.createClass({
   componentDidMount: function () {
-    store.subscribe(() => this.forceUpdate())
+    // store.subscribe(() => this.forceUpdate())
     this.checkRoute()
   },
   componentDidUpdate: function() {

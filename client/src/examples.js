@@ -81,7 +81,9 @@ export const exampleStates = [
 ]
 
 export const initialState = {
+  route: null,
   example: null,
+  title: 'Some title',
   activeWord: 1,
   target: null,
   dictionary: [],

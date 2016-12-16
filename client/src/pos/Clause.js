@@ -225,7 +225,7 @@ export const Clause = {
     // c = !!this.adjective ? `${c}, ${this.adjective}` : c
     c = [...c, this.adjective]
     c = this.convertToString(c)
-    console.log(c)
+    // console.log(c)
     c = this.checkArticle(c)
     c = c.map(o => o.toString()).join(' ')
     return c

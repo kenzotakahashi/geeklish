@@ -4,64 +4,68 @@ import store from '../store.js'
 import Canvas from './Canvas.jsx'
 
 import { initialState } from '../examples'
-import { browserHistory, Link } from 'react-router'
+import { history, Link } from './kenzo-router'
 
 const Projects = React.createClass({
-  getInitialState: function () {
-    return {
-      field: 'Untitled',
-    }
-  },
+  // getInitialState: function () {
+  //   return {
+  //     field: 'Untitled',
+  //   }
+  // },
   onInputChange: function(e) {
-    this.setState({
-      field: e.target.value,
+    store.dispatch({
+      type: 'UPDATE_TITLE',
+      title: e.target.value
     })
+    // this.setState({
+    //   field: e.target.value,
+    // })
   },
-  saveSentence: function(title, id, state) {
+  saveSentence: function(state, isNew=false) {
     store.dispatch({
       type: 'SAVE_SENTENCE',
-      title,
-      id,
-      state
+      state,
+      isNew
     })
-    if (!id) browserHistory.push(`/projects/${store.getState().projects[0].id}`)
+    if (isNew) history.push(`/projects/${store.getState().projects[0].id}`)
   },
   onFormSubmit(e) {
     e.preventDefault()
-    this.saveSentence(this.state.field, this.props.params.id, store.getState())
+    this.saveSentence(store.getState())
   },
-  componentDidMount: function () {
-    store.subscribe(() => this.forceUpdate())
-    this.checkRoute()
-  },
-  componentDidUpdate: function() {
-    this.checkRoute()
-  },
-  changeExample: function(state) {
-    store.dispatch({
-      type: 'CHANGE_EXAMPLE',
-      state
-    })
-  },
-  checkRoute: function() {
-    const state = store.getState()
-    const id = this.props.params.id
-    // Switch to different project
-    if (id !== undefined && id !== state.example) {
-      const data = JSON.parse(sessionStorage[`project_${id}`])
-      this.changeExample(data.state)
-      this.setState({
-        field: data.title,
-      })
-    // Switch to 'new'
-    } else if (id === undefined && state.example !== null) {
-      this.changeExample(initialState)
-      this.setState({
-        field: 'Untitled',
-      })
-    }
-    // Do nothing 
-  },
+  // componentDidMount: function () {
+  //   this.checkRoute()
+  // },
+  // componentDidUpdate: function() {
+  //   this.checkRoute()
+  // },
+  // changeExample: function(state) {
+  //   store.dispatch({
+  //     type: 'CHANGE_EXAMPLE',
+  //     state
+  //   })
+  // },
+  // checkRoute: function() {
+  //   const state = store.getState()
+  //   const id = this.props.id
+  //   console.log(id)
+  //   console.log(state.example)
+  //   // Switch to different project
+  //   if (id !== undefined && id !== state.example) {
+  //     console.log('different')
+  //     const data = JSON.parse(sessionStorage[`project_${id}`])
+  //     this.setState({
+  //       field: data.title,
+  //     })
+  //   }
+  //   // Switch to 'new'
+  //   // else if (id === undefined && state.example !== null) {
+  //   //   this.setState({
+  //   //     field: 'Untitled',
+  //   //   })
+  //   // }
+  //   // Do nothing 
+  // },
   deleteProject: function(id) {
     store.dispatch({
       type: 'DELETE_PROJECT',
@@ -69,12 +73,12 @@ const Projects = React.createClass({
     })
     const projects = store.getState().projects
     if (projects.length > 0) {
-      browserHistory.push(`/projects/${projects[0].id}`)
+      history.push(`/projects/${projects[0].id}`)
     } else {
       this.setState({
         field: 'Untitled'
       })
-      browserHistory.push('/projects')
+      history.push('/projects')
     }
   },
   render: function() {
@@ -82,13 +86,13 @@ const Projects = React.createClass({
 
     const projects = state.projects.map(o => (
       <li key={o.id} className='example'>
-        <Link to={`/projects/${o.id}`} activeClassName="active-link">{o.title}</Link>
+        <Link to={`/projects/${o.id}`}>{o.title}</Link>
       </li>
     ))
 
-    const deleteButton = this.props.params.id !== undefined && (
+    const deleteButton = this.props.id !== undefined && (
       <button type="button" className="btn btn-default"
-             onClick={() => this.deleteProject(this.props.params.id)}>
+             onClick={() => this.deleteProject(state.example)}>
        <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
       </button>
     )
@@ -102,7 +106,7 @@ const Projects = React.createClass({
               placeholder='title'
               className="form-control title-form"
               type='text'
-              value={this.state.field}
+              value={state.title}
               onChange={this.onInputChange}
             />
           </div>
@@ -117,7 +121,7 @@ const Projects = React.createClass({
             <div className='main-box'>
               <ul className='list-group'>              
                 <button type="button" className="btn btn-default btn-block"
-                        onClick={() => this.saveSentence('Untitled', null, initialState)}>
+                        onClick={() => this.saveSentence(initialState, true)}>
                   New Project
                 </button>
                 {projects}

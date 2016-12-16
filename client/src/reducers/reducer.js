@@ -40,6 +40,30 @@ function getContainer(pos) {
 
 function reducer(state, action) {
   switch (action.type) {
+    // ======================= Route ================================
+    case 'ROUTE_PROJECTS': {
+      return {
+        ...action.state,
+        route: 'projects',
+        example: action.id,
+        title: action.title,
+        projects: action.projects
+      }
+    }
+    case 'ROUTE_GUIDE': {
+      return {
+        ...state,
+        route: 'guide'
+      }
+    }
+    case 'ROUTE_ADMIN': {
+      return {
+        ...state,
+        route: 'admin'
+      }
+    }
+
+    // ====================== Main ==================================
     case 'SHOW_OPTIONS': {
       return {
         ...state,
@@ -177,26 +201,34 @@ function reducer(state, action) {
     }
 
     // ======================= Project ================================
-    case 'CHANGE_EXAMPLE': {
+    // case 'CHANGE_EXAMPLE': {
+    //   return {
+    //     ...action.state,
+    //     projects: state.projects
+    //   }
+    // }
+    case 'UPDATE_TITLE': {
       return {
-        ...action.state,
-        projects: state.projects
+        ...state,
+        title: action.title
       }
     }
     case 'SAVE_SENTENCE': {
-      let id, newProjects
-      const title = action.title === '' ? 'Untitled' : action.title
+      let id, newProjects, title
 
-      if (!action.id) {
+      if (action.isNew) {
         id = uuid.v4()
+        title = 'Untitled'
 
         if (!sessionStorage.projects) {
           sessionStorage.projects = '[]'
         }
         const projects = JSON.parse(sessionStorage.projects)
         newProjects = [{id: id, title: title}, ...projects]
-      } else {
-        id = action.id
+      }
+      else {
+        id = state.example
+        title = state.title === '' ? 'Untitled' : state.title
 
         const projects = JSON.parse(sessionStorage.projects)
         newProjects = projects.map(o => o.id === id ? {id: id, title: title} : o)
@@ -215,7 +247,7 @@ function reducer(state, action) {
 
       return {
         ...action.state,
-        example: action.id,
+        example: id,
         projects: newProjects
       }   
     }
@@ -230,7 +262,7 @@ function reducer(state, action) {
         example: null,
         projects: state.projects.filter(o => o.id !== action.id)
       }
-    }
+    }    
     default: {
       return state
     }
