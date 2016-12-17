@@ -18,14 +18,14 @@ const Examples = React.createClass({
     return (
       <div className='container small-font'>
         <div className='row'>
-          <div className='col-md-2'>
+          <div className='col-xs-2'>
             <div className='main-box'>
               <ul className='list-group fixed-box'>
                 {examples}
               </ul>
             </div>
           </div>
-          <div className='col-md-10'>
+          <div className='col-xs-10'>
             <Canvas />
           </div>
         </div>

@@ -158,7 +158,7 @@ export const NounClause = {
   getList: function() {
     if (!this.clause) return
     const result = this.clause.print()
-    return Array.isArray(result) ? '' : this.getRest(`${this.that && 'that '}${result}`)
+    return Array.isArray(result) ? '' : this.getRest(`${this.that ? 'that ' : ''}${result}`)
   },
   getRest: function(noun) {
     return [...this.determiners,

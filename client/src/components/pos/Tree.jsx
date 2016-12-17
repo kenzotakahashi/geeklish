@@ -77,8 +77,8 @@ export const UndoConjunctionButton = (props) => (
 )
 
 export const ModalSelect = (props) => (
-  <span className="select is-small" value={props.value} onChange={props.onChange}>
-    <select>
+  <span className="select is-small">
+    <select value={props.value} onChange={props.onChange}>
       {['modal','can','could','should','may','might','must','will','would'].map(o => (
          <option key={o} value={o === 'modal' ? '' : o}>{o}</option>
         ))

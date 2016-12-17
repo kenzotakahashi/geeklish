@@ -1,7 +1,7 @@
 import React from 'react'
 import createHistory from 'history/createBrowserHistory'
 import store from '../store.js'
-import { exampleStates, initialState } from '../examples'
+import { exampleWords, initialState } from '../examples'
 
 export const history = createHistory()
 
@@ -34,7 +34,7 @@ function handleNavigation(location, action) {
     const id = pathList[1]
     store.dispatch({
       type: 'ROUTE_EXAMPLES',
-      state: !!id ? exampleStates[parseInt(id, 10)] : initialState
+      words: !!id ? exampleWords[parseInt(id, 10)] : initialState.Words
     }) 
   }
   else if (path === 'guide') {

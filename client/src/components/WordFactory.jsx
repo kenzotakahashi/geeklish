@@ -1,19 +1,10 @@
 import React from 'react'
 import store from '../store.js'
-// import { getArgument } from '../wordDictionary'
+import { createNewWord } from '../actions'
 
 const e = React.createElement
 
 const WordFactory = React.createClass({
-  createNewWord: function (wordBase, activeWord, target, arg) {
-    store.dispatch({
-      type: 'CREATE_WORD',
-      wordBase,
-      activeWord,
-      target,
-      arg
-    })
-  },
   getInitialState: function () {
     return {
       field: '',
@@ -31,7 +22,6 @@ const WordFactory = React.createClass({
   },
   render: function() {
     const state = store.getState()
-
     // ref={input => input && input.focus()}
     return (
       <div>
@@ -46,9 +36,9 @@ const WordFactory = React.createClass({
           {
             this.state.dictionary.map(o => (
               e('li', {
-                className: `list-group-item col-md-6 ${o.pos}`,
+                className: `list-group-item col-xs-6 ${o.pos}`,
                 key: o._id,
-                onClick: () => this.createNewWord(o, state.activeWord, state.target)
+                onClick: () => store.dispatch(createNewWord(o, state.activeWord, state.target))
               }, o.base)
             ))
           }

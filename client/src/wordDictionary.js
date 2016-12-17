@@ -1,6 +1,6 @@
 import store from './store.js'
 import Client from './Client'
-import { showWordFactory } from './actions'
+import { showWordFactory, createNewWord } from './actions'
 
 const nouns = ['Noun', 'Pronoun', 'NounClause', 'Gerund']
 const verbs = ['Verb', 'Be']
@@ -116,17 +116,23 @@ function valid_check(valid_list, word) {
   return false
 }
 
+function dispatchTask(data, valid, id, target) {
+  const dictionary = data.filter(t => valid_check(valid, t))
+  store.dispatch(showWordFactory(id, target, dictionary))
+  if (dictionary.length === 1 && ['Clause','AdjectiveClause'].includes(dictionary[0].pos)) {
+    store.dispatch(createNewWord(dictionary[0], id, target))
+  }
+}
+
 export const getWordDictionary = function(words, activeWord, id, target) {
   const pos = words.find(t => t.id === activeWord).pos
   const valid = valid_pos[pos][target]   
   if (sessionStorage.dictionary) {
     const data = JSON.parse(sessionStorage.dictionary)
-    const dictionary = data.filter(t => valid_check(valid, t))
-    store.dispatch(showWordFactory(id, target, dictionary))
+    dispatchTask(data, valid, id, target)
   } else {
     Client.getDics(data => {
-      const dictionary = data.filter(t => valid_check(valid, t))
-      store.dispatch(showWordFactory(id, target, dictionary))
+      dispatchTask(data, valid, id, target)
     })
   }
 }

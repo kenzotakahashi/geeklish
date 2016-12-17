@@ -52,8 +52,9 @@ function reducer(state, action) {
     }
     case 'ROUTE_EXAMPLES': {
       return {
-        ...action.state,
+        ...state,
         route: 'examples',
+        Words: action.words
       }
     }
     case 'ROUTE_GUIDE': {

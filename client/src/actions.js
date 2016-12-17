@@ -38,3 +38,10 @@ export const undoConjunction = (element, thisRole, childRole, parentId) => ({
   childRole,
   parentId
 })
+
+export const createNewWord = (wordBase, activeWord, target) => ({
+  type: 'CREATE_WORD',
+  wordBase,
+  activeWord,
+  target,
+})

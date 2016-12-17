@@ -9,13 +9,7 @@ const Admin = React.createClass({
       <div>
         <div className='container'>
           <button type="button" className="btn btn-default"
-                  onClick={() => console.log(JSON.stringify({
-                    ...state,
-                    activeWord: 1,
-                    target: null,
-                    dictionary: [],
-                    projects: [],
-                  }))}>
+                  onClick={() => console.log(JSON.stringify(state.Words))}>
             Save
           </button>
         </div>

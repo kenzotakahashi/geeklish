@@ -65,7 +65,7 @@ const Projects = React.createClass({
         </form>}
 
         <div className='row'>
-          <div className='col-md-2'>
+          <div className='col-xs-2'>
             <div className='main-box'>
               <ul className='list-group'>              
                 <button type="button" className="btn btn-default btn-block"
@@ -76,7 +76,7 @@ const Projects = React.createClass({
               </ul>
             </div>
           </div>
-          <div className='col-md-10'>
+          <div className='col-xs-10'>
             {projects.length > 0 && <Canvas />}
           </div>
         </div>
