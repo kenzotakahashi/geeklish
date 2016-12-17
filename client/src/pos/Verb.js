@@ -1,16 +1,23 @@
 import { createWord } from './util.js'
 
-const strAdverbs = function(verb, adverbs) {
-  const before = []
-  const after = []
-  for (const adv of adverbs) {
-    if (adv.position === 'before') {
+function categorize(adverbs) {
+  const [beginning,before,middle,after] = [[],[],[],[]]
+  const base = adverbs.map(o => createWord(o))
+  for (const adv of base) {
+    if (adv.position === 'beginning') {
+      beginning.push(adv)
+    }
+    else if (adv.position === 'before') {
       before.push(adv)
-    } else if (adv.position === 'after' || adv.pos === 'Infinitive') {
+    }
+    else if (adv.position === 'middle') {
+      middle.push(adv)
+    }
+    else if (adv.position === 'after' || adv.pos === 'Infinitive') {
       after.push(adv)
     }
   }
-  return [...before, ...verb, ...after]
+  return [beginning,before,middle,after]
 }
 
 const makePhrasalVerb = function(particle, complements) {
@@ -25,7 +32,7 @@ const makePhrasalVerb = function(particle, complements) {
 const getList = function(v) {
   let word = v || [this.word[this.form]] // gerund
   let verb = word.concat(makePhrasalVerb(this.particle, this.complements))
-  verb = this.strAdverbs(verb, this.adverbs)
+  verb = [...this.advBefore, ...verb, ...this.advAfter]
   verb = verb.concat(this.prepositions.filter(o => !o.before))
   return verb
 }
@@ -56,15 +63,14 @@ const initVerb = function(v) {
   this.perfect = v.perfect
   this.passive = v.passive
   this.particle = createWord(v.particle)
-  this.complements = v.complements.map(o => createWord(o))
-  this.adverbs = v.adverbs.map(o => createWord(o))
+  this.complements = v.complements.map(o => createWord(o));
+  [this.advBeginning,this.advBefore,this.advMiddle,this.advAfter] = categorize(v.adverbs)
   this.prepositions = v.prepositions.map(o => createWord(o))
   return this
 }
 
 export const Verb = {
   init: initVerb,
-  strAdverbs: strAdverbs,
   getList: getList,
   verbAfterTo: verbAfterTo,
   toString: toString,
@@ -86,14 +92,13 @@ export const VerbContainer = {
     this.continuous = v.continuous
     this.perfect = v.perfect
     this.passive = v.passive
-    this.complements = v.complements.map(o => createWord(o))
-    this.adverbs = v.adverbs.map(o => createWord(o))
+    this.complements = v.complements.map(o => createWord(o));
+    [this.advBeginning,this.advBefore,this.advMiddle,this.advAfter] = categorize(v.adverbs)
     this.prepositions = v.prepositions.map(o => createWord(o))
     this.verbs = v.verbs.map(o => createWord(o))
     this.conjunction = createWord(v.conjunction)
     return this
   },
-  strAdverbs: strAdverbs,
   getList: getList,
   verbAfterTo: function() {
     if (!this.conjunction) return []

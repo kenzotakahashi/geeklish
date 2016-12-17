@@ -54,8 +54,7 @@ export const Clause = {
       }
     }
     const negative = v.negative ? ['not'] : []
-    const middleAdverbs = v.adverbs.filter(o => o.position === 'middle')
-    return [head, [...negative, ...middleAdverbs, ...rest]]
+    return [head, [...negative, ...v.advMiddle, ...rest]]
   },
   getVerb: function(v) {
     if (v.perfect || v.continuous || !!v.modal || v.negative || v.passive) {
@@ -183,9 +182,7 @@ export const Clause = {
     }
   },
   convertToString: function(c) {
-    return c.filter(t => !['', null].includes(t))
-            .map(o => o.pos === 'AdverbClause' && o.position === 'beginning' ?
-                      `${o}, ` : o.toString())
+    return c.filter(t => !['', null].includes(t)).map(o => o.toString())
   },
   shouldUseAn: function(word) {
     const a_specials = ['us','uni','one','once','eu']
@@ -199,13 +196,20 @@ export const Clause = {
     return 'aeiou'.includes(word[0])
   },
   checkArticle: function(clause) {
-    return clause.reduce((a, b) => a === 'a' && this.shouldUseAn(b) ? 'an' : a.concat(b), [])
+    let newClause = []
+    for (let i=0; i < clause.length; i++) {
+      newClause.push(clause[i] === 'a' && this.shouldUseAn(clause[i+1]) ? 'an' : clause[i])
+    }
+    return newClause
   },
   toString: function() {
     return this.print()
   },
   addComma: function(list) {
     return list.map(o => `${o.toString()},`).join(' ')
+  },
+  joinElements: function(list) {
+    return list.reduce((a, b) => `${a}${b === ',' ? ',' : ' '+b}`, []).slice(1)
   },
   print: function() {
     const s = this.subject
@@ -214,20 +218,22 @@ export const Clause = {
       return c
     }
     // console.log(c)
-    const beginningPreps = this.verb.prepositions.filter(o => o && o.before) 
+    const prepBeginning = this.verb.prepositions.filter(o => o && o.before) 
     c = [this.addComma(this.adverbs),
-         this.addComma(beginningPreps),
+         this.addComma(prepBeginning),
+         this.addComma(this.verb.advBeginning),
          !!s && !!s.adjBeginning ? this.addComma(s.adjBeginning) : '',
          ...c]
     // console.log(c)
     c = this.reorderWh(c)
     // console.log(c)
-    // c = !!this.adjective ? `${c}, ${this.adjective}` : c
-    c = [...c, this.adjective]
+    const adj = this.adjective ? [',', this.adjective] : []
+    c = [...c, ...adj]
     c = this.convertToString(c)
     // console.log(c)
     c = this.checkArticle(c)
-    c = c.map(o => o.toString()).join(' ')
+    c = this.joinElements(c.map(o => o.toString()))
+    // console.log(c)
     return c
   },
 }

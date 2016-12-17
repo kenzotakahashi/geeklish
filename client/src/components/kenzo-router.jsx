@@ -8,7 +8,6 @@ export const history = createHistory()
 function handleNavigation(location, action) {
   // console.log(action, location.pathname, location.state)
   const pathList = location.pathname.split('/').filter(o => o !== '')
-  console.log(pathList)
   const path = pathList[0] || 'examples'
 
   if (path === 'projects') {
@@ -62,7 +61,7 @@ function isModifiedEvent(event) {
 }
 
 export const Link = React.createClass({
-  handleClick(event) {
+  handleClick: function(event) {
     if (event.defaultPrevented || isModifiedEvent(event) || !isLeftClickEvent(event)) {
       return
     }

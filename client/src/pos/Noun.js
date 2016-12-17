@@ -14,7 +14,7 @@ const getWh = function() {
   return [null, false]
 }
 
-const beforeOrAfter = function(adjs) {
+function beforeOrAfter(adjs) {
   const adjBeginning = []
   const adjectives = []
   const adjectivesAfter = []
@@ -39,7 +39,7 @@ export const Noun = {
     this.person = w.person
     this.number = w.number
     this.isWh = w.isWh;
-    [this.adjBeginning, this.adjectives, this.adjectivesAfter] = this.beforeOrAfter(w.adjectives)
+    [this.adjBeginning, this.adjectives, this.adjectivesAfter] = beforeOrAfter(w.adjectives)
     this.determiners = w.determiners.map(o => createWord(o))
     this.prepositions = w.prepositions.map(o => createWord(o))
     this.nouns = w.nouns.map(o => createWord(o))
@@ -56,7 +56,6 @@ export const Noun = {
       return this.getRest(possessive)
     }
   },
-  beforeOrAfter: beforeOrAfter,
   isValid: () => true,
   toString: function() {
     return this.getList().map(o => o.toString()).join(' ')
@@ -92,7 +91,7 @@ export const NounContainer = {
     this.person = w.person
     this.number = w.number
     this.isWh = w.isWh;
-    [this.adjectives, this.adjectivesAfter] = this.beforeOrAfter(w.adjectives)
+    [this.adjectives, this.adjectivesAfter] = beforeOrAfter(w.adjectives)
     this.determiners = w.determiners.map(o => createWord(o))
     this.prepositions = w.prepositions.map(o => createWord(o))
     this.nouns = w.nouns.map(o => createWord(o))
@@ -104,7 +103,6 @@ export const NounContainer = {
     const last = `${list.slice(-1)[0]}'s`
     return [...list.slice(0,-1), last]
   },
-  beforeOrAfter: beforeOrAfter,
   isValid: function() {
     return this.nouns.length > 0 && !!this.conjunction
   },
@@ -144,13 +142,12 @@ export const NounClause = {
     this.that = w.that
     this.clause = createWord(w.clause)
     this.isWh = w.isWh;
-    [this.adjectives, this.adjectivesAfter] = this.beforeOrAfter(w.adjectives)
+    [this.adjectives, this.adjectivesAfter] = beforeOrAfter(w.adjectives)
     this.determiners = w.determiners.map(o => createWord(o))
     this.prepositions = w.prepositions.map(o => createWord(o))
     this.nouns = w.nouns.map(o => createWord(o))
     return this
   },
-  beforeOrAfter: beforeOrAfter,
   isValid: function() {
     return this.clause && !Array.isArray(this.clause.print())
   },
