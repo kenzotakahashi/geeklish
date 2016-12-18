@@ -3,7 +3,7 @@ import uuid from 'uuid'
 const factory = {
   Pronoun: function(w, arg) {
     const init = {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Pronoun',
       word: {
         nominative: w.base,
@@ -23,7 +23,7 @@ const factory = {
   },
   Noun: function(w) {
     const init = {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Noun',
       type: w.type,
       word: {
@@ -43,7 +43,7 @@ const factory = {
   },
   NounContainer: function(w, arg) {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'NounContainer',
       person: null,
       number: 'plural',
@@ -58,7 +58,7 @@ const factory = {
   },
   NounClause: function() {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'NounClause',
       person: null,
       number: 'singular',
@@ -74,7 +74,7 @@ const factory = {
   },
   Determiner: function(w) {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Determiner',
       word: w.base,
       number: w.number,
@@ -84,14 +84,14 @@ const factory = {
   },
   Possessive: function() {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Possessive',
       noun: null,
     }
   },
   Verb: function(w, arg) {
     const init = {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Verb',
       word: {
         base: w.base,
@@ -117,7 +117,7 @@ const factory = {
   },
   Be: function(w, arg) {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Be',
       word: {
         base: 'be',
@@ -144,7 +144,7 @@ const factory = {
   },
   VerbContainer: function(w, arg) {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'VerbContainer',
       valid_complements: null,
       form: arg.form || null,
@@ -163,7 +163,7 @@ const factory = {
   },
   Adjective: function(w) {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Adjective',
       word: {
         base: w.base,
@@ -178,7 +178,7 @@ const factory = {
   },
   AdjectiveClause: function(w) {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'AdjectiveClause',
       clause: null,
       isWh: false
@@ -186,7 +186,7 @@ const factory = {
   },
   Adverb: function(w) {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Adverb',
       word: {
         base: w.base,
@@ -206,7 +206,7 @@ const factory = {
   },
   AdverbClause: function(w) {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'AdverbClause',
       conjunction: null,
       clause: null,
@@ -216,7 +216,7 @@ const factory = {
   },
   Preposition: function(w, arg) {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Preposition',
       word: w.base,
       complement: null,
@@ -226,7 +226,7 @@ const factory = {
   },
   Infinitive: function() {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Infinitive',
       word: 'to',
       verb: null,
@@ -235,14 +235,14 @@ const factory = {
   },
   Gerund: function() {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Gerund',
       verb: null
     }
   },
   Participle: function() {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Participle',
       verb: null,
       form: 'present',
@@ -251,7 +251,7 @@ const factory = {
   },
   Clause: function() {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Clause',
       cType: 'statement',
       subject: null,
@@ -262,7 +262,7 @@ const factory = {
   },
   ClauseContainer: function(w, arg) {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'ClauseContainer',
       conjunction: null,
       clauses: [arg.child],
@@ -270,7 +270,7 @@ const factory = {
   },
   Conjunction: function(w) {
     return {
-      id: uuid.v4(),
+      id: uuid.v1(),
       pos: 'Conjunction',
       word: w.base,
       type: w.type

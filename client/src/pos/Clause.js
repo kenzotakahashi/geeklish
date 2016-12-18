@@ -187,24 +187,6 @@ export const Clause = {
             .reduce((a, b) => a.concat(b), [])
             .map(o => o.toString())
   },
-  shouldUseAn: function(word) {
-    const a_specials = ['us','uni','one','once','eu']
-    const an_specials = ['hour','honor','honest']
-    for (const s of a_specials) {
-      if (word.startsWith(s)) return false
-    }
-    for (const s of an_specials) {
-      if (word.startsWith(s)) return true
-    }
-    return 'aeiou'.includes(word[0])
-  },
-  checkArticle: function(clause) {
-    let newClause = []
-    for (let i=0; i < clause.length; i++) {
-      newClause.push(clause[i] === 'a' && this.shouldUseAn(clause[i+1]) ? 'an' : clause[i])
-    }
-    return newClause
-  },
   toString: function() {
     return this.print()
   },
@@ -233,8 +215,7 @@ export const Clause = {
     const adj = this.adjective ? [',', this.adjective] : []
     c = [...c, ...adj]
     c = this.convertToString(c)
-    console.log(c)
-    // c = this.checkArticle(c)
+    // console.log(c)
     c = this.joinElements(c.map(o => o.toString()))
     // console.log(c)
     return c

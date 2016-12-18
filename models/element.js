@@ -1,14 +1,27 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const ObjectId = Schema.Types.ObjectId
 
-var options = {discriminatorKey: 'pos'}
+var options = {discriminatorKey: 'pos', _id: false}
 
-const PosSchema = new Schema({
+export const Element = mongoose.model('Element', new Schema({
+  _id: String,
   createdAt: {type: Date, default: Date.now},
-}, options)
-export const Pos = mongoose.model('Pos', PosSchema)
+}, options))
 
-const PronounSchema = new Schema({
+export const Sentence = Element.discriminator('Sentence', new Schema({
+  clause: ObjectId,
+}, options))
+
+export const Clause = Element.discriminator('Clause', new Schema({
+  cType: String,
+  subject: ObjectId,
+  verb: ObjectId,
+  adjective: ObjectId,
+  adverbs: [ObjectId]
+}, options))
+
+export const Pronoun = Element.discriminator('Pronoun', new Schema({
   word: {
     nominative: String,
     accusative: String,
@@ -19,13 +32,12 @@ const PronounSchema = new Schema({
   person: Number,
   number: String,
   form: String,
-  adjectives: [Schema.Types.ObjectId],
-  prepositions: [Schema.Types.ObjectId],
+  adjectives: [ObjectId],
+  prepositions: [ObjectId],
   isWh: Boolean
-}, options)
-export const Pronoun = mongoose.model('Pronoun', PronounSchema)
+}, options))
 
-const VerbSchema = new Schema({
+export const Verb = Element.discriminator('Verb', new Schema({
   word: {
     base: String,
     tps: String,
@@ -41,17 +53,16 @@ const VerbSchema = new Schema({
   perfect: Boolean,
   passive: Boolean,
   modal: String,
-  particle: Schema.Types.ObjectId,
-  complements: [Schema.Types.ObjectId],
-  adverbs: [Schema.Types.ObjectId],
-  prepositions: [Schema.Types.ObjectId]
-})
-export const Verb = mongoose.model('Verb', VerbSchema)
+  particle: ObjectId,
+  complements: [ObjectId],
+  adverbs: [ObjectId],
+  prepositions: [ObjectId]
+}, options))
 
 
 //   Noun: function(w) {
 //     const init = {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'Noun',
 //       type: w.type,
 //       word: {
@@ -71,7 +82,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   NounContainer: function(w, arg) {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'NounContainer',
 //       person: null,
 //       number: 'plural',
@@ -86,7 +97,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   NounClause: function() {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'NounClause',
 //       person: null,
 //       number: 'singular',
@@ -102,7 +113,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   Determiner: function(w) {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'Determiner',
 //       word: w.base,
 //       number: w.number,
@@ -112,7 +123,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   Possessive: function() {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'Possessive',
 //       noun: null,
 //     }
@@ -120,7 +131,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 
 //   Be: function(w, arg) {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'Be',
 //       word: {
 //         base: 'be',
@@ -147,7 +158,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   VerbContainer: function(w, arg) {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'VerbContainer',
 //       valid_complements: null,
 //       form: arg.form || null,
@@ -166,7 +177,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   Adjective: function(w) {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'Adjective',
 //       word: {
 //         base: w.base,
@@ -181,7 +192,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   AdjectiveClause: function(w) {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'AdjectiveClause',
 //       clause: null,
 //       isWh: false
@@ -189,7 +200,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   Adverb: function(w) {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'Adverb',
 //       word: {
 //         base: w.base,
@@ -209,7 +220,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   AdverbClause: function(w) {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'AdverbClause',
 //       conjunction: null,
 //       clause: null,
@@ -219,7 +230,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   Preposition: function(w, arg) {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'Preposition',
 //       word: w.base,
 //       complement: null,
@@ -229,7 +240,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   Infinitive: function() {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'Infinitive',
 //       word: 'to',
 //       verb: null,
@@ -238,34 +249,24 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   Gerund: function() {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'Gerund',
 //       verb: null
 //     }
 //   },
 //   Participle: function() {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'Participle',
 //       verb: null,
 //       form: 'present',
 //       beginning: false,
 //     }
 //   },
-//   Clause: function() {
-//     return {
-//       id: uuid.v4(),
-//       pos: 'Clause',
-//       cType: 'statement',
-//       subject: null,
-//       verb: null,
-//       adjective: null,
-//       adverbs: [],
-//     }
-//   },
+
 //   ClauseContainer: function(w, arg) {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'ClauseContainer',
 //       conjunction: null,
 //       clauses: [arg.child],
@@ -273,7 +274,7 @@ export const Verb = mongoose.model('Verb', VerbSchema)
 //   },
 //   Conjunction: function(w) {
 //     return {
-//       id: uuid.v4(),
+//       id: uuid.v1(),
 //       pos: 'Conjunction',
 //       word: w.base,
 //       type: w.type

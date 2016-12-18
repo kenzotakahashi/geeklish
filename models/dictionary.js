@@ -1,102 +1,98 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-var options = {discriminatorKey: 'pos'}
+var options = {discriminatorKey: 'dicPos'}
 
-const dictionarySchema = new Schema({
+export const Dictionary = mongoose.model('Dictionary', new Schema({
 	base: {type: String, required: true},
 	order: {type: Number, required: true},
 	createdAt: {type: Date, default: Date.now},
-}, options)
-export const Dictionary = mongoose.model('Dictionary', dictionarySchema)
+}, options))
 
-const PronounDicSchema = new Schema({
+export const PronounDic = Dictionary.discriminator('PronounDic', new Schema({
 	a: {type: String},
 	p: {type: String},
 	pp: {type: String},
 	r: {type: String},
 	person: {type: Number},
 	number: {type: String},
-}, options)
-export const PronounDic = Dictionary.discriminator('Pronoun', PronounDicSchema)
+	pos: {type: String, default: 'Pronoun'}
+}, options))
 
-const NounDicSchema = new Schema({
+export const NounDic = Dictionary.discriminator('NounDic', new Schema({
 	type: {type: String, required: true},
-	plural: {type: String}
-}, options)
-export const NounDic = Dictionary.discriminator('Noun', NounDicSchema)
+	plural: {type: String},
+	pos: {type: String, default: 'Noun'},
+}, options))
 
-const DeterminerDicSchema = new Schema({
-	number: {type: String, required: true}
-}, options)
-export const DeterminerDic = Dictionary.discriminator('Determiner', DeterminerDicSchema)
+export const DeterminerDic = Dictionary.discriminator('DeterminerDic', new Schema({
+	number: {type: String, required: true},
+	pos: {type: String, default: 'Determiner'},
+}, options))
 
-const VerbDicSchema = new Schema({
+export const VerbDic = Dictionary.discriminator('VerbDic', new Schema({
 	tps: {type: String, required: true},
 	past: {type: String, required: true},
 	passive: {type: String},
-	gerund: {type: String, required: true}
-}, options)
-export const VerbDic = Dictionary.discriminator('Verb', VerbDicSchema)
+	gerund: {type: String, required: true},
+	pos: {type: String, default: 'Verb'},
+}, options))
 
-const AdjectiveDicSchema = new Schema({
-	comparative: {type: String},
-	superlative: {type: String}
-}, options)
-export const AdjectiveDic = Dictionary.discriminator('Adjective', AdjectiveDicSchema)
-
-const AdverbDicSchema = new Schema({
+export const AdjectiveDic = Dictionary.discriminator('AdjectiveDic', new Schema({
 	comparative: {type: String},
 	superlative: {type: String},
-	canModify: [{type: String}]
-}, options)
-export const AdverbDic = Dictionary.discriminator('Adverb', AdverbDicSchema)
+	pos: {type: String, default: 'Adjective'},
+}, options))
 
-const ConjunctionDicSchema = new Schema({
+export const AdverbDic = Dictionary.discriminator('AdverbDic', new Schema({
+	comparative: {type: String},
+	superlative: {type: String},
+	canModify: [{type: String}],
+	pos: {type: String, default: 'Adverb'},
+}, options))
+
+export const ConjunctionDic = Dictionary.discriminator('ConjunctionDic', new Schema({
 	type: {type: String, required: true},
-}, options)
-export const ConjunctionDic = Dictionary.discriminator('Conjunction', ConjunctionDicSchema)
+	pos: {type: String, default: 'Conjunction'},
+}, options))
 
-const PrepositionDicSchema = new Schema({}, options)
-export const PrepositionDic = Dictionary.discriminator('Preposition', PrepositionDicSchema)
+export const PrepositionDic = Dictionary.discriminator('PrepositionDic',
+	new Schema({pos: {type: String, default: 'Preposition'}}, options))
 
-const InfinitiveDicSchema = new Schema({}, options)
-export const InfinitiveDic = Dictionary.discriminator('Infinitive', InfinitiveDicSchema)
+export const InfinitiveDic = Dictionary.discriminator('InfinitiveDic',
+	new Schema({pos: {type: String, default: 'Infinitive'}}, options))
 
-const GerundDicSchema = new Schema({}, options)
-export const GerundDic = Dictionary.discriminator('Gerund', GerundDicSchema)
+export const GerundDic = Dictionary.discriminator('GerundDic',
+	new Schema({pos: {type: String, default: 'Gerund'}}, options))
 
-const ParticipleDicSchema = new Schema({}, options)
-export const ParticipleDic = Dictionary.discriminator('Participle', ParticipleDicSchema)
+export const ParticipleDic = Dictionary.discriminator('ParticipleDic',
+	new Schema({pos: {type: String, default: 'Participle'}}, options))
 
-const PossessiveDicSchema = new Schema({}, options)
-export const PossessiveDic = Dictionary.discriminator('Possessive', PossessiveDicSchema)
+export const PossessiveDic = Dictionary.discriminator('PossessiveDic',
+	new Schema({pos: {type: String, default: 'Possessive'}}, options))
 
-const BeDicSchema = new Schema({}, options)
-export const BeDic = Dictionary.discriminator('Be', BeDicSchema)
+export const BeDic = Dictionary.discriminator('BeDic',
+	new Schema({pos: {type: String, default: 'Be'}}, options))
 
-const ClauseDicSchema = new Schema({}, options)
-export const ClauseDic = Dictionary.discriminator('Clause', ClauseDicSchema)
+export const ClauseDic = Dictionary.discriminator('ClauseDic',
+	new Schema({pos: {type: String, default: 'Clause'}}, options))
 
-const NounContainerDicSchema = new Schema({}, options)
-export const NounContainerDic = Dictionary.discriminator('NounContainer', NounContainerDicSchema)
+export const NounContainerDic = Dictionary.discriminator('NounContainerDic',
+	new Schema({pos: {type: String, default: 'NounContainer'}}, options))
 
-const NounClauseDicSchema = new Schema({}, options)
-export const NounClauseDic = Dictionary.discriminator('NounClause', NounClauseDicSchema)
+export const NounClauseDic = Dictionary.discriminator('NounClauseDic',
+	new Schema({pos: {type: String, default: 'NounClause'}}, options))
 
-const AdjectiveClauseDicSchema = new Schema({}, options)
-export const AdjectiveClauseDic = Dictionary.discriminator('AdjectiveClause', AdjectiveClauseDicSchema)
+export const AdjectiveClauseDic = Dictionary.discriminator('AdjectiveClauseDic',
+	new Schema({pos: {type: String, default: 'AdjectiveClause'}}, options))
 
-const AdverbClauseDicSchema = new Schema({}, options)
-export const AdverbClauseDic = Dictionary.discriminator('AdverbClause', AdverbClauseDicSchema)
+export const AdverbClauseDic = Dictionary.discriminator('AdverbClauseDic',
+	new Schema({pos: {type: String, default: 'AdverbClause'}}, options))
 
-const ClauseContainerDicSchema = new Schema({}, options)
-export const ClauseContainerDic = Dictionary.discriminator('ClauseContainer', ClauseContainerDicSchema)
+export const ClauseContainerDic = Dictionary.discriminator('ClauseContainerDic',
+	new Schema({pos: {type: String, default: 'ClauseContainer'}}, options))
 
-const VerbContainerDicSchema = new Schema({}, options)
-export const VerbContainerDic = Dictionary.discriminator('VerbContainer', VerbContainerDicSchema)
-
-
-
+export const VerbContainerDic = Dictionary.discriminator('VerbContainerDic',
+	new Schema({pos: {type: String, default: 'VerbContainer'}}, options))
 
 

@@ -221,7 +221,7 @@ function reducer(state, action) {
       let id, newProjects, title
 
       if (action.isNew) {
-        id = uuid.v4()
+        id = uuid.v1()
         title = 'Untitled'
 
         if (!sessionStorage.projects) {

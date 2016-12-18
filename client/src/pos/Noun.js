@@ -81,7 +81,6 @@ export const Noun = {
     return this.getList().map(o => o.toString()).join(' ')
   },
   getList: function() {
-    console.log(this.getRest(this.word[this.number]))
     return checkArticle(this.getRest(this.word[this.number]))
   },
   getRest: function(noun) {
