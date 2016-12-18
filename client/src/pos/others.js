@@ -2,7 +2,7 @@ import { createWord } from './util.js'
 
 export const Infinitive = {
   init: function(p) {
-    this.id = p.id
+    this._id = p._id
     this.pos = p.pos
     this.verb = createWord(p.verb)
     this.omit = p.omit
@@ -18,7 +18,7 @@ export const Infinitive = {
 
 export const Gerund = {
   init: function(p) {
-    this.id = p.id
+    this._id = p._id
     this.pos = p.pos
     this.verb = createWord(p.verb)
     return this    
@@ -37,7 +37,7 @@ export const Gerund = {
 
 export const Participle = {
   init: function(p) {
-    this.id = p.id
+    this._id = p._id
     this.pos = p.pos
     this.verb = createWord(p.verb)
     this.form = p.form
@@ -62,7 +62,7 @@ export const Participle = {
 
 export const Sentence = {
   init: function(p) {
-    this.id = p.id
+    this._id = p._id
     this.pos = p.pos
     this.clause = createWord(p.clause)
     return this

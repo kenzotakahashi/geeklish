@@ -51,7 +51,7 @@ const toString = function() {
 }
 
 const initVerb = function(v) {
-  this.id = v.id
+  this._id = v._id
   this.pos = v.pos
   this.word = v.word
   this.valid_complements = v.valid_complements
@@ -82,7 +82,7 @@ export const Be = Verb
 
 export const VerbContainer = {
   init: function(v) {
-    this.id = v.id
+    this._id = v._id
     this.pos = v.pos
     this.valid_complements = v.valid_complements
     this.form = v.form

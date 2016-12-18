@@ -53,7 +53,7 @@ function checkArticle(phrase) {
 
 export const Noun = {
   init: function(w) {
-    this.id = w.id
+    this._id = w._id
     this.pos = w.pos
     this.word = w.word
     this.person = w.person
@@ -106,7 +106,7 @@ export const Noun = {
 
 export const NounContainer = {
   init: function(w) {
-    this.id = w.id
+    this._id = w._id
     this.pos = w.pos
     this.person = w.person
     this.number = w.number
@@ -155,7 +155,7 @@ export const NounContainer = {
 
 export const NounClause = {
   init: function(w) {
-    this.id = w.id
+    this._id = w._id
     this.pos = w.pos
     this.person = w.person
     this.number = w.number

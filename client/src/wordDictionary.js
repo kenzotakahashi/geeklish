@@ -125,7 +125,7 @@ function dispatchTask(data, valid, id, target) {
 }
 
 export const getWordDictionary = function(words, activeWord, id, target) {
-  const pos = words.find(t => t.id === activeWord).pos
+  const pos = words.find(t => t._id === activeWord).pos
   const valid = valid_pos[pos][target]   
   if (sessionStorage.dictionary) {
     const data = JSON.parse(sessionStorage.dictionary)

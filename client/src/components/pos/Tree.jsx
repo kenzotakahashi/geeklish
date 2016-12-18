@@ -13,19 +13,19 @@ export const Children = (props) => (
       	w.slice(-1) === 's' ? (
       		// attribute is a list(ex. complements)
       		props.element[w].map((t, j) => (
-      		  e(pos_components[props.words.find(o => o.id === t).pos],
-      		  	{key: w+j, parent: props.element, id: t, role: w}
+      		  e(pos_components[props.words.find(o => o._id === t).pos],
+      		  	{key: w+j, parent: props.element, _id: t, role: w}
       		  )
       		))
       	) : (props.element[w] &&
 	      	// attribute is a non-list(ex. subject)	      	
-      		e(pos_components[props.words.find(o => o.id === props.element[w]).pos],
-      			{key: w, parent: props.element, id: props.element[w], role: w}
+      		e(pos_components[props.words.find(o => o._id === props.element[w]).pos],
+      			{key: w, parent: props.element, _id: props.element[w], role: w}
       		)
       	)
       ))
     }
-    {props.activeWord === props.element.id &&
+    {props.activeWord === props.element._id &&
 	    props.attrs.map(o => (
 	    	(o.slice(-1) === 's' || !props.element[o]) &&
 	      e(
@@ -33,7 +33,7 @@ export const Children = (props) => (
 	      	{
 	          className: `tree tree-${props.target === o ? 'active' : 'info'}`,
 	          key: o,
-	          onClick: () => getWordDictionary(props.words, props.activeWord, props.element.id, o)
+	          onClick: () => getWordDictionary(props.words, props.activeWord, props.element._id, o)
 	        },
 	        o
 	      )
@@ -48,7 +48,7 @@ export const WH = (props) => (
 		{
 		  className: `button is-small is-active ${props.isWh && 'is-primary'}`,
 		  type: 'button',
-		  onClick: () => store.dispatch(changeAttribute(props.id, 'isWh', !props.isWh))
+		  onClick: () => store.dispatch(changeAttribute(props._id, 'isWh', !props.isWh))
 		},
 		'WH'
 	)
@@ -56,7 +56,7 @@ export const WH = (props) => (
 
 export const DeleteButton = (props) => (
 	<button type="button" className="btn btn-default btn-xs trash"
-	        onClick={() => store.dispatch(deleteElement(props.id, props.role, props.parentId))}>
+	        onClick={() => store.dispatch(deleteElement(props._id, props.role, props.parentId))}>
 	  <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
 	</button>
 )

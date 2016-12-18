@@ -8,7 +8,7 @@ const e = React.createElement
 export const Adjective = React.createClass({
   render: function() {
     const state = store.getState()
-    const element = state.Words.find(o => o.id === this.props.id)
+    const element = state.Words.find(o => o._id === this.props._id)
     const attrs = ['adverbs', 'prepositions']
 
     const attributes = ['base','comparative','superlative'].map(o => (
@@ -16,7 +16,7 @@ export const Adjective = React.createClass({
         className: `button is-small is-active ${element.form === o && 'is-primary'}`,
         key: o,
         type: 'button',
-        onClick: () => store.dispatch(changeAttribute(this.props.id, 'form', o))
+        onClick: () => store.dispatch(changeAttribute(this.props._id, 'form', o))
       }, o)
     ))
 
@@ -24,11 +24,11 @@ export const Adjective = React.createClass({
       <ul>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
-            <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>{element.word.base}</span>
+            <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>{element.word.base}</span>
             <span className="label label-default">{this.props.role}</span>
             {attributes}
-            <WH id={this.props.id} isWh={element.isWh} />
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+            <WH id={this.props._id} isWh={element.isWh} />
+            <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
           </div>
           <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />
@@ -41,16 +41,16 @@ export const Adjective = React.createClass({
 export const AdjectiveClause = React.createClass({
   render: function() {
     const state = store.getState()
-    const element = state.Words.find(o => o.id === this.props.id)
+    const element = state.Words.find(o => o._id === this.props._id)
     const attrs = ['clause']
 
     return (
       <ul>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
-            <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>Adjective Clause</span>            
+            <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>Adjective Clause</span>            
             <span className="label label-default">{this.props.role}</span>
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+            <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
           </div>
           <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />

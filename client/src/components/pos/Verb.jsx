@@ -7,11 +7,11 @@ const e = React.createElement
 
 export const Verb = React.createClass({
   handleChange: function(e){
-    store.dispatch(changeAttribute(this.props.id, 'modal', e.target.value))
+    store.dispatch(changeAttribute(this.props._id, 'modal', e.target.value))
   },
   render: function() {
     const state = store.getState()
-    const element = state.Words.find(o => o.id === this.props.id)
+    const element = state.Words.find(o => o._id === this.props._id)
     const attrs = ['particle','complements','adverbs','prepositions']
 
     const list = this.props.parent.pos === 'Infinitive' ? ['negative','continuous','passive'] :
@@ -21,7 +21,7 @@ export const Verb = React.createClass({
         className: `button is-small is-active ${element[o] && 'is-primary'}`,
         key: o,
         type: 'button',
-        onClick: () => store.dispatch(changeAttribute(element.id, o, !element[o]))
+        onClick: () => store.dispatch(changeAttribute(element._id, o, !element[o]))
       }, o)
     ))
 
@@ -33,11 +33,11 @@ export const Verb = React.createClass({
         <ul>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
-              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>
+              <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>
                 {element.word[element.form]}
               </span>
               <span className="label label-default">{this.props.role}</span>
-              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+              <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
             {children}
           </li>
@@ -48,9 +48,9 @@ export const Verb = React.createClass({
         <ul>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
-              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
               <span className="label label-default">{this.props.role}</span>
-              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+              <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
             {children}
           </li>
@@ -61,12 +61,12 @@ export const Verb = React.createClass({
         <ul>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
-              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
               <span className="label label-default">{this.props.role}</span>
               {attributes}
               {this.props.parent.pos !== 'VerbContainer' &&
-               <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent.id} />}
-              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+               <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent._id} />}
+              <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
             {children}
           </li>
@@ -77,13 +77,13 @@ export const Verb = React.createClass({
         <ul>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
-              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
               <span className="label label-default">{this.props.role}</span>
               <ModalSelect value={element.modal} onChange={this.handleChange} />
               {attributes}
               {this.props.parent.pos !== 'VerbContainer' &&
-               <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent.id} />}
-              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+               <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent._id} />}
+              <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
             {children}
           </li>
@@ -95,11 +95,11 @@ export const Verb = React.createClass({
 
 export const Be = React.createClass({
   handleChange: function(e){
-    store.dispatch(changeAttribute(this.props.id, 'modal', e.target.value))
+    store.dispatch(changeAttribute(this.props._id, 'modal', e.target.value))
   },
   render: function() {
     const state = store.getState()
-    const element = state.Words.find(o => o.id === this.props.id)
+    const element = state.Words.find(o => o._id === this.props._id)
     const attrs = ['complements','adverbs','prepositions']
 
     const list = this.props.parent.pos === 'Infinitive' ? ['negative','continuous','passive'] :
@@ -109,7 +109,7 @@ export const Be = React.createClass({
         className: `button is-small is-active ${element[o] && 'is-primary'}`,
         key: o,
         type: 'button',
-        onClick: () => store.dispatch(changeAttribute(element.id, o, !element[o]))
+        onClick: () => store.dispatch(changeAttribute(element._id, o, !element[o]))
       }, o)
     ))
 
@@ -121,9 +121,9 @@ export const Be = React.createClass({
         <ul>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
-              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
               <span className="label label-default">{this.props.role}</span>
-              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+              <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
             {children}
           </li>
@@ -134,9 +134,9 @@ export const Be = React.createClass({
         <ul>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
-              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
               <span className="label label-default">{this.props.role}</span>
-              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+              <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
             {children}
           </li>
@@ -147,12 +147,12 @@ export const Be = React.createClass({
         <ul>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
-              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
               <span className="label label-default">{this.props.role}</span>
               {attributes}
               {this.props.parent.pos !== 'VerbContainer' &&
-               <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent.id} />}
-              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+               <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent._id} />}
+              <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
             {children}
           </li>
@@ -163,13 +163,13 @@ export const Be = React.createClass({
         <ul>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
-              <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>{element.word.base}</span>
+              <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
               <span className="label label-default">{this.props.role}</span>
               <ModalSelect value={element.modal} onChange={this.handleChange} />
               {attributes}
               {this.props.parent.pos !== 'VerbContainer' &&
-               <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent.id} />}
-              <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+               <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent._id} />}
+              <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
             {children}
           </li>
@@ -181,24 +181,24 @@ export const Be = React.createClass({
 
 export const VerbContainer = React.createClass({
   handleChange: function(e){
-    store.dispatch(changeAttribute(this.props.id, 'modal', e.target.value))
+    store.dispatch(changeAttribute(this.props._id, 'modal', e.target.value))
   },
   render: function() {
     const state = store.getState()
-    const element = state.Words.find(o => o.id === this.props.id)
+    const element = state.Words.find(o => o._id === this.props._id)
     const attrs = ['conjunction', 'verbs', 'complements','adverbs','prepositions']
 
     return (
       <ul>
         <li className="tree-top">
           <div className={`tree-box ${element.pos}`}>
-            <span className='word' onClick={() => store.dispatch(showOptions(element.id))}>VerbContainer</span>
+            <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>VerbContainer</span>
             <span className="label label-default">{this.props.role}</span>
             <ModalSelect value={element.modal} onChange={this.handleChange} />
             {element.verbs.length > 0 &&
             <UndoConjunctionButton element={element} thisRole={this.props.role}
-                                   childRole='verbs' parentId={this.props.parent.id} />}
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+                                   childRole='verbs' parentId={this.props.parent._id} />}
+            <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
           </div>
           <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />

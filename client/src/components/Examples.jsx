@@ -6,15 +6,15 @@ import { exampleOutputs } from '../examples'
 import { Link } from './kenzo-router'
 
 const Examples = React.createClass({
-  // TOTO activeClass <Link to={`/examples/${o.id}`} activeClassName="active-link">{o.title}</Link>
+  // TOTO activeClass <Link to={`/examples/${o._id}`} activeClassName="active-link">{o.title}</Link>
 
   render: function() {
     const examples = exampleOutputs.map(o => (
       <ul key={o.category}>
         <h5>{o.category}</h5>
         {o.examples.map(t => (
-          <li key={t.id} className='example'>
-            <Link to={`/examples/${t.id}`} >{t.title}</Link>
+          <li key={t._id} className='example'>
+            <Link to={`/examples/${t._id}`} >{t.title}</Link>
           </li>
         ))}
       </ul>

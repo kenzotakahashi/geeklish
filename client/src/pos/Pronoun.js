@@ -2,7 +2,7 @@ import { createWord } from './util.js'
 
 const Pronoun = {
   init: function(p) {
-    this.id = p.id
+    this._id = p._id
     this.pos = p.pos
     this.word = p.word
     this.person = p.person

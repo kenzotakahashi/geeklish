@@ -5,7 +5,7 @@ import { DeleteButton } from './Tree'
 const Conjunction = React.createClass({
   render: function() {
     const state = store.getState()
-    const element = state.Words.find(o => o.id === this.props.id)
+    const element = state.Words.find(o => o._id === this.props._id)
 
     return (
       <ul>
@@ -13,7 +13,7 @@ const Conjunction = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word'>{element.word}</span>
             <span className="label label-default">{this.props.role}</span>
-            <DeleteButton id={element.id} role={this.props.role} parentId={this.props.parent.id} />
+            <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
           </div>
         </li>
       </ul>

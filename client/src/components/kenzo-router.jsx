@@ -11,10 +11,10 @@ function handleNavigation(location, action) {
   const path = pathList[0] || 'examples'
 
   if (path === 'projects') {
-    const id = pathList[1]
+    const _id = pathList[1]
     let state, title
-    if (!!id) {
-      const data = JSON.parse(sessionStorage[`project_${id}`])
+    if (!!_id) {
+      const data = JSON.parse(sessionStorage[`project_${_id}`])
       title = data.title
       state = data.state
     }
@@ -24,17 +24,17 @@ function handleNavigation(location, action) {
     }
     store.dispatch({
       type: 'ROUTE_PROJECTS',
-      id: id,
+      _id: _id,
       title: title,
       state: state,
       projects: sessionStorage.projects ? JSON.parse(sessionStorage.projects) : []
     })
   }
   else if (path === 'examples') {
-    const id = pathList[1]
+    const _id = pathList[1]
     store.dispatch({
       type: 'ROUTE_EXAMPLES',
-      words: !!id ? exampleWords[parseInt(id, 10)] : initialState.Words
+      words: !!_id ? exampleWords[parseInt(_id, 10)] : initialState.Words
     }) 
   }
   else if (path === 'guide') {

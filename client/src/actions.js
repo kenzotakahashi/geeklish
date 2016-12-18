@@ -1,25 +1,25 @@
-export const showOptions = (id) => ({
+export const showOptions = (_id) => ({
   type: 'SHOW_OPTIONS',
-  id
+  _id
 })
 
-export const showWordFactory = (id, target, dictionary) => ({
+export const showWordFactory = (_id, target, dictionary) => ({
   type: 'SHOW_WORD_FACTORY',
-  id,
+  _id,
   target,
   dictionary
 })
 
-export const changeAttribute = (id, attr, change_to) => ({
+export const changeAttribute = (_id, attr, change_to) => ({
   type: 'CHANGE_ATTRIBUTE',
-  id,
+  _id,
   attr,
   change_to,
 })
 
-export const deleteElement = (id, role, parentId) => ({
+export const deleteElement = (_id, role, parentId) => ({
 	type: 'DELETE_ELEMENT',
-	id,
+	_id,
   role,
   parentId
 })

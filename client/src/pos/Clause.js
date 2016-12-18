@@ -2,7 +2,7 @@ import { createWord } from './util.js'
 
 export const Clause = {
   init: function(c) {
-    this.id = c.id
+    this._id = c._id
     this.pos = c.pos
     this.cType = c.cType
     this.subject = createWord(c.subject)
@@ -224,7 +224,7 @@ export const Clause = {
 
 export const ClauseContainer = {
   init: function(c) {
-    this.id = c.id
+    this._id = c._id
     this.pos = c.pos
     this.conjunction = createWord(c.conjunction)
     this.clauses = c.clauses.map(o => createWord(o))

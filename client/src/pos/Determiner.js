@@ -2,7 +2,7 @@ import { createWord } from './util.js'
 
 export const Determiner = {
   init: function(p) {
-    this.id = p.id
+    this._id = p._id
     this.pos = p.pos
     this.word = p.word
     this.number = p.number
@@ -16,7 +16,7 @@ export const Determiner = {
 
 export const Possessive = {
   init: function(p) {
-    this.id = p.id
+    this._id = p._id
     this.pos = p.pos
     this.noun = createWord(p.noun)
     return this    

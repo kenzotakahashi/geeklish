@@ -1,6 +1,6 @@
 const Conjunction = {
   init: function(p) {
-    this.id = p.id
+    this._id = p._id
     this.pos = p.pos
     this.word = p.word
     this.type = p.type

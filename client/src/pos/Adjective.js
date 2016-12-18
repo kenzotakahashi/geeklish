@@ -2,7 +2,7 @@ import { createWord } from './util.js'
 
 export const Adjective = {
   init: function(p) {
-    this.id = p.id
+    this._id = p._id
     this.pos = p.pos
     this.word = p.word
     this.form = p.form
@@ -35,7 +35,7 @@ export const Adjective = {
 
 export const AdjectiveClause = {
   init: function(p) {
-    this.id = p.id
+    this._id = p._id
     this.pos = p.pos
     this.clause = createWord(p.clause)
     this.isWh = p.isWh

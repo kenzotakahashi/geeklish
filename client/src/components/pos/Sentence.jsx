@@ -9,7 +9,7 @@ const Sentence = React.createClass({
   //   const state = store.getState()
   //   const element = state.Words.find(o => o.pos === 'Sentence')
   //   if (!element.clause) {
-  //     getWordDictionary(state.Words, state.activeWord, element.id, 'clause')
+  //     getWordDictionary(state.Words, state.activeWord, element._id, 'clause')
   //   }
   // },
   render: function() {
@@ -21,7 +21,7 @@ const Sentence = React.createClass({
       <ul>
         <li>
           <div className={`tree-box ${element.pos}`}>
-            <span className='word' onClick={() => store.dispatch(showOptions(this.props.id))}>Sentence</span>
+            <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>Sentence</span>
           </div>
           <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />

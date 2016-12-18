@@ -29,7 +29,7 @@ app.get('/api/dictionary', (req, res) => {
 })
 
 app.get('/api/dictionary/:id', (req, res) => {	
-	Dictionary.findById(req.params.id).exec((err, dic) => {
+	Dictionary.findById(req.params._id).exec((err, dic) => {
 		if (err) {return next(err)}
 		res.json({ result: dic })
 	})

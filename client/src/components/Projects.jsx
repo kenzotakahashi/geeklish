@@ -19,7 +19,7 @@ const Projects = React.createClass({
       state,
       isNew
     })
-    if (isNew) history.push(`/projects/${store.getState().projects[0].id}`)
+    if (isNew) history.push(`/projects/${store.getState().projects[0]._id}`)
   },
   onFormSubmit(e) {
     e.preventDefault()
@@ -30,14 +30,14 @@ const Projects = React.createClass({
       type: 'DELETE_PROJECT'
     })
     const projects = store.getState().projects
-    history.push(`/projects/${projects.length > 0 ? projects[0].id : ''}`)
+    history.push(`/projects/${projects.length > 0 ? projects[0]._id : ''}`)
   },
   render: function() {
     const state = store.getState()
 
     const projects = state.projects.map(o => (
-      <li key={o.id} className='example'>
-        <Link to={`/projects/${o.id}`}>{o.title}</Link>
+      <li key={o._id} className='example'>
+        <Link to={`/projects/${o._id}`}>{o.title}</Link>
       </li>
     ))
 
