@@ -1,3 +1,14 @@
+html {
+  overflow-y: scroll
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: whitesmoke;
+}
+
 .container.small-font {
   padding-right: 0;
   padding-left: 0;  
@@ -10,7 +21,17 @@
   border-style: solid;
   border-width: 1px;
   padding: 7px;
-  min-height: 500px; 
+  min-height: 570px;
+}
+
+.fixed-box {
+  height: 560px;
+  margin-bottom: 0;
+  overflow: scroll;
+}
+
+div.main-box > .fixed-box {
+  padding-left: 5px;
 }
 
 div.row > div {
@@ -142,34 +163,34 @@ button.trash {
   float: right;
 }
 
-.fixed-box {
-  height: 500px;
-  /*border:1px solid #ccc;*/
-  overflow: scroll;
-}
-
-.panel.panel-default {
-  border-width: 3px;
-}
-
 .active-link {
   color: #23527c;
   text-decoration: underline;
 }
 
 .example {
-  margin: 3px 0;
+  margin: 5px 0;
 }
 
 .form-inline.project-form {
   margin-bottom: 5px;
+  margin-left: 5px;
 }
 
 input.form-control.title-form {
   width: 500px;
 }
 
+.output {
+  padding: 7px 0 0 7px;
+  font-size: 14px;
+}
+
 footer {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 5px;
+}
+
+.btn.btn-default[disabled] {
+  cursor: default;
 }

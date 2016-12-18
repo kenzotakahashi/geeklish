@@ -24,7 +24,7 @@ const WordFactory = React.createClass({
     const state = store.getState()
     // ref={input => input && input.focus()}
     return (
-      <div>
+      <div className='word-factory'>
         <input
           placeholder='search'
           type='text'

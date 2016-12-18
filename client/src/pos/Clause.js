@@ -182,7 +182,10 @@ export const Clause = {
     }
   },
   convertToString: function(c) {
-    return c.filter(t => !['', null].includes(t)).map(o => o.toString())
+    return c.filter(t => !['', null].includes(t))
+            .map(o => o.toString())
+            .reduce((a, b) => a.concat(b), [])
+            .map(o => o.toString())
   },
   shouldUseAn: function(word) {
     const a_specials = ['us','uni','one','once','eu']
@@ -230,8 +233,8 @@ export const Clause = {
     const adj = this.adjective ? [',', this.adjective] : []
     c = [...c, ...adj]
     c = this.convertToString(c)
-    // console.log(c)
-    c = this.checkArticle(c)
+    console.log(c)
+    // c = this.checkArticle(c)
     c = this.joinElements(c.map(o => o.toString()))
     // console.log(c)
     return c

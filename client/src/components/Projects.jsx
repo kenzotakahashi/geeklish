@@ -42,7 +42,7 @@ const Projects = React.createClass({
     ))
 
     return (
-      <div className='container small-font'>
+      <div className='small-font'>
 
         {state.example !== undefined &&
         <form className="form-inline project-form" onSubmit={this.onFormSubmit}>
@@ -55,19 +55,19 @@ const Projects = React.createClass({
               onChange={this.onInputChange}
             />
           </div>
-          <button type="submit" className="btn btn-default">
+          <button type="submit" className="btn btn-default" disabled={state.saved ? "disabled" : ""}>
             Save
           </button>
           <button type="button" className="btn btn-default"
                  onClick={() => this.deleteProject()}>
-           <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
           </button>
         </form>}
 
         <div className='row'>
           <div className='col-xs-2'>
             <div className='main-box'>
-              <ul className='list-group'>              
+              <ul className='fixed-box'>              
                 <button type="button" className="btn btn-default btn-block"
                         onClick={() => this.saveSentence(initialState, true)}>
                   New Project

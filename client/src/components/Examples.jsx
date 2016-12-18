@@ -10,19 +10,24 @@ const Examples = React.createClass({
 
   render: function() {
     const examples = exampleOutputs.map(o => (
-      <li key={o.id} className='example'>
-        <Link to={`/examples/${o.id}`} >{o.title}</Link>
-      </li>
+      <ul key={o.category}>
+        <h5>{o.category}</h5>
+        {o.examples.map(t => (
+          <li key={t.id} className='example'>
+            <Link to={`/examples/${t.id}`} >{t.title}</Link>
+          </li>
+        ))}
+      </ul>
     ))
 
     return (
-      <div className='container small-font'>
+      <div className='small-font'>
         <div className='row'>
           <div className='col-xs-2'>
             <div className='main-box'>
-              <ul className='list-group fixed-box'>
+              <div className='fixed-box'>
                 {examples}
-              </ul>
+              </div>
             </div>
           </div>
           <div className='col-xs-10'>

@@ -1,43 +1,97 @@
 
 export const exampleOutputs = [
-  {id: 0, title: "I am eating."},
-  {id: 1, title: "She likes you."},
-  {id: 2, title: "I am John."},
-  {id: 3, title: "We do not know her."},
-  {id: 4, title: "I do not drink."},
-  {id: 5, title: "You gave him the dog."},
-  {id: 6, title: "I will think about it."},
+  {
+    category: "Basics",
+    examples: [
+      {id: 0, title: "I am eating."},
+      {id: 4, title: "I do not drink."},
+    ]
+  },
+  {
+    category: "Complement",
+    examples: [
+      {id: 1, title: "She likes you."},
+      {id: 3, title: "We do not know her."},
+      {id: 5, title: "You gave him the dog."},
+      {id: 2, title: "I am John."},
+      {id: 8, title: "I am at the park."},
+      {id: 17, title: "You should not have done that."},
+    ]
+  },  
+  {
+    category: "Preposition",
+    examples: [
+      {id: 6, title: "I will think about it."},
+      {id: 7, title: "I live with John."},
+      {id: 9, title: "John is younger than me."},
+      {id: 10, title: "Do you want to talk to him?"},
+      {id: 11, title: "Tell me about yourself."},
+    ]
+  },
+  {
+    category: "Gerund",
+    examples: [
+      {id: 12, title: "Walking is good for you."},
+    ]
+  },
+  {
+    category: "Adverb",
+    examples: [
+      {id: 13, title: "She really does not have time."},
+      {id: 14, title: "This is so important to me."},
+      {id: 15, title: "I have not had lunch today."},
+      {id: 28, title: "She would never do something like that."},
+    ]
+  },
+  {
+    category: "Possessive",
+    examples: [
+      {id: 16, title: "My child has been found."},
+    ]
+  },
+  {
+    category: "Question",
+    examples: [
+      {id: 18, title: "What do you want?"},
+      {id: 19, title: "What are you doing?"},
+      {id: 20, title: "Where are you going?"},
+      {id: 21, title: "How did you find me?"},
+      {id: 22, title: "Who told you that?"},
+    ]
+  },
+  {
+    category: "Noun Clause",
+    examples: [
+      {id: 23, title: "I know what you are thinking."},
+      {id: 24, title: "This is where I live."},
+      {id: 25, title: "You are what you eat."},
+    ]
+  },
+  {
+    category: "Adverb Clause",
+    examples: [
+      {id: 26, title: "I am hungry because I did not eat lunch today."},
+    ]
+  },
+  {
+    category: "Noun Container",
+    examples: [
+      {id: 27, title: "John and I are friends."},
+    ]
+  },
+  {
+    category: "Particle",
+    examples: [
+      {id: 29, title: "Wake me up."}
+    ]
+  },
+  // {
+  //   category: ,
+  //   examples: [
 
-  {id: 7, title: "I live with John."},
-  {id: 8, title: "I am at the park."},
-  {id: 9, title: "John is younger than me."},
-  {id: 10, title: "Do you want to talk to him?"},
-  {id: 11, title: "Tell me about yourself."},
+  //   ]
+  // },
 
-  {id: 12, title: "Walking is good for you."},
-
-  {id: 13, title: "She really does not have time."},
-  {id: 14, title: "This is so important to me."},
-
-  {id: 15, title: "I have not had lunch today."},
-  {id: 16, title: "My child has been found."},
-  {id: 17, title: "You should not have done that."},
-
-  {id: 18, title: "What do you want?"},
-  {id: 19, title: "What are you doing?"},
-  {id: 20, title: "Where are you going?"},
-  {id: 21, title: "How did you find me?"},
-  {id: 22, title: "Who told you that?"},
-
-  {id: 23, title: "I know what you are thinking."},
-  {id: 24, title: "This is where I live."},
-  {id: 25, title: "You are what you eat."},
-  
-  {id: 26, title: "I am hungry because I did not eat lunch today."},
-  {id: 27, title: "John and I are friends."},
-
-  {id: 28, title: "She would never do something like that."},
-  {id: 29, title: "Wake me up."}
   // {id:, title: ""},
   // {id:, title: ""},
   // {id:, title: ""},
@@ -87,6 +141,7 @@ export const initialState = {
   route: null,
   example: null,
   title: 'Some title',
+  saved: true,
   activeWord: 1,
   target: null,
   dictionary: [],

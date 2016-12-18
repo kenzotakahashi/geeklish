@@ -45,6 +45,7 @@ function reducer(state, action) {
       return {
         ...action.state,
         route: 'projects',
+        saved: true,
         example: action.id,
         title: action.title,
         projects: action.projects
@@ -74,20 +75,16 @@ function reducer(state, action) {
     case 'SHOW_OPTIONS': {
       return {
         ...state,
+        saved: false,
         activeWord: state.activeWord === action.id ? 1 : action.id,
         target: null
-      }
-    }
-    case 'INSERT_DICTIONARY': {
-      return {
-        ...state,
-        dictionary: action.dictionary
       }
     }
     case 'SHOW_WORD_FACTORY': {
       return {
         ...state,
-        activeWord: action.id,        
+        saved: false,
+        activeWord: action.id, 
         target: action.target,
         dictionary: action.dictionary
       }
@@ -116,6 +113,7 @@ function reducer(state, action) {
 
       return {
         ...state,
+        saved: false,
         activeWord: newActiveWord,
         target: false,
         Words: [
@@ -135,6 +133,7 @@ function reducer(state, action) {
       }
       return {
         ...state,
+        saved: false,
         Words: [
           ...state.Words.slice(0, elementIndex),
           newElement,
@@ -154,6 +153,7 @@ function reducer(state, action) {
       }
       return {
         ...state,
+        saved: false,
         Words: [
           ...filtered.slice(0, elementIndex),
           newElement,
@@ -177,6 +177,7 @@ function reducer(state, action) {
 
       return {
         ...state,
+        saved: false,
         activeWord: initialized.id,
         target: false,
         Words: [
@@ -199,6 +200,7 @@ function reducer(state, action) {
       }
       return {
         ...state,
+        saved: false,
         Words: [
           ...filtered.slice(0, elementIndex),
           newParent,
@@ -211,6 +213,7 @@ function reducer(state, action) {
     case 'UPDATE_TITLE': {
       return {
         ...state,
+        saved: false,
         title: action.title
       }
     }
@@ -248,6 +251,7 @@ function reducer(state, action) {
 
       return {
         ...action.state,
+        saved: true,
         example: id,
         projects: newProjects
       }   

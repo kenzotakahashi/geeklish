@@ -31,6 +31,26 @@ function beforeOrAfter(adjs) {
   return [adjBeginning, adjectives, adjectivesAfter]
 }
 
+function shouldUseAn(word) {
+  const a_specials = ['us','uni','one','once','eu']
+  const an_specials = ['hour','honor','honest']
+  for (const s of a_specials) {
+    if (word.startsWith(s)) return false
+  }
+  for (const s of an_specials) {
+    if (word.startsWith(s)) return true
+  }
+  return 'aeiou'.includes(word[0])
+}
+
+function checkArticle(phrase) {
+  let newPhrase = []
+  for (let i=0; i < phrase.length; i++) {
+    newPhrase.push(phrase[i].word === 'a' && shouldUseAn(phrase[i+1].toString()) ? 'an' : phrase[i])
+  }
+  return newPhrase
+}
+
 export const Noun = {
   init: function(w) {
     this.id = w.id
@@ -61,7 +81,8 @@ export const Noun = {
     return this.getList().map(o => o.toString()).join(' ')
   },
   getList: function() {
-    return this.getRest(this.word[this.number])
+    console.log(this.getRest(this.word[this.number]))
+    return checkArticle(this.getRest(this.word[this.number]))
   },
   getRest: function(noun) {
     return [...this.determiners,

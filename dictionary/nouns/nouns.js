@@ -51,6 +51,11 @@ const nouns = [
 		type: "countable",
 		base: 'dogma',
 	},
+	{
+		type: "countable",
+		base: "man",
+		plural: "men"
+	}
 ].map(o => ({
 	...o,
 	order: 1

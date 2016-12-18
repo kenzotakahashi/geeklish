@@ -9,10 +9,11 @@ const Output = React.createClass({
                     .init(state.Words.find(o => o.pos === 'Sentence')).toString()
 
     return (
-      <div className="panel panel-default">
-        <div className="panel-body">
+      <div>
+        <div className="output">
           {sentence}
         </div>
+        <hr />
       </div>
     )
   }

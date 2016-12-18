@@ -2,9 +2,7 @@ import express from 'express'
 import path from 'path'
 import mongoose from 'mongoose'
 import mongo from 'mongodb'
-import { Dictionary, PronounDic, NounDic, DeterminerDic, VerbDic, AdjectiveDic,
-         AdverbDic, ConjunctionDic, PrepositionDic, InfinitiveDic, BeDic, ClauseDic, NounContainerDic,
-         NounClauseDic, AdjectiveClauseDic, ClauseContainerDic, VerbContainerDic } from './models/models'
+import { Dictionary } from './models/dictionary'
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.Promise = global.Promise
