@@ -45,3 +45,9 @@ export const createNewWord = (wordBase, activeWord, target) => ({
   activeWord,
   target,
 })
+
+export const routeExample = (examples, words) => ({
+  type: 'ROUTE_EXAMPLES',
+  examples,
+  words
+})

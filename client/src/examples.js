@@ -1,3 +1,4 @@
+import uuid from 'uuid'
 
 export const exampleOutputs = [
   {
@@ -137,44 +138,24 @@ export const exampleWords = [
 
 ]
 
-export const initialState = {
-  route: null,
-  example: null,
-  title: 'Some title',
-  saved: true,
-  activeWord: 1,
-  target: null,
-  dictionary: [],
-  projects: !!sessionStorage.projects ? JSON.parse(sessionStorage.projects) : [],
-  Words: [
-    {
-      _id: 1,
-      pos: 'Sentence',
-      clause: null,
-    },
-  ],
+export const initialState = function() {
+  const _id = uuid.v1()
+  return {
+    route: null,
+    example: null,
+    title: 'Some title',
+    saved: true,
+    activeWord: _id,
+    target: null,
+    dictionary: [],
+    examples: !!sessionStorage.examples ? JSON.parse(sessionStorage.examples) : [],
+    projects: !!sessionStorage.projects ? JSON.parse(sessionStorage.projects) : [],
+    Words: [
+      {
+        _id: _id,
+        pos: 'Sentence',
+        clause: null,
+      },
+    ],
+  }
 }
-
-// export const initialState = {
-//   example: null,
-//   activeWord: 2,
-//   target: null,
-//   dictionary: [],
-//   projects: !!sessionStorage.projects ? JSON.parse(sessionStorage.projects) : [],
-//   Words: [
-//     {
-//       _id: 1,
-//       pos: 'Sentence',
-//       clause: 2,
-//     },
-//     {
-//       _id: 2,
-//       pos: 'Clause',
-//       cType: 'statement',
-//       subject: null,
-//       verb: null,
-//       adjectiveClause: null,
-//       adverbs: [],
-//     },
-//   ],
-// }

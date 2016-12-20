@@ -6,19 +6,20 @@ var options = {discriminatorKey: 'pos', _id: false}
 
 export const Element = mongoose.model('Element', new Schema({
   _id: String,
+  projectId: String,
   createdAt: {type: Date, default: Date.now},
 }, options))
 
 export const Sentence = Element.discriminator('Sentence', new Schema({
-  clause: ObjectId,
+  clause: String,
 }, options))
 
 export const Clause = Element.discriminator('Clause', new Schema({
   cType: String,
-  subject: ObjectId,
-  verb: ObjectId,
-  adjective: ObjectId,
-  adverbs: [ObjectId]
+  subject: String,
+  verb: String,
+  adjective: String,
+  adverbs: [String]
 }, options))
 
 export const Pronoun = Element.discriminator('Pronoun', new Schema({
@@ -32,8 +33,8 @@ export const Pronoun = Element.discriminator('Pronoun', new Schema({
   person: Number,
   number: String,
   form: String,
-  adjectives: [ObjectId],
-  prepositions: [ObjectId],
+  adjectives: [String],
+  prepositions: [String],
   isWh: Boolean
 }, options))
 
@@ -53,10 +54,10 @@ export const Verb = Element.discriminator('Verb', new Schema({
   perfect: Boolean,
   passive: Boolean,
   modal: String,
-  particle: ObjectId,
-  complements: [ObjectId],
-  adverbs: [ObjectId],
-  prepositions: [ObjectId]
+  particle: String,
+  complements: [String],
+  adverbs: [String],
+  prepositions: [String]
 }, options))
 
 
@@ -282,3 +283,9 @@ export const Verb = Element.discriminator('Verb', new Schema({
 //   }
 // }
 
+export const Pos = {
+  Sentence,
+  Clause,
+  Pronoun,
+  Verb
+}

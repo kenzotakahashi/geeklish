@@ -1,8 +1,13 @@
 import express from 'express'
 import path from 'path'
+import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import mongo from 'mongodb'
-import { Dictionary } from './models/dictionary'
+import async from 'async'
+
+import { Dictionary } from './server/models/dictionary'
+import { Element, Pos } from './server/models/element'
+import { Project } from './server/models/project'
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.Promise = global.Promise
@@ -18,6 +23,8 @@ app.use(function(req, res, next) {
   next()
 })
 
+app.use(bodyParser.json())
+
 app.set('port', (process.env.PORT || 3001))
 
 app.get('/api/dictionary', (req, res) => {
@@ -32,6 +39,52 @@ app.get('/api/dictionary/:id', (req, res) => {
 	Dictionary.findById(req.params._id).exec((err, dic) => {
 		if (err) {return next(err)}
 		res.json({ result: dic })
+	})
+})
+
+app.get('/api/projects', (req, res) => {	
+	Project.find({}).select('_id title').exec((err, dic) => {
+		if (err) {return next(err)}
+		res.json({ result: dic })
+	})
+})
+
+app.get('/api/project/:_id', (req, res) => {	
+	Element.find({'projectId': req.params._id}).exec((err, dic) => {
+		if (err) {return next(err)}
+		res.json({ result: dic })
+	})
+})
+
+const excludeId = function(obj) {
+	const newObj = {}
+	const nonIds = Object.keys(obj).filter(o => o !== '_id')
+	for (let k in nonIds) {
+		newObj[nonIds[k]] = obj[nonIds[k]]
+	}
+	return newObj
+}
+
+app.post('/api/save_project', (req, res) => {
+	const project = req.body.project
+	Project.findByIdAndUpdate(
+		project._id,
+		excludeId(project),
+	  {upsert: true, setDefaultsOnInsert: true}
+	).exec((err, dic) => {
+	  if (err) return console.log(err)
+
+		async.eachSeries(req.body.words, (element, callback) => {
+			Pos[element.pos].findByIdAndUpdate(
+				element._id,
+				{...excludeId(element), projectId: project._id},
+			  {upsert: true, setDefaultsOnInsert: true},
+			  callback
+			), function(err) {
+			  if (err) return console.log(err);
+			  res.json({ result: {} })
+			}
+		})
 	})
 })
 

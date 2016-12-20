@@ -12,10 +12,12 @@
     "node": "7.2.0"
   },
   "dependencies": {
+    "async": "^2.1.4",
     "babel-cli": "6.18.0",
     "babel-core": "6.18.2",
     "babel-preset-es2015": "6.18.0",
     "babel-preset-stage-0": "6.16.0",
+    "body-parser": "^1.15.2",
     "express": "4.14.0",
     "foreman": "2.0.0",
     "fs": "0.0.2",
@@ -26,6 +28,6 @@
     "start": "nf start -p 3000",
     "dev": "nf start -f Procfile.dev -p 3000",
     "server": "API_PORT=3001 ./node_modules/.bin/babel-node server.js",
-    "db": "./node_modules/.bin/babel-node script.js"
+    "db": "./node_modules/.bin/babel-node server/script.js"
   }
 }

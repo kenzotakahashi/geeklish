@@ -1,9 +1,22 @@
 import React from 'react'
 import createHistory from 'history/createBrowserHistory'
 import store from '../store.js'
-import { exampleWords, initialState } from '../examples'
+import { initialState } from '../examples'
+import Client from '../Client'
+import { routeExample } from '../actions'
 
 export const history = createHistory()
+
+function dispatchExamples(_id, examples) {
+  if (!!_id) {
+    Client.getProject(_id, (data) => {
+      store.dispatch(routeExample(examples, data.result))
+    })
+  }
+  else {
+    store.dispatch(routeExample(examples, initialState().Words))
+  }
+}
 
 function handleNavigation(location, action) {
   // console.log(action, location.pathname, location.state)
@@ -20,7 +33,7 @@ function handleNavigation(location, action) {
     }
     else {
       title = ''
-      state = initialState
+      state = initialState()
     }
     store.dispatch({
       type: 'ROUTE_PROJECTS',
@@ -32,10 +45,14 @@ function handleNavigation(location, action) {
   }
   else if (path === 'examples') {
     const _id = pathList[1]
-    store.dispatch({
-      type: 'ROUTE_EXAMPLES',
-      words: !!_id ? exampleWords[parseInt(_id, 10)] : initialState.Words
-    }) 
+    if (sessionStorage.examples) {
+      const data = JSON.parse(sessionStorage.examples)
+      dispatchExamples(_id, data)
+    } else {
+      Client.getProjects(data => {
+        dispatchExamples(_id, data)
+      })
+    }
   }
   else if (path === 'guide') {
     store.dispatch({type: 'ROUTE_GUIDE'})
@@ -50,15 +67,8 @@ handleNavigation(history.location)
 history.listen(handleNavigation)
 
 
-
-
-function isLeftClickEvent(event) {
-  return event.button === 0
-}
-
-function isModifiedEvent(event) {
-  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey)
-}
+const isLeftClickEvent = (e) => e.button === 0
+const isModifiedEvent = (e) => !!(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey)
 
 export const Link = React.createClass({
   handleClick: function(event) {

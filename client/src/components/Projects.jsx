@@ -1,5 +1,6 @@
 import React from 'react'
 import store from '../store.js'
+import Client from '../Client'
 
 import Canvas from './Canvas.jsx'
 
@@ -19,6 +20,17 @@ const Projects = React.createClass({
       state,
       isNew
     })
+    if (process.env.NODE_ENV === 'development') {
+      const newState = store.getState()
+      Client.postProject({
+        project: {
+          _id: newState.example,
+          title: newState.title,
+          category: '',          
+        },
+        words: newState.Words
+      })
+    }
     if (isNew) history.push(`/projects/${store.getState().projects[0]._id}`)
   },
   onFormSubmit(e) {
@@ -69,7 +81,7 @@ const Projects = React.createClass({
             <div className='main-box'>
               <ul className='fixed-box'>              
                 <button type="button" className="btn btn-default btn-block"
-                        onClick={() => this.saveSentence(initialState, true)}>
+                        onClick={() => this.saveSentence(initialState(), true)}>
                   New Project
                 </button>
                 {projects}

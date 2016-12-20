@@ -55,6 +55,7 @@ function reducer(state, action) {
       return {
         ...state,
         route: 'examples',
+        examples: action.examples,
         Words: action.words
       }
     }
@@ -263,7 +264,7 @@ function reducer(state, action) {
       sessionStorage.projects = JSON.stringify(newProjects)
 
       return {
-        ...initialState,
+        ...initialState(),
         example: null,
         projects: state.projects.filter(o => o._id !== state.example)
       }
