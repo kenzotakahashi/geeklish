@@ -9,6 +9,8 @@ import { Dictionary } from './server/models/dictionary'
 import { Element, Pos } from './server/models/element'
 import { Project } from './server/models/project'
 
+import { excludeId, categories } from './server/utils'
+
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.Promise = global.Promise
 
@@ -43,9 +45,14 @@ app.get('/api/dictionary/:id', (req, res) => {
 })
 
 app.get('/api/projects', (req, res) => {	
-	Project.find({}).select('_id title').exec((err, dic) => {
+	Project.find({}).select('_id title category').exec((err, dic) => {
 		if (err) {return next(err)}
-		res.json({ result: dic })
+		// TODO refactor using mongo instead of filter.
+		const r = categories.map(o => ({
+			category: o,
+			examples: dic.filter(t => t.category === o)
+		}))
+		res.json({ result: r })
 	})
 })
 
@@ -55,15 +62,6 @@ app.get('/api/project/:_id', (req, res) => {
 		res.json({ result: dic })
 	})
 })
-
-const excludeId = function(obj) {
-	const newObj = {}
-	const nonIds = Object.keys(obj).filter(o => o !== '_id')
-	for (let k in nonIds) {
-		newObj[nonIds[k]] = obj[nonIds[k]]
-	}
-	return newObj
-}
 
 app.post('/api/save_project', (req, res) => {
 	const project = req.body.project
@@ -82,7 +80,7 @@ app.post('/api/save_project', (req, res) => {
 			  callback
 			), function(err) {
 			  if (err) return console.log(err);
-			  res.json({ result: {} })
+			  res.json({ result: 'success' })
 			}
 		})
 	})

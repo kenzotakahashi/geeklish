@@ -93,6 +93,16 @@ const pronouns = [
     base: 'something',
     person: 3,
     number: 'singular',
+  },
+  {
+    base: 'someone',
+    person: 3,
+    number: 'singular',
+  },
+  {
+    base: 'one',
+    person: 3,
+    number: 'singular',
   }
 ].map(o => ({
   ...o,

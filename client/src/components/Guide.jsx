@@ -61,6 +61,7 @@ const Guide = React.createClass({
           <ul>
             <li className='function-group'>
               <div className='function-title'>adjectives</div>
+              <span className='pos basic'>Adjective Clause</span>
               <span className='pos basic'>Infinitive</span>
               <span className='pos basic'>Participle</span>
             </li>

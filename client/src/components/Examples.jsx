@@ -11,21 +11,15 @@ const Examples = React.createClass({
 
   render: function() {
     const state = store.getState()
-    // const examples = state.examples.map(o => (
-    //   <ul key={o.category}>
-    //     <h5>{o.category}</h5>
-    //     {o.examples.map(t => (
-    //       <li key={t._id} className='example'>
-    //         <Link to={`/examples/${t._id}`} >{t.title}</Link>
-    //       </li>
-    //     ))}
-    //   </ul>
-    // ))
-
     const examples = state.examples.map(o => (
-      <li key={o._id} className='example'>
-        <Link to={`/examples/${o._id}`} >{o.title}</Link>
-      </li>
+      <ul key={o.category}>
+        <h5>{o.category}</h5>
+        {o.examples.map(t => (
+          <li key={t._id} className='example'>
+            <Link to={`/examples/${t._id}`} >{t.title}</Link>
+          </li>
+        ))}
+      </ul>
     ))
 
     return (
@@ -34,9 +28,7 @@ const Examples = React.createClass({
           <div className='col-xs-2'>
             <div className='main-box'>
               <div className='fixed-box'>
-                <ul>
-                  {examples}
-                </ul>
+                {examples}
               </div>
             </div>
           </div>

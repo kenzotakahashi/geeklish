@@ -204,6 +204,19 @@ const verbs = [
 		past: 'said',
 		gerund: 'saying',
 	},
+	{
+		base: 'speak',
+		tps: 'speaks',
+		past: 'spoke',
+		passive: 'spoken',
+		gerund: 'speaking',
+	},
+	{
+		base: 'make',
+		tps: 'makes',
+		past: 'made',
+		gerund: 'making',
+	},
 ].map(o => ({
 	...o,
 	order: 3

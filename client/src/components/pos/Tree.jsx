@@ -48,7 +48,7 @@ export const WH = (props) => (
 		{
 		  className: `button is-small is-active ${props.isWh && 'is-primary'}`,
 		  type: 'button',
-		  onClick: () => store.dispatch(changeAttribute(props._id, 'isWh', !props.isWh))
+		  onClick: () => store.dispatch(changeAttribute(props.id, 'isWh', !props.isWh))
 		},
 		'WH'
 	)

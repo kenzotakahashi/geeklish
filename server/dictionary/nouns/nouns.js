@@ -55,6 +55,26 @@ const nouns = [
 		type: "countable",
 		base: "man",
 		plural: "men"
+	},
+	{
+		type: "countable",
+		base: "brother",
+	},
+	{
+		type: "countable",
+		base: "architect",
+	},
+	{
+		type: 'uncountable',
+		base: 'Chinese',
+	},
+	{
+		type: 'uncountable',
+		base: 'China',
+	},
+	{
+		type: "countable",
+		base: 'T-shirt',
 	}
 ].map(o => ({
 	...o,

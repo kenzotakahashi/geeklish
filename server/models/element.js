@@ -60,232 +60,192 @@ export const Verb = Element.discriminator('Verb', new Schema({
   prepositions: [String]
 }, options))
 
+export const Noun = Element.discriminator('Noun', new Schema({
+  type: String,
+  word: {
+    singular: String,
+    plural: String
+  },
+  person: Number,
+  number: String,
+  isWh: Boolean,
+  adjectives: [String],
+  adjectivesAfter: [String],
+  determiners: [String],
+  prepositions: [String],
+  nouns: [String]
+}, options))
 
-//   Noun: function(w) {
-//     const init = {
-//       id: uuid.v1(),
-//       pos: 'Noun',
-//       type: w.type,
-//       word: {
-//         singular: w.base,
-//         plural: w.type === 'uncountable' ? w.base : w.plural || `${w.base}s`, 
-//       },
-//       person: null,
-//       number: 'singular',
-//       isWh: false,
-//       adjectives: [],
-//       adjectivesAfter: [],
-//       determiners: [],
-//       prepositions: [],
-//       nouns: []
-//     }
-//     return init
-//   },
-//   NounContainer: function(w, arg) {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'NounContainer',
-//       person: null,
-//       number: 'plural',
-//       isWh: false,
-//       adjectives: [],
-//       adjectivesAfter: [],
-//       determiners: [],
-//       prepositions: [],
-//       nouns: [arg.child],
-//       conjunction: null,
-//     }
-//   },
-//   NounClause: function() {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'NounClause',
-//       person: null,
-//       number: 'singular',
-//       isWh: false,
-//       that: false,
-//       clause: null,
-//       adjectives: [],
-//       adjectivesAfter: [],
-//       determiners: [],
-//       prepositions: [],
-//       nouns: [],
-//     }
-//   },
-//   Determiner: function(w) {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'Determiner',
-//       word: w.base,
-//       number: w.number,
-//       adverb: null,
-//       // isWh: ['what','whose','which'].includes(w.base) ? true : false
-//     }
-//   },
-//   Possessive: function() {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'Possessive',
-//       noun: null,
-//     }
-//   },
+export const NounContainer = Element.discriminator('NounContainer', new Schema({
+  person: Number,
+  number: String,
+  isWh: Boolean,
+  adjectives: [String],
+  adjectivesAfter: [String],
+  determiners: [String],
+  prepositions: [String],
+  nouns: [String],
+  conjunction: String,
+}, options))
 
-//   Be: function(w, arg) {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'Be',
-//       word: {
-//         base: 'be',
-//         first: 'am',
-//         tps: 'is',
-//         'plural': 'are',
-//         'past_s': 'was',
-//         'past_p': 'were',
-//         'past': null,
-//         'passive': 'been',
-//         'gerund': 'being'
-//       },
-//       valid_complements: [],
-//       form: arg.form || 'base',
-//       negative: false,
-//       modal: '',
-//       past: false,
-//       perfect: false,
-//       continuous: false,
-//       complements: [],
-//       adverbs: [],
-//       prepositions: []
-//     }
-//   },
-//   VerbContainer: function(w, arg) {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'VerbContainer',
-//       valid_complements: null,
-//       form: arg.form || null,
-//       negative: false,
-//       past: false,
-//       continuous: false,
-//       perfect: false,
-//       passive: false,
-//       modal: '',
-//       complements: [],
-//       adverbs: [],
-//       prepositions: [],
-//       verbs: arg.child ? [arg.child] : [],
-//       conjunction: null
-//     }
-//   },
-//   Adjective: function(w) {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'Adjective',
-//       word: {
-//         base: w.base,
-//         comparative: w.comparative || `more ${w.base}`,
-//         superlative: w.superlative || `most ${w.base}`
-//       },
-//       form: 'base',
-//       adverbs: [],
-//       prepositions: [],
-//       isWh: false
-//     }
-//   },
-//   AdjectiveClause: function(w) {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'AdjectiveClause',
-//       clause: null,
-//       isWh: false
-//     }
-//   },
-//   Adverb: function(w) {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'Adverb',
-//       word: {
-//         base: w.base,
-//         comparative: w.comparative === 'n' ? false : w.comparative || `more ${w.base}`,
-//         superlative: w.superlative || `most ${w.base}`
-//       },
-//       form: 'base',
-//       canModifyVerb: w.canModify.includes('verb'),
-//       canModifyAdj: w.canModify.includes('adj'),
-//       canModifyAdv: w.canModify.includes('adv'),
-//       canModifyDet: w.canModify.includes('det'),
-//       canModifyClause: w.canModify.includes('clause'),
-//       position: 'before',
-//       adverb: null,
-//       isWh: ['when','where','how','why'].includes(w.base) ? true : false
-//     }
-//   },
-//   AdverbClause: function(w) {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'AdverbClause',
-//       conjunction: null,
-//       clause: null,
-//       position: 'after',
-//       isWh: false
-//     }
-//   },
-//   Preposition: function(w, arg) {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'Preposition',
-//       word: w.base,
-//       complement: null,
-//       before: arg.before || false,
-//       isWh: false
-//     }
-//   },
-//   Infinitive: function() {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'Infinitive',
-//       word: 'to',
-//       verb: null,
-//       omit: false,
-//     }
-//   },
-//   Gerund: function() {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'Gerund',
-//       verb: null
-//     }
-//   },
-//   Participle: function() {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'Participle',
-//       verb: null,
-//       form: 'present',
-//       beginning: false,
-//     }
-//   },
+export const NounClause = Element.discriminator('NounClause', new Schema({
+  person: Number,
+  number: String,
+  isWh: Boolean,
+  that: Boolean,
+  clause: String,
+  adjectives: [String],
+  adjectivesAfter: [String],
+  determiners: [String],
+  prepositions: [String],
+  nouns: [String],
+}, options))
 
-//   ClauseContainer: function(w, arg) {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'ClauseContainer',
-//       conjunction: null,
-//       clauses: [arg.child],
-//     }
-//   },
-//   Conjunction: function(w) {
-//     return {
-//       id: uuid.v1(),
-//       pos: 'Conjunction',
-//       word: w.base,
-//       type: w.type
-//     }
-//   }
-// }
+export const Determiner = Element.discriminator('Determiner', new Schema({
+  word: String,
+  number: String,
+  adverb: String,
+}, options))
+
+export const Possessive = Element.discriminator('Possessive', new Schema({
+  noun: String,
+}, options))
+
+export const Be = Element.discriminator('Be', new Schema({
+  word: {
+    base: String,
+    first: String,
+    tps: String,
+    'plural': String,
+    'past_s': String,
+    'past_p': String,
+    'past': String,
+    'passive': String,
+    'gerund': String
+  },
+  valid_complements: [String],
+  form: String,
+  negative: Boolean,
+  modal: String,
+  past: Boolean,
+  perfect: Boolean,
+  continuous: Boolean,
+  complements: [String],
+  adverbs: [String],
+  prepositions: [String]
+}, options))
+
+export const VerbContainer = Element.discriminator('VerbContainer', new Schema({
+  valid_complements: [],
+  form: String,
+  negative: Boolean,
+  past: Boolean,
+  continuous: Boolean,
+  perfect: Boolean,
+  passive: Boolean,
+  modal: String,
+  complements: [String],
+  adverbs: [String],
+  prepositions: [String],
+  verbs: [String],
+  conjunction: String
+}, options))
+
+export const Adjective = Element.discriminator('Adjective', new Schema({
+  word: {
+    base: String,
+    comparative: String,
+    superlative: String
+  },
+  form: String,
+  adverbs: [String],
+  prepositions: [String],
+  isWh: Boolean
+}, options))
+
+export const AdjectiveClause = Element.discriminator('AdjectiveClause', new Schema({
+  clause: String,
+  isWh: Boolean
+}, options))
+
+export const Adverb = Element.discriminator('Adverb', new Schema({
+  word: {
+    base: String,
+    comparative: String,
+    superlative: String
+  },
+  form: String,
+  canModifyVerb: Boolean,
+  canModifyAdj: Boolean,
+  canModifyAdv: Boolean,
+  canModifyDet: Boolean,
+  canModifyClause: Boolean,
+  position: String,
+  adverb: String,
+  isWh: Boolean
+}, options))
+
+export const AdverbClause = Element.discriminator('AdverbClause', new Schema({
+  conjunction: String,
+  clause: String,
+  position: String,
+  isWh: Boolean
+}, options))
+
+export const Preposition = Element.discriminator('Preposition', new Schema({
+  word: String,
+  complement: String,
+  before: Boolean,
+  isWh: Boolean
+}, options))
+
+export const Infinitive = Element.discriminator('Infinitive', new Schema({
+  word: String,
+  verb: String,
+  omit: Boolean,
+}, options))
+
+export const Gerund = Element.discriminator('Gerund', new Schema({
+  verb: String
+}, options))
+
+export const Participle = Element.discriminator('Participle', new Schema({
+  verb: String,
+  form: String,
+  beginning: Boolean,
+}, options))
+
+export const ClauseContainer = Element.discriminator('ClauseContainer', new Schema({
+  conjunction: String,
+  clauses: [String],
+}, options))
+
+export const Conjunction = Element.discriminator('Conjunction', new Schema({
+  word: String,
+  type: String
+}, options))
+
 
 export const Pos = {
   Sentence,
+  Verb,
+  VerbContainer,
   Clause,
+  ClauseContainer,
   Pronoun,
-  Verb
+  Noun,
+  NounContainer,
+  NounClause,
+  Determiner,
+  Possessive,
+  Adjective,
+  AdjectiveClause,
+  Adverb,
+  AdverbClause,
+  Preposition,
+  Conjunction,
+  Be,
+  Infinitive,
+  Gerund,
+  Participle,
 }

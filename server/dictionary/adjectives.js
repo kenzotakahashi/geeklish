@@ -33,6 +33,16 @@ const adjectives = [
 	},
 	{
 		base: 'possible'
+	},
+	{
+		base: 'big',
+		comparative: "bigger",
+		superlative: "biggest"
+	},
+	{
+		base: 'smart',
+		comparative: "smarter",
+		superlative: "smartest"
 	}
 ].map(o => ({
 	...o,
