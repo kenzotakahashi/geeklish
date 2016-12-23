@@ -8,9 +8,9 @@ const getArgument = function(parent, wordPos, target) {
       ['Verb','Be','VerbContainer','Preposition'].includes(parent.pos)) {
     return {form: 'accusative'}
   } else if ((parent.pos === 'Gerund' && ['Verb','Be','VerbContainer'].includes(wordPos)) ||
-             (parent.pos === 'VerbContainer' && parent.form === 'gerund' &&
+             (parent.pos === 'VerbContainer' && parent.form === 'progressive' &&
               ['Verb','Be'].includes(wordPos))) {
-    return {form: 'gerund'}
+    return {form: 'progressive'}
   } else if (target === 'particle') {
     return {before: true}
   }

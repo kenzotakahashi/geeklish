@@ -50,7 +50,7 @@ export const Participle = {
   toString: function() {
     if (!this.verb) return ''
     if (this.form === 'present') {
-      return this.verb.getList([this.verb.word.gerund]).join(' ')
+      return this.verb.getList([this.verb.word.progressive]).join(' ')
     } else if (this.form === 'past') {
       return this.verb.getList([this.verb.word.passive]).join(' ')
     } else {

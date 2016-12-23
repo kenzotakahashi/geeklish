@@ -3,7 +3,7 @@ import path from 'path'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import mongo from 'mongodb'
-import async from 'async'
+import Promise from 'promise'
 
 import { Dictionary } from './server/models/dictionary'
 import { Element, Pos } from './server/models/element'
@@ -30,23 +30,19 @@ app.use(bodyParser.json())
 app.set('port', (process.env.PORT || 3001))
 
 app.get('/api/dictionary', (req, res) => {
-	Dictionary.find({}).sort({'order': 1}).exec((err, dics) => {
-	// Dictionary.find({}).select('_id base pos').exec((err, dics) => {
-		if (err) {return next(err)}
+	Dictionary.find({}).sort({'order': 1}).then((dics) => {
 		res.json({ result: dics })
 	})
 })
 
 app.get('/api/dictionary/:id', (req, res) => {	
-	Dictionary.findById(req.params._id).exec((err, dic) => {
-		if (err) {return next(err)}
+	Dictionary.findById(req.params._id).then((dic) => {
 		res.json({ result: dic })
 	})
 })
 
 app.get('/api/projects', (req, res) => {	
-	Project.find({}).select('_id title category').exec((err, dic) => {
-		if (err) {return next(err)}
+	Project.find({}).select('_id title category').then((dic) => {
 		// TODO refactor using mongo instead of filter.
 		const r = categories.map(o => ({
 			category: o,
@@ -57,8 +53,7 @@ app.get('/api/projects', (req, res) => {
 })
 
 app.get('/api/project/:_id', (req, res) => {	
-	Element.find({'projectId': req.params._id}).exec((err, dic) => {
-		if (err) {return next(err)}
+	Element.find({'projectId': req.params._id}).then((dic) => {
 		res.json({ result: dic })
 	})
 })
@@ -68,22 +63,23 @@ app.post('/api/save_project', (req, res) => {
 	Project.findByIdAndUpdate(
 		project._id,
 		excludeId(project),
-	  {upsert: true, setDefaultsOnInsert: true}
-	).exec((err, dic) => {
-	  if (err) return console.log(err)
-
-		async.eachSeries(req.body.words, (element, callback) => {
+	  {upsert: true, setDefaultsOnInsert: true, new: true}
+	).then(dic =>
+		dic.save()
+	).then(_ => {
+		Promise.all(req.body.words.map(element => {
 			Pos[element.pos].findByIdAndUpdate(
 				element._id,
 				{...excludeId(element), projectId: project._id},
-			  {upsert: true, setDefaultsOnInsert: true},
-			  callback
-			), function(err) {
-			  if (err) return console.log(err);
-			  res.json({ result: 'success' })
-			}
-		})
-	})
+			  {upsert: true, setDefaultsOnInsert: true, new: true},
+			).then(dic =>
+				dic.save()
+			)
+		}))
+	}).then(_ =>
+		res.json({ result: 'success' })
+	)
+
 })
 
 app.get('*', function (req, res) {

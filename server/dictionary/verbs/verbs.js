@@ -1,36 +1,31 @@
 const verbs = [
 	{
 		base: 'love',
-		tps: 'loves',
-		past: 'loved',
-		gerund: 'loving',
+		progressive: 'loving',
 		// complements: [
 		// 	['N']
 		// ]
 	},
 	{
 		base: 'like',
-		tps: 'likes',
-		past: 'liked',
-		gerund: 'liking',
+		progressive: 'liking',
 		// complements: [
 		// 	['N']
 		// ]
 	},
 	{
 		base: 'find',
-		tps: 'finds',
 		past: 'found',
-		gerund: 'finding',
+		progressive: 'finding',
 		// complements: [
 		// 	['N']
 		// ]
 	},
 	{
 		base: 'have',
-		tps: 'has',
+		present: 'has',
 		past: 'had',
-		gerund: 'having',
+		progressive: 'having',
 		// complements: [
 		// 	['N'],
 		// 	['Infinitive']
@@ -38,9 +33,7 @@ const verbs = [
 	},
 	{
 		base: 'want',
-		tps: 'wants',
-		past: 'wanted',
-		gerund: 'wanting',
+		progressive: 'wanting',
 		// complements: [
 		// 	['N'],
 		// 	['Infinitive']
@@ -48,10 +41,9 @@ const verbs = [
 	},
 	{
 		base: 'give',
-		tps: 'gives',
 		past: 'gave',
 		passive: 'given',
-		gerund: 'giving',
+		progressive: 'giving',
 		// complements: [
 		// 	['N', 'N'],
 		// 	['N', 'P']
@@ -59,18 +51,14 @@ const verbs = [
 	},
 	{
 		base: 'talk',
-		tps: 'talks',
-		past: 'talked',
-		gerund: 'talking',
+		progressive: 'talking',
 		// complements: [
 		// 	['P']
 		// ]
 	},
 	{
 		base: 'live',
-		tps: 'lives',
-		past: 'lived',
-		gerund: 'living',
+		progressive: 'living',
 		// complements: [
 		// 	[],
 		// 	['P']
@@ -78,9 +66,7 @@ const verbs = [
 	},
 	{
 		base: 'work',
-		tps: 'works',
-		past: 'worked',
-		gerund: 'working',
+		progressive: 'working',
 		// complements: [
 		// 	[],
 		// 	['P']
@@ -88,10 +74,9 @@ const verbs = [
 	},
 	{
 		base: 'eat',
-		tps: 'eats',
 		past: 'ate',
 		passive: 'eaten',
-		gerund: 'eating',
+		progressive: 'eating',
 		// complements: [
 		// 	[],
 		// 	['N']
@@ -99,9 +84,7 @@ const verbs = [
 	},
 	{
 		base: 'walk',
-		tps: 'walks',
-		past: 'walked',
-		gerund: 'walking',
+		progressive: 'walking',
 		// complements: [
 		// 	[],
 		// 	['N']
@@ -109,113 +92,101 @@ const verbs = [
 	},
 	{
 		base: 'tell',
-		tps: 'tells',
 		past: 'told',
-		gerund: 'telling',
+		progressive: 'telling',
 	},
 	{
 		base: 'go',
-		tps: 'goes',
+		present: 'goes',
 		past: 'went',
 		passive: 'gone',
-		gerund: 'going',
+		progressive: 'going',
 	},
 	{
 		base: 'do',
-		tps: 'does',
+		present: 'does',
 		past: 'did',
 		passive: 'done',
-		gerund: 'doing',
+		progressive: 'doing',
 	},
 	{
 		base: 'buy',
-		tps: 'buys',
 		past: 'bought',
-		gerund: 'buying',
+		progressive: 'buying',
 	},
 	{
 		base: 'think',
-		tps: 'thinks',
 		past: 'thought',
-		gerund: 'thinking',
+		progressive: 'thinking',
 	},
 	{
 		base: 'know',
-		tps: 'knows',
 		past: 'knew',
 		passive: 'known',
-		gerund: 'knowing',
+		progressive: 'knowing',
 	},
 	{
 		base: 'drink',
-		tps: 'drinks',
 		past: 'drunk',
-		gerund: 'drinking',
+		progressive: 'drinking',
 	},
 	{
 		base: 'need',
-		tps: 'needs',
-		past: 'needed',
-		gerund: 'needing',
+		progressive: 'needing',
 	},
 	{
 		base: 'trap',
-		tps: 'traps',
 		past: 'trapped',
-		gerund: 'trapping',
+		progressive: 'trapping',
 	},
 	{
 		base: 'let',
-		tps: 'lets',
 		past: 'let',
-		gerund: 'letting',
+		progressive: 'letting',
 	},
 	{
 		base: 'see',
-		tps: 'sees',
 		past: 'saw',
 		passive: 'seen',
-		gerund: 'seeing',
+		progressive: 'seeing',
 	},
 	{
 		base: 'take',
-		tps: 'takes',
 		past: 'took',
 		passive: 'taken',
-		gerund: 'taking',
+		progressive: 'taking',
 	},
 	{
 		base: 'get',
-		tps: 'gets',
 		past: 'got',
 		passive: 'got',
-		gerund: 'getting',
+		progressive: 'getting',
 	},
 	{
 		base: 'wake',
-		tps: 'wakes',
 		past: 'woke',
 		passive: 'woken',
-		gerund: 'waking',
+		progressive: 'waking',
 	},
 	{
 		base: 'say',
-		tps: 'says',
 		past: 'said',
-		gerund: 'saying',
+		progressive: 'saying',
 	},
 	{
 		base: 'speak',
-		tps: 'speaks',
 		past: 'spoke',
 		passive: 'spoken',
-		gerund: 'speaking',
+		progressive: 'speaking',
 	},
 	{
 		base: 'make',
-		tps: 'makes',
 		past: 'made',
-		gerund: 'making',
+		progressive: 'making',
+	},
+	{
+		base: 'call',
+		progressive: 'calling',
 	},
 ].map(o => ({
 	...o,

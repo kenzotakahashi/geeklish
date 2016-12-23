@@ -95,6 +95,11 @@ const pronouns = [
     number: 'singular',
   },
   {
+    base: 'anything',
+    person: 3,
+    number: 'singular',
+  },
+  {
     base: 'someone',
     person: 3,
     number: 'singular',

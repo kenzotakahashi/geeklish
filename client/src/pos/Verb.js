@@ -41,7 +41,7 @@ const verbAfterTo = function() {
   const negative = this.negative ? ['not'] : []
   const verb = this.perfect ? [...negative, 'have', this.word.passive] :
                this.passive ? [...negative, 'be', this.word.passive] :
-               this.continuous ? [...negative, 'be', this.word.gerund] :
+               this.continuous ? [...negative, 'be', this.word.progressive] :
                [...negative, this.word.base]
   return this.getList(verb)
 }
@@ -105,7 +105,7 @@ export const VerbContainer = {
     const negative = this.negative ? ['not'] : []
     const verb = this.perfect ? [...negative, 'have', this.word.passive] :
                  this.passive ? [...negative, 'be', this.word.passive] :
-                 this.continuous ? [...negative, 'be', this.word.gerund] :
+                 this.continuous ? [...negative, 'be', this.word.progressive] :
                  [...negative, this.verbs.map(o => o.toString()).join(` ${this.conjunction} `)]
     return this.getList(verb)
   },

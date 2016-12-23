@@ -95,9 +95,9 @@ const factory = {
       pos: 'Verb',
       word: {
         base: w.base,
-        tps: w.tps,
-        past: w.past,
-        gerund: w.gerund 
+        present: w.present || `${w.base}s`, 
+        past: w.past || `${w.base}ed`,
+        progressive: w.progressive 
       },
       valid_complements: w.complements,
       form: arg.form || 'base',
@@ -122,13 +122,13 @@ const factory = {
       word: {
         base: 'be',
         first: 'am',
-        tps: 'is',
-        'plural': 'are',
-        'past_s': 'was',
-        'past_p': 'were',
-        'past': null,
-        'passive': 'been',
-        'gerund': 'being'
+        present: 'is',
+        plural: 'are',
+        past_s: 'was',
+        past_p: 'were',
+        past: null,
+        passive: 'been',
+        progressive: 'being'
       },
       valid_complements: [],
       form: arg.form || 'base',

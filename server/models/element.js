@@ -41,10 +41,10 @@ export const Pronoun = Element.discriminator('Pronoun', new Schema({
 export const Verb = Element.discriminator('Verb', new Schema({
   word: {
     base: String,
-    tps: String,
+    present: String,
     past: String,
     passive: String,
-    gerund: String,
+    progressive: String,
   },
   valid_complements: [],
   form: String,
@@ -115,13 +115,13 @@ export const Be = Element.discriminator('Be', new Schema({
   word: {
     base: String,
     first: String,
-    tps: String,
-    'plural': String,
-    'past_s': String,
-    'past_p': String,
-    'past': String,
-    'passive': String,
-    'gerund': String
+    present: String,
+    plural: String,
+    past_s: String,
+    past_p: String,
+    past: String,
+    passive: String,
+    progressive: String
   },
   valid_complements: [String],
   form: String,

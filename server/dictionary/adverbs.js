@@ -91,6 +91,10 @@ const adverbs = [
 		comparative: "sooner",
 		superlative: "soonest"
 	},
+	{
+		base: 'later',
+		canModify: ["verb"],
+	},
 ].map(o => ({
 	...o,
 	order: 6

@@ -21,13 +21,13 @@ export const Clause = {
         if (v.passive) {
           rest = ['have', 'been', v.word.passive]
         } else {
-          rest = v.continuous ? ['have', 'been', v.word.gerund] : ['have', v.word.passive]
+          rest = v.continuous ? ['have', 'been', v.word.progressive] : ['have', v.word.passive]
         }
       } else {
         if (v.passive) {
           rest = ['be', v.word.passive]
         } else {
-          rest = v.continuous ? ['be', v.word.gerund] : [v.word.base]
+          rest = v.continuous ? ['be', v.word.progressive] : [v.word.base]
         }
       }
     } else {
@@ -36,7 +36,7 @@ export const Clause = {
         if (v.passive) {
           rest = ['been', v.word.passive]
         } else {
-          rest = v.continuous ? ['been', v.word.gerund] : [v.word.passive]
+          rest = v.continuous ? ['been', v.word.progressive] : [v.word.passive]
         }
       } else {
         if (v.passive) {
@@ -45,7 +45,7 @@ export const Clause = {
         } else {
           if (v.continuous) {
             head = s.getBe(v.past)
-            rest = [v.word.gerund]
+            rest = [v.word.progressive]
           } else {
             head = v.past ? 'did' : s.is3s() ? 'does' : 'do'
             rest = [v.word.base]
@@ -64,7 +64,7 @@ export const Clause = {
     if (v.past) {
       return [v.word['past']]
     }
-    return this.subject.is3s() ? [v.word.tps] : [v.word.base]
+    return this.subject.is3s() ? [v.word.present] : [v.word.base]
   },
   getBeVerb: function(v) {
     const s = this.subject
