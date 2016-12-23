@@ -143,6 +143,7 @@ function reducer(state, action) {
       }
     }
     case 'DELETE_ELEMENT': {
+      console.log(action)
       const filtered = state.Words.filter(o => o._id !== action._id)
       const elementIndex = filtered.findIndex(t => t._id === action.parentId)
       const oldElement = filtered[elementIndex]

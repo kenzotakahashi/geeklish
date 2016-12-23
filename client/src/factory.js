@@ -34,7 +34,6 @@ const factory = {
       number: 'singular',
       isWh: false,
       adjectives: [],
-      adjectivesAfter: [],
       determiners: [],
       prepositions: [],
       nouns: []
@@ -49,7 +48,6 @@ const factory = {
       number: 'plural',
       isWh: false,
       adjectives: [],
-      adjectivesAfter: [],
       determiners: [],
       prepositions: [],
       nouns: [arg.child],
@@ -66,7 +64,6 @@ const factory = {
       that: false,
       clause: null,
       adjectives: [],
-      adjectivesAfter: [],
       determiners: [],
       prepositions: [],
       nouns: [],
@@ -231,6 +228,7 @@ const factory = {
       word: 'to',
       verb: null,
       omit: false,
+      before: false,
     }
   },
   Gerund: function() {

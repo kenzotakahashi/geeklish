@@ -56,7 +56,7 @@ export const WH = (props) => (
 
 export const DeleteButton = (props) => (
 	<button type="button" className="btn btn-default btn-xs trash"
-	        onClick={() => store.dispatch(deleteElement(props._id, props.role, props.parentId))}>
+	        onClick={() => store.dispatch(deleteElement(props.id, props.role, props.parentId))}>
 	  <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
 	</button>
 )

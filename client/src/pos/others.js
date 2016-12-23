@@ -6,6 +6,7 @@ export const Infinitive = {
     this.pos = p.pos
     this.verb = createWord(p.verb)
     this.omit = p.omit
+    this.before = p.before
     return this    
   },
   toString: function() {

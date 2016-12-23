@@ -5,7 +5,7 @@ import { showWordFactory, createNewWord } from './actions'
 const nouns = ['Noun', 'Pronoun', 'NounClause', 'Gerund']
 const verbs = ['Verb', 'Be']
 const adjectives = ['Adjective', 'AdjectiveClause', 'Participle']
-const adverbs = ['Adverb', 'AdverbClause']
+const adverbs = ['Adverb', 'AdverbClause', 'Infinitive']
 const coordinating = [{pos: 'Conjunction', attr: (w) => w.type === 'coordinating' }]
 const complements = [...nouns, 'Adjective', 'Adverb', 'Preposition', 'Infinitive']
 const determiners = ['Determiner', 'Possessive']
@@ -16,7 +16,7 @@ const valid_pos = {
     clause: ['Clause'],
   },
   Clause: {
-    adverbs: ['Adverb'],
+    adverbs: adverbs,
     subject: [...nouns, 'Infinitive'],
     verb: verbs,
     adjective: ['AdjectiveClause'],
@@ -28,17 +28,17 @@ const valid_pos = {
   Verb: {
     particle: ['Preposition'],
     complements: complements,
-    adverbs: [...adverbs, 'Infinitive'],
+    adverbs: ['Adverb'],
     prepositions: ['Preposition']
   },
   Be: {
     complements: complements,
-    adverbs: [...adverbs, 'Infinitive'],
+    adverbs: ['Adverb'],
     prepositions: ['Preposition']
   },
   VerbContainer: {
     complements: complements,
-    adverbs: [...adverbs, 'Infinitive'],
+    adverbs: ['Adverb'],
     prepositions: ['Preposition'],
     verbs: verbs,
     conjunction: coordinating

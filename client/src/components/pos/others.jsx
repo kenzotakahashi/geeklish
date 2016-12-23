@@ -27,11 +27,18 @@ export const Infinitive = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Infinitive</span>
             <span className="label label-default">{this.props.role}</span>
-            {e('button', {
+            {this.props.parent.pos !== 'Clause' &&
+              e('button', {
               className: `button is-small is-active ${element.omit && 'is-primary'}`,
               type: 'button',
               onClick: () => store.dispatch(changeAttribute(element._id, 'omit', !element.omit))
             }, 'omit to')}
+            {this.props.parent.pos === 'Clause' &&
+              e('button', {
+              className: `button is-small is-active ${element.before && 'is-primary'}`,
+              type: 'button',
+              onClick: () => store.dispatch(changeAttribute(this.props._id, 'before', !element.before))
+            }, element.before ? 'before' : 'after')}
             <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
           </div>
           <Children element={element} attrs={attrs} words={state.Words}

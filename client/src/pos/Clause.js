@@ -1,5 +1,19 @@
 import { createWord } from './util.js'
 
+function categorize(adverbs) {
+  const [before,after] = [[],[]]
+  const base = adverbs.map(o => createWord(o))
+  for (const adv of base) {
+    if (adv.before) {
+      before.push(adv)
+    }
+    else {
+      after.push(adv)
+    }
+  }
+  return [before,after]
+}
+
 export const Clause = {
   init: function(c) {
     this._id = c._id
@@ -7,8 +21,8 @@ export const Clause = {
     this.cType = c.cType
     this.subject = createWord(c.subject)
     this.verb = createWord(c.verb)
-    this.adjective = createWord(c.adjective)
-    this.adverbs = c.adverbs.map(o => createWord(o))
+    this.adjective = createWord(c.adjective);
+    [this.advBefore, this.advAfter] = categorize(c.adverbs)
     return this
   },
   getVerbForQuestion: function(v) {
@@ -185,6 +199,7 @@ export const Clause = {
     return c.filter(t => !['', null].includes(t))
             .map(o => o.toString())
             .reduce((a, b) => a.concat(b), [])
+            .filter(t => !['', null].includes(t))
             .map(o => o.toString())
   },
   toString: function() {
@@ -204,16 +219,15 @@ export const Clause = {
     }
     // console.log(c)
     const prepBeginning = this.verb.prepositions.filter(o => o && o.before) 
-    c = [this.addComma(this.adverbs),
+    c = [this.addComma(this.advBefore),
          this.addComma(prepBeginning),
-         this.addComma(this.verb.advBeginning),
          !!s && !!s.adjBeginning ? this.addComma(s.adjBeginning) : '',
          ...c]
     // console.log(c)
     c = this.reorderWh(c)
     // console.log(c)
     const adj = this.adjective ? [',', this.adjective] : []
-    c = [...c, ...adj]
+    c = [...c, ...adj, ...this.advAfter]
     c = this.convertToString(c)
     // console.log(c)
     c = this.joinElements(c.map(o => o.toString()))

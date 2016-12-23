@@ -68,11 +68,10 @@ export const AdverbClause = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>Adverb Clause</span>            
             <span className="label label-default">{this.props.role}</span>
             {e('button', {
-              className: `button is-small is-active ${element.position === 'before' && 'is-primary'}`,
+              className: `button is-small is-active ${element.before && 'is-primary'}`,
               type: 'button',
-              onClick: () => store.dispatch(changeAttribute(this.props._id, 'position',
-                             element.position === 'before' ? 'after' : 'before'))
-            }, element.position)}
+              onClick: () => store.dispatch(changeAttribute(this.props._id, 'before', !element.before))
+            }, element.before ? 'before' : 'after')}
             <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
           </div>
           <Children element={element} attrs={attrs} words={state.Words}

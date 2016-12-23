@@ -39,7 +39,7 @@ export const AdverbClause = {
     this.pos = p.pos
     this.conjunction = createWord(p.conjunction)
     this.clause = createWord(p.clause)
-    this.position = p.position === 'before' ? 'beginning' : p.position
+    this.before = p.before
     this.isWh = p.isWh
     return this
   },

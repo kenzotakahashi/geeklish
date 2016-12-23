@@ -1,23 +1,20 @@
 import { createWord } from './util.js'
 
 function categorize(adverbs) {
-  const [beginning,before,middle,after] = [[],[],[],[]]
+  const [before,middle,after] = [[],[],[],[]]
   const base = adverbs.map(o => createWord(o))
   for (const adv of base) {
-    if (adv.position === 'beginning') {
-      beginning.push(adv)
-    }
-    else if (adv.position === 'before') {
+    if (adv.position === 'before') {
       before.push(adv)
     }
     else if (adv.position === 'middle') {
       middle.push(adv)
     }
-    else if (adv.position === 'after' || adv.pos === 'Infinitive') {
+    else if (adv.position === 'after') {
       after.push(adv)
     }
   }
-  return [beginning,before,middle,after]
+  return [before,middle,after]
 }
 
 const makePhrasalVerb = function(particle, complements) {
@@ -64,7 +61,7 @@ const initVerb = function(v) {
   this.passive = v.passive
   this.particle = createWord(v.particle)
   this.complements = v.complements.map(o => createWord(o));
-  [this.advBeginning,this.advBefore,this.advMiddle,this.advAfter] = categorize(v.adverbs)
+  [this.advBefore,this.advMiddle,this.advAfter] = categorize(v.adverbs)
   this.prepositions = v.prepositions.map(o => createWord(o))
   return this
 }
@@ -93,7 +90,7 @@ export const VerbContainer = {
     this.perfect = v.perfect
     this.passive = v.passive
     this.complements = v.complements.map(o => createWord(o));
-    [this.advBeginning,this.advBefore,this.advMiddle,this.advAfter] = categorize(v.adverbs)
+    [this.advBefore,this.advMiddle,this.advAfter] = categorize(v.adverbs)
     this.prepositions = v.prepositions.map(o => createWord(o))
     this.verbs = v.verbs.map(o => createWord(o))
     this.conjunction = createWord(v.conjunction)

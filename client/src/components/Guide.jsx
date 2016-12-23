@@ -117,8 +117,6 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>adverbs</div>
               <span className='pos Adverb'>Adverb</span>
-              <span className='pos basic'>Adverb Clause</span>
-              <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>prepositions</div>
@@ -152,8 +150,6 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>adverbs</div>
               <span className='pos Adverb'>Adverb</span>
-              <span className='pos basic'>Adverb Clause</span>
-              <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>prepositions</div>
@@ -261,6 +257,8 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>adverbs</div>
               <span className='pos Adverb'>Adverb</span>
+              <span className='pos basic'>Adverb Clause</span>
+              <span className='pos basic'>Infinitive</span>
             </li>          
             <li className='function-group'>
               <div className='function-title'>subject</div>
@@ -453,8 +451,6 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>adverbs</div>
               <span className='pos Adverb'>Adverb</span>
-              <span className='pos basic'>Adverb Clause</span>
-              <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>prepositions</div>

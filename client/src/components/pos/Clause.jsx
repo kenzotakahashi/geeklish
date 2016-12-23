@@ -9,7 +9,7 @@ export const Clause = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
-    const attrs = ['adverbs','subject','verb','adjective']
+    const attrs = ['subject','verb','adverbs','adjective']
 
     const attr = ['statement','question','command'].map(o => (
       e('button', {
