@@ -24,7 +24,11 @@ const Guide = React.createClass({
 
           <ul>
             <li className='function-group'>
-              <div className='function-title'>determiners</div>
+              <div className='function-title'>quantifier</div>
+              <span className='pos Determiner'>Determiner</span>
+            </li>            
+            <li className='function-group'>
+              <div className='function-title'>determiner</div>
               <span className='pos Determiner'>Determiner</span>
               <span className='pos basic'>Possessive</span>
             </li>
@@ -62,8 +66,8 @@ const Guide = React.createClass({
             <li className='function-group'>
               <div className='function-title'>adjectives</div>
               <span className='pos basic'>Adjective Clause</span>
-              <span className='pos basic'>Infinitive</span>
               <span className='pos basic'>Participle</span>
+              <span className='pos basic'>Infinitive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>prepositions</div>
@@ -253,13 +257,7 @@ const Guide = React.createClass({
         
           <h4>Functions</h4>
 
-          <ul>
-            <li className='function-group'>
-              <div className='function-title'>adverbs</div>
-              <span className='pos Adverb'>Adverb</span>
-              <span className='pos basic'>Adverb Clause</span>
-              <span className='pos basic'>Infinitive</span>
-            </li>          
+          <ul>        
             <li className='function-group'>
               <div className='function-title'>subject</div>
               <span className='pos Noun'>Noun</span>
@@ -273,6 +271,12 @@ const Guide = React.createClass({
               <span className='pos Verb'>Verb</span>
               <span className='pos Be'>Be</span>
             </li>
+            <li className='function-group'>
+              <div className='function-title'>adverbs</div>
+              <span className='pos Adverb'>Adverb</span>
+              <span className='pos basic'>Adverb Clause</span>
+              <span className='pos basic'>Infinitive</span>
+            </li>  
             <li className='function-group'>
               <div className='function-title'>adjective</div>
               <span className='pos basic'>Adjective Clause</span>
@@ -294,7 +298,11 @@ const Guide = React.createClass({
               <span className='pos basic'>Clause</span>
             </li>
             <li className='function-group'>
-              <div className='function-title'>determiners</div>
+              <div className='function-title'>quantifier</div>
+              <span className='pos Determiner'>Determiner</span>
+            </li>            
+            <li className='function-group'>
+              <div className='function-title'>determiner</div>
               <span className='pos Determiner'>Determiner</span>
               <span className='pos basic'>Possessive</span>
             </li>
@@ -394,7 +402,11 @@ const Guide = React.createClass({
               <span className='pos Conjunction'>Conjunction</span>
             </li>
             <li className='function-group'>
-              <div className='function-title'>determiners</div>
+              <div className='function-title'>quantifier</div>
+              <span className='pos Determiner'>Determiner</span>
+            </li>            
+            <li className='function-group'>
+              <div className='function-title'>determiner</div>
               <span className='pos Determiner'>Determiner</span>
               <span className='pos basic'>Possessive</span>
             </li>

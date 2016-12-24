@@ -34,7 +34,8 @@ const factory = {
       number: 'singular',
       isWh: false,
       adjectives: [],
-      determiners: [],
+      quantifier: null,
+      determiner: null,
       prepositions: [],
       nouns: []
     }
@@ -48,7 +49,8 @@ const factory = {
       number: 'plural',
       isWh: false,
       adjectives: [],
-      determiners: [],
+      quantifier: null,
+      determiner: null,
       prepositions: [],
       nouns: [arg.child],
       conjunction: null,
@@ -64,7 +66,8 @@ const factory = {
       that: false,
       clause: null,
       adjectives: [],
-      determiners: [],
+      quantifier: null,
+      determiner: null,
       prepositions: [],
       nouns: [],
     }
@@ -74,7 +77,11 @@ const factory = {
       _id: uuid.v1(),
       pos: 'Determiner',
       word: w.base,
+      type: w.type,
       number: w.number,
+      mass: w.mass,
+      of: w.of || w.base,
+      isOf: false,
       adverb: null,
       // isWh: ['what','whose','which'].includes(w.base) ? true : false
     }
@@ -105,7 +112,10 @@ const factory = {
       passive: false,
       modal: '',
       particle: null,
-      complements: [],
+      // complements: [],
+      complements: [
+        {category: 'noun', _id: null}
+      ],
       adverbs: [],
       prepositions: [],
     }

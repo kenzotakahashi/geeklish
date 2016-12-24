@@ -11,7 +11,7 @@ const getArgument = function(parent, wordPos, target) {
              (parent.pos === 'VerbContainer' && parent.form === 'progressive' &&
               ['Verb','Be'].includes(wordPos))) {
     return {form: 'progressive'}
-  } else if (target === 'particle') {
+  } else if (target[0] === 'particle') {
     return {before: true}
   }
   return {}
@@ -20,8 +20,15 @@ const getArgument = function(parent, wordPos, target) {
 const takeWord = function(parent, wordBase, action_target, child={}) {
   const arg = getArgument(parent, wordBase.pos, action_target)
   const init = factory[wordBase.pos](wordBase, {...arg, ...child})
-  const target = parent[action_target]
-  const updated = Array.isArray(target) ? target.concat(init._id) : init._id
+  let updated
+  if (action_target[1] === null) {
+    const target = parent[action_target[0]]
+    updated = Array.isArray(target) ? target.concat(init._id) : init._id
+  }
+  else {
+    updated = Object.assign([], parent.complements)
+    updated[action_target[1]]._id = init._id
+  }
   return [updated, init]
 }
 
@@ -78,7 +85,7 @@ function reducer(state, action) {
         ...state,
         saved: false,
         activeWord: state.activeWord === action._id ? 1 : action._id,
-        target: null
+        target: []
       }
     }
     case 'SHOW_WORD_FACTORY': {
@@ -96,14 +103,14 @@ function reducer(state, action) {
       const [updated, initialized] = takeWord(parent, action.wordBase, action.target)
       const newElement = {
         ...parent,
-        [action.target]: updated,
+        [action.target[0]]: updated,
       }
 
       let newActiveWord
       if (parent.pos === 'Clause') {
-        if (action.target === 'subject' && parent.verb === null) {
+        if (action.target[0] === 'subject' && parent.verb === null) {
           newActiveWord = parent._id
-        } else if (action.target === 'verb' && parent.subject === null) {
+        } else if (action.target[0] === 'verb' && parent.subject === null) {
           newActiveWord = parent._id
         } else {
           newActiveWord = initialized._id
@@ -116,7 +123,7 @@ function reducer(state, action) {
         ...state,
         saved: false,
         activeWord: newActiveWord,
-        target: false,
+        target: [],
         Words: [
           ...state.Words.slice(0, elementIndex),
           newElement,
@@ -143,19 +150,28 @@ function reducer(state, action) {
       }
     }
     case 'DELETE_ELEMENT': {
-      console.log(action)
       const filtered = state.Words.filter(o => o._id !== action._id)
       const elementIndex = filtered.findIndex(t => t._id === action.parentId)
       const oldElement = filtered[elementIndex]
-      const newRole = action.role.slice(-1) === 's' ?
-                      oldElement[action.role].filter(o => o !== action._id) : null   
+
+      let newRole
+      if (action.role[1] === null) {
+        newRole = action.role[0].slice(-1) === 's' ?
+                  oldElement[action.role[0]].filter(o => o !== action._id) : null
+      }
+      else {
+        newRole = Object.assign([], oldElement.complements)
+        newRole[action.role[1]]._id = null
+      }
+            
       const newElement = {
         ...oldElement,
-        [action.role]: newRole
+        [action.role[0]]: newRole
       }
       return {
         ...state,
         saved: false,
+        target: [],
         Words: [
           ...filtered.slice(0, elementIndex),
           newElement,
@@ -174,14 +190,14 @@ function reducer(state, action) {
       )  
       const newElement = {
         ...parent,
-        [action.target]: updated,
+        [action.target[0]]: updated,
       }
 
       return {
         ...state,
         saved: false,
         activeWord: initialized._id,
-        target: false,
+        target: [],
         Words: [
           ...state.Words.slice(0, elementIndex),
           newElement,
@@ -196,9 +212,19 @@ function reducer(state, action) {
       const elementIndex = filtered.findIndex(t => t._id === action.parentId)
       const parent = filtered[elementIndex]
       const childId = action.element[action.childRole][0]
+
+      let updated
+      if (action.thisRole[1] === null) {
+        updated = action.thisRole[0].slice(-1) === 's' ? [childId] : childId
+      }
+      else {
+        updated = Object.assign([], parent.complements)
+        updated[action.thisRole[1]]._id = childId
+      }
+
       const newParent = {
         ...parent,
-        [action.thisRole]: action.thisRole.slice(-1) === 's' ? [childId] : childId
+        [action.thisRole[0]]: updated
       }
       return {
         ...state,

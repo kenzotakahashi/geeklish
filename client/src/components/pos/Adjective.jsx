@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, WH, DeleteButton } from './Tree'
+import { Children, WH, DeleteButton, Label } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
@@ -25,7 +25,7 @@ export const Adjective = React.createClass({
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>{element.word.base}</span>
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             {attributes}
             <WH id={this.props._id} isWh={element.isWh} />
             <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
@@ -49,7 +49,7 @@ export const AdjectiveClause = React.createClass({
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>Adjective Clause</span>            
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
           </div>
           <Children element={element} attrs={attrs} words={state.Words}

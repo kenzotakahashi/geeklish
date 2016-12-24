@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, WH, DeleteButton } from './Tree'
+import { Children, WH, DeleteButton, Label } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
@@ -17,7 +17,7 @@ const Preposition = React.createClass({
           <li className='tree-top'>
             <div className={`tree-box ${element.pos}`}>
               <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>{element.word}</span>
-              <span className="label label-default">{this.props.role}</span>
+              <Label parent={this.props.parent} role={this.props.role} />
               {this.props.parent.complements.length > 0 &&
               e('button', {
                 className: `button is-small is-active ${element.before && 'is-primary'}`,
@@ -36,7 +36,7 @@ const Preposition = React.createClass({
           <li className='tree-top'>
             <div className={`tree-box ${element.pos}`}>
               <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>{element.word}</span>
-              <span className="label label-default">{this.props.role}</span>
+              <Label parent={this.props.parent} role={this.props.role} />
               <WH id={element._id} isWh={element.isWh} />
               {['Verb','Be','VerbContainer'].includes(this.props.parent.pos) &&
                 e('button', {

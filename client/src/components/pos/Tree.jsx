@@ -14,13 +14,13 @@ export const Children = (props) => (
       		// attribute is a list(ex. complements)
       		props.element[w].map((t, j) => (
       		  e(pos_components[props.words.find(o => o._id === t).pos],
-      		  	{key: w+j, parent: props.element, _id: t, role: w}
+      		  	{key: w+j, parent: props.element, _id: t, role: [w, null]}
       		  )
       		))
       	) : (props.element[w] &&
 	      	// attribute is a non-list(ex. subject)	      	
       		e(pos_components[props.words.find(o => o._id === props.element[w]).pos],
-      			{key: w, parent: props.element, _id: props.element[w], role: w}
+      			{key: w, parent: props.element, _id: props.element[w], role: [w, null]}
       		)
       	)
       ))
@@ -31,15 +31,38 @@ export const Children = (props) => (
 	      e(
 	      	'li',
 	      	{
-	          className: `tree tree-${props.target === o ? 'active' : 'info'}`,
+	          className: `tree tree-${props.target[0] === o ? 'active' : 'info'}`,
 	          key: o,
-	          onClick: () => getWordDictionary(props.words, props.activeWord, props.element._id, o)
+	          onClick: () => getWordDictionary(props.words, props.activeWord, props.element._id, [o, null])
 	        },
 	        o
 	      )
 	    ))
     }    		
 	</ul>
+)
+
+export const CompChildren = (props) => (
+  <ul>
+    {
+      props.attrs.map((w, i) => (
+        w._id ?
+          e(pos_components[props.words.find(o => o._id === w._id).pos],
+            {key: i, parent: props.element, _id: w._id, role: ['complements', i]}
+          ) : props.activeWord === props.element._id &&
+          e(
+            'li',
+            {
+              className: `tree tree-${props.target[1] === i ? 'active' : 'info'}`,
+              key: i,
+              onClick: () => getWordDictionary(
+                props.words, props.activeWord, props.element._id, ['complements', i])
+            },
+            w.category
+          )
+      ))
+    }
+  </ul>
 )
 
 export const WH = (props) => (
@@ -84,5 +107,11 @@ export const ModalSelect = (props) => (
         ))
       }
     </select>
+  </span>
+)
+
+export const Label = (props) => (
+  <span className="label label-default">
+    {props.role[1] === null ? props.role[0] : props.parent.complements[props.role[1]].category}
   </span>
 )

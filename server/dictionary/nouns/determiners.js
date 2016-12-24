@@ -1,43 +1,93 @@
 const determiners = [
 	{
 		base: "this",
-		number: "singular"
+		type: 'determiner',
+		number: "singular",
+		mass: false,
 	},
 	{
 		base: "that",
-		number: "singular"
+		type: 'determiner',
+		number: "singular",
+		mass: true,
 	},
 	{
 		base: "a",
-		number: "singular"
+		type: 'determiner',
+		number: "singular",
+		mass: false,
 	},
 	{
 	  base: 'those',
-	  number: 'plural'
+		type: 'determiner',
+	  number: 'plural',
+		mass: false,
 	}, 
 	{
 		base: "the",
-		number: "both"
-	},
-	{
-		base: "no",
-		number: "singular",
+		type: 'determiner',
+		number: "both",
+		mass: true,
 	},
 	{
 		base: 'what',
-		number: 'both'
+		type: 'determiner',
+		number: 'both',
+		mass: true,
 	},
 	{
 		base: 'which',
-		number: 'both'
+		type: 'determiner',
+		number: 'both',
+		mass: false,
 	},
 	{
 		base: 'whose',
-		number: 'both'
+		type: 'determiner',
+		number: 'both',
+		mass: true,
 	},
 	{
 		base: 'every',
-		number: 'singular'
+		type: 'quantifier',
+		number: 'singular',
+		mass: false,
+		of: 'every one',
+	},
+	{
+		base: "no",
+		type: 'quantifier',
+		number: "singular",
+		mass: true,
+		of: 'none'
+	},
+	{
+		base: 'more',
+		type: 'quantifier',
+		number: 'plural',
+		mass: true,
+		of: '',
+	},
+	{
+		base: 'some',
+		type: 'quantifier',
+		number: 'plural',
+		mass: true,
+		of: '',
+	},
+	{
+		base: 'a little',
+		type: 'quantifier',
+		number: '',
+		mass: true,
+		of: '',
+	},
+	{
+		base: 'a lot of',
+		type: 'quantifier',
+		number: 'plural',
+		mass: true,
+		of: 'a lot',
 	},
 ].map(o => ({
 	...o,

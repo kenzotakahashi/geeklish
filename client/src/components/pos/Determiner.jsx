@@ -1,8 +1,10 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, DeleteButton } from './Tree'
-import { showOptions } from '../../actions'
+import { Children, DeleteButton, Label } from './Tree'
+import { showOptions, changeAttribute } from '../../actions'
 import { getWordDictionary } from '../../wordDictionary'
+
+const e = React.createElement
 
 export const Determiner = React.createClass({
   render: function() {
@@ -15,7 +17,13 @@ export const Determiner = React.createClass({
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word}</span>
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
+            {element.type === 'quantifier' &&
+              e('button', {
+              className: `button is-small is-active ${element.isOf && 'is-primary'}`,
+              type: 'button',
+              onClick: () => store.dispatch(changeAttribute(this.props._id, 'isOf', !element.isOf))
+            }, 'of')}
             <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
           </div>
           <Children element={element} attrs={attrs} words={state.Words}
@@ -31,7 +39,7 @@ export const Possessive = React.createClass({
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
     if (!element.noun) {
-      getWordDictionary(state.Words, state.activeWord, element._id, 'noun')
+      getWordDictionary(state.Words, state.activeWord, element._id, ['noun', null])
     }
   },
   render: function() {
@@ -44,7 +52,7 @@ export const Possessive = React.createClass({
         <li className="tree-top">
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Possessive</span>
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
           </div>
           <Children element={element} attrs={attrs} words={state.Words}

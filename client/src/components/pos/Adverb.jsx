@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, WH, DeleteButton } from './Tree'
+import { Children, WH, DeleteButton, Label } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
@@ -14,7 +14,7 @@ export const Adverb = React.createClass({
     const element = state.Words.find(o => o._id === this.props._id)
     const attrs = ['adverb']
     const modifyVerb = ['Verb','Be','VerbContainer'].includes(this.props.parent.pos) &&
-                        this.props.role === 'adverbs'
+                        this.props.role[0] === 'adverbs'
 
     const forms = ['before','middle','after'].map(o => (
       <option key={o} value={o}>{o}</option>
@@ -41,7 +41,7 @@ export const Adverb = React.createClass({
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>{element.word.base}</span>
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             {formSelect}
             {comparison}
             <WH id={this.props._id} isWh={element.isWh} />
@@ -66,7 +66,7 @@ export const AdverbClause = React.createClass({
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>Adverb Clause</span>            
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             {e('button', {
               className: `button is-small is-active ${element.before && 'is-primary'}`,
               type: 'button',

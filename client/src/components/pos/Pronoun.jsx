@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, WH, DeleteButton, ConjunctionButton } from './Tree'
+import { Children, WH, DeleteButton, ConjunctionButton, Label } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 
 const Pronoun = React.createClass({
@@ -27,7 +27,7 @@ const Pronoun = React.createClass({
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word[element.form]}</span>
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             {formSelect}
             {this.props.parent.pos !== 'Possessive' && 
              <WH id={element._id} isWh={element.isWh} />}

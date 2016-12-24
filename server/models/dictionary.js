@@ -26,7 +26,10 @@ const NounDic = Dictionary.discriminator('NounDic', new Schema({
 }, options))
 
 const DeterminerDic = Dictionary.discriminator('DeterminerDic', new Schema({
-	number: {type: String, required: true},
+	type: {type: String, required: true},
+	number: String,
+	mass: Boolean,
+	of: String,
 	pos: {type: String, default: 'Determiner'},
 }, options))
 

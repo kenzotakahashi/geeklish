@@ -5,12 +5,17 @@ export const Determiner = {
     this._id = p._id
     this.pos = p.pos
     this.word = p.word
+    this.type = p.type
     this.number = p.number
+    this.mass = p.mass
+    this.of = p.of
+    this.isOf = p.isOf
     this.adverb = createWord(p.adverb)
     return this
   },
   toString: function() {
-    return !!this.adverb ? `${this.adverb} ${this.word}` : this.word
+    const word = this.isOf ? `${this.of} of` : this.word
+    return !!this.adverb ? `${this.adverb} ${word}` : word
   },
 }
 

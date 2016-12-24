@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, WH, DeleteButton, ConjunctionButton, UndoConjunctionButton } from './Tree'
+import { Children, WH, DeleteButton, ConjunctionButton, UndoConjunctionButton, Label } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 
 const e = React.createElement
@@ -9,14 +9,14 @@ export const Noun = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
-    const attrs = ['determiners','adjectives','nouns','prepositions']
+    const attrs = ['quantifier','determiner','adjectives','nouns','prepositions']
 
     return (
       <ul>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.singular}</span>
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             {e('button', {
               className: `button is-small is-active ${element.number === 'plural' && 'is-primary'}`,
               type: 'button',
@@ -40,14 +40,14 @@ export const NounContainer = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
-    const attrs = ['conjunction','determiners','adjectives','nouns','prepositions']
+    const attrs = ['conjunction','quantifier','determiner','adjectives','nouns','prepositions']
 
     return (
       <ul>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>NounContainer</span>
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             <WH id={element._id} isWh={element.isWh} />
             {element.nouns.length > 0 &&
             <UndoConjunctionButton element={element} thisRole={this.props.role}
@@ -66,14 +66,14 @@ export const NounClause = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
-    const attrs = ['clause', 'determiners','adjectives','nouns','prepositions']
+    const attrs = ['clause','quantifier','determiner','adjectives','nouns','prepositions']
 
     return (
       <ul>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Noun Clause</span>
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             {e('button', {
               className: `button is-small is-active ${element.that && 'is-primary'}`,
               type: 'button',

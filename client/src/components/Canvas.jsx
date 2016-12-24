@@ -12,7 +12,7 @@ const Canvas = React.createClass({
   render: function() {
     const state = store.getState()
 
-    const wordFactory = !!state.target && <WordFactory dictionary={state.dictionary} />
+    const wordFactory = state.target.length > 0 && <WordFactory dictionary={state.dictionary} />
     return (
       <div className='row'>
         <div className='col-xs-9'>

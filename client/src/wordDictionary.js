@@ -8,7 +8,8 @@ const adjectives = ['Adjective', 'AdjectiveClause', 'Participle']
 const adverbs = ['Adverb', 'AdverbClause', 'Infinitive']
 const coordinating = [{pos: 'Conjunction', attr: (w) => w.type === 'coordinating' }]
 const complements = [...nouns, 'Adjective', 'Adverb', 'Preposition', 'Infinitive']
-const determiners = ['Determiner', 'Possessive']
+const determiners = [{pos: 'Determiner', attr: (w) => w.type === 'determiner' }, 'Possessive']
+const quantifier = [{pos: 'Determiner', attr: (w) => w.type === 'quantifier' }]
 // const verbAdverbs = [{pos: 'Adverb', attr: (w) =>}]
 
 const valid_pos = {
@@ -26,8 +27,15 @@ const valid_pos = {
     conjunction: coordinating
   },
   Verb: {
-    particle: ['Preposition'],
     complements: complements,
+    noun: nouns,
+    clause: ['NounClause'],
+    infinitive: ['Infinitive'],
+    adverb: ['Adverb'],
+    adjective: ['Adjective'],
+    preposition: ['Preposition'],
+
+    particle: ['Preposition'],
     adverbs: ['Adverb'],
     prepositions: ['Preposition']
   },
@@ -44,7 +52,8 @@ const valid_pos = {
     conjunction: coordinating
   },
   Noun: {
-    determiners: determiners,
+    quantifier: quantifier,
+    determiner: determiners,
     adjectives: [...adjectives, 'Infinitive'],
     nouns: ['Noun', 'NounClause'],
     prepositions: ['Preposition'],
@@ -53,13 +62,15 @@ const valid_pos = {
     nouns: nouns,
     adjectives: adjectives,
     prepositions: ['Preposition'],
-    determiners: determiners,
+    quantifier: quantifier,
+    determiner: determiners,
     conjunction: coordinating
   },
   NounClause: {
     clause: ['Clause'],
     nouns: ['Noun', 'NounClause'],
-    determiners: determiners,
+    quantifier: quantifier,
+    determiner: determiners,
     adjectives: adjectives,
     prepositions: ['Preposition'],
   },
@@ -125,8 +136,9 @@ function dispatchTask(data, valid, id, target) {
 }
 
 export const getWordDictionary = function(words, activeWord, id, target) {
-  const pos = words.find(t => t._id === activeWord).pos
-  const valid = valid_pos[pos][target]   
+  const word = words.find(t => t._id === activeWord)
+  const valid = valid_pos[word.pos][target[1] === null ?
+                                    target[0] : word.complements[target[1]].category]
   if (sessionStorage.dictionary) {
     const data = JSON.parse(sessionStorage.dictionary)
     dispatchTask(data, valid, id, target)

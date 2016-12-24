@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { DeleteButton } from './Tree'
+import { DeleteButton, Label } from './Tree'
 
 const Conjunction = React.createClass({
   render: function() {
@@ -12,7 +12,7 @@ const Conjunction = React.createClass({
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word'>{element.word}</span>
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
           </div>
         </li>

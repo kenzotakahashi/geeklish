@@ -60,7 +60,8 @@ export const Noun = {
     this.number = w.number
     this.isWh = w.isWh;
     [this.adjBeginning, this.adjectives, this.adjectivesAfter] = beforeOrAfter(w.adjectives)
-    this.determiners = w.determiners.map(o => createWord(o))
+    this.quantifier = createWord(w.quantifier)
+    this.determiner = createWord(w.determiner)
     this.prepositions = w.prepositions.map(o => createWord(o))
     this.nouns = w.nouns.map(o => createWord(o))
     return this
@@ -84,7 +85,8 @@ export const Noun = {
     return checkArticle(this.getRest(this.word[this.number]))
   },
   getRest: function(noun) {
-    return [...this.determiners,
+    return [this.quantifier || '',
+            this.determiner || '',
             ...this.adjectives,
             ...this.nouns, 
             noun,
@@ -112,7 +114,8 @@ export const NounContainer = {
     this.number = w.number
     this.isWh = w.isWh;
     [this.adjectives, this.adjectivesAfter] = beforeOrAfter(w.adjectives)
-    this.determiners = w.determiners.map(o => createWord(o))
+    this.quantifier = createWord(w.quantifier)
+    this.determiner = createWord(w.determiner)
     this.prepositions = w.prepositions.map(o => createWord(o))
     this.nouns = w.nouns.map(o => createWord(o))
     this.conjunction = createWord(w.conjunction)
@@ -138,7 +141,8 @@ export const NounContainer = {
     return this.getRest(with_conj)
   },
   getRest: function(noun) {
-    return [...this.determiners,
+    return [this.quantifier || '',
+            this.determiner || '',
             ...this.adjectives,
             ...noun,
             ...this.adjectivesAfter,
@@ -163,7 +167,8 @@ export const NounClause = {
     this.clause = createWord(w.clause)
     this.isWh = w.isWh;
     [this.adjectives, this.adjectivesAfter] = beforeOrAfter(w.adjectives)
-    this.determiners = w.determiners.map(o => createWord(o))
+    this.quantifier = createWord(w.quantifier)
+    this.determiner = createWord(w.determiner)
     this.prepositions = w.prepositions.map(o => createWord(o))
     this.nouns = w.nouns.map(o => createWord(o))
     return this
@@ -181,7 +186,8 @@ export const NounClause = {
     return Array.isArray(result) ? '' : this.getRest(`${this.that ? 'that ' : ''}${result}`)
   },
   getRest: function(noun) {
-    return [...this.determiners,
+    return [this.quantifier || '',
+            this.determiner || '',
             ...this.adjectives,
             ...this.nouns, 
             noun,

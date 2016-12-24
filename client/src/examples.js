@@ -8,7 +8,7 @@ export const initialState = function() {
     title: 'Some title',
     saved: true,
     activeWord: _id,
-    target: null,
+    target: [],
     dictionary: [],
     examples: !!sessionStorage.examples ? JSON.parse(sessionStorage.examples) : [],
     projects: !!sessionStorage.projects ? JSON.parse(sessionStorage.projects) : [],

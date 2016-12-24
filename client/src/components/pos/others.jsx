@@ -1,6 +1,6 @@
 import React from 'react'
 import store from '../../store.js'
-import { Children, DeleteButton, ConjunctionButton } from './Tree'
+import { Children, DeleteButton, ConjunctionButton, Label } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 import { getWordDictionary } from '../../wordDictionary'
 
@@ -10,7 +10,7 @@ function shortCut() {
   const state = store.getState()
   const element = state.Words.find(o => o._id === this.props._id)
   if (!element.verb) {
-    getWordDictionary(state.Words, state.activeWord, element._id, 'verb')
+    getWordDictionary(state.Words, state.activeWord, element._id, ['verb', null])
   }
 }
 
@@ -26,7 +26,7 @@ export const Infinitive = React.createClass({
         <li className="tree-top">
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Infinitive</span>
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             {this.props.parent.pos !== 'Clause' &&
               e('button', {
               className: `button is-small is-active ${element.omit && 'is-primary'}`,
@@ -61,7 +61,7 @@ export const Gerund = React.createClass({
         <li className="tree-top">
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Gerund</span>
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             {this.props.parent.pos !== 'NounContainer' &&
              <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent._id} />}
             <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
@@ -97,7 +97,7 @@ export const Participle = React.createClass({
         <li className="tree-top">
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Participle</span>
-            <span className="label label-default">{this.props.role}</span>
+            <Label parent={this.props.parent} role={this.props.role} />
             {attr}
             {e('button', {
               className: `button is-small is-active ${element.beginning && 'is-primary'}`,
