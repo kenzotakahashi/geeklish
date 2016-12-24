@@ -97,14 +97,17 @@ function reducer(state, action) {
         dictionary: action.dictionary
       }
     }
-    case 'CREATE_WORD': {
+    case 'CREATE_WORD': {      
       const elementIndex = state.Words.findIndex(t => t._id === action.activeWord)
       const parent = state.Words[elementIndex]
       const [updated, initialized] = takeWord(parent, action.wordBase, action.target)
-      const newElement = {
+
+      const newWords = Object.assign([], state.Words)
+      newWords[elementIndex] = {
         ...parent,
         [action.target[0]]: updated,
       }
+      newWords.push(initialized)
 
       let newActiveWord
       if (parent.pos === 'Clause') {
@@ -124,29 +127,21 @@ function reducer(state, action) {
         saved: false,
         activeWord: newActiveWord,
         target: [],
-        Words: [
-          ...state.Words.slice(0, elementIndex),
-          newElement,
-          ...state.Words.slice(elementIndex + 1, state.Words.length),
-          initialized,
-        ],
+        Words: newWords
       }
     }
     case 'CHANGE_ATTRIBUTE': {
       const elementIndex = state.Words.findIndex(t => t._id === action._id)
       const parent = state.Words[elementIndex]
-      const newElement = {
+      const newWords = Object.assign([], state.Words)
+      newWords[elementIndex] = {
         ...parent,
         [action.attr]: action.change_to,
       }
       return {
         ...state,
         saved: false,
-        Words: [
-          ...state.Words.slice(0, elementIndex),
-          newElement,
-          ...state.Words.slice(elementIndex + 1, state.Words.length),
-        ],
+        Words: newWords,
       }
     }
     case 'DELETE_ELEMENT': {
@@ -163,8 +158,9 @@ function reducer(state, action) {
         newRole = Object.assign([], oldElement.complements)
         newRole[action.role[1]]._id = null
       }
-            
-      const newElement = {
+      
+      const newWords = Object.assign([], filtered)
+      newWords[elementIndex] = {
         ...oldElement,
         [action.role[0]]: newRole
       }
@@ -172,11 +168,7 @@ function reducer(state, action) {
         ...state,
         saved: false,
         target: [],
-        Words: [
-          ...filtered.slice(0, elementIndex),
-          newElement,
-          ...filtered.slice(elementIndex + 1, filtered.length)
-        ]
+        Words: newWords
       }
     }
     case 'USE_CONJUNCTION': {
@@ -187,23 +179,21 @@ function reducer(state, action) {
         getContainer(action.element.pos),
         action.target,
         {child: action.element._id}
-      )  
-      const newElement = {
+      )
+
+      const newWords = Object.assign([], state.Words)
+      newWords[elementIndex] = {
         ...parent,
         [action.target[0]]: updated,
       }
+      newWords.push(initialized)
 
       return {
         ...state,
         saved: false,
         activeWord: initialized._id,
         target: [],
-        Words: [
-          ...state.Words.slice(0, elementIndex),
-          newElement,
-          ...state.Words.slice(elementIndex + 1, state.Words.length),
-          initialized,
-        ],
+        Words: newWords
       }
     }
 
@@ -222,18 +212,15 @@ function reducer(state, action) {
         updated[action.thisRole[1]]._id = childId
       }
 
-      const newParent = {
+      const newWords = Object.assign([], filtered)
+      newWords[elementIndex] ={
         ...parent,
         [action.thisRole[0]]: updated
       }
       return {
         ...state,
         saved: false,
-        Words: [
-          ...filtered.slice(0, elementIndex),
-          newParent,
-          ...filtered.slice(elementIndex + 1, filtered.length)
-        ]
+        Words: newWords
       }
     }
 
