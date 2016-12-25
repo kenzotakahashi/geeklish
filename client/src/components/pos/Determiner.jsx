@@ -20,7 +20,7 @@ export const Determiner = React.createClass({
             <Label parent={this.props.parent} role={this.props.role} />
             {element.type === 'quantifier' &&
               e('button', {
-              className: `button is-small is-active ${element.isOf && 'is-primary'}`,
+              className: `tree-button ${element.isOf  && 'on'}`,
               type: 'button',
               onClick: () => store.dispatch(changeAttribute(this.props._id, 'isOf', !element.isOf))
             }, 'of')}
@@ -39,7 +39,7 @@ export const Possessive = React.createClass({
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
     if (!element.noun) {
-      getWordDictionary(state.Words, state.activeWord, element._id, ['noun', null])
+      getWordDictionary(state.Words, element, ['noun', null])
     }
   },
   render: function() {

@@ -10,7 +10,7 @@ function shortCut() {
   const state = store.getState()
   const element = state.Words.find(o => o._id === this.props._id)
   if (!element.verb) {
-    getWordDictionary(state.Words, state.activeWord, element._id, ['verb', null])
+    getWordDictionary(state.Words, element, ['verb', null])
   }
 }
 
@@ -29,13 +29,13 @@ export const Infinitive = React.createClass({
             <Label parent={this.props.parent} role={this.props.role} />
             {this.props.parent.pos !== 'Clause' &&
               e('button', {
-              className: `button is-small is-active ${element.omit && 'is-primary'}`,
+              className: `tree-button ${element.omit && 'on'}`,
               type: 'button',
               onClick: () => store.dispatch(changeAttribute(element._id, 'omit', !element.omit))
             }, 'omit to')}
             {this.props.parent.pos === 'Clause' &&
               e('button', {
-              className: `button is-small is-active ${element.before && 'is-primary'}`,
+              className: `tree-button ${element.before && 'on'}`,
               type: 'button',
               onClick: () => store.dispatch(changeAttribute(this.props._id, 'before', !element.before))
             }, element.before ? 'before' : 'after')}
@@ -85,7 +85,7 @@ export const Participle = React.createClass({
     const list = !!verb && verb.pos === 'Be' ? ['present','perfect'] : ['present','past','perfect']
     const attr = list.map(o => (
       e('button', {
-        className: `button is-small is-active ${element.form === o && 'is-primary'}`,
+        className: `tree-button ${element.form === o && 'on'}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(element._id, 'form', o))
@@ -100,7 +100,7 @@ export const Participle = React.createClass({
             <Label parent={this.props.parent} role={this.props.role} />
             {attr}
             {e('button', {
-              className: `button is-small is-active ${element.beginning && 'is-primary'}`,
+              className: `tree-button ${element.beginning && 'on'}`,
               type: 'button',
               onClick: () => store.dispatch(changeAttribute(element._id, 'beginning', !element.beginning))
             }, 'beginning')}

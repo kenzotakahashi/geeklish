@@ -79,7 +79,16 @@ function reducer(state, action) {
       }
     }
 
-    // ====================== Main ==================================
+    // ====================== App ====================================
+
+    case 'CHANGE_MODAL': {
+      return {
+        ...state,
+        currentModal: action.currentModal
+      }
+    }
+
+    // ====================== Canvas ==================================
     case 'SHOW_OPTIONS': {
       return {
         ...state,
@@ -213,13 +222,33 @@ function reducer(state, action) {
       }
 
       const newWords = Object.assign([], filtered)
-      newWords[elementIndex] ={
+      newWords[elementIndex] = {
         ...parent,
         [action.thisRole[0]]: updated
       }
       return {
         ...state,
         saved: false,
+        Words: newWords
+      }
+    }
+
+    case 'SET_COMPLEMENT': {
+      console.log('hello')
+      const elementIndex = state.Words.findIndex(t => t._id === action._id)
+      const oldElement = state.Words[elementIndex]
+      const complementArray = oldElement.valid_complements[action.verbType][action.index]
+
+      const newWords = Object.assign([], state.Words)
+      newWords[elementIndex] = {
+        ...oldElement,
+        isComplementChosen: true,
+        complements: complementArray.map(o => ({category: o, _id: null}))
+      }
+
+      return {
+        ...state,
+        currentModal: {name: null},
         Words: newWords
       }
     }

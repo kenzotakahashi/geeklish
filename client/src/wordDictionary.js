@@ -35,7 +35,7 @@ const valid_pos = {
     adjective: ['Adjective'],
     preposition: ['Preposition'],
 
-    particle: ['Preposition'],
+    particle: [{pos: 'Preposition', attr: (w, word) => word.valid_particles.includes(w.base)}],
     adverbs: ['Adverb'],
     prepositions: ['Preposition']
   },
@@ -112,14 +112,14 @@ const valid_pos = {
   },
 }
 
-function valid_check(valid_list, word) {
+function valid_check(valid_list, dicWord, word) {
   for (let valid of valid_list) {
     if (typeof(valid) === 'string') {
-      if (valid === word.pos) {
+      if (valid === dicWord.pos) {
         return true
       }
     } else {
-      if (valid.pos === word.pos && valid.attr(word)) {
+      if (valid.pos === dicWord.pos && valid.attr(dicWord, word)) {
         return true
       }
     }
@@ -127,24 +127,23 @@ function valid_check(valid_list, word) {
   return false
 }
 
-function dispatchTask(data, valid, id, target) {
-  const dictionary = data.filter(t => valid_check(valid, t))
-  store.dispatch(showWordFactory(id, target, dictionary))
+function dispatchTask(data, valid, word, target) {
+  const dictionary = data.filter(t => valid_check(valid, t, word))
+  store.dispatch(showWordFactory(word._id, target, dictionary))
   if (dictionary.length === 1 && ['Clause','AdjectiveClause'].includes(dictionary[0].pos)) {
-    store.dispatch(createNewWord(dictionary[0], id, target))
+    store.dispatch(createNewWord(dictionary[0], word._id, target))
   }
 }
 
-export const getWordDictionary = function(words, activeWord, id, target) {
-  const word = words.find(t => t._id === activeWord)
+export const getWordDictionary = function(words, word, target) {
   const valid = valid_pos[word.pos][target[1] === null ?
                                     target[0] : word.complements[target[1]].category]
   if (sessionStorage.dictionary) {
     const data = JSON.parse(sessionStorage.dictionary)
-    dispatchTask(data, valid, id, target)
+    dispatchTask(data, valid, word, target)
   } else {
     Client.getDics(data => {
-      dispatchTask(data, valid, id, target)
+      dispatchTask(data, valid, word, target)
     })
   }
 }

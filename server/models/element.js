@@ -46,7 +46,9 @@ export const Verb = Element.discriminator('Verb', new Schema({
     passive: String,
     progressive: String,
   },
+  valid_particles: [],
   valid_complements: [],
+  isComplementChosen: Boolean
   form: String,
   negative: Boolean,
   past: Boolean,

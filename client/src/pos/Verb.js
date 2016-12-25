@@ -1,7 +1,7 @@
 import { createWord } from './util.js'
 
 function categorize(adverbs) {
-  const [before,middle,after] = [[],[],[],[]]
+  const [before,middle,after] = [[],[],[]]
   const base = adverbs.map(o => createWord(o))
   for (const adv of base) {
     if (adv.position === 'before') {
@@ -52,6 +52,8 @@ const initVerb = function(v) {
   this.pos = v.pos
   this.word = v.word
   this.valid_complements = v.valid_complements
+  this.valid_particles = v.valid_particles
+  this.isComplementChosen = v.isComplementChosen
   this.form = v.form
   this.modal = v.modal
   this.past = v.past
@@ -61,7 +63,6 @@ const initVerb = function(v) {
   this.passive = v.passive
   this.particle = createWord(v.particle)
   this.complements = v.complements.filter(t => !!t._id).map(o => createWord(o._id));
-  // this.complements = [];
   [this.advBefore,this.advMiddle,this.advAfter] = categorize(v.adverbs)
   this.prepositions = v.prepositions.map(o => createWord(o))
   return this

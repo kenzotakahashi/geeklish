@@ -4,6 +4,7 @@ export const initialState = function() {
   const _id = uuid.v1()
   return {
     route: null,
+    currentModal: {name: null},
     example: null,
     title: 'Some title',
     saved: true,

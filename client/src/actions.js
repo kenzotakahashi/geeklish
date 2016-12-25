@@ -51,3 +51,8 @@ export const routeExample = (examples, words) => ({
   examples,
   words
 })
+
+export const changeModal = (currentModal) => ({
+  type: 'CHANGE_MODAL',
+  currentModal
+})

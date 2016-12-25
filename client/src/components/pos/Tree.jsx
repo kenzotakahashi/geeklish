@@ -1,7 +1,8 @@
 import React from 'react'
 import store from '../../store.js'
 import pos_components from './pos_components'
-import { changeAttribute, deleteElement, useConjunction, undoConjunction } from '../../actions'
+import { changeAttribute, deleteElement, useConjunction, undoConjunction,
+         changeModal } from '../../actions'
 import { getWordDictionary } from '../../wordDictionary'
 
 const e = React.createElement
@@ -33,7 +34,7 @@ export const Children = (props) => (
 	      	{
 	          className: `tree tree-${props.target[0] === o ? 'active' : 'info'}`,
 	          key: o,
-	          onClick: () => getWordDictionary(props.words, props.activeWord, props.element._id, [o, null])
+	          onClick: () => getWordDictionary(props.words, props.element, [o, null])
 	        },
 	        o
 	      )
@@ -45,22 +46,26 @@ export const Children = (props) => (
 export const CompChildren = (props) => (
   <ul>
     {
-      props.attrs.map((w, i) => (
-        w._id ?
-          e(pos_components[props.words.find(o => o._id === w._id).pos],
-            {key: i, parent: props.element, _id: w._id, role: ['complements', i]}
-          ) : props.activeWord === props.element._id &&
-          e(
-            'li',
-            {
-              className: `tree tree-${props.target[1] === i ? 'active' : 'info'}`,
-              key: i,
-              onClick: () => getWordDictionary(
-                props.words, props.activeWord, props.element._id, ['complements', i])
-            },
-            w.category
-          )
-      ))
+      props.element.isComplementChosen ?
+        props.element.complements.map((w, i) => (
+          w._id ?
+            e(pos_components[props.words.find(o => o._id === w._id).pos],
+              {key: i, parent: props.element, _id: w._id, role: ['complements', i]}
+            ) : props.activeWord === props.element._id &&
+            e(
+              'li',
+              {
+                className: `tree tree-${props.target[1] === i ? 'active' : 'info'}`,
+                key: i,
+                onClick: () => getWordDictionary(
+                  props.words, props.element, ['complements', i])
+              },
+              w.category
+            )
+        )) : props.activeWord === props.element._id &&
+        <li className='tree tree-info'
+            onClick={() => store.dispatch(changeModal({name: 'Complement', rest: props.element._id}))}>
+                           Choose complement</li>
     }
   </ul>
 )
@@ -68,8 +73,8 @@ export const CompChildren = (props) => (
 export const WH = (props) => (
 	e(
 		'button',
-		{
-		  className: `button is-small is-active ${props.isWh && 'is-primary'}`,
+		{             
+      className: `tree-button ${props.isWh && 'on'}`,
 		  type: 'button',
 		  onClick: () => store.dispatch(changeAttribute(props.id, 'isWh', !props.isWh))
 		},
@@ -85,14 +90,14 @@ export const DeleteButton = (props) => (
 )
 
 export const ConjunctionButton = (props) => (
-  <button type="button" className="button is-small is-active"
+  <button type="button" className='tree-button'
           onClick={() => store.dispatch(useConjunction(props.element, props.role, props.parentId))}>
     C
   </button>
 )
 
 export const UndoConjunctionButton = (props) => (
-  <button type="button" className="button is-small is-active is-primary"
+  <button type="button" className='tree-button on'
           onClick={() => store.dispatch(undoConjunction(
                           props.element, props.thisRole, props.childRole, props.parentId))}>
     C
@@ -100,7 +105,7 @@ export const UndoConjunctionButton = (props) => (
 )
 
 export const ModalSelect = (props) => (
-  <span className="select is-small">
+  <span className='select'>
     <select value={props.value} onChange={props.onChange}>
       {['modal','can','could','should','may','might','must','will','would'].map(o => (
          <option key={o} value={o === 'modal' ? '' : o}>{o}</option>

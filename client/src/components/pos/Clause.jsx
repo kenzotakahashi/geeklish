@@ -13,7 +13,7 @@ export const Clause = React.createClass({
 
     const attr = ['statement','question','command'].map(o => (
       e('button', {
-        className: `button is-small is-active ${element.cType === o && 'is-primary'}`,
+        className: `tree-button ${element.cType === o && 'on'}`,              
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(element._id, 'cType', o))

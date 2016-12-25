@@ -33,7 +33,7 @@ const Projects = React.createClass({
     }
     if (isNew) history.push(`/projects/${store.getState().projects[0]._id}`)
   },
-  onFormSubmit(e) {
+  onFormSubmit: function(e) {
     e.preventDefault()
     this.saveSentence(store.getState())
   },

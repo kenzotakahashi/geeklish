@@ -29,7 +29,7 @@ export const Adverb = React.createClass({
     const comparison = modifyVerb && !!element.word.comparative &&
     (['base','comparative','superlative'].map(o => (
       e('button', {
-        className: `button is-small is-active ${element.form === o && 'is-primary'}`,
+        className: `tree-button ${element.form === o && 'on'}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(this.props._id, 'form', o))
@@ -68,7 +68,7 @@ export const AdverbClause = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>Adverb Clause</span>            
             <Label parent={this.props.parent} role={this.props.role} />
             {e('button', {
-              className: `button is-small is-active ${element.before && 'is-primary'}`,
+              className: `tree-button ${element.before && 'on'}`,              
               type: 'button',
               onClick: () => store.dispatch(changeAttribute(this.props._id, 'before', !element.before))
             }, element.before ? 'before' : 'after')}

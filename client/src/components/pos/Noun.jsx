@@ -18,7 +18,7 @@ export const Noun = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.singular}</span>
             <Label parent={this.props.parent} role={this.props.role} />
             {e('button', {
-              className: `button is-small is-active ${element.number === 'plural' && 'is-primary'}`,
+              className: `tree-button ${element.number === 'plural'  && 'on'}`,
               type: 'button',
               onClick: () => store.dispatch(changeAttribute(
                              element._id, 'number', element.number === 'plural' ? 'singular' : 'plural'))
@@ -75,7 +75,7 @@ export const NounClause = React.createClass({
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Noun Clause</span>
             <Label parent={this.props.parent} role={this.props.role} />
             {e('button', {
-              className: `button is-small is-active ${element.that && 'is-primary'}`,
+              className: `tree-button ${element.that  && 'on'}`,
               type: 'button',
               onClick: () => store.dispatch(changeAttribute(element._id, 'that', !element.that))
             }, 'that')}

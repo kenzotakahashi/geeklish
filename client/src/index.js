@@ -7,9 +7,7 @@ import App from './components/App'
 
 import 'whatwg-fetch'
 
-import 'bulma/css/bulma.css'
 import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/css/bootstrap-theme.css'
 
 import './css/main.css'
 

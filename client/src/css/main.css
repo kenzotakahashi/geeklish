@@ -9,6 +9,14 @@ body {
   background-color: whitesmoke;
 }
 
+ul {
+  padding-left: 10px;
+}
+
+li {
+  list-style-type: none;
+}
+
 .container.small-font {
   padding-right: 0;
   padding-left: 0;  
@@ -41,16 +49,13 @@ div.row > div {
 .small-font {
   font-size: 12px;
   font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
 .word {
   margin-right: 10px;
   cursor: pointer; 
   padding: 2px;
-}
-
-span.select {
-  margin-left: 3px;
 }
 
 li.list-group-item, .tree{
@@ -108,14 +113,36 @@ li.list-group-item, .tree{
   background-color: grey;
 }
 
-button.button {
+button.tree-button {
+  letter-spacing: 0.3px;
   margin-left: 3px;
-  padding: 0px 5px 0px 5px;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  color: #444;
+}
+
+button.tree-button.on {
+  background-color: #666;
+  border: 1px solid #666;
+  color: #fff;
+}
+
+button:focus, select:focus {
+  outline:0 !important;
+}
+
+.select {
+  color: #444;
+  margin-left: 3px;
+}
+
+.form-control {
+  width: 100px;
 }
 
 li.tree {
   padding: 4px;
-  margin-left: 20px;
+  margin-left: 12px;
   margin-bottom: -1px;
   border-style: solid;
   border-width: 1px;
@@ -143,13 +170,8 @@ li.tree-active {
   background-color: gray;
 }
 
-li.tree-top {
-  margin-left: 20px;
-}
-
 div.tree-box {
   font-size: 12px;
-  font-weight: bold;
   border-style: solid;
   border-width: 1px;
   border-radius: 3px;
@@ -193,4 +215,8 @@ footer {
 
 .btn.btn-default[disabled] {
   cursor: default;
+}
+
+.modal-container {
+  padding: 20px;
 }

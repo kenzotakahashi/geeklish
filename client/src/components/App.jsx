@@ -6,6 +6,7 @@ import Examples from './Examples'
 import Projects from './Projects'
 import Guide from './Guide'
 import Admin from './Admin'
+import ModalConductor from './modal/ModalConductor'
 
 function getChildren(state, route) {
   if (route === 'projects') {
@@ -59,6 +60,8 @@ const App = React.createClass({
           <p>© 2016 Geeklish. All Rights Reserved. 
           <a href="mailto:kenzotakahashi2@gmail.com" target="_top">kenzotakahashi2@gmail.com</a></p>
         </footer>
+
+        <ModalConductor {...state} />
       </div>
     )
   }

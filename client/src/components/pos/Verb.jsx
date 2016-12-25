@@ -13,22 +13,22 @@ export const Verb = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
-    // const attrs = ['particle','complements','adverbs','prepositions']
     const attrs = ['particle','adverbs','prepositions']
 
     const list = this.props.parent.pos === 'Infinitive' ? ['negative','continuous','passive'] :
                  ['past','negative','continuous','perfect','passive']
     const attributes = list.map(o => (
       e('button', {
-        className: `button is-small is-active ${element[o] && 'is-primary'}`,
+        className: `tree-button ${element[o] && 'on'}`,
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(element._id, o, !element[o]))
       }, o)
     ))
 
-    const compChildren = <CompChildren element={element} attrs={element.complements}
-                          words={state.Words} target={state.target} activeWord={state.activeWord} />
+    console.log(element)
+    const compChildren = <CompChildren element={element} words={state.Words}
+                          target={state.target} activeWord={state.activeWord} openModal={this.openModal}/>
 
     const children = <Children element={element} attrs={attrs} words={state.Words}
                       target={state.target} activeWord={state.activeWord} />
@@ -112,7 +112,7 @@ export const Be = React.createClass({
                  ['past','negative','continuous','perfect','passive']
     const attributes = list.map(o => (
       e('button', {
-        className: `button is-small is-active ${element[o] && 'is-primary'}`,
+        className: `tree-button ${element[o] && 'on'}`,        
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(element._id, o, !element[o]))

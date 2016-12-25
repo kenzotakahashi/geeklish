@@ -104,6 +104,8 @@ const factory = {
         progressive: w.progressive 
       },
       valid_complements: w.complements,
+      valid_particles: w.particles,
+      isComplementChosen: false,
       form: arg.form || 'base',
       negative: false,
       past: false,
@@ -112,10 +114,8 @@ const factory = {
       passive: false,
       modal: '',
       particle: null,
-      // complements: [],
-      complements: [
-        {category: 'noun', _id: null}
-      ],
+      complements: [],
+        // [{category: 'noun', _id: null}]
       adverbs: [],
       prepositions: [],
     }

@@ -34,20 +34,29 @@ const verbs = [
 	{
 		base: 'want',
 		progressive: 'wanting',
-		// complements: [
-		// 	['N'],
-		// 	['Infinitive']
-		// ]
+		complements: {
+			base: [
+				['noun'],
+				['infinitive']
+			]
+		}
 	},
 	{
 		base: 'give',
 		past: 'gave',
 		passive: 'given',
 		progressive: 'giving',
-		// complements: [
-		// 	['N', 'N'],
-		// 	['N', 'P']
-		// ]
+		particles: ['up'],
+		complements: {
+			base: [
+				['noun', 'noun'],
+				['noun', 'preposition']
+			],
+			up: [
+				[],
+				['noun']
+			]
+		}
 	},
 	{
 		base: 'talk',

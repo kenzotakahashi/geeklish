@@ -20,7 +20,7 @@ const Preposition = React.createClass({
               <Label parent={this.props.parent} role={this.props.role} />
               {this.props.parent.complements.length > 0 &&
               e('button', {
-                className: `button is-small is-active ${element.before && 'is-primary'}`,
+                className: `tree-button ${element.before  && 'on'}`,
                 type: 'button',
                 onClick: () => store.dispatch(changeAttribute(element._id, 'before', !element.before))
               }, element.before ? 'before': 'after')
@@ -40,7 +40,7 @@ const Preposition = React.createClass({
               <WH id={element._id} isWh={element.isWh} />
               {['Verb','Be','VerbContainer'].includes(this.props.parent.pos) &&
                 e('button', {
-                className: `button is-small is-active ${element.before && 'is-primary'}`,
+                className: `tree-button ${element.before  && 'on'}`,
                 type: 'button',
                 onClick: () => store.dispatch(changeAttribute(element._id, 'before', !element.before))
               }, element.before ? 'before': 'after')}
