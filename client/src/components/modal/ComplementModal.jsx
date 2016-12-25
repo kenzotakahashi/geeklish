@@ -24,15 +24,17 @@ export const ComplementModal = React.createClass({
 		const state = store.getState()
 		const element = state.Words.find(o => o._id === this.props.rest)
 
-		const verbType = !!element.particle ? element.particle.word : 'base'
+		const verbType = !!element.particle ? 
+		                   state.Words.find(o => o._id === element.particle).word : 'base'
 		const complements = element.valid_complements[verbType].map((o, i) => (
 			<div className="radio" key={i}>
 			  <label>
 			    <input type="radio" value={i} checked={parseInt(this.state.choice, 10) === i}
 			           onChange={this.onChange} />
-			    {o.map((t, j) => (
-			    	<span key={j}>{t}</span>
-			    ))}
+			    {o.length > 0 ?
+			       o.map((t, j) => (<span key={j} className='comp-choice'>{t}</span>))
+			       : <span className='comp-choice'>No complement</span>
+			    }
 			  </label>
 			</div>
 		))
@@ -40,17 +42,18 @@ export const ComplementModal = React.createClass({
 		return (
 			<Modal isOpen={true} onClose={() => this.props.closeModal()}>
 			  <div className='modal-container'>
-				  <h1>Choose a set of complements</h1>
+				  <h2>Choose a complement</h2>
 				  
 				  <form className="form" onSubmit={(e) => this.onFormSubmit(element._id, verbType, e)}>
 			    	{complements}
-				    <button type="submit" className="btn btn-default"
-				            disabled={this.state.choice === null ? "disabled" : ""}>
-				      Save
-				    </button>
+			    	<div className='container container-left'>
+					    <button type="submit" className="button-primary"
+					            disabled={this.state.choice === null ? "disabled" : ""}>
+					      Save
+					    </button>
+					    <button type='button' onClick={() => this.props.closeModal()}>Close</button>
+				  	</div>
 				  </form>
-
-				  <button type='button' onClick={() => this.props.closeModal()}>Close</button>
 				</div>
 			</Modal>
 		)

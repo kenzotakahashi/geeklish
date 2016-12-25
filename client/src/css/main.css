@@ -9,12 +9,36 @@ body {
   background-color: whitesmoke;
 }
 
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.container-left {
+  justify-content: flex-end
+}
+
 ul {
   padding-left: 10px;
 }
 
 li {
   list-style-type: none;
+}
+
+button {
+  border: transparent;
+  padding: .5em 1em;
+  background-color: #E6E6E6;
+}
+
+.button-small {
+  font-size: 85%;
+}
+
+.button-primary {
+  color: #fff;
+  background-color: #0078e7;
 }
 
 .container.small-font {
@@ -115,10 +139,11 @@ li.list-group-item, .tree{
 
 button.tree-button {
   letter-spacing: 0.3px;
+  padding: 2px 5px;
   margin-left: 3px;
+  color: #444;
   background-color: #fff;
   border: 1px solid #aaa;
-  color: #444;
 }
 
 button.tree-button.on {
@@ -219,4 +244,12 @@ footer {
 
 .modal-container {
   padding: 20px;
+}
+
+.comp-children {
+  margin-bottom: 10px;
+}
+
+.comp-choice {
+  padding: 5px;
 }

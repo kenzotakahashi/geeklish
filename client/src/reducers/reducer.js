@@ -112,9 +112,14 @@ function reducer(state, action) {
       const [updated, initialized] = takeWord(parent, action.wordBase, action.target)
 
       const newWords = Object.assign([], state.Words)
+      const resetComplement = action.target[0] === 'particle' ? {
+                                isComplementChosen: false,
+                                complements: []
+                              } : {}
       newWords[elementIndex] = {
         ...parent,
         [action.target[0]]: updated,
+        ...resetComplement
       }
       newWords.push(initialized)
 
@@ -169,9 +174,14 @@ function reducer(state, action) {
       }
       
       const newWords = Object.assign([], filtered)
+      const resetComplement = action.role[0] === 'particle' ? {
+                                isComplementChosen: false,
+                                complements: []
+                              } : {}
       newWords[elementIndex] = {
         ...oldElement,
-        [action.role[0]]: newRole
+        [action.role[0]]: newRole,
+        ...resetComplement
       }
       return {
         ...state,
@@ -234,7 +244,6 @@ function reducer(state, action) {
     }
 
     case 'SET_COMPLEMENT': {
-      console.log('hello')
       const elementIndex = state.Words.findIndex(t => t._id === action._id)
       const oldElement = state.Words[elementIndex]
       const complementArray = oldElement.valid_complements[action.verbType][action.index]

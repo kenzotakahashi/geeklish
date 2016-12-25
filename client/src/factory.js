@@ -115,7 +115,6 @@ const factory = {
       modal: '',
       particle: null,
       complements: [],
-        // [{category: 'noun', _id: null}]
       adverbs: [],
       prepositions: [],
     }

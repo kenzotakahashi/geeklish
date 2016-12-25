@@ -26,7 +26,6 @@ export const Verb = React.createClass({
       }, o)
     ))
 
-    console.log(element)
     const compChildren = <CompChildren element={element} words={state.Words}
                           target={state.target} activeWord={state.activeWord} openModal={this.openModal}/>
 

@@ -11,7 +11,7 @@ const Preposition = React.createClass({
     const element = state.Words.find(o => o._id === this.props._id)
     const attrs = ['complement']
 
-    if (this.props.role === 'particle') {
+    if (this.props.role[0] === 'particle') {
       return (
         <ul>
           <li className='tree-top'>
