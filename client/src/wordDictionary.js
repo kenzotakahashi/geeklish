@@ -2,12 +2,13 @@ import store from './store.js'
 import Client from './Client'
 import { showWordFactory, createNewWord } from './actions'
 
+const adverb = p => ({pos: 'Adverb', attr: (w) => w.canModify.includes(p)})
+
 const nouns = ['Noun', 'Pronoun', 'NounClause', 'Gerund']
 const verbs = ['Verb', 'Be']
 const adjectives = ['Adjective', 'AdjectiveClause', 'Participle']
-const adverbs = ['Adverb', 'AdverbClause', 'Infinitive']
 const coordinating = [{pos: 'Conjunction', attr: (w) => w.type === 'coordinating' }]
-const complements = [...nouns, 'Adjective', 'Adverb', 'Preposition', 'Infinitive']
+const complements = [...nouns, 'Adjective', adverb('comp'), 'Preposition', 'Infinitive']
 const determiners = [{pos: 'Determiner', attr: (w) => w.type === 'determiner' }, 'Possessive']
 const quantifier = [{pos: 'Determiner', attr: (w) => w.type === 'quantifier' }]
 // const verbAdverbs = [{pos: 'Adverb', attr: (w) =>}]
@@ -17,7 +18,7 @@ const valid_pos = {
     clause: ['Clause'],
   },
   Clause: {
-    adverbs: adverbs,
+    adverbs: [adverb('clause'), 'AdverbClause', 'Infinitive'],
     subject: [...nouns, 'Infinitive'],
     verb: verbs,
     adjective: ['AdjectiveClause'],
@@ -27,33 +28,31 @@ const valid_pos = {
     conjunction: coordinating
   },
   Verb: {
-    complements: complements,
     noun: nouns,
     clause: ['NounClause'],
     infinitive: ['Infinitive'],
-    adverb: ['Adverb'],
+    adverb: [adverb('comp')],
     adjective: ['Adjective'],
     preposition: ['Preposition'],
 
     particle: [{pos: 'Preposition', attr: (w, word) => word.valid_particles.includes(w.base)}],
-    adverbs: ['Adverb'],
+    adverbs: [adverb('verb')],
     prepositions: ['Preposition']
   },
   Be: {
-    complements: complements,
     noun: nouns,
     clause: ['NounClause'],
     infinitive: ['Infinitive'],
-    adverb: ['Adverb'],
+    adverb: [adverb('comp')],
     adjective: ['Adjective'],
     preposition: ['Preposition'],
 
-    adverbs: ['Adverb'],
+    adverbs: [adverb('verb')],
     prepositions: ['Preposition']
   },
   VerbContainer: {
     complements: complements,
-    adverbs: ['Adverb'],
+    adverbs: [adverb('verb')],
     prepositions: ['Preposition'],
     verbs: verbs,
     conjunction: coordinating
@@ -86,17 +85,17 @@ const valid_pos = {
     prepositions: ['Preposition'],
   },
   Determiner: {
-    adverb: ['Adverb'],
+    adverb: [adverb('det')],
   },
   Adjective: {
-    adverbs: ['Adverb'],
+    adverbs: [adverb('adj')],
     prepositions: ['Preposition'] 
   },
   AdjectiveClause: {
     clause: ['Clause']
   },
   Adverb: {
-    adverb: ['Adverb']
+    adverb: [adverb('adv')]
   },
   AdverbClause: {
     conjunction: [{pos: 'Conjunction', attr: (w) => w.type === 'subordinating' }],

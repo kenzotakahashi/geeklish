@@ -37,7 +37,37 @@ const prepositions = [
 	},
 	{
 		base: "after"
-	}
+	},
+	{
+		base: "down"
+	},
+	{
+		base: "over"
+	},
+	{
+		base: "against"
+	},
+	{
+		base: "through"
+	},
+	{
+		base: "around"
+	},
+	{
+		base: "into"
+	},
+	{
+		base: "across"
+	},
+	{
+		base: "along"
+	},
+	{
+		base: "behind"
+	},
+	{
+		base: 'back'
+	},
 ].map(o => ({
 	...o,
 	order: 7

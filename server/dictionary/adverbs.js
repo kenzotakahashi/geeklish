@@ -7,15 +7,15 @@ const adverbs = [
 	},
 	{
 		base: "really",
-		canModify: ["verb","adj","adv","clause"]
+		canModify: ["verb","clause"]
 	},
 	{
 		base: "quickly",
-		canModify: ["verb","adj","adv","clause"]
+		canModify: ["verb","clause"]
 	},
 	{
 		base: "hopefully",
-		canModify: ["verb","adj","adv","clause"]
+		canModify: ["verb","clause"]
 	},
 	{
 		base: "why",
@@ -24,17 +24,17 @@ const adverbs = [
 	},
 	{
 		base: "how",
-		canModify: ["verb", "adj", "adv"],
+		canModify: ["verb","adj","adv"],
 		comparative: "n",
 	},
 	{
 		base: "when",
-		canModify: ["verb", "adj", "adv"],
+		canModify: ["verb","comp"],
 		comparative: "n",
 	},
 	{
 		base: "where",
-		canModify: ["verb", "adj"],
+		canModify: ["verb","comp"],
 		comparative: "n",
 	},
 	{
@@ -57,17 +57,17 @@ const adverbs = [
 	},
 	{
 		base: "today",
-		canModify: ["verb","clause"],
+		canModify: ["verb","clause","comp"],
 		comparative: "n",
 	},
 	{
 		base: "yesterday",
-		canModify: ["verb","clause"],
+		canModify: ["verb","clause","comp"],
 		comparative: "n",
 	},
 	{
 		base: "just",
-		canModify: ["verb", "adj", "adv"],
+		canModify: ["verb","adj","adv"],
 		comparative: "n",
 	},
 	{
