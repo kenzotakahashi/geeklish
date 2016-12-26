@@ -63,6 +63,7 @@ export const CompChildren = (props) => (
               {
                 className: `tree tree-${props.target[1] === i ? 'active' : 'info'}`,
                 key: i,
+                disabled: props.element.passive && i === 0 && w.category === 'noun' && "disabled",
                 onClick: () => getWordDictionary(
                   props.words, props.element, ['complements', i])
               },

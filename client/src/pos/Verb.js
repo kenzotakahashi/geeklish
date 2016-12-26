@@ -62,7 +62,8 @@ const initVerb = function(v) {
   this.perfect = v.perfect
   this.passive = v.passive
   this.particle = createWord(v.particle)
-  this.complements = v.complements.filter(t => !!t._id).map(o => createWord(o._id));
+  this.complements = v.complements.slice(this.passive ? 1 : 0)
+                     .filter(t => !!t._id).map(o => createWord(o._id));
   [this.advBefore,this.advMiddle,this.advAfter] = categorize(v.adverbs)
   this.prepositions = v.prepositions.map(o => createWord(o))
   return this

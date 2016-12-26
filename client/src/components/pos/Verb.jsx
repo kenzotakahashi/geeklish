@@ -15,11 +15,17 @@ export const Verb = React.createClass({
     const element = state.Words.find(o => o._id === this.props._id)
     const attrs = ['particle','adverbs','prepositions']
 
-    const list = this.props.parent.pos === 'Infinitive' ? ['negative','continuous','passive'] :
-                 ['past','negative','continuous','perfect','passive']
+    const object = element.complements[0]
+    const disablePassive = (object && object.category === 'noun' && !!object._id) ||
+                           (object && object.category !== 'noun')
+
+    const list = this.props.parent.pos === 'Infinitive' ? ['negative','continuous', 'passive'] :
+                 ['past','negative','continuous','perfect', 'passive']
+
     const attributes = list.map(o => (
       e('button', {
         className: `tree-button ${element[o] && 'on'}`,
+        disabled: o === 'passive' && disablePassive && "disabled",
         key: o,
         type: 'button',
         onClick: () => store.dispatch(changeAttribute(element._id, o, !element[o]))
@@ -43,6 +49,7 @@ export const Verb = React.createClass({
               <Label parent={this.props.parent} role={this.props.role} />
               <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
+            {compChildren}
             {children}
           </li>
         </ul>
@@ -56,6 +63,7 @@ export const Verb = React.createClass({
               <Label parent={this.props.parent} role={this.props.role} />
               <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
+            {compChildren}
             {children}
           </li>
         </ul>
@@ -72,6 +80,7 @@ export const Verb = React.createClass({
                <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent._id} />}
               <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
+            {compChildren}
             {children}
           </li>
         </ul>
@@ -105,10 +114,10 @@ export const Be = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
-    const attrs = ['complements','adverbs','prepositions']
+    const attrs = ['adverbs','prepositions']
 
-    const list = this.props.parent.pos === 'Infinitive' ? ['negative','continuous','passive'] :
-                 ['past','negative','continuous','perfect','passive']
+    const list = this.props.parent.pos === 'Infinitive' ?
+                 ['negative','continuous'] : ['past','negative','continuous','perfect']
     const attributes = list.map(o => (
       e('button', {
         className: `tree-button ${element[o] && 'on'}`,        
@@ -117,6 +126,9 @@ export const Be = React.createClass({
         onClick: () => store.dispatch(changeAttribute(element._id, o, !element[o]))
       }, o)
     ))
+
+    const compChildren = <CompChildren element={element} words={state.Words}
+                          target={state.target} activeWord={state.activeWord} openModal={this.openModal}/>
 
     const children = <Children element={element} attrs={attrs} words={state.Words}
                       target={state.target} activeWord={state.activeWord} />
@@ -130,6 +142,7 @@ export const Be = React.createClass({
               <Label parent={this.props.parent} role={this.props.role} />
               <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
+            {compChildren}
             {children}
           </li>
         </ul>
@@ -143,6 +156,7 @@ export const Be = React.createClass({
               <Label parent={this.props.parent} role={this.props.role} />
               <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
+            {compChildren}
             {children}
           </li>
         </ul>
@@ -159,6 +173,7 @@ export const Be = React.createClass({
                <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent._id} />}
               <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
+            {compChildren}
             {children}
           </li>
         </ul>
@@ -176,6 +191,7 @@ export const Be = React.createClass({
                <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent._id} />}
               <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
             </div>
+            {compChildren}
             {children}
           </li>
         </ul>

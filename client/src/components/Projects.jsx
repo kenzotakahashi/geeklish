@@ -67,12 +67,11 @@ const Projects = React.createClass({
               onChange={this.onInputChange}
             />
           </div>
-          <button type="submit" className="btn btn-default" disabled={state.saved ? "disabled" : ""}>
+          <button type="submit" className="button-primary" disabled={state.saved && "disabled"}>
             Save
           </button>
-          <button type="button" className="btn btn-default"
-                 onClick={() => this.deleteProject()}>
-            <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          <button type="button" className="button-error" onClick={() => this.deleteProject()}>
+            Delete
           </button>
         </form>}
 

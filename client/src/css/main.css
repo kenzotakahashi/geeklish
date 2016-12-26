@@ -26,19 +26,44 @@ li {
   list-style-type: none;
 }
 
+li[disabled] {
+  opacity: .4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 button {
   border: transparent;
   padding: .5em 1em;
   background-color: #E6E6E6;
 }
 
+button[disabled] {
+  opacity: .4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .button-small {
   font-size: 85%;
 }
 
+.button-primary,
+.button-success,
+.button-error,
+.button-warning,
+.button-secondary {
+    color: white;
+    /*border-radius: 4px;*/
+    /*text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);*/
+}
+
 .button-primary {
-  color: #fff;
   background-color: #0078e7;
+}
+
+.button-error {
+  background: rgb(202, 60, 60); /* this is a maroon */
 }
 
 .container.small-font {
@@ -226,6 +251,7 @@ button.trash {
 
 input.form-control.title-form {
   width: 500px;
+  max-width: 100%;
 }
 
 .output {
@@ -236,10 +262,6 @@ input.form-control.title-form {
 footer {
   text-align: center;
   margin-top: 5px;
-}
-
-.btn.btn-default[disabled] {
-  cursor: default;
 }
 
 .modal-container {

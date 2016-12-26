@@ -136,7 +136,15 @@ const factory = {
         passive: 'been',
         progressive: 'being'
       },
-      valid_complements: [],
+      valid_complements: {
+        base: [
+          ['noun'],
+          ['adjective'],
+          ['adverb'],
+          ['preposition'],
+          ['infinitive']
+        ]
+      },
       form: arg.form || 'base',
       negative: false,
       modal: '',

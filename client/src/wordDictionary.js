@@ -41,6 +41,13 @@ const valid_pos = {
   },
   Be: {
     complements: complements,
+    noun: nouns,
+    clause: ['NounClause'],
+    infinitive: ['Infinitive'],
+    adverb: ['Adverb'],
+    adjective: ['Adjective'],
+    preposition: ['Preposition'],
+
     adverbs: ['Adverb'],
     prepositions: ['Preposition']
   },

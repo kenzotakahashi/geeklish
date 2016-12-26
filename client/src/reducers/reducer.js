@@ -258,6 +258,7 @@ function reducer(state, action) {
       return {
         ...state,
         currentModal: {name: null},
+        target: [],
         Words: newWords
       }
     }
