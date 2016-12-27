@@ -2,6 +2,15 @@ import store from './store.js'
 import Client from './Client'
 import { showWordFactory, createNewWord } from './actions'
 
+function validDeterminer(dType, w, word) {
+  if (w.type !== dType) return false
+  // TODO noun clause and noun container don't have type
+  if (word.type === 'uncountable') {
+    return w.mass
+  }
+  return ['both',word.number].includes(w.number)
+}
+
 const adverb = p => ({pos: 'Adverb', attr: (w) => w.canModify.includes(p)})
 
 const nouns = ['Noun', 'Pronoun', 'NounClause', 'Gerund']
@@ -9,9 +18,9 @@ const verbs = ['Verb', 'Be']
 const adjectives = ['Adjective', 'AdjectiveClause', 'Participle']
 const coordinating = [{pos: 'Conjunction', attr: (w) => w.type === 'coordinating' }]
 const complements = [...nouns, 'Adjective', adverb('comp'), 'Preposition', 'Infinitive']
-const determiners = [{pos: 'Determiner', attr: (w) => w.type === 'determiner' }, 'Possessive']
-const quantifier = [{pos: 'Determiner', attr: (w) => w.type === 'quantifier' }]
-// const verbAdverbs = [{pos: 'Adverb', attr: (w) =>}]
+const determiners = [{pos: 'Determiner', attr: (w, word) => validDeterminer('determiner', w, word)},
+                      'Possessive']
+const quantifier = [{pos: 'Determiner', attr: (w, word) => validDeterminer('quantifier', w, word)}]
 
 const valid_pos = {
   Sentence: {
@@ -76,7 +85,6 @@ const valid_pos = {
     clause: ['Clause'],
     nouns: ['Noun', 'NounClause'],
     quantifier: quantifier,
-    determiner: determiners,
     adjectives: adjectives,
     prepositions: ['Preposition'],
   },
@@ -141,7 +149,7 @@ function dispatchTask(data, valid, word, target) {
   }
 }
 
-export const getWordDictionary = function(words, word, target) {
+export const getWordDictionary = function(word, target) {
   const valid = valid_pos[word.pos][target[1] === null ?
                                     target[0] : word.complements[target[1]].category]
   if (sessionStorage.dictionary) {

@@ -71,9 +71,10 @@ export const Noun = Element.discriminator('Noun', new Schema({
   person: Number,
   number: String,
   isWh: Boolean,
+  quantifier: String,
+  determiner: String,
   adjectives: [String],
   adjectivesAfter: [String],
-  determiners: [String],
   prepositions: [String],
   nouns: [String]
 }, options))
@@ -84,7 +85,8 @@ export const NounContainer = Element.discriminator('NounContainer', new Schema({
   isWh: Boolean,
   adjectives: [String],
   adjectivesAfter: [String],
-  determiners: [String],
+  quantifier: String,
+  determiner: String,
   prepositions: [String],
   nouns: [String],
   conjunction: String,
@@ -96,9 +98,9 @@ export const NounClause = Element.discriminator('NounClause', new Schema({
   isWh: Boolean,
   that: Boolean,
   clause: String,
+  quantifier: String,
   adjectives: [String],
   adjectivesAfter: [String],
-  determiners: [String],
   prepositions: [String],
   nouns: [String],
 }, options))
@@ -111,6 +113,7 @@ export const Determiner = Element.discriminator('Determiner', new Schema({
 
 export const Possessive = Element.discriminator('Possessive', new Schema({
   noun: String,
+  number: String,
 }, options))
 
 export const Be = Element.discriminator('Be', new Schema({

@@ -55,6 +55,7 @@ export const Noun = {
   init: function(w) {
     this._id = w._id
     this.pos = w.pos
+    this.type = w.type
     this.word = w.word
     this.person = w.person
     this.number = w.number
@@ -168,7 +169,6 @@ export const NounClause = {
     this.isWh = w.isWh;
     [this.adjectives, this.adjectivesAfter] = beforeOrAfter(w.adjectives)
     this.quantifier = createWord(w.quantifier)
-    this.determiner = createWord(w.determiner)
     this.prepositions = w.prepositions.map(o => createWord(o))
     this.nouns = w.nouns.map(o => createWord(o))
     return this

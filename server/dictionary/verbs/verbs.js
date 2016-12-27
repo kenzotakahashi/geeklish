@@ -343,7 +343,7 @@ const verbs = [
 		past: 'took',
 		passive: 'taken',
 		progressive: 'taking',
-		particles: ['over','up','away','off'],
+		particles: ['over','up','away','off','into'],
 		complements: {
 			base: [
 				['noun'],
@@ -364,6 +364,9 @@ const verbs = [
 			off: [
 				[],
 				['noun']
+			],
+			into: [
+				['noun','noun']
 			]
 		}
 	},

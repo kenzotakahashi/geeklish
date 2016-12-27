@@ -10,7 +10,7 @@ function shortCut() {
   const state = store.getState()
   const element = state.Words.find(o => o._id === this.props._id)
   if (!element.verb) {
-    getWordDictionary(state.Words, element, ['verb', null])
+    getWordDictionary(element, ['verb', null])
   }
 }
 

@@ -48,7 +48,7 @@ export const ComplementModal = React.createClass({
 			    	{complements}
 			    	<div className='container container-left'>
 					    <button type="submit" className="button-primary"
-					            disabled={this.state.choice === null ? "disabled" : ""}>
+					            disabled={this.state.choice === null && "disabled"}>
 					      Save
 					    </button>
 					    <button type='button' onClick={() => this.props.closeModal()}>Close</button>

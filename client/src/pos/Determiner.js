@@ -23,6 +23,7 @@ export const Possessive = {
   init: function(p) {
     this._id = p._id
     this.pos = p.pos
+    this.number = p.number
     this.noun = createWord(p.noun)
     return this    
   },

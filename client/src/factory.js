@@ -67,7 +67,6 @@ const factory = {
       clause: null,
       adjectives: [],
       quantifier: null,
-      determiner: null,
       prepositions: [],
       nouns: [],
     }
@@ -90,6 +89,7 @@ const factory = {
     return {
       _id: uuid.v1(),
       pos: 'Possessive',
+      number: 'both',
       noun: null,
     }
   },

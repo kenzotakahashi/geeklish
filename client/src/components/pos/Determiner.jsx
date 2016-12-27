@@ -39,7 +39,7 @@ export const Possessive = React.createClass({
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
     if (!element.noun) {
-      getWordDictionary(state.Words, element, ['noun', null])
+      getWordDictionary(element, ['noun', null])
     }
   },
   render: function() {

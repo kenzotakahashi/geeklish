@@ -9,7 +9,7 @@ const Sentence = React.createClass({
   //   const state = store.getState()
   //   const element = state.Words.find(o => o.pos === 'Sentence')
   //   if (!element.clause) {
-  //     getWordDictionary(state.Words, element, ['clause', null])
+  //     getWordDictionary(element, ['clause', null])
   //   }
   // },
   render: function() {

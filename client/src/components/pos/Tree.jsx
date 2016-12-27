@@ -34,7 +34,7 @@ export const Children = (props) => (
 	      	{
 	          className: `tree tree-${props.target[0] === o ? 'active' : 'info'}`,
 	          key: o,
-	          onClick: () => getWordDictionary(props.words, props.element, [o, null])
+	          onClick: () => getWordDictionary(props.element, [o, null])
 	        },
 	        o
 	      )

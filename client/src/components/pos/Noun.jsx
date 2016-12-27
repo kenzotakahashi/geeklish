@@ -2,14 +2,29 @@ import React from 'react'
 import store from '../../store.js'
 import { Children, WH, DeleteButton, ConjunctionButton, UndoConjunctionButton, Label } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
+import { getWordDictionary } from '../../wordDictionary'
 
 const e = React.createElement
 
 export const Noun = React.createClass({
+  changeNumber: function(element) {
+    store.dispatch(changeAttribute(
+      element._id, 'number', element.number === 'plural' ? 'singular' : 'plural'))
+    const state = store.getState()
+    const newElement = state.Words.find(o => o._id === element._id)
+    if (state.activeWord === newElement._id && ['quantifier','determiner'].includes(state.target[0])) {
+      getWordDictionary(newElement, state.target)
+    }
+  },
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
     const attrs = ['quantifier','determiner','adjectives','nouns','prepositions']
+
+    const quantifier = state.Words.find(o => o._id === element.quantifier)
+    const determiner = state.Words.find(o => o._id === element.determiner)
+    const disableNumber = (quantifier && quantifier.number !== 'both') ||
+                          (determiner && determiner.number !== 'both')
 
     return (
       <ul>
@@ -17,14 +32,15 @@ export const Noun = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.singular}</span>
             <Label parent={this.props.parent} role={this.props.role} />
-            {e('button', {
+            {element.type === 'countable' &&
+              e('button', {
               className: `tree-button ${element.number === 'plural'  && 'on'}`,
               type: 'button',
-              onClick: () => store.dispatch(changeAttribute(
-                             element._id, 'number', element.number === 'plural' ? 'singular' : 'plural'))
+              disabled: disableNumber && "disabled",
+              onClick: () => this.changeNumber(element)
             }, element.number)}
-            {parent.pos !== 'Possessive' && <WH id={element._id} isWh={element.isWh} />}
-            {parent.pos !== 'NounContainer' &&
+            {this.props.parent.pos !== 'Possessive' && <WH id={element._id} isWh={element.isWh} />}
+            {this.props.parent.pos !== 'NounContainer' &&
              <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent._id} />}
             <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
           </div>
@@ -66,7 +82,7 @@ export const NounClause = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
-    const attrs = ['clause','quantifier','determiner','adjectives','nouns','prepositions']
+    const attrs = ['clause','quantifier','adjectives','nouns','prepositions']
 
     return (
       <ul>

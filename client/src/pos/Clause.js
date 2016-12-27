@@ -141,6 +141,9 @@ export const Clause = {
       }
     }
     if (!(s && s.isValid() && v && v.isValid())) return [false, '(You need a subject and a verb)']
+    if (s && s.isValid() && !(s.determiner || s.quantifier)) {
+      return [false, '(The countable noun needs either a quantifier or determiner)']
+    }
 
     let c = s.getList()
     if (v.pos === "Be") {
@@ -162,10 +165,10 @@ export const Clause = {
       if (this.cType === 'question' && !s.isWh) {
         const vType = v.verbs.map(o => o.pos)
         if (vType.includes('Be') && vType.includes('Verb')) {
-          return [false, "We do not support Be verb and non-Be verb in a question"]
+          return [false, "(We do not support Be verb and non-Be verb in a question)"]
         }
         if (vType.includes('Be')) {
-          return [false, "We do not support multiple Be verbs in a question"]
+          return [false, "(We do not support multiple Be verbs in a question)"]
         }
         const heads = []
         for (let i = 0; i < v.verbs.length; i++) {
