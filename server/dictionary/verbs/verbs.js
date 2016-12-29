@@ -145,6 +145,7 @@ const verbs = [
 				[]
 			]
 		}
+	},
 	{
 		base: 'tell',
 		past: 'told',

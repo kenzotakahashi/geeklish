@@ -302,11 +302,6 @@ const Guide = React.createClass({
               <span className='pos Determiner'>Determiner</span>
             </li>            
             <li className='function-group'>
-              <div className='function-title'>determiner</div>
-              <span className='pos Determiner'>Determiner</span>
-              <span className='pos basic'>Possessive</span>
-            </li>
-            <li className='function-group'>
               <div className='function-title'>adjectives</div>
               <span className='pos Adjective'>Adjective</span>
               <span className='pos basic'>Adjective Clause</span>

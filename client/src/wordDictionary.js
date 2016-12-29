@@ -4,7 +4,6 @@ import { showWordFactory, createNewWord } from './actions'
 
 function validDeterminer(dType, w, word) {
   if (w.type !== dType) return false
-  // TODO noun clause and noun container don't have type
   if (word.type === 'uncountable') {
     return w.mass
   }

@@ -13,7 +13,8 @@ export const Verb = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
-    const attrs = ['particle','adverbs','prepositions']
+    const attrs = element.valid_particles.length > 0 ?
+                  ['particle','adverbs','prepositions'] : ['adverbs','prepositions']
 
     const object = element.complements[0]
     const disablePassive = (object && object.category === 'noun' && !!object._id) ||

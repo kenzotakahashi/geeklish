@@ -21,7 +21,7 @@ const Sentence = React.createClass({
       <ul>
         <li>
           <div className={`tree-box ${element.pos}`}>
-            <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>Sentence</span>
+            <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Sentence</span>
           </div>
           <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />

@@ -2,6 +2,8 @@ import factory from '../factory.js'
 // import Client from '../Client'
 import uuid from 'uuid'
 import { initialState } from '../examples'
+import { score } from './score'
+import { getDescendantIds } from './getDescendantIds'
 
 const getArgument = function(parent, wordPos, target) {
   if (wordPos === 'Pronoun' &&
@@ -43,7 +45,6 @@ function getContainer(pos) {
     return {pos: 'VerbContainer'}
   }
 }
-
 
 function reducer(state, action) {
   switch (action.type) {
@@ -93,7 +94,7 @@ function reducer(state, action) {
       return {
         ...state,
         saved: false,
-        activeWord: state.activeWord === action._id ? 1 : action._id,
+        activeWord: action._id,
         target: []
       }
     }
@@ -152,6 +153,9 @@ function reducer(state, action) {
         ...parent,
         [action.attr]: action.change_to,
       }
+
+      console.log(score())
+
       return {
         ...state,
         saved: false,
@@ -159,17 +163,21 @@ function reducer(state, action) {
       }
     }
     case 'DELETE_ELEMENT': {
-      const filtered = state.Words.filter(o => o._id !== action._id)
+      const deletedIds = getDescendantIds(action._id, state.Words)
+      const filtered = state.Words.filter(o => !deletedIds.includes(o._id))
+
+      // console.log(`${state.Words.length} - ${filtered.length}`)
+
       const elementIndex = filtered.findIndex(t => t._id === action.parentId)
-      const oldElement = filtered[elementIndex]
+      const parent = filtered[elementIndex]
 
       let newRole
       if (action.role[1] === null) {
         newRole = action.role[0].slice(-1) === 's' ?
-                  oldElement[action.role[0]].filter(o => o !== action._id) : null
+                  parent[action.role[0]].filter(o => o !== action._id) : null
       }
       else {
-        newRole = Object.assign([], oldElement.complements)
+        newRole = Object.assign([], parent.complements)
         newRole[action.role[1]]._id = null
       }
       
@@ -179,7 +187,7 @@ function reducer(state, action) {
                                 complements: []
                               } : {}
       newWords[elementIndex] = {
-        ...oldElement,
+        ...parent,
         [action.role[0]]: newRole,
         ...resetComplement
       }

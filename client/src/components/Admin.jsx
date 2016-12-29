@@ -15,7 +15,7 @@ const Admin = React.createClass({
       <div>
         <div className='container'>
           <button type="button" className="btn btn-default"
-                  onClick={() => this.saveProject(JSON.stringify(state.Words))}>
+                  onClick={() => console.log(JSON.stringify(state.Words))}>
             Save
           </button>
         </div>
