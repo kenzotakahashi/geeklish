@@ -1,12 +1,15 @@
 import React from 'react'
-import store from '../store.js'
-import { Link } from './kenzo-router'
+import { store } from '../../index.js'
+import { Link } from '../kenzo-router'
 
 import Examples from './Examples'
 import Projects from './Projects'
 import Guide from './Guide'
 import Admin from './Admin'
 import ModalConductor from './modal/ModalConductor'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import '../css/main.css'
 
 function getChildren(state, route) {
   if (route === 'projects') {
@@ -66,8 +69,6 @@ const App = React.createClass({
     )
   }
 })
-
-
 
 
 export default App

@@ -1,10 +1,9 @@
 import React from 'react'
-import store from '../store.js'
+import { store } from '../../index.js'
 
 import Canvas from './Canvas.jsx'
 
-// import { exampleOutputs } from '../examples'
-import { Link } from './kenzo-router'
+import { Link } from '../kenzo-router'
 
 const Examples = React.createClass({
   // TOTO activeClass <Link to={`/examples/${o._id}`} activeClassName="active-link">{o.title}</Link>

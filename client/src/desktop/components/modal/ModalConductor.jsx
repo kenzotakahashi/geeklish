@@ -1,5 +1,5 @@
 import React from 'react'
-import store from '../../store.js'
+import { store } from '../../../index.js'
 import { changeModal } from '../../actions'
 
 import ComplementModal from './ComplementModal.jsx'

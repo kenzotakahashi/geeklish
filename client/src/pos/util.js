@@ -1,5 +1,5 @@
 import Pos from './Pos.js'
-import store from '../store.js'
+import { store } from '../index.js'
 
 export const createWord = function(id) {
 	if (!id) return null

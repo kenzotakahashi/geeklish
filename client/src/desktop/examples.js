@@ -1,6 +1,6 @@
 import uuid from 'uuid'
 
-export const initialState = function() {
+export const desktopInitialState = function() {
   const _id = uuid.v1()
   return {
     route: null,

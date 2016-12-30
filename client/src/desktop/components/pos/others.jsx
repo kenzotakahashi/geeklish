@@ -1,5 +1,5 @@
 import React from 'react'
-import store from '../../store.js'
+import { store } from '../../../index.js'
 import { Children, DeleteButton, ConjunctionButton, Label } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'
 import { getWordDictionary } from '../../wordDictionary'

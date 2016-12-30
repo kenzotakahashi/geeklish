@@ -1,6 +1,6 @@
 import React from 'react'
-import store from '../store.js'
-import Pos from '../pos/Pos.js'
+import { store } from '../../index.js'
+import Pos from '../../pos/Pos.js'
 
 const Output = React.createClass({
   render: function() {

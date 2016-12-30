@@ -1,5 +1,5 @@
-import store from './store.js'
-import Client from './Client'
+import { store } from '../index.js'
+import Client from '../Client'
 import { showWordFactory, createNewWord } from './actions'
 
 function validDeterminer(dType, w, word) {

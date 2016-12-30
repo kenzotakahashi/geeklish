@@ -1,5 +1,5 @@
 import React from 'react'
-import store from '../../store.js'
+import { store } from '../../../index.js'
 import { CompChildren, Children, DeleteButton, ConjunctionButton, UndoConjunctionButton,
          ModalSelect, Label } from './Tree'
 import { showOptions, changeAttribute } from '../../actions'

@@ -1,11 +1,11 @@
 import React from 'react'
-import store from '../store.js'
-import Client from '../Client'
+import { store } from '../../index.js'
+import Client from '../../Client'
 
 import Canvas from './Canvas.jsx'
 
-import { initialState } from '../examples'
-import { history, Link } from './kenzo-router'
+import { desktopInitialState } from '../examples'
+import { history, Link } from '../kenzo-router'
 
 const Projects = React.createClass({
   onInputChange: function(e) {
@@ -80,7 +80,7 @@ const Projects = React.createClass({
             <div className='main-box'>
               <ul className='fixed-box'>              
                 <button type="button" className="btn btn-default btn-block"
-                        onClick={() => this.saveSentence(initialState(), true)}>
+                        onClick={() => this.saveSentence(desktopInitialState(), true)}>
                   New Project
                 </button>
                 {projects}

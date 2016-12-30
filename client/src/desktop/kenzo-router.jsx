@@ -1,9 +1,9 @@
 import React from 'react'
 import createHistory from 'history/createBrowserHistory'
-import store from '../store.js'
-import { initialState } from '../examples'
+import { store } from '../index.js'
+import { desktopInitialState } from './examples'
 import Client from '../Client'
-import { routeExample } from '../actions'
+import { routeExample } from './actions'
 
 export const history = createHistory()
 
@@ -14,11 +14,11 @@ function dispatchExamples(_id, examples) {
     })
   }
   else {
-    store.dispatch(routeExample(examples, initialState().Words))
+    store.dispatch(routeExample(examples, desktopInitialState().Words))
   }
 }
 
-function handleNavigation(location, action) {
+export const desktopHandleNavigation = (location, action) => {
   // console.log(action, location.pathname, location.state)
   const pathList = location.pathname.split('/').filter(o => o !== '')
   const path = pathList[0] || 'examples'
@@ -33,7 +33,7 @@ function handleNavigation(location, action) {
     }
     else {
       title = ''
-      state = initialState()
+      state = desktopInitialState()
     }
     store.dispatch({
       type: 'ROUTE_PROJECTS',
@@ -62,11 +62,6 @@ function handleNavigation(location, action) {
   }
 }
 
-// Handle the initial location
-handleNavigation(history.location)
-history.listen(handleNavigation)
-
-
 const isLeftClickEvent = (e) => e.button === 0
 const isModifiedEvent = (e) => !!(e.metaKey || e.altKey || e.ctrlKey || e.shiftKey)
 
@@ -89,3 +84,7 @@ export const Link = React.createClass({
     )
   }
 })
+
+// console.log('route')
+// desktopHandleNavigation(history.location)
+history.listen(desktopHandleNavigation)

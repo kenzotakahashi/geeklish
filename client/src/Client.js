@@ -1,5 +1,3 @@
-// import fetch from 'whatwg-fetch'
-
 // const uri = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : ''
 
 function getDics(result) {

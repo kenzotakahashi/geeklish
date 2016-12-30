@@ -1,9 +1,8 @@
-import factory from '../factory.js'
-// import Client from '../Client'
 import uuid from 'uuid'
-import { initialState } from '../examples'
-import { score } from './score'
-import { getDescendantIds } from './getDescendantIds'
+import factory from '../../factory.js'
+import { desktopInitialState } from '../examples'
+import { score } from '../../score'
+import { getDescendantIds } from '../../getDescendantIds'
 
 const getArgument = function(parent, wordPos, target) {
   if (wordPos === 'Pronoun' &&
@@ -154,7 +153,7 @@ function reducer(state, action) {
         [action.attr]: action.change_to,
       }
 
-      console.log(score())
+      // console.log(score())
 
       return {
         ...state,
@@ -325,7 +324,7 @@ function reducer(state, action) {
       sessionStorage.projects = JSON.stringify(newProjects)
 
       return {
-        ...initialState(),
+        ...desktopInitialState(),
         example: null,
         projects: state.projects.filter(o => o._id !== state.example)
       }
