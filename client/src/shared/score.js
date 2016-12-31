@@ -47,7 +47,7 @@ const answer = [
 			"base":[["noun"],["clause"]]
 		},
 		"valid_particles":[],
-		"isComplementChosen":true,
+		"complemenetIndex": 0,
 		"form":"base",
 		"negative":false,
 		"past":false,
@@ -110,7 +110,7 @@ const users_answer = [
 			"base":[["noun"],["clause"]]
 		},
 		"valid_particles":[],
-		"isComplementChosen":true,
+		"complemenetIndex":0,
 		"form":"base",
 		"negative":false,
 		"past":false,

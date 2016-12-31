@@ -43,8 +43,19 @@ html, body {
 	border-bottom: 1px solid #ccc;
 }
 
+.back-arrow {
+	padding: 10px;
+	/*margin: 10px;*/
+	background-image: url('../img/back_arrow_blue.svg');
+	background-repeat: no-repeat; 
+	background-size: contain;
+	background-position: center;
+}
 
-
+.m-icon {
+	padding: 20px;
+	float: left;
+}
 
 
 

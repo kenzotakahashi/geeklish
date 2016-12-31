@@ -41,14 +41,16 @@ app.get('/api/dictionary/:id', (req, res) => {
 	})
 })
 
-app.get('/api/projects', (req, res) => {	
-	Project.find({}).select('_id title category').then((dic) => {
-		// TODO refactor using mongo instead of filter.
-		const r = categories.map(o => ({
-			category: o,
-			examples: dic.filter(t => t.category === o)
-		}))
-		res.json({ result: r })
+app.get('/api/projects', (req, res) => {
+	Promise.all(categories.map(o => {
+		return Project.find({category: o}).select('_id title').then((dic) => {
+			return {
+				category: o,
+				examples: dic
+			}
+		})
+	})).then((dic) => {
+		res.json({ result: dic })
 	})
 })
 
@@ -64,22 +66,21 @@ app.post('/api/save_project', (req, res) => {
 		project._id,
 		excludeId(project),
 	  {upsert: true, setDefaultsOnInsert: true, new: true}
-	).then(dic =>
+	).then(dic => {
 		dic.save()
-	).then(_ => {
-		Promise.all(req.body.words.map(element => {
-			Pos[element.pos].findByIdAndUpdate(
+	}).then(_ => {
+		return Promise.all(req.body.words.map(element => {
+			return Pos[element.pos].findByIdAndUpdate(
 				element._id,
 				{...excludeId(element), projectId: project._id},
 			  {upsert: true, setDefaultsOnInsert: true, new: true},
-			).then(dic =>
+			).then(dic => {
 				dic.save()
-			)
+			})
 		}))
-	}).then(_ =>
-		res.json({ result: 'success' })
-	)
-
+	}).then(_ => {
+		res.json({ result: 'success' })		
+	})
 })
 
 app.get('*', function (req, res) {

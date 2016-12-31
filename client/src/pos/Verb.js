@@ -53,7 +53,7 @@ const initVerb = function(v) {
   this.word = v.word
   this.valid_complements = v.valid_complements
   this.valid_particles = v.valid_particles
-  this.isComplementChosen = v.isComplementChosen
+  this.complementIndex = v.complementIndex
   this.form = v.form
   this.modal = v.modal
   this.past = v.past
@@ -74,7 +74,9 @@ export const Verb = {
   getList: getList,
   verbAfterTo: verbAfterTo,
   toString: toString,
-  isValid: () => true,
+  isValid: function() {
+    return this.complementIndex !== null
+  },
   getWh: () => [null, false],
 }
 

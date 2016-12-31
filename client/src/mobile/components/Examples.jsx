@@ -18,9 +18,9 @@ const Examples = React.createClass({
     ))
 
     return (
-      <section>
+      <div>
         {examples}
-      </section>
+      </div>
     )
   }
 })

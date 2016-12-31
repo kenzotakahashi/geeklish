@@ -6,7 +6,8 @@ import Modal from './Modal'
 
 export const ComplementModal = React.createClass({
 	getInitialState: function () {
-	  return {choice: null}
+		const element = store.getState().Words.find(o => o._id === this.props.rest)
+	  return {choice: element.complementIndex}
 	},
 	onChange: function(e) {
 		this.setState({choice: e.currentTarget.value})

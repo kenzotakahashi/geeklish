@@ -56,3 +56,15 @@ export const changeModal = (currentModal) => ({
   type: 'CHANGE_MODAL',
   currentModal
 })
+
+// ================ Mobile =================
+
+export const routeCanvas = (words) => ({
+  type: 'ROUTE_CANVAS',
+  words
+})
+
+export const routeSentences = (examples) => ({
+  type: 'ROUTE_SENTENCES',
+  examples
+}) 

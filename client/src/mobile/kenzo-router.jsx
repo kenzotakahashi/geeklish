@@ -1,22 +1,10 @@
 import React from 'react'
 import createHistory from 'history/createBrowserHistory'
 import { store } from '../index.js'
-import { mobileInitialState } from './initialState'
 import Client from '../Client'
-import { routeExample } from '../shared/actions'
+import { routeSentences, routeCanvas } from '../shared/actions'
 
 export const mobileHistory = createHistory()
-
-function dispatchExamples(_id, examples) {
-  if (!!_id) {
-    Client.getProject(_id, (data) => {
-      store.dispatch(routeExample(examples, data.result))
-    })
-  }
-  else {
-    store.dispatch(routeExample(examples, mobileInitialState().Words))
-  }
-}
 
 export const mobileHandleNavigation = (location, action) => {
   // console.log(action, location.pathname, location.state)
@@ -25,13 +13,20 @@ export const mobileHandleNavigation = (location, action) => {
 
   if (path === 'examples') {
     const _id = pathList[1]
-    if (sessionStorage.examples) {
-      const data = JSON.parse(sessionStorage.examples)
-      dispatchExamples(_id, data)
-    } else {
-      Client.getProjects(data => {
-        dispatchExamples(_id, data)
+    if (!!_id) {
+      Client.getProject(_id, (data) => {
+        store.dispatch(routeCanvas(data.result))
       })
+    }
+    else {
+      if (sessionStorage.examples) {
+        const data = JSON.parse(sessionStorage.examples)
+        store.dispatch(routeSentences(data))
+      } else {
+        Client.getProjects(data => {
+          store.dispatch(routeSentences(data))
+        })
+      }
     }
   }
 }

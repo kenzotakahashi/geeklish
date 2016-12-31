@@ -1,39 +1,32 @@
 // import { score } from '../../shared/score'
 import { getDescendantIds } from '../../shared/getDescendantIds'
 import { takeWord, getContainer } from '../../shared/others'
-
+import { mobileInitialState } from '../initialState'
 
 function reducer(state, action) {
   switch (action.type) {
     // ======================= Route ================================
-    case 'ROUTE_PROJECTS': {
-      return {
-        ...action.state,
-        route: 'projects',
-        saved: true,
-        example: action._id,
-        title: action.title,
-        projects: action.projects
-      }
-    }
-    case 'ROUTE_EXAMPLES': {
+    case 'ROUTE_SENTENCES': {
       return {
         ...state,
-        route: 'examples',
+        route: 'sentences',
         examples: action.examples,
-        Words: action.words
+        Words: action.words,
+      }
+    }
+    case 'ROUTE_CANVAS': {
+      return {
+        ...state,
+        route: 'canvas',
+        Words: action.words,
+        answer: action.words,
+        userAnswer: mobileInitialState(),
       }
     }
     case 'ROUTE_GUIDE': {
       return {
         ...state,
         route: 'guide'
-      }
-    }
-    case 'ROUTE_ADMIN': {
-      return {
-        ...state,
-        route: 'admin'
       }
     }
 
@@ -71,7 +64,7 @@ function reducer(state, action) {
 
       const newWords = Object.assign([], state.Words)
       const resetComplement = action.target[0] === 'particle' ? {
-                                isComplementChosen: false,
+                                complementIndex: null,
                                 complements: []
                               } : {}
       newWords[elementIndex] = {
@@ -140,7 +133,7 @@ function reducer(state, action) {
       
       const newWords = Object.assign([], filtered)
       const resetComplement = action.role[0] === 'particle' ? {
-                                isComplementChosen: false,
+                                complementIndex: null,
                                 complements: []
                               } : {}
       newWords[elementIndex] = {
@@ -216,7 +209,7 @@ function reducer(state, action) {
       const newWords = Object.assign([], state.Words)
       newWords[elementIndex] = {
         ...oldElement,
-        isComplementChosen: true,
+        complementIndex: action.index,
         complements: complementArray.map(o => ({category: o, _id: null}))
       }
 

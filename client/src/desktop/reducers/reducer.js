@@ -73,7 +73,7 @@ function reducer(state, action) {
 
       const newWords = Object.assign([], state.Words)
       const resetComplement = action.target[0] === 'particle' ? {
-                                isComplementChosen: false,
+                                complementIndex: null,
                                 complements: []
                               } : {}
       newWords[elementIndex] = {
@@ -142,7 +142,7 @@ function reducer(state, action) {
       
       const newWords = Object.assign([], filtered)
       const resetComplement = action.role[0] === 'particle' ? {
-                                isComplementChosen: false,
+                                complementIndex: null,
                                 complements: []
                               } : {}
       newWords[elementIndex] = {
@@ -218,7 +218,7 @@ function reducer(state, action) {
       const newWords = Object.assign([], state.Words)
       newWords[elementIndex] = {
         ...oldElement,
-        isComplementChosen: true,
+        complementIndex: action.index,
         complements: complementArray.map(o => ({category: o, _id: null}))
       }
 

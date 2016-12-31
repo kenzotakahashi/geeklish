@@ -47,8 +47,8 @@ export const Verb = Element.discriminator('Verb', new Schema({
     progressive: String,
   },
   valid_particles: [],
-  valid_complements: [],
-  isComplementChosen: Boolean,
+  valid_complements: Schema.Types.Mixed,
+  complementIndex: Number,
   form: String,
   negative: Boolean,
   past: Boolean,
@@ -57,7 +57,38 @@ export const Verb = Element.discriminator('Verb', new Schema({
   passive: Boolean,
   modal: String,
   particle: String,
-  complements: [String],
+  complements: [{
+    category: String,
+    _id: String
+  }],
+  adverbs: [String],
+  prepositions: [String]
+}, options))
+
+export const Be = Element.discriminator('Be', new Schema({
+  word: {
+    base: String,
+    first: String,
+    present: String,
+    plural: String,
+    past_s: String,
+    past_p: String,
+    past: String,
+    passive: String,
+    progressive: String
+  },
+  valid_complements: Schema.Types.Mixed,
+  complementIndex: Number,
+  form: String,
+  negative: Boolean,
+  modal: String,
+  past: Boolean,
+  perfect: Boolean,
+  continuous: Boolean,
+  complements: [{
+    category: String,
+    _id: String
+  }],
   adverbs: [String],
   prepositions: [String]
 }, options))
@@ -114,30 +145,6 @@ export const Determiner = Element.discriminator('Determiner', new Schema({
 export const Possessive = Element.discriminator('Possessive', new Schema({
   noun: String,
   number: String,
-}, options))
-
-export const Be = Element.discriminator('Be', new Schema({
-  word: {
-    base: String,
-    first: String,
-    present: String,
-    plural: String,
-    past_s: String,
-    past_p: String,
-    past: String,
-    passive: String,
-    progressive: String
-  },
-  valid_complements: [String],
-  form: String,
-  negative: Boolean,
-  modal: String,
-  past: Boolean,
-  perfect: Boolean,
-  continuous: Boolean,
-  complements: [String],
-  adverbs: [String],
-  prepositions: [String]
 }, options))
 
 export const VerbContainer = Element.discriminator('VerbContainer', new Schema({

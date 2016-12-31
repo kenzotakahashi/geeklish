@@ -49,10 +49,10 @@ export const CompChildren = (props) => (
       props.activeWord === props.element._id &&
         <li className='word tree tree-info'
             onClick={() => store.dispatch(changeModal({name: 'Complement', rest: props.element._id}))}>
-            {`${props.element.isComplementChosen ? 'Change' : 'Choose'}`} a complement</li>
+            {`${props.element.complementIndex !== null ? 'Change' : 'Choose'}`} a complement</li>
     }
     {
-      props.element.isComplementChosen &&
+      props.element.complementIndex !== null &&
         props.element.complements.map((w, i) => (
           w._id ?
             e(pos_components[props.words.find(o => o._id === w._id).pos],

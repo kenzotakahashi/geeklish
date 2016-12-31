@@ -105,7 +105,7 @@ const factory = {
       },
       valid_complements: w.complements,
       valid_particles: w.particles,
-      isComplementChosen: false,
+      complementIndex: w.complements.base[0].length === 0 ? 0 : null,
       form: arg.form || 'base',
       negative: false,
       past: false,
@@ -138,6 +138,7 @@ const factory = {
       },
       valid_complements: {
         base: [
+          [],
           ['noun'],
           ['adjective'],
           ['adverb'],
@@ -145,6 +146,7 @@ const factory = {
           ['infinitive']
         ]
       },
+      complementIndex: 0,
       form: arg.form || 'base',
       negative: false,
       modal: '',

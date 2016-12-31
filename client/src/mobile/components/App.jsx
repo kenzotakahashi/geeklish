@@ -1,18 +1,19 @@
 import React from 'react'
 import { store } from '../../index.js'
-// import { Link } from '../kenzo-router'
+import { Link } from '../kenzo-router'
 
 import Examples from './Examples'
+import Canvas from './Canvas'
 
 import '../css/main.css'
 
 function getChildren(state, route) {
-  if (route === 'examples') {
+  if (route === 'sentences') {
     return <Examples/>
   }
-  // if (route === 'guide') {
-  //   return <Guide />
-  // }
+  if (route === 'canvas') {
+    return <Canvas />
+  }
 }
 
 const App = React.createClass({
@@ -27,9 +28,13 @@ const App = React.createClass({
     return (
       <div>
         <nav className='m-container m-nav'>
+          <Link to='/' className='m-icon'><span className='back-arrow'></span></Link>
           <h3 className='title'>Geeklish</h3>
         </nav>
-        {children}
+        <section>
+
+          {children}
+        </section>
         <div className='m-tab'></div>
       </div>
     )

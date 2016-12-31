@@ -5,7 +5,7 @@ export const mobileInitialState = function() {
   return {
     route: null,
     currentModal: {name: null},
-    example: null,
+    // example: null,
     title: 'Some title',
     saved: true,
     activeWord: _id,
@@ -20,5 +20,7 @@ export const mobileInitialState = function() {
         clause: null,
       },
     ],
+    answer: [],
+    userAnswer: []
   }
 }
