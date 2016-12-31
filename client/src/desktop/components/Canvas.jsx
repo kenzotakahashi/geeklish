@@ -14,13 +14,13 @@ const Canvas = React.createClass({
     const wordFactory = state.target.length > 0 && <WordFactory dictionary={state.dictionary} />
     return (
       <div className='row'>
-        <div className='col-xs-9'>
+        <div className='col-9'>
           <div className='main-box'>
             <Output />
             {e(pos_components.Sentence)}
           </div>
         </div>
-        <div className='col-xs-3'>
+        <div className='col-3'>
           {wordFactory}
         </div>
       </div>

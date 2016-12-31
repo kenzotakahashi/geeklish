@@ -1,6 +1,6 @@
 import { store } from '../index.js'
 import Client from '../Client'
-import { showWordFactory, createNewWord } from './actions'
+import { showWordFactory, createNewWord } from '../shared/actions'
 
 function validDeterminer(dType, w, word) {
   if (w.type !== dType) return false

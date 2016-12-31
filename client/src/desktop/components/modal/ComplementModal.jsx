@@ -28,14 +28,12 @@ export const ComplementModal = React.createClass({
 		                   state.Words.find(o => o._id === element.particle).word : 'base'
 		const complements = element.valid_complements[verbType].map((o, i) => (
 			<div className="radio" key={i}>
-			  <label>
-			    <input type="radio" value={i} checked={parseInt(this.state.choice, 10) === i}
-			           onChange={this.onChange} />
-			    {o.length > 0 ?
-			       o.map((t, j) => (<span key={j} className='comp-choice'>{t}</span>))
-			       : <span className='comp-choice'>No complement</span>
-			    }
-			  </label>
+		    <input type="radio" value={i} checked={parseInt(this.state.choice, 10) === i}
+		           onChange={this.onChange} />
+		    {o.length > 0 ?
+		       o.map((t, j) => (<span key={j} className='comp-choice'>{t}</span>))
+		       : <span className='comp-choice'>No complement</span>
+		    }
 			</div>
 		))
 

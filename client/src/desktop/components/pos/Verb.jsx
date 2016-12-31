@@ -2,7 +2,7 @@ import React from 'react'
 import { store } from '../../../index.js'
 import { CompChildren, Children, DeleteButton, ConjunctionButton, UndoConjunctionButton,
          ModalSelect, Label } from './Tree'
-import { showOptions, changeAttribute } from '../../actions'
+import { showOptions, changeAttribute } from '../../../shared/actions'
 
 const e = React.createElement
 

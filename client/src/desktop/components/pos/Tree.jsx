@@ -2,7 +2,7 @@ import React from 'react'
 import { store } from '../../../index.js'
 import pos_components from './pos_components'
 import { changeAttribute, deleteElement, useConjunction, undoConjunction,
-         changeModal } from '../../actions'
+         changeModal } from '../../../shared/actions'
 import { getWordDictionary } from '../../wordDictionary'
 
 const e = React.createElement
@@ -32,7 +32,7 @@ export const Children = (props) => (
 	      e(
 	      	'li',
 	      	{
-	          className: `tree tree-${props.target[0] === o ? 'active' : 'info'}`,
+	          className: `word tree tree-${props.target[0] === o ? 'active' : 'info'}`,
 	          key: o,
 	          onClick: () => getWordDictionary(props.element, [o, null])
 	        },
@@ -47,7 +47,7 @@ export const CompChildren = (props) => (
   <ul className='comp-children'>
     {
       props.activeWord === props.element._id &&
-        <li className='tree tree-info'
+        <li className='word tree tree-info'
             onClick={() => store.dispatch(changeModal({name: 'Complement', rest: props.element._id}))}>
             {`${props.element.isComplementChosen ? 'Change' : 'Choose'}`} a complement</li>
     }
@@ -61,7 +61,7 @@ export const CompChildren = (props) => (
             e(
               'li',
               {
-                className: `tree tree-${props.target[1] === i ? 'active' : 'info'}`,
+                className: `word tree tree-${props.target[1] === i ? 'active' : 'info'}`,
                 key: i,
                 disabled: props.element.passive && i === 0 && w.category === 'noun' && "disabled",
                 onClick: () => getWordDictionary(props.element, ['complements', i])
@@ -86,9 +86,9 @@ export const WH = (props) => (
 )
 
 export const DeleteButton = (props) => (
-	<button type="button" className="btn btn-default btn-xs trash"
+	<button type="button" className="button-error trash"
 	        onClick={() => store.dispatch(deleteElement(props.id, props.role, props.parentId))}>
-	  <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    ×
 	</button>
 )
 
@@ -119,7 +119,7 @@ export const ModalSelect = (props) => (
 )
 
 export const Label = (props) => (
-  <span className="label label-default">
+  <span className="label">
     {props.role[1] === null ? props.role[0] : props.parent.complements[props.role[1]].category}
   </span>
 )

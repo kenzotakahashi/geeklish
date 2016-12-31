@@ -1,7 +1,7 @@
 import React from 'react'
 import { store } from '../../../index.js'
 import { Children, WH, DeleteButton, ConjunctionButton, Label } from './Tree'
-import { showOptions, changeAttribute } from '../../actions'
+import { showOptions, changeAttribute } from '../../../shared/actions'
 
 const Pronoun = React.createClass({
   handleChange: function(e){

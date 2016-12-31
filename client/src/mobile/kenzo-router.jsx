@@ -1,11 +1,11 @@
 import React from 'react'
 import createHistory from 'history/createBrowserHistory'
 import { store } from '../index.js'
-import { desktopInitialState } from './examples'
+import { mobileInitialState } from './initialState'
 import Client from '../Client'
 import { routeExample } from '../shared/actions'
 
-export const desktopHistory = createHistory()
+export const mobileHistory = createHistory()
 
 function dispatchExamples(_id, examples) {
   if (!!_id) {
@@ -14,36 +14,16 @@ function dispatchExamples(_id, examples) {
     })
   }
   else {
-    store.dispatch(routeExample(examples, desktopInitialState().Words))
+    store.dispatch(routeExample(examples, mobileInitialState().Words))
   }
 }
 
-export const desktopHandleNavigation = (location, action) => {
+export const mobileHandleNavigation = (location, action) => {
   // console.log(action, location.pathname, location.state)
   const pathList = location.pathname.split('/').filter(o => o !== '')
   const path = pathList[0] || 'examples'
 
-  if (path === 'projects') {
-    const _id = pathList[1]
-    let state, title
-    if (!!_id) {
-      const data = JSON.parse(sessionStorage[`project_${_id}`])
-      title = data.title
-      state = data.state
-    }
-    else {
-      title = ''
-      state = desktopInitialState()
-    }
-    store.dispatch({
-      type: 'ROUTE_PROJECTS',
-      _id: _id,
-      title: title,
-      state: state,
-      projects: sessionStorage.projects ? JSON.parse(sessionStorage.projects) : []
-    })
-  }
-  else if (path === 'examples') {
+  if (path === 'examples') {
     const _id = pathList[1]
     if (sessionStorage.examples) {
       const data = JSON.parse(sessionStorage.examples)
@@ -53,12 +33,6 @@ export const desktopHandleNavigation = (location, action) => {
         dispatchExamples(_id, data)
       })
     }
-  }
-  else if (path === 'guide') {
-    store.dispatch({type: 'ROUTE_GUIDE'})
-  }
-  else if (path === 'admin') {
-    store.dispatch({type: 'ROUTE_ADMIN'})
   }
 }
 
@@ -71,7 +45,7 @@ export const Link = React.createClass({
       return
     }
     event.preventDefault()
-    desktopHistory.push(this.props.to)
+    mobileHistory.push(this.props.to)
   },
 
   render: function() {
@@ -85,6 +59,4 @@ export const Link = React.createClass({
   }
 })
 
-// console.log('route')
-// desktopHandleNavigation(desktopHistory.location)
-desktopHistory.listen(desktopHandleNavigation)
+mobileHistory.listen(mobileHandleNavigation)

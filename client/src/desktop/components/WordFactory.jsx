@@ -1,6 +1,6 @@
 import React from 'react'
 import { store } from '../../index.js'
-import { createNewWord } from '../actions'
+import { createNewWord } from '../../shared/actions'
 
 const e = React.createElement
 
@@ -36,7 +36,7 @@ const WordFactory = React.createClass({
           {
             this.state.dictionary.map(o => (
               e('li', {
-                className: `list-group-item col-xs-6 ${o.pos}`,
+                className: `list-group-item col-6 ${o.pos}`,
                 key: o._id,
                 onClick: () => store.dispatch(createNewWord(o, state.activeWord, state.target))
               }, o.base)

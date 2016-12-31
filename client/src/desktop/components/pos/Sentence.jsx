@@ -1,6 +1,6 @@
 import React from 'react'
 import { store } from '../../../index.js'
-import { showOptions } from '../../actions'
+import { showOptions } from '../../../shared/actions'
 import { Children } from './Tree'
 // import { getWordDictionary } from '../../wordDictionary'
 

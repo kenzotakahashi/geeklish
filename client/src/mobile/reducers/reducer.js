@@ -1,5 +1,3 @@
-import uuid from 'uuid'
-import { desktopInitialState } from '../examples'
 // import { score } from '../../shared/score'
 import { getDescendantIds } from '../../shared/getDescendantIds'
 import { takeWord, getContainer } from '../../shared/others'
@@ -229,66 +227,7 @@ function reducer(state, action) {
         Words: newWords
       }
     }
-
-    // ======================= Project ================================
-    case 'UPDATE_TITLE': {
-      return {
-        ...state,
-        saved: false,
-        title: action.title
-      }
-    }
-    case 'SAVE_SENTENCE': {
-      let _id, newProjects, title
-
-      if (action.isNew) {
-        _id = uuid.v1()
-        title = 'Untitled'
-
-        if (!sessionStorage.projects) {
-          sessionStorage.projects = '[]'
-        }
-        const projects = JSON.parse(sessionStorage.projects)
-        newProjects = [{_id: _id, title: title}, ...projects]
-      }
-      else {
-        _id = state.example
-        title = state.title === '' ? 'Untitled' : state.title
-
-        const projects = JSON.parse(sessionStorage.projects)
-        newProjects = projects.map(o => o._id === _id ? {_id: _id, title: title} : o)
-      }
-      sessionStorage.projects = JSON.stringify(newProjects)  
-
-      const data = {
-        _id,
-        title: title,
-        state: {
-          ...action.state,
-          example: _id
-        }
-      }
-      sessionStorage[`project_${_id}`] = JSON.stringify(data)
-
-      return {
-        ...action.state,
-        saved: true,
-        example: _id,
-        projects: newProjects
-      }   
-    }
-    case 'DELETE_PROJECT': {
-      sessionStorage.removeItem(`project_${state.example}`)
-      const projects = JSON.parse(sessionStorage.projects)
-      const newProjects = projects.filter(o => o._id !== state.example)
-      sessionStorage.projects = JSON.stringify(newProjects)
-
-      return {
-        ...desktopInitialState(),
-        example: null,
-        projects: state.projects.filter(o => o._id !== state.example)
-      }
-    }    
+  
     default: {
       return state
     }

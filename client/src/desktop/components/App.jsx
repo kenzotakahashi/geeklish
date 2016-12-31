@@ -8,7 +8,7 @@ import Guide from './Guide'
 import Admin from './Admin'
 import ModalConductor from './modal/ModalConductor'
 
-import 'bootstrap/dist/css/bootstrap.css'
+import 'normalize.css'
 import '../css/main.css'
 
 function getChildren(state, route) {
@@ -37,24 +37,19 @@ const App = React.createClass({
 
     return (
       <div>
-        <nav className="navbar navbar-default">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <Link to='/' className="navbar-brand">Geeklish</Link>
-            </div>
-
-            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul className="nav navbar-nav">
-                <li><Link to='/examples'>Examples</Link></li>
-              </ul>
-              <ul className="nav navbar-nav">
-                <li><Link to='/projects'>My Projects</Link></li>
-              </ul>
-              <ul className="nav navbar-nav">
-                <li><Link to='/guide'>Guide</Link></li>
-              </ul>
-            </div>
-          </div>
+        <nav className="row">
+          <span className="nav-item">
+            <Link to='/' className="">Geeklish</Link>
+          </span>
+          <span className="nav-item">
+            <Link to='/examples'>Examples</Link>
+          </span>
+          <span className="nav-item">
+            <Link to='/projects'>My Projects</Link>
+          </span>
+          <span className="nav-item">
+            <Link to='/guide'>Guide</Link>
+          </span>
         </nav>
 
         {children}

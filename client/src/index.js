@@ -8,16 +8,23 @@ import 'whatwg-fetch'
 // ================ Desktop ===================
 import DesktopApp from './desktop/components/App'
 import { desktopInitialState } from './desktop/examples'
-import { desktopHandleNavigation, history } from './desktop/kenzo-router'
+import { desktopHandleNavigation, desktopHistory } from './desktop/kenzo-router'
 import desktopReducer from './desktop/reducers/reducer.js'
 
 // =============== Mobile =====================
 
-const isDesktop = window.matchMedia("(min-width: 500px)").matches;
+import MobileApp from './mobile/components/App'
+import { mobileInitialState } from './mobile/initialState'
+import { mobileHandleNavigation, mobileHistory } from './mobile/kenzo-router'
+import mobileReducer from './mobile/reducers/reducer.js'
+
+// ===========================================
+
+const isDesktop = window.matchMedia("(min-width: 800px)").matches;
 
 const [reducer, initialState] = isDesktop ?
 																[desktopReducer, desktopInitialState()] : 
-																[desktopReducer, desktopInitialState()]
+																[mobileReducer, mobileInitialState()]
 
 export const store = createStore(reducer, initialState)
 // console.log('store')
@@ -26,7 +33,11 @@ if (isDesktop) {
   ReactDOM.render((
   	<DesktopApp />
   ), document.getElementById('root'))
-	desktopHandleNavigation(history.location)
+	desktopHandleNavigation(desktopHistory.location)
 }
 else {
+  ReactDOM.render((
+  	<MobileApp />
+  ), document.getElementById('root'))
+	mobileHandleNavigation(mobileHistory.location)
 }

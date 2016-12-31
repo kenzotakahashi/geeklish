@@ -1,12 +1,99 @@
+/* ======== grid ===============*/
+
+* {
+    box-sizing: border-box;
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    /*border: 1px solid red;*/
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* ===== After taking out bootstrap ===== */
+
+a {
+  color: #0275d8;
+  text-decoration: none;
+}
+
+.form-inline {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+
+.nav-item {
+  float: left;
+  padding: 15px;
+}
+
+.label {
+  font-size: 10px;
+  color: #fff;
+  background-color: #aaa;
+  padding: 1px 3px;
+  border-radius: 5px;
+}
+
+/* ==============================*/
+
+
 html {
   overflow-y: scroll
 }
 
-body {
-  margin: 0;
+/*body {
   padding: 0;
   font-family: sans-serif;
   background-color: whitesmoke;
+}*/
+
+body {
+  padding: 0;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #292b2c;
+  background-color: #fff;
+}
+
+hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+footer {
+  text-align: center;
+  margin: 5px 0;
 }
 
 .container {
@@ -20,6 +107,10 @@ body {
 
 ul {
   padding-left: 10px;
+}
+
+ul.list-group {
+  padding: 0;
 }
 
 li {
@@ -66,11 +157,6 @@ button[disabled] {
   background: rgb(202, 60, 60); /* this is a maroon */
 }
 
-.container.small-font {
-  padding-right: 0;
-  padding-left: 0;  
-}
-
 .main-box {
   background-color: #fff;
   border-color: #fff;
@@ -87,21 +173,12 @@ button[disabled] {
   overflow: scroll;
 }
 
-div.main-box > .fixed-box {
-  padding-left: 5px;
-}
-
 div.row > div {
-  padding: 0 8px;
-}
-
-.small-font {
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
+  padding: 0 4px;
 }
 
 .word {
+  font-size: 16px;
   margin-right: 10px;
   cursor: pointer; 
   padding: 2px;
@@ -191,6 +268,7 @@ button:focus, select:focus {
 }
 
 li.tree {
+  font-size: 12px;
   padding: 4px;
   margin-left: 12px;
   margin-bottom: -1px;
@@ -220,6 +298,10 @@ li.tree-active {
   background-color: gray;
 }
 
+li.tree.word {
+  font-size: 16px;
+}
+
 div.tree-box {
   font-size: 12px;
   border-style: solid;
@@ -233,6 +315,7 @@ div.tree-box {
 
 button.trash {
   float: right;
+  padding: 3px 5px;
 }
 
 .active-link {
@@ -241,27 +324,23 @@ button.trash {
 }
 
 .example {
-  margin: 5px 0;
+  margin: 10px 0;
 }
 
-.form-inline.project-form {
+.project-form {
   margin-bottom: 5px;
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 input.form-control.title-form {
   width: 500px;
+  height: 35px;
   max-width: 100%;
+  padding: 5px;
 }
 
 .output {
   padding: 7px 0 0 7px;
-  font-size: 14px;
-}
-
-footer {
-  text-align: center;
-  margin-top: 5px;
 }
 
 .modal-container {
@@ -274,4 +353,4 @@ footer {
 
 .comp-choice {
   padding: 5px;
-}
+} 

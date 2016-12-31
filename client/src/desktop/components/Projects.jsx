@@ -5,7 +5,7 @@ import Client from '../../Client'
 import Canvas from './Canvas.jsx'
 
 import { desktopInitialState } from '../examples'
-import { history, Link } from '../kenzo-router'
+import { desktopHistory, Link } from '../kenzo-router'
 
 const Projects = React.createClass({
   onInputChange: function(e) {
@@ -31,7 +31,7 @@ const Projects = React.createClass({
         words: newState.Words
       })
     }
-    if (isNew) history.push(`/projects/${store.getState().projects[0]._id}`)
+    if (isNew) desktopHistory.push(`/projects/${store.getState().projects[0]._id}`)
   },
   onFormSubmit: function(e) {
     e.preventDefault()
@@ -42,7 +42,7 @@ const Projects = React.createClass({
       type: 'DELETE_PROJECT'
     })
     const projects = store.getState().projects
-    history.push(`/projects/${projects.length > 0 ? projects[0]._id : ''}`)
+    desktopHistory.push(`/projects/${projects.length > 0 ? projects[0]._id : ''}`)
   },
   render: function() {
     const state = store.getState()
@@ -54,7 +54,7 @@ const Projects = React.createClass({
     ))
 
     return (
-      <div className='small-font'>
+      <div>
 
         {state.example !== undefined &&
         <form className="form-inline project-form" onSubmit={this.onFormSubmit}>
@@ -76,7 +76,7 @@ const Projects = React.createClass({
         </form>}
 
         <div className='row'>
-          <div className='col-xs-2'>
+          <div className='col-2'>
             <div className='main-box'>
               <ul className='fixed-box'>              
                 <button type="button" className="btn btn-default btn-block"
@@ -87,7 +87,7 @@ const Projects = React.createClass({
               </ul>
             </div>
           </div>
-          <div className='col-xs-10'>
+          <div className='col-10'>
             {projects.length > 0 && <Canvas />}
           </div>
         </div>

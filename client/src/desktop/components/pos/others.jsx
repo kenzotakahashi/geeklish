@@ -1,7 +1,7 @@
 import React from 'react'
 import { store } from '../../../index.js'
 import { Children, DeleteButton, ConjunctionButton, Label } from './Tree'
-import { showOptions, changeAttribute } from '../../actions'
+import { showOptions, changeAttribute } from '../../../shared/actions'
 import { getWordDictionary } from '../../wordDictionary'
 
 const e = React.createElement
