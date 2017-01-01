@@ -1,9 +1,9 @@
 import React from 'react'
 import { store } from '../../../index.js'
-import { Children, DeleteButton, ConjunctionButton, UndoConjunctionButton, Label } from './Tree'
-import { showOptions, changeAttribute } from '../../../shared/actions'
+import { Children } from './Tree'
+import { showOptions } from '../../../shared/actions'
 
-const e = React.createElement
+// const e = React.createElement
 
 export const Clause = React.createClass({
   render: function() {
