@@ -20,6 +20,8 @@ export const Clause = React.createClass({
       }, o)
     ))
 
+    console.log('render')
+
     return (
       <ul>
         <li className='tree-top'>

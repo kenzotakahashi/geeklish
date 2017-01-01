@@ -59,12 +59,14 @@ export const changeModal = (currentModal) => ({
 
 // ================ Mobile =================
 
-export const routeCanvas = (words) => ({
+export const routeCanvas = (words, routeAction) => ({
   type: 'ROUTE_CANVAS',
-  words
+  words,
+  routeAction
 })
 
-export const routeSentences = (examples) => ({
+export const routeSentences = (examples, routeAction) => ({
   type: 'ROUTE_SENTENCES',
-  examples
+  examples,
+  routeAction
 }) 

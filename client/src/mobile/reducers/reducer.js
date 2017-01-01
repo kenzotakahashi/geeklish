@@ -10,6 +10,7 @@ function reducer(state, action) {
       return {
         ...state,
         route: 'sentences',
+        routeAction: action.routeAction,
         examples: action.examples,
         Words: action.words,
       }
@@ -18,15 +19,10 @@ function reducer(state, action) {
       return {
         ...state,
         route: 'canvas',
+        routeAction: action.routeAction,
         Words: action.words,
         answer: action.words,
         userAnswer: mobileInitialState(),
-      }
-    }
-    case 'ROUTE_GUIDE': {
-      return {
-        ...state,
-        route: 'guide'
       }
     }
 

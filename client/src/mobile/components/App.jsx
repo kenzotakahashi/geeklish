@@ -1,11 +1,12 @@
 import React from 'react'
 import { store } from '../../index.js'
-import { Link } from '../kenzo-router'
 
 import Examples from './Examples'
 import Canvas from './Canvas'
 
 import '../css/main.css'
+
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group' 
 
 function getChildren(state, route) {
   if (route === 'sentences') {
@@ -16,6 +17,8 @@ function getChildren(state, route) {
   }
 }
 
+const timeout = 300
+
 const App = React.createClass({
   componentDidMount: function() {
     store.subscribe(() => this.forceUpdate())
@@ -24,20 +27,41 @@ const App = React.createClass({
     const state = store.getState()
     const route = state.route
     const children = getChildren(state, route)
+    const routeAction = state.routeAction
 
-    return (
-      <div>
-        <nav className='m-container m-nav'>
-          <Link to='/' className='m-icon'><span className='back-arrow'></span></Link>
-          <h3 className='title'>Geeklish</h3>
-        </nav>
-        <section>
+    // console.log(route)
+    // console.log(state.routeAction)
 
-          {children}
-        </section>
-        <div className='m-tab'></div>
-      </div>
-    )
+    if (routeAction === 'PUSH') {
+      return (
+        <ReactCSSTransitionGroup
+          transitionName='forward'
+          transitionEnterTimeout={timeout}
+          transitionLeaveTimeout={timeout}>
+          {children && React.cloneElement(children, {key: route})}
+        </ReactCSSTransitionGroup>
+      )
+    }
+    else if (routeAction === 'POP') {
+      return (
+        <ReactCSSTransitionGroup
+          transitionName='backward'
+          transitionEnterTimeout={timeout}
+          transitionLeaveTimeout={timeout}>
+          {children && React.cloneElement(children, {key: route})}
+        </ReactCSSTransitionGroup>
+      )
+    }
+    else {
+      return (
+        <ReactCSSTransitionGroup
+          transitionName='initial'
+          transitionEnter={false}
+          transitionLeaveTimeout={timeout}>
+          {children && React.cloneElement(children, {key: route})}
+        </ReactCSSTransitionGroup>
+      )
+    }
   }
 })
 

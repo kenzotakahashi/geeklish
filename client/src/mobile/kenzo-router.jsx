@@ -6,25 +6,31 @@ import { routeSentences, routeCanvas } from '../shared/actions'
 
 export const mobileHistory = createHistory()
 
+const rootPath = 'examples'
+
 export const mobileHandleNavigation = (location, action) => {
   // console.log(action, location.pathname, location.state)
-  const pathList = location.pathname.split('/').filter(o => o !== '')
-  const path = pathList[0] || 'examples'
+  // If the app is launched from homescreen, naavigate to root.
+  const pathList = action === undefined && window.navigator.standalone ?
+                   [] : location.pathname.split('/').filter(o => o !== '')
+  const path = pathList[0] || rootPath
+  const routeAction = !action ? null :
+                      location.state.back ? 'POP' : 'PUSH'
 
   if (path === 'examples') {
     const _id = pathList[1]
     if (!!_id) {
       Client.getProject(_id, (data) => {
-        store.dispatch(routeCanvas(data.result))
+        store.dispatch(routeCanvas(data.result, routeAction))
       })
     }
     else {
       if (sessionStorage.examples) {
         const data = JSON.parse(sessionStorage.examples)
-        store.dispatch(routeSentences(data))
+        store.dispatch(routeSentences(data, routeAction))
       } else {
         Client.getProjects(data => {
-          store.dispatch(routeSentences(data))
+          store.dispatch(routeSentences(data, routeAction))
         })
       }
     }
@@ -40,13 +46,15 @@ export const Link = React.createClass({
       return
     }
     event.preventDefault()
-    mobileHistory.push(this.props.to)
+    
+    mobileHistory.push(this.props.to, { back: this.props.back })
   },
 
   render: function() {
     let props = Object.assign({}, this.props)
     props.onClick = this.handleClick
     props.href = this.props.to
+    delete props.back
 
     return (
       <a {...props}>{this.props.children}</a>
@@ -54,4 +62,16 @@ export const Link = React.createClass({
   }
 })
 
-mobileHistory.listen(mobileHandleNavigation)
+// export const BackButton = React.createClass({
+//   handleClick: function(event) {
+//     mobileHistory.goBack()
+//   },
+//   render: function() {
+//     let props = Object.assign({}, this.props)
+//     props.onClick = this.handleClick
+
+//     return (
+//       <span {...props}>{this.props.children}</span>
+//     )
+//   }
+// })

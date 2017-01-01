@@ -84,7 +84,3 @@ export const Link = React.createClass({
     )
   }
 })
-
-// console.log('route')
-// desktopHandleNavigation(desktopHistory.location)
-desktopHistory.listen(desktopHandleNavigation)

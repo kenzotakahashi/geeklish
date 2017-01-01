@@ -34,10 +34,12 @@ if (isDesktop) {
   	<DesktopApp />
   ), document.getElementById('root'))
 	desktopHandleNavigation(desktopHistory.location)
+  desktopHistory.listen(desktopHandleNavigation)
 }
 else {
   ReactDOM.render((
   	<MobileApp />
   ), document.getElementById('root'))
 	mobileHandleNavigation(mobileHistory.location)
+  mobileHistory.listen(mobileHandleNavigation)
 }

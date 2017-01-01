@@ -353,4 +353,24 @@ input.form-control.title-form {
 
 .comp-choice {
   padding: 5px;
-} 
+}
+
+ /* =============== Animation ==================*/
+
+.tree-enter {
+  opacity: 0.01;
+}
+
+.tree-enter.tree-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.tree-leave {
+  opacity: 1;
+}
+
+.tree-leave.tree-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

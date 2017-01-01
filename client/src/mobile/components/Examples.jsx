@@ -3,6 +3,8 @@ import { store } from '../../index.js'
 
 import { Link } from '../kenzo-router'
 
+// import {Motion, spring} from 'react-motion'
+
 const Examples = React.createClass({
   render: function() {
     const state = store.getState()
@@ -18,8 +20,14 @@ const Examples = React.createClass({
     ))
 
     return (
-      <div>
-        {examples}
+      <div className='page page-examples'>
+        <nav className='m-container m-nav'>
+          <h3 className='title'>Geeklish</h3>
+        </nav>
+        <section>
+          {examples}
+          <p>AAFSDFASFasfkasf</p>
+        </section>
       </div>
     )
   }

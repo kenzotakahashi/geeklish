@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group' 
 import { store } from '../../../index.js'
 import pos_components from './pos_components'
 import { changeAttribute, deleteElement, useConjunction, undoConjunction,
@@ -9,23 +10,28 @@ const e = React.createElement
 
 export const Children = (props) => (
 	<ul>
-    {
-      props.attrs.map((w, i) => (
-      	w.slice(-1) === 's' ? (
-      		// attribute is a list(ex. complements)
-      		props.element[w].map((t, j) => (
-      		  e(pos_components[props.words.find(o => o._id === t).pos],
-      		  	{key: w+j, parent: props.element, _id: t, role: [w, null]}
-      		  )
-      		))
-      	) : (props.element[w] &&
-	      	// attribute is a non-list(ex. subject)	      	
-      		e(pos_components[props.words.find(o => o._id === props.element[w]).pos],
-      			{key: w, parent: props.element, _id: props.element[w], role: [w, null]}
-      		)
-      	)
-      ))
-    }
+    <ReactCSSTransitionGroup
+      transitionName="tree"
+      transitionEnterTimeout={300}
+      transitionLeaveTimeout={300}>
+      {
+        props.attrs.map((w, i) => (
+          w.slice(-1) === 's' ? (
+            // attribute is a list(ex. complements)
+            props.element[w].map((t, j) => (
+              e(pos_components[props.words.find(o => o._id === t).pos],
+                {key: w+j, parent: props.element, _id: t, role: [w, null]}
+              )
+            ))
+          ) : (props.element[w] &&
+            // attribute is a non-list(ex. subject)         
+            e(pos_components[props.words.find(o => o._id === props.element[w]).pos],
+              {key: w, parent: props.element, _id: props.element[w], role: [w, null]}
+            )
+          )
+        ))
+      }
+    </ReactCSSTransitionGroup>
     {props.activeWord === props.element._id &&
 	    props.attrs.map(o => (
 	    	(o.slice(-1) === 's' || !props.element[o]) &&
