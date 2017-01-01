@@ -54,9 +54,14 @@ app.get('/api/projects', (req, res) => {
 	})
 })
 
-app.get('/api/project/:_id', (req, res) => {	
-	Element.find({'projectId': req.params._id}).then((dic) => {
-		res.json({ result: dic })
+app.get('/api/project/:_id', (req, res) => {
+	Project.findById(req.params._id).select('title category').then((project) => {
+		Element.find({'projectId': req.params._id}).then((words) => {
+			res.json({ result: {
+				project,
+				words,
+			}})
+		})
 	})
 })
 

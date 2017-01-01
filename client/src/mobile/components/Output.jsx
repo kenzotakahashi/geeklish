@@ -10,6 +10,7 @@ const Output = React.createClass({
 
     return (
       <div>
+        <span className='m-answer'>{state.title}</span>
         <div className="output">
           {sentence}
         </div>

@@ -54,6 +54,7 @@ export const Link = React.createClass({
     let props = Object.assign({}, this.props)
     props.onClick = this.handleClick
     props.href = this.props.to
+    props.className = `m-link ${props.className}`
     delete props.back
 
     return (

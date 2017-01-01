@@ -19,11 +19,11 @@ export const Clause = React.createClass({
         onClick: () => store.dispatch(changeAttribute(element._id, 'cType', o))
       }, o)
     ))
-
+    
     return (
       <ul>
         <li className='tree-top'>
-          <div className={`tree-box basic ${element.pos}`}>
+          <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Clause</span>
             <Label parent={this.props.parent} role={this.props.role} />
             {attr}

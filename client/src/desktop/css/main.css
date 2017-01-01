@@ -236,7 +236,7 @@ li.list-group-item, .tree{
 
 .basic {
   color: #fff;
-  background-color: grey;
+  background-color: #aaa;
 }
 
 button.tree-button {
@@ -304,10 +304,10 @@ li.tree.word {
 
 div.tree-box {
   font-size: 12px;
-  border-style: solid;
+/*  border-style: solid;
   border-width: 1px;
   border-radius: 3px;
-  border-color: #ddd;
+  border-color: #ddd;*/
   margin: 4px 4px 4px 0; 
   padding: 4px;
   max-width: 550px;

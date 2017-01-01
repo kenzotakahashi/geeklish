@@ -59,9 +59,9 @@ export const changeModal = (currentModal) => ({
 
 // ================ Mobile =================
 
-export const routeCanvas = (words, routeAction) => ({
+export const routeCanvas = (project, routeAction) => ({
   type: 'ROUTE_CANVAS',
-  words,
+  project,
   routeAction
 })
 

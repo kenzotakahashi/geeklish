@@ -19,9 +19,10 @@ function reducer(state, action) {
       return {
         ...state,
         route: 'canvas',
+        title: action.project.project.title,
         routeAction: action.routeAction,
-        Words: action.words,
-        answer: action.words,
+        Words: action.project.words,
+        answer: action.project.words,
         userAnswer: mobileInitialState(),
       }
     }
