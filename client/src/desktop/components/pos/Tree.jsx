@@ -9,7 +9,7 @@ import { getWordDictionary } from '../../../shared/wordDictionary'
 const e = React.createElement
 
 export const Children = (props) => (
-	<ul>
+	<ul className='desktop-ul'>
     <ReactCSSTransitionGroup
       transitionName="tree"
       transitionEnterTimeout={300}
@@ -50,7 +50,7 @@ export const Children = (props) => (
 )
 
 export const CompChildren = (props) => (
-  <ul className='comp-children'>
+  <ul className='comp-children desktop-ul'>
     {
       props.activeWord === props.element._id &&
         <li className='word tree tree-info'
@@ -92,7 +92,7 @@ export const WH = (props) => (
 )
 
 export const DeleteButton = (props) => (
-	<button type="button" className="button-error trash"
+	<button type="button" className="trash"
 	        onClick={() => store.dispatch(deleteElement(props.id, props.role, props.parentId))}>
     ×
 	</button>

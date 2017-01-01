@@ -78,13 +78,13 @@ const Projects = React.createClass({
         <div className='row'>
           <div className='col-2'>
             <div className='main-box'>
-              <ul className='fixed-box'>              
+              <div className='fixed-box'>              
                 <button type="button" className="btn btn-default btn-block"
                         onClick={() => this.saveSentence(desktopInitialState(), true)}>
                   New Project
                 </button>
                 {projects}
-              </ul>
+              </div>
             </div>
           </div>
           <div className='col-10'>

@@ -37,7 +37,7 @@ export const Adverb = React.createClass({
     )))
 
     return (
-      <ul>
+      <ul className='m-ul'>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>{element.word.base}</span>
@@ -62,7 +62,7 @@ export const AdverbClause = React.createClass({
     const attrs = ['conjunction', 'clause']
 
     return (
-      <ul>
+      <ul className='m-ul'>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>Adverb Clause</span>            

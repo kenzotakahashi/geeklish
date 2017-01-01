@@ -41,7 +41,7 @@ export const Verb = React.createClass({
 
     if (this.props.parent.pos === 'Gerund') {
       return (
-        <ul>
+        <ul className='desktop-ul'>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
               <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>
@@ -57,7 +57,7 @@ export const Verb = React.createClass({
       )
     } else if (this.props.parent.pos === 'Participle') {
       return (
-        <ul>
+        <ul className='desktop-ul'>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
               <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
@@ -71,7 +71,7 @@ export const Verb = React.createClass({
       ) 
     } else if (this.props.parent.pos === 'Infinitive') {
       return (
-        <ul>
+        <ul className='desktop-ul'>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
               <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
@@ -88,7 +88,7 @@ export const Verb = React.createClass({
       ) 
     } else {
       return (
-        <ul>
+        <ul className='desktop-ul'>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
               <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
@@ -136,7 +136,7 @@ export const Be = React.createClass({
 
     if (this.props.parent.pos === 'Gerund') {
       return (
-        <ul>
+        <ul className='desktop-ul'>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
               <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
@@ -150,7 +150,7 @@ export const Be = React.createClass({
       )
     } else if (this.props.parent.pos === 'Participle') {
       return (
-        <ul>
+        <ul className='desktop-ul'>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
               <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
@@ -164,7 +164,7 @@ export const Be = React.createClass({
       )
     } else if (this.props.parent.pos === 'Infinitive') {
       return (
-        <ul>
+        <ul className='desktop-ul'>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
               <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
@@ -181,7 +181,7 @@ export const Be = React.createClass({
       )
     } else {
       return (
-        <ul>
+        <ul className='desktop-ul'>
           <li className="tree-top">
             <div className={`tree-box ${element.pos}`}>
               <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.base}</span>
@@ -211,7 +211,7 @@ export const VerbContainer = React.createClass({
     const attrs = ['conjunction', 'verbs', 'complements','adverbs','prepositions']
 
     return (
-      <ul>
+      <ul className='desktop-ul'>
         <li className="tree-top">
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>VerbContainer</span>

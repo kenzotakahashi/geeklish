@@ -9,7 +9,7 @@ import { getWordDictionary } from '../../../shared/wordDictionary'
 const e = React.createElement
 
 export const Children = (props) => (
-	<ul>
+	<ul className='m-tree'>
     <ReactCSSTransitionGroup
       transitionName="tree"
       transitionEnterTimeout={300}

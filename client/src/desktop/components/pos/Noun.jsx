@@ -27,7 +27,7 @@ export const Noun = React.createClass({
                           (determiner && determiner.number !== 'both')
 
     return (
-      <ul>
+      <ul className='desktop-ul'>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.singular}</span>
@@ -59,7 +59,7 @@ export const NounContainer = React.createClass({
     const attrs = ['conjunction','quantifier','determiner','adjectives','nouns','prepositions']
 
     return (
-      <ul>
+      <ul className='desktop-ul'>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>NounContainer</span>
@@ -85,7 +85,7 @@ export const NounClause = React.createClass({
     const attrs = ['clause','quantifier','adjectives','nouns','prepositions']
 
     return (
-      <ul>
+      <ul className='desktop-ul'>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Noun Clause</span>

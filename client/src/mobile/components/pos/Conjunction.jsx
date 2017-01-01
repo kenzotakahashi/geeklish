@@ -8,7 +8,7 @@ const Conjunction = React.createClass({
     const element = state.Words.find(o => o._id === this.props._id)
 
     return (
-      <ul>
+      <ul className='m-ul'>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word'>{element.word}</span>

@@ -58,8 +58,8 @@ a {
 
 .label {
   font-size: 10px;
+  font-style: italic;
   color: #fff;
-  background-color: #aaa;
   padding: 1px 3px;
   border-radius: 5px;
 }
@@ -105,7 +105,7 @@ footer {
   justify-content: flex-end
 }
 
-ul {
+ul.desktop-ul {
   padding-left: 10px;
 }
 
@@ -245,12 +245,10 @@ button.tree-button {
   margin-left: 3px;
   color: #444;
   background-color: #fff;
-  border: 1px solid #aaa;
 }
 
 button.tree-button.on {
   background-color: #666;
-  border: 1px solid #666;
   color: #fff;
 }
 
@@ -272,9 +270,6 @@ li.tree {
   padding: 4px;
   margin-left: 12px;
   margin-bottom: -1px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #ddd;
   max-width: 550px;
 }
 
@@ -308,14 +303,19 @@ div.tree-box {
   border-width: 1px;
   border-radius: 3px;
   border-color: #ddd;*/
-  margin: 4px 4px 4px 0; 
-  padding: 4px;
+  margin: 4px 0; 
+  padding: 6px;
   max-width: 550px;
 }
 
 button.trash {
+  font-size: 21px;
+  color: #fff;
   float: right;
-  padding: 3px 5px;
+  padding: 0 5px;
+  margin-top: -3px;
+  cursor: pointer;
+  background-color: transparent;
 }
 
 .active-link {

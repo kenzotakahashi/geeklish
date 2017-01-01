@@ -57,6 +57,8 @@ export const Link = React.createClass({
     props.className = `m-link ${props.className}`
     delete props.back
 
+    console.log(mobileHistory.length)
+
     return (
       <a {...props}>{this.props.children}</a>
     )

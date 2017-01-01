@@ -21,7 +21,7 @@ export const Clause = React.createClass({
     ))
 
     return (
-      <ul>
+      <ul className='desktop-ul'>
         <li className='tree-top'>
           <div className={`tree-box basic ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Clause</span>
@@ -46,7 +46,7 @@ export const ClauseContainer = React.createClass({
     const attrs = ['conjunction', 'clauses']
 
     return (
-      <ul>
+      <ul className='desktop-ul'>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>ClauseContainer</span>

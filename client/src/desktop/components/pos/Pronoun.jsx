@@ -23,7 +23,7 @@ const Pronoun = React.createClass({
     )
 
     return (
-      <ul>
+      <ul className='desktop-ul'>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word[element.form]}</span>

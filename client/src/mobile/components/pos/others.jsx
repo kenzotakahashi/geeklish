@@ -22,7 +22,7 @@ export const Infinitive = React.createClass({
     const attrs = ['verb']
 
     return (
-      <ul>
+      <ul className='m-ul'>
         <li className="tree-top">
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Infinitive</span>
@@ -57,7 +57,7 @@ export const Gerund = React.createClass({
     const attrs = ['verb']
 
     return (
-      <ul>
+      <ul className='m-ul'>
         <li className="tree-top">
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Gerund</span>
@@ -93,7 +93,7 @@ export const Participle = React.createClass({
     ))
 
     return (
-      <ul>
+      <ul className='m-ul'>
         <li className="tree-top">
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Participle</span>

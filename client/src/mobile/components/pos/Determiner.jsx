@@ -13,7 +13,7 @@ export const Determiner = React.createClass({
     const attrs = ['adverb']
 
     return (
-      <ul>
+      <ul className='m-ul'>
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word}</span>
@@ -48,7 +48,7 @@ export const Possessive = React.createClass({
     const attrs = ['noun']
 
     return (
-      <ul>
+      <ul className='m-ul'>
         <li className="tree-top">
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Possessive</span>

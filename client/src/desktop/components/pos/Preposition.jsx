@@ -13,7 +13,7 @@ const Preposition = React.createClass({
 
     if (this.props.role[0] === 'particle') {
       return (
-        <ul>
+        <ul className='desktop-ul'>
           <li className='tree-top'>
             <div className={`tree-box ${element.pos}`}>
               <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>{element.word}</span>
@@ -32,7 +32,7 @@ const Preposition = React.createClass({
       )
     } else {
       return (
-        <ul>
+        <ul className='desktop-ul'>
           <li className='tree-top'>
             <div className={`tree-box ${element.pos}`}>
               <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>{element.word}</span>

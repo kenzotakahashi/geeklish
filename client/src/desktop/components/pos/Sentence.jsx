@@ -10,7 +10,7 @@ const Sentence = React.createClass({
     const attrs = ['clause']
 
     return (
-      <ul>
+      <ul className='desktop-ul'>
         <li>
           <div className={`tree-box basic ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Sentence</span>

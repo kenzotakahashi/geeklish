@@ -98,7 +98,17 @@ hr.m-border {
 	color: #aaa;
 }
 
-/* =================== Animation ==========================*/
+/* =================== Canvas ============================= */
+
+.m-ul {
+	padding: 0;
+}
+
+.m-tree {
+	padding-left: 15px;
+}
+
+/* =================== Animation ========================== */
 
 .forward-enter {
 	position: fixed;
