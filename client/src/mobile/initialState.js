@@ -4,7 +4,12 @@ export const mobileInitialState = function() {
   const _id = uuid.v1()
   return {
     route: null,
+    previousRoute: null,
     routeAction: null,
+    animation: {
+      examples: 'normal',
+      canvas: null
+    },
     currentModal: {name: null},
     // example: null,
     title: 'Some title',

@@ -9,18 +9,27 @@ function reducer(state, action) {
     case 'ROUTE_SENTENCES': {
       return {
         ...state,
-        route: 'sentences',
+        route: 'examples',
+        previous: action.previous,
         routeAction: action.routeAction,
+        animation: {
+          examples: action.previous ? 'in' : 'normal',
+          canvas: action.previous ? 'out' : null
+        },
         examples: action.examples,
-        Words: action.words,
       }
     }
     case 'ROUTE_CANVAS': {
       return {
         ...state,
         route: 'canvas',
-        title: action.project.project.title,
+        previous: action.previous,
         routeAction: action.routeAction,
+        animation: {
+          examples: 'out',
+          canvas: 'in'
+        },
+        title: action.project.project.title,
         Words: action.project.words,
         answer: action.project.words,
         userAnswer: mobileInitialState(),
@@ -29,12 +38,24 @@ function reducer(state, action) {
 
     // ====================== App ====================================
 
-    case 'CHANGE_MODAL': {
+    case 'END_TRANSITION': {
+      let newAnimation = {}
+      for (let key of Object.keys(state.animation)) {
+        newAnimation[key] = key === action.route ? 'normal' : null
+      }
+
       return {
         ...state,
-        currentModal: action.currentModal
+        animation: newAnimation
       }
     }
+
+    // case 'CHANGE_MODAL': {
+    //   return {
+    //     ...state,
+    //     currentModal: action.currentModal
+    //   }
+    // }
 
     // ====================== Canvas ==================================
     case 'SHOW_OPTIONS': {

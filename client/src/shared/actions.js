@@ -59,14 +59,21 @@ export const changeModal = (currentModal) => ({
 
 // ================ Mobile =================
 
-export const routeCanvas = (project, routeAction) => ({
+export const routeCanvas = (project, previous, routeAction) => ({
   type: 'ROUTE_CANVAS',
   project,
+  previous,
   routeAction
 })
 
-export const routeSentences = (examples, routeAction) => ({
+export const routeSentences = (examples, previous, routeAction) => ({
   type: 'ROUTE_SENTENCES',
   examples,
+  previous,
   routeAction
-}) 
+})
+
+export const endTransition = (route) => ({
+  type: 'END_TRANSITION',
+  route
+})

@@ -3,65 +3,71 @@ import { store } from '../../index.js'
 
 import Examples from './Examples'
 import Canvas from './Canvas'
+// import Controller from './Controller'
 
 import '../css/main.css'
 
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group' 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import TransitionGroup from 'react-addons-transition-group' 
+// import {TransitionMotion, spring, presets} from 'react-motion'
 
-function getChildren(state, route) {
-  if (route === 'sentences') {
-    return <Examples/>
-  }
-  if (route === 'canvas') {
-    return <Canvas />
-  }
-}
 
-const timeout = 300
+const timeout = 3000
 
 const App = React.createClass({
   componentDidMount: function() {
     store.subscribe(() => this.forceUpdate())
   },
+
   render: function() {
     const state = store.getState()
     const route = state.route
-    const children = getChildren(state, route)
-    const routeAction = state.routeAction
+    const previous = state.previous
+    const animation = state.animation
 
     // console.log(route)
     // console.log(state.routeAction)
 
-    if (routeAction === 'PUSH') {
-      return (
-        <ReactCSSTransitionGroup
-          transitionName='forward'
-          transitionEnterTimeout={timeout}
-          transitionLeaveTimeout={timeout}>
-          {children && React.cloneElement(children, {key: route})}
-        </ReactCSSTransitionGroup>
-      )
-    }
-    else if (routeAction === 'POP') {
-      return (
-        <ReactCSSTransitionGroup
-          transitionName='backward'
-          transitionEnterTimeout={timeout}
-          transitionLeaveTimeout={timeout}>
-          {children && React.cloneElement(children, {key: route})}
-        </ReactCSSTransitionGroup>
-      )
-    }
-    else {
-      return (
-        <ReactCSSTransitionGroup
-          transitionName='initial'
-          transitionEnter={false}
-          transitionLeaveTimeout={timeout}>
-          {children && React.cloneElement(children, {key: route})}
-        </ReactCSSTransitionGroup>
-      )
-    }
+    console.log(animation)
+
+    return (
+      <div>
+        {animation.examples && <Examples animation={animation.examples} />}
+        {animation.canvas && <Canvas animation={animation.canvas} />}
+      </div>
+    )
+
+
+    // if (routeAction === 'PUSH') {
+    //   return (
+    //     <ReactCSSTransitionGroup
+    //       transitionName='forward'
+    //       transitionEnterTimeout={timeout}
+    //       transitionLeaveTimeout={timeout}>
+    //       {children && React.cloneElement(children, {key: route})}
+    //     </ReactCSSTransitionGroup>
+    //   )
+    // }
+    // else if (routeAction === 'POP') {
+    //   return (
+    //     <ReactCSSTransitionGroup
+    //       transitionName='backward'
+    //       transitionEnterTimeout={timeout}
+    //       transitionLeaveTimeout={timeout}>
+    //       {children && React.cloneElement(children, {key: route})}
+    //     </ReactCSSTransitionGroup>
+    //   )
+    // }
+    // else {
+    //   return (
+    //     <ReactCSSTransitionGroup
+    //       transitionName='initial'
+    //       transitionEnter={false}
+    //       transitionLeaveTimeout={timeout}>
+    //       {children && React.cloneElement(children, {key: route})}
+    //     </ReactCSSTransitionGroup>
+    //   )
+    // }
   }
 })
 
