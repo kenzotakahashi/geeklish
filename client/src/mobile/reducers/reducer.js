@@ -12,10 +12,6 @@ function reducer(state, action) {
         route: 'examples',
         previous: action.previous,
         routeAction: action.routeAction,
-        animation: {
-          examples: action.previous ? 'in' : 'normal',
-          canvas: action.previous ? 'out' : null
-        },
         examples: action.examples,
       }
     }
@@ -25,14 +21,23 @@ function reducer(state, action) {
         route: 'canvas',
         previous: action.previous,
         routeAction: action.routeAction,
-        animation: {
-          examples: 'out',
-          canvas: 'in'
-        },
+        example: action._id,
         title: action.project.project.title,
         Words: action.project.words,
         answer: action.project.words,
         userAnswer: mobileInitialState(),
+      }
+    }
+    case 'SHOW_DETAIL': {
+      // Fake route
+      return {
+        ...state,
+        route: 'detail',
+        previous: action.previous,
+        routeAction: action.routeAction,
+        parent: action.parent,
+        role: action.role,
+        activeWord: action._id,
       }
     }
 

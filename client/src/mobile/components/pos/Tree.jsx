@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group' 
 import { store } from '../../../index.js'
-import pos_components from './pos_components'
+import { pos_components } from './pos_components'
 import { changeAttribute, deleteElement, useConjunction, undoConjunction,
          changeModal } from '../../../shared/actions'
 import { getWordDictionary } from '../../../shared/wordDictionary'

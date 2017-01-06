@@ -1,5 +1,5 @@
 import { Verb, Be, VerbContainer } from './Verb.jsx'
-import { Clause, ClauseContainer } from './Clause.jsx'
+import { Clause, ClauseContainer, ClauseDetail } from './Clause.jsx'
 import Pronoun from './Pronoun.jsx'
 import Sentence from './Sentence.jsx'
 import { Noun, NounContainer, NounClause } from './Noun.jsx'
@@ -10,7 +10,7 @@ import Preposition from './Preposition.jsx'
 import Conjunction from './Conjunction.jsx'
 import { Infinitive, Gerund, Participle } from './others.jsx'
 
-const components = {
+export const pos_components = {
 	Verb,
 	Be,
 	VerbContainer,
@@ -34,4 +34,6 @@ const components = {
 	Possessive,
 }
 
-export default components
+export const pos_details = {
+	Clause: ClauseDetail
+}

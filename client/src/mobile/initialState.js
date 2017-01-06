@@ -5,16 +5,18 @@ export const mobileInitialState = function() {
   return {
     route: null,
     previousRoute: null,
-    routeAction: null,
+    routeAction: 'initial',
     animation: {
       examples: 'normal',
       canvas: null
     },
-    currentModal: {name: null},
-    // example: null,
+    // currentModal: {name: null},
+    example: null,
     title: 'Some title',
     saved: true,
-    activeWord: _id,
+    activeWord: null,
+    parent: null,
+    role: null,
     target: [],
     dictionary: [],
     examples: !!sessionStorage.examples ? JSON.parse(sessionStorage.examples) : [],

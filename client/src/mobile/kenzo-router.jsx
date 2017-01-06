@@ -2,7 +2,7 @@ import React from 'react'
 import createHistory from 'history/createBrowserHistory'
 import { store } from '../index.js'
 import Client from '../Client'
-import { routeSentences, routeCanvas } from '../shared/actions'
+import { routeSentences, routeCanvas, routeDetail } from '../shared/actions'
 
 export const mobileHistory = createHistory()
 
@@ -19,9 +19,8 @@ export const mobileHandleNavigation = (location, action) => {
   // If the app is launched from homescreen, naavigate to root.
   const pathList = getPathList(location, action)
   const path = pathList[0] || rootPath
-  // const routeAction = !action ? null :
-  //                     location.state.back ? 'POP' : 'PUSH'
-  const routeAction = 'PUSH'
+  const routeAction = !action ? 'initial' :
+                      location.state.back ? 'backward' : 'forward'
   const previous = action === undefined ? null : location.state.previous
 
   if (path === 'examples') {
@@ -36,10 +35,21 @@ export const mobileHandleNavigation = (location, action) => {
   }
   else if (path === 'canvas') {
     const _id = pathList[1]
-    Client.getProject(_id, (data) => {
-      store.dispatch(routeCanvas(data.result, previous, routeAction))
-    })
+    if (sessionStorage.canvas) {
+      const data = JSON.parse(sessionStorage.canvas)
+      store.dispatch(routeCanvas(_id, data, previous, routeAction))
+    } else {
+      Client.getProject(_id, (data) => {
+        store.dispatch(routeCanvas(_id, data, previous, routeAction))
+      })
+    }
   }
+  // else if (path === 'detail') {
+  //   const _id = pathList[1]
+  //   // Assume words are cached in session.
+  //   const words = JSON.parse(sessionStorage.canvas)
+  //   store.dispatch(routeDetail(_id, words))
+  // }
 }
 
 const isLeftClickEvent = (e) => e.button === 0
@@ -52,12 +62,17 @@ export const Link = React.createClass({
     }
     event.preventDefault()
     
-    console.log(mobileHistory.action)
     const pathList = getPathList(mobileHistory.location, mobileHistory.action)
     const path = pathList[0] || rootPath
     console.log(path)
+    const {back, parent, role} = this.props
 
-    mobileHistory.push(this.props.to, { back: this.props.back, previous: path })
+    mobileHistory.push(this.props.to, {
+      back: back,
+      // parent: parent,
+      // role: role,
+      previous: path
+    })
   },
 
   render: function() {

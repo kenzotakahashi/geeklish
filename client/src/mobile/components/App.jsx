@@ -3,12 +3,11 @@ import { store } from '../../index.js'
 
 import Examples from './Examples'
 import Canvas from './Canvas'
-// import Controller from './Controller'
+import Detail from './Detail'
 
 import '../css/main.css'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import TransitionGroup from 'react-addons-transition-group' 
 // import {TransitionMotion, spring, presets} from 'react-motion'
 
 
@@ -23,17 +22,19 @@ const App = React.createClass({
     const state = store.getState()
     const route = state.route
     const previous = state.previous
-    const animation = state.animation
     const routeAction = state.routeAction
 
     console.log(route)
     // console.log(state.routeAction)
-    // console.log(animation)
 
     return (
       <div>
-        <Examples route={route === 'examples'} />
-        <Canvas route={route === 'canvas'} />
+        <Examples route={route === 'examples'} previous={previous === 'examples'}
+                  routeAction={routeAction} />
+        <Canvas route={route === 'canvas'} previous={previous === 'canvas'}
+                  routeAction={routeAction} />
+        <Detail route={route === 'detail'} previous={previous === 'detail'}
+                  routeAction={routeAction} />
       </div>
     )
 

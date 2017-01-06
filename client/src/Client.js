@@ -5,7 +5,7 @@ function getDics(result) {
     accept: 'application/json',
   }).then(checkStatus)
     .then(res => res.json())
-    .then(storeToSession)
+    .then(response => storeToSession(response, 'dictionary'))
     .then(result)
 }
 
@@ -22,7 +22,7 @@ function getProjects(result) {
     accept: 'application/json',
   }).then(checkStatus)
     .then(res => res.json())
-    .then(storeToSession2)
+    .then(response => storeToSession(response, 'examples'))
     .then(result)
 }
 
@@ -31,6 +31,7 @@ function getProject(_id, result) {
     accept: 'application/json',
   }).then(checkStatus)
     .then(res => res.json())
+    .then(response => storeToSession(response, 'canvas'))
     .then(result)
 }
 
@@ -60,13 +61,8 @@ function checkStatus(response) {
   }
 }
 
-function storeToSession(response) {
-  sessionStorage.dictionary = JSON.stringify(response.result)
-  return response.result
-}
-
-function storeToSession2(response) {
-  sessionStorage.examples = JSON.stringify(response.result)
+function storeToSession(response, key) {
+  sessionStorage[key] = JSON.stringify(response.result)
   return response.result
 }
 

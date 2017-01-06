@@ -211,13 +211,18 @@ hr.m-border {
 	transition: all 3000ms ease-out;
 }
 
+
 .page {
 	width: 100%;
+	background-color: #fff;
 }
 
 .page-canvas {
-  	z-index: 1000;
-	background-color: #fff;
+  	z-index: 10;
+}
+
+.page-detail {
+	z-index: 10;
 }
 
 /*.page-example {

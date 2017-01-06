@@ -1,76 +1,26 @@
 import React from 'react'
 import { store } from '../../index.js'
 import { Link } from '../kenzo-router'
-import { endTransition } from '../../shared/actions'
 
 import Output from './Output.jsx'
-import pos_components from './pos/pos_components.jsx'
+import { pos_components } from './pos/pos_components.jsx'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 
 const e = React.createElement
 
-const TICK = 17
 
 const Canvas = React.createClass({
-  getInitialState() {
-    return {
-      className: 'forward-enter'
-    }
-  },
-  componentWillReceiveProps(newProps) { 
-    if (newProps.animation === 'out') {
-      this.unMountStyle()
-    }
-    else if (newProps.animation === 'in') {
-      setTimeout(this.mountStyle, 10)
-    }
-    else {
-      this.setState({className: ''})
-    }
-  },
-  unMountStyle() {
-    console.log('unmount')
-    this.setState({className: 'backward-leave'})
-    // debugger
-    setTimeout(() => this.setState({
-      className: 'backward-leave backward-leave-active'
-    }), TICK)
-
-  },
-  mountStyle() {
-    console.log('mount')
-    // this.setState({
-    //   className: 'forward-enter'
-    // })
-    this.setState({className: 'forward-enter forward-enter-active'})
-    // setTimeout(() => this.setState({
-    //   className: 'forward-enter forward-enter-active'
-    // }), TICK)
-  },
-  componentDidMount(){
-    if (this.props.animation === 'in') {
-      setTimeout(this.mountStyle, 10)    
-    }
-  },
-  transitionEnd(){
-    console.log('transitionEnd')
-    if(this.props.animation === 'in') {
-      store.dispatch(endTransition('canvas'))
-      // this.setState({className: ''})
-      // this.setState({className: 'backward-leave'})
-    }
-  },
-
   render: function() {
+    const {route, previoues, routeAction} = this.props
     return (
       <ReactCSSTransitionGroup
-        transitionName='canvas'
+        transitionName={routeAction}
         transitionEnterTimeout={3000}
         transitionLeaveTimeout={3000}>
         
-        {this.props.route && (
+        {route && (
           <div className='page page-canvas' key='examples'>
             <nav className='m-nav'>
               <Link to='/examples' back={true} className='m-back'>
