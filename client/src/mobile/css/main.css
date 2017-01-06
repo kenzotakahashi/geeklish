@@ -110,6 +110,54 @@ hr.m-border {
 
 /* =================== Animation ========================== */
 
+.examples-enter {
+	position: fixed;
+	-webkit-transform: translate3d(-30%, 0, 0);
+	transform: translate3d(-30%, 0, 0);
+}
+.examples-enter.examples-enter-active {
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+	transition: all 3000ms ease-out;
+}
+.examples-leave {
+	position: fixed;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+.examples-leave.examples-leave-active {
+	-webkit-transform: translate3d(-30%, 0, 0);
+	transform: translate3d(-30%, 0, 0);
+	transition: all 3000ms ease-out;
+}
+
+.canvas-enter {
+	position: fixed;
+	-webkit-transform: translate3d(100%, 0, 0);
+	transform: translate3d(100%, 0, 0);
+}
+.canvas-enter.canvas-enter-active {
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+	transition: all 3000ms ease-out;
+}
+.canvas-leave {
+	position: fixed;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+.canvas-leave.canvas-leave-active {
+	-webkit-transform: translate3d(100%, 0, 0);
+  	transform: translate3d(100%, 0, 0);
+	transition: all 3000ms ease-out;
+}
+
+
+
+
+
+
+
 .forward-enter {
 	position: fixed;
 	-webkit-transform: translate3d(100%, 0, 0);

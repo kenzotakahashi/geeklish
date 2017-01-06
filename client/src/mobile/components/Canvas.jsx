@@ -6,6 +6,9 @@ import { endTransition } from '../../shared/actions'
 import Output from './Output.jsx'
 import pos_components from './pos/pos_components.jsx'
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
+
 const e = React.createElement
 
 const TICK = 17
@@ -62,36 +65,43 @@ const Canvas = React.createClass({
 
   render: function() {
     return (
-      <div className={`page page-canvas ${this.state.className}`}
-           onTransitionEnd={this.transitionEnd}>
-        <nav className='m-nav'>
-          <Link to='/examples' back={true} className='m-back'>
-            <span className='back-arrow'></span>
-          </Link>
-          <h3 className='title'>{store.getState().title}</h3>
-        </nav>
-        <section>
-          <Output />
-          {e(pos_components.Sentence)}
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-        </section>
-      </div>
+      <ReactCSSTransitionGroup
+        transitionName='canvas'
+        transitionEnterTimeout={3000}
+        transitionLeaveTimeout={3000}>
+        
+        {this.props.route && (
+          <div className='page page-canvas' key='examples'>
+            <nav className='m-nav'>
+              <Link to='/examples' back={true} className='m-back'>
+                <span className='back-arrow'></span>
+              </Link>
+              <h3 className='title'>{store.getState().title}</h3>
+            </nav>
+            <section>
+              <Output />
+              {e(pos_components.Sentence)}
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+            </section>
+          </div>
+        )}        
+      </ReactCSSTransitionGroup>
     )
   }
 })

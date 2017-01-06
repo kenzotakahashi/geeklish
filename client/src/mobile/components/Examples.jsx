@@ -5,6 +5,7 @@ import { endTransition } from '../../shared/actions'
 
 import { Link } from '../kenzo-router'
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 // import {TransitionMotion, spring, presets} from 'react-motion'
 
 // .forward-leave {
@@ -95,31 +96,38 @@ const Examples = React.createClass({
       </ul>
     ))
     return (
-      <div className={`page page-examples ${this.state.className}`} onTransitionEnd={this.transitionEnd}>
-        <nav className='m-nav'>
-          <h3 className='title'>Geeklish</h3>
-        </nav>
-        <section>
-          {examples}
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
-        </section>
-      </div>
+      <ReactCSSTransitionGroup
+        transitionName={'examples'}
+        transitionEnterTimeout={3000}
+        transitionLeaveTimeout={3000}>
+        {this.props.route && (
+          <div className={`page page-examples ${this.state.className}`}>
+            <nav className='m-nav'>
+              <h3 className='title'>Geeklish</h3>
+            </nav>
+            <section>
+              {examples}
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+              <p>Something</p>
+            </section>
+          </div>
+        )}
+      </ReactCSSTransitionGroup>
     )
 
   }

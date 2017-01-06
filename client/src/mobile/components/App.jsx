@@ -24,50 +24,19 @@ const App = React.createClass({
     const route = state.route
     const previous = state.previous
     const animation = state.animation
+    const routeAction = state.routeAction
 
-    // console.log(route)
+    console.log(route)
     // console.log(state.routeAction)
-
-    console.log(animation)
+    // console.log(animation)
 
     return (
       <div>
-        {animation.examples && <Examples animation={animation.examples} />}
-        {animation.canvas && <Canvas animation={animation.canvas} />}
+        <Examples route={route === 'examples'} />
+        <Canvas route={route === 'canvas'} />
       </div>
     )
 
-
-    // if (routeAction === 'PUSH') {
-    //   return (
-    //     <ReactCSSTransitionGroup
-    //       transitionName='forward'
-    //       transitionEnterTimeout={timeout}
-    //       transitionLeaveTimeout={timeout}>
-    //       {children && React.cloneElement(children, {key: route})}
-    //     </ReactCSSTransitionGroup>
-    //   )
-    // }
-    // else if (routeAction === 'POP') {
-    //   return (
-    //     <ReactCSSTransitionGroup
-    //       transitionName='backward'
-    //       transitionEnterTimeout={timeout}
-    //       transitionLeaveTimeout={timeout}>
-    //       {children && React.cloneElement(children, {key: route})}
-    //     </ReactCSSTransitionGroup>
-    //   )
-    // }
-    // else {
-    //   return (
-    //     <ReactCSSTransitionGroup
-    //       transitionName='initial'
-    //       transitionEnter={false}
-    //       transitionLeaveTimeout={timeout}>
-    //       {children && React.cloneElement(children, {key: route})}
-    //     </ReactCSSTransitionGroup>
-    //   )
-    // }
   }
 })
 
