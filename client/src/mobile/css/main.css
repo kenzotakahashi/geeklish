@@ -45,12 +45,17 @@ a.m-link:active {
 section {
 	width: 100%;
 	padding: 10px 0;
-	border-bottom: 1px solid #ccc;
+	/*border-bottom: 1px solid #ccc;*/
 	margin: 50px 0 45px 0;
 }
 
 hr.m-border {
 	width: 95%;
+	margin: 0 auto;
+}
+
+hr.m-border-edge {
+	width: 100%;
 	margin: 0 auto;
 }
 
@@ -77,20 +82,22 @@ hr.m-border {
 	/*background-color: #eee;*/
 }
 
-.m-example {
+.m-list-group {
+	padding: 5px 0;
+	/*margin: 10px 0;*/
+}
+
+.m-list {
 	width: 100%;
 	height: 45px;
-	background-color: #fff;
+	/*background-color: #fff;*/
 	display: block;
 	cursor: pointer;
 	margin: auto;
 	padding: 12px;
 }
 
-.m-example > span {
-	width: 95%;
-	border-bottom: 1px solid #aaa;
-}
+
 
 .m-answer {
 	padding: 8px;
@@ -108,55 +115,11 @@ hr.m-border {
 	padding-left: 15px;
 }
 
+.m-list-right {
+	float: right;
+}
+
 /* =================== Animation ========================== */
-
-.examples-enter {
-	position: fixed;
-	-webkit-transform: translate3d(-30%, 0, 0);
-	transform: translate3d(-30%, 0, 0);
-}
-.examples-enter.examples-enter-active {
-	-webkit-transform: translate3d(0, 0, 0);
-	transform: translate3d(0, 0, 0);
-	transition: all 3000ms ease-out;
-}
-.examples-leave {
-	position: fixed;
-	-webkit-transform: translate3d(0, 0, 0);
-	transform: translate3d(0, 0, 0);
-}
-.examples-leave.examples-leave-active {
-	-webkit-transform: translate3d(-30%, 0, 0);
-	transform: translate3d(-30%, 0, 0);
-	transition: all 3000ms ease-out;
-}
-
-.canvas-enter {
-	position: fixed;
-	-webkit-transform: translate3d(100%, 0, 0);
-	transform: translate3d(100%, 0, 0);
-}
-.canvas-enter.canvas-enter-active {
-	-webkit-transform: translate3d(0, 0, 0);
-	transform: translate3d(0, 0, 0);
-	transition: all 3000ms ease-out;
-}
-.canvas-leave {
-	position: fixed;
-	-webkit-transform: translate3d(0, 0, 0);
-	transform: translate3d(0, 0, 0);
-}
-.canvas-leave.canvas-leave-active {
-	-webkit-transform: translate3d(100%, 0, 0);
-  	transform: translate3d(100%, 0, 0);
-	transition: all 3000ms ease-out;
-}
-
-
-
-
-
-
 
 .forward-enter {
 	position: fixed;
@@ -166,7 +129,7 @@ hr.m-border {
 .forward-enter.forward-enter-active {
 	-webkit-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
-	transition: all 3000ms ease-out;
+	transition: all 1000ms ease-out;
 }
 .forward-leave {
 	position: fixed;
@@ -176,7 +139,7 @@ hr.m-border {
 .forward-leave.forward-leave-active {
 	-webkit-transform: translate3d(-30%, 0, 0);
 	transform: translate3d(-30%, 0, 0);
-	transition: all 3000ms ease-out;
+	transition: all 1000ms ease-out;
 }
 
 .backward-enter {
@@ -187,7 +150,7 @@ hr.m-border {
 .backward-enter.backward-enter-active {
 	-webkit-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
-	transition: all 3000ms ease-out;
+	transition: all 1000ms ease-out;
 }
 .backward-leave {
 	position: fixed;
@@ -197,7 +160,7 @@ hr.m-border {
 .backward-leave.backward-leave-active {
 	-webkit-transform: translate3d(100%, 0, 0);
   	transform: translate3d(100%, 0, 0);
-	transition: all 3000ms ease-out;
+	transition: all 1000ms ease-out;
 }
 
 .initial-leave {
@@ -208,12 +171,28 @@ hr.m-border {
 .initial-leave.initial-leave-active {
 	-webkit-transform: translate3d(100%, 0, 0);
   	transform: translate3d(100%, 0, 0);
-	transition: all 3000ms ease-out;
+	transition: all 1000ms ease-out;
 }
 
+/*.element-enter {
+  opacity: 0.01;
+}
+.element-enter.element-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+.element-leave {
+  opacity: 1;
+}
+.element-leave.element-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+*/
 
 .page {
 	width: 100%;
+	min-height: 100%;
 	background-color: #fff;
 }
 
@@ -222,9 +201,79 @@ hr.m-border {
 }
 
 .page-detail {
-	z-index: 10;
+	z-index: 20;
+}
+
+.page-option {
+	z-index: 30;
 }
 
 /*.page-example {
 	background-color: #aaa;
 }*/
+
+
+/* ===================== toggle =========================== */
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+  float: right;
+  margin-top: -4px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 1px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(21px);
+  -ms-transform: translateX(21px);
+  transform: translateX(21px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+ /*============================================= */

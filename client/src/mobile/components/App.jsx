@@ -4,6 +4,7 @@ import { store } from '../../index.js'
 import Examples from './Examples'
 import Canvas from './Canvas'
 import Detail from './Detail'
+import Option from './Option'
 
 import '../css/main.css'
 
@@ -24,8 +25,8 @@ const App = React.createClass({
     const previous = state.previous
     const routeAction = state.routeAction
 
-    console.log(route)
-    // console.log(state.routeAction)
+    // console.log(route)
+    console.log(state.routeAction)
 
     return (
       <div>
@@ -35,6 +36,7 @@ const App = React.createClass({
                   routeAction={routeAction} />
         <Detail route={route === 'detail'} previous={previous === 'detail'}
                   routeAction={routeAction} />
+        <Option route={route === 'option'} routeAction={routeAction} />
       </div>
     )
 

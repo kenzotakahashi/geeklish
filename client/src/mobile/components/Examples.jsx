@@ -9,7 +9,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 const Examples = React.createClass({
   render: function() {
-    const {route, previoues, routeAction} = this.props
+    const {route, routeAction} = this.props
     const state = store.getState()
     const examples = state.examples.map(o => (
       <ul key={o.category} className='m-container'>
@@ -17,7 +17,7 @@ const Examples = React.createClass({
         {o.examples.map((t, i) => (
           <li key={t._id}>
             {i > 0 && <hr className='m-border' />}
-            <Link className='m-example' to={`/canvas/${t._id}`} >
+            <Link className='m-list' to={`/canvas/${t._id}`} >
               {t.title}
             </Link>
           </li>
@@ -27,8 +27,8 @@ const Examples = React.createClass({
     return (
       <ReactCSSTransitionGroup
         transitionName={routeAction}
-        transitionEnterTimeout={3000}
-        transitionLeaveTimeout={3000}>
+        transitionEnterTimeout={1000}
+        transitionLeaveTimeout={1000}>
         {route && (
           <div className='page page-examples'>
             <nav className='m-nav'>

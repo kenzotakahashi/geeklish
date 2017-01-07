@@ -13,12 +13,12 @@ const e = React.createElement
 
 const Canvas = React.createClass({
   render: function() {
-    const {route, previoues, routeAction} = this.props
+    const {route, routeAction} = this.props
     return (
       <ReactCSSTransitionGroup
         transitionName={routeAction}
-        transitionEnterTimeout={3000}
-        transitionLeaveTimeout={3000}>
+        transitionEnterTimeout={1000}
+        transitionLeaveTimeout={1000}>
         
         {route && (
           <div className='page page-canvas' key='examples'>

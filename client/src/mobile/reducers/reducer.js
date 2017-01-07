@@ -16,16 +16,25 @@ function reducer(state, action) {
       }
     }
     case 'ROUTE_CANVAS': {
-      return {
-        ...state,
-        route: 'canvas',
-        previous: action.previous,
-        routeAction: action.routeAction,
-        example: action._id,
-        title: action.project.project.title,
-        Words: action.project.words,
-        answer: action.project.words,
-        userAnswer: mobileInitialState(),
+      // quick fix
+      if (action.routeAction === 'backward') {
+        return {
+          ...state,
+          route: 'canvas',
+          routeAction: action.routeAction
+        }
+      } else {
+        return {
+          ...state,
+          route: 'canvas',
+          previous: action.previous,
+          routeAction: action.routeAction,
+          example: action._id,
+          title: action.project.project.title,
+          Words: action.project.words,
+          answer: action.project.words,
+          userAnswer: mobileInitialState(),
+        }
       }
     }
     case 'SHOW_DETAIL': {
@@ -33,11 +42,18 @@ function reducer(state, action) {
       return {
         ...state,
         route: 'detail',
-        previous: action.previous,
         routeAction: action.routeAction,
-        parent: action.parent,
-        role: action.role,
+        parent: action.parent || state.parent,
+        role: action.role || state.role,
         activeWord: action._id,
+      }
+    }
+    case 'ROUTE_OPTION': {
+      // Fake route
+      return {
+        ...state,
+        route: 'option',
+        option: action.option
       }
     }
 

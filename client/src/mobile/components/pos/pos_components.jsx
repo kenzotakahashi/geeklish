@@ -1,6 +1,6 @@
-import { Verb, Be, VerbContainer } from './Verb.jsx'
+import { Verb, VerbLink,VerbDetail, Be, VerbContainer } from './Verb.jsx'
 import { Clause, ClauseContainer, ClauseDetail } from './Clause.jsx'
-import Pronoun from './Pronoun.jsx'
+import { Pronoun, PronounLink, PronounDetail } from './Pronoun.jsx'
 import Sentence from './Sentence.jsx'
 import { Noun, NounContainer, NounClause } from './Noun.jsx'
 import { Determiner, Possessive } from './Determiner.jsx'
@@ -34,6 +34,13 @@ export const pos_components = {
 	Possessive,
 }
 
-export const pos_details = {
-	Clause: ClauseDetail
+export const posDetails = {
+	Clause: ClauseDetail,
+	Pronoun: PronounDetail,
+	Verb: VerbDetail
+}
+
+export const posLinks = {
+	Pronoun: PronounLink,
+	Verb: VerbLink
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group' 
 import { store } from '../../../index.js'
-import { pos_components } from './pos_components'
+import { pos_components, posLinks } from './pos_components'
 import { changeAttribute, deleteElement, useConjunction, undoConjunction,
-         changeModal } from '../../../shared/actions'
+         changeModal, showDetail } from '../../../shared/actions'
 import { getWordDictionary } from '../../../shared/wordDictionary'
 
 const e = React.createElement
@@ -31,22 +31,47 @@ export const Children = (props) => (
           )
         ))
       }
-    </ReactCSSTransitionGroup>
-    {props.activeWord === props.element._id &&
-	    props.attrs.map(o => (
-	    	(o.slice(-1) === 's' || !props.element[o]) &&
-	      e(
-	      	'li',
-	      	{
-	          className: `word tree tree-${props.target[0] === o ? 'active' : 'info'}`,
-	          key: o,
-	          onClick: () => getWordDictionary(props.element, [o, null])
-	        },
-	        o
-	      )
-	    ))
-    }    		
+    </ReactCSSTransitionGroup>  		
 	</ul>
+)
+
+export const ChildrenDetail = (props) => (
+  <div>
+    <ul className='m-list-group'>
+      {
+        props.attrs.map((w, i) => {
+          if (w.slice(-1) === 's') {
+            return props.element[w].map((t, j) => {
+              const element = props.words.find(o => o._id === t)
+              e(posLinks[element.pos],
+                {key: w+j, _id: t, parent: props.element, role: [w, null]}
+              )
+            })
+          }
+          else if (props.element[w]) {
+            const element = props.words.find(o => o._id === props.element[w])
+            return (
+              e(posLinks[element.pos],
+                {key: w, _id: element._id, parent: props.element, role: [w, null]}
+              )
+            )
+          }
+        })
+      }
+    </ul>
+    <ul className='m-list-group'>
+      {
+        props.attrs.filter(t => t.slice(-1) === 's' || !props.element[t]).map((o, i) => (
+          <li key={o}
+              onClick={() => getWordDictionary(props.element, [o, null])}>
+            <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
+            <span className='m-list'>{o}</span>
+          </li>
+        ))
+      }
+      <hr className='m-border-edge' />
+    </ul>
+  </div>
 )
 
 export const CompChildren = (props) => (
@@ -80,16 +105,16 @@ export const CompChildren = (props) => (
 )
 
 export const WH = (props) => (
-	e(
-		'button',
-		{             
-      className: `tree-button ${props.isWh && 'on'}`,
-		  type: 'button',
-		  onClick: () => store.dispatch(changeAttribute(props.id, 'isWh', !props.isWh))
-		},
-		'WH'
-	)
+  <span className='m-list'>
+    <span>WH</span>
+    <label className="switch">
+      <input type="checkbox" onChange={() => store.dispatch(changeAttribute(
+        props.id, 'isWh', !props.isWh))} checked={props.isWh} />
+      <div className="slider round"></div>
+    </label>
+  </span>
 )
+
 
 export const DeleteButton = (props) => (
 	<button type="button" className="button-error trash"

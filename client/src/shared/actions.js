@@ -74,16 +74,15 @@ export const routeSentences = (examples, previous, routeAction) => ({
   routeAction
 })
 
-export const showDetail = (_id, parent, role, previous, routeAction) => ({
+export const showDetail = (_id, routeAction, parent, role) => ({
   type: 'SHOW_DETAIL',
   _id,
+  routeAction,
   parent,
-  role,
-  previous,
-  routeAction
+  role
 })
 
-// export const endTransition = (route) => ({
-//   type: 'END_TRANSITION',
-//   route
-// })
+export const routeOption = (option) => ({
+  type: 'ROUTE_OPTION',
+  option
+})

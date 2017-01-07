@@ -13,10 +13,11 @@ export const mobileInitialState = function() {
     // currentModal: {name: null},
     example: null,
     title: 'Some title',
-    saved: true,
+    // saved: true,
     activeWord: null,
-    parent: null,
+    parent: null, // element, not id
     role: null,
+    option: null,
     target: [],
     dictionary: [],
     examples: !!sessionStorage.examples ? JSON.parse(sessionStorage.examples) : [],
