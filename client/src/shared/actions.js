@@ -57,6 +57,13 @@ export const changeModal = (currentModal) => ({
   currentModal
 })
 
+export const setComplement = (_id, verbType, index) => ({
+  type: 'SET_COMPLEMENT',
+  _id,
+  verbType,
+  index
+})
+
 // ================ Mobile =================
 
 export const routeCanvas = (_id, project, previous, routeAction) => ({
@@ -85,4 +92,14 @@ export const showDetail = (_id, routeAction, parent, role) => ({
 export const routeOption = (option) => ({
   type: 'ROUTE_OPTION',
   option
+})
+
+export const routeComplementOption = () => ({
+  type: 'ROUTE_COMPLEMENT_OPTION',
+})
+
+export const routeWordFactory = (target, dictionary) => ({
+  type: 'ROUTE_WORD_FACTORY',
+  target,
+  dictionary
 })

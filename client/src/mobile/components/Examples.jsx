@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { store } from '../../index.js'
 
 import { Link } from '../kenzo-router'

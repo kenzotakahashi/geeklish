@@ -1,6 +1,6 @@
 // import { score } from '../../shared/score'
-import { getDescendantIds } from '../../shared/getDescendantIds'
-import { takeWord, getContainer } from '../../shared/others'
+import { takeWord, getContainer, createWordHelper, setComplementHelper,
+         deleteElementHelper } from '../../shared/others'
 import { mobileInitialState } from '../initialState'
 
 function reducer(state, action) {
@@ -53,23 +53,28 @@ function reducer(state, action) {
       return {
         ...state,
         route: 'option',
+        routeAction: 'forward',
         option: action.option
+      }
+    }
+    case 'ROUTE_COMPLEMENT_OPTION': {
+      return {
+        ...state,
+        route: 'complementOption',
+        routeAction: 'forward'
+      }
+    }
+    case 'ROUTE_WORD_FACTORY': {
+      return {
+        ...state,
+        route: 'wordFactory',
+        routeAction: 'slideup',
+        target: action.target,
+        dictionary: action.dictionary
       }
     }
 
     // ====================== App ====================================
-
-    case 'END_TRANSITION': {
-      let newAnimation = {}
-      for (let key of Object.keys(state.animation)) {
-        newAnimation[key] = key === action.route ? 'normal' : null
-      }
-
-      return {
-        ...state,
-        animation: newAnimation
-      }
-    }
 
     // case 'CHANGE_MODAL': {
     //   return {
@@ -79,57 +84,13 @@ function reducer(state, action) {
     // }
 
     // ====================== Canvas ==================================
-    case 'SHOW_OPTIONS': {
-      return {
-        ...state,
-        saved: false,
-        activeWord: action._id,
-        target: []
-      }
-    }
-    case 'SHOW_WORD_FACTORY': {
-      return {
-        ...state,
-        saved: false,
-        activeWord: action._id, 
-        target: action.target,
-        dictionary: action.dictionary
-      }
-    }
-    case 'CREATE_WORD': {      
-      const elementIndex = state.Words.findIndex(t => t._id === action.activeWord)
-      const parent = state.Words[elementIndex]
-      const [updated, initialized] = takeWord(parent, action.wordBase, action.target)
-
-      const newWords = Object.assign([], state.Words)
-      const resetComplement = action.target[0] === 'particle' ? {
-                                complementIndex: null,
-                                complements: []
-                              } : {}
-      newWords[elementIndex] = {
-        ...parent,
-        [action.target[0]]: updated,
-        ...resetComplement
-      }
-      newWords.push(initialized)
-
-      let newActiveWord
-      if (parent.pos === 'Clause') {
-        if (action.target[0] === 'subject' && parent.verb === null) {
-          newActiveWord = parent._id
-        } else if (action.target[0] === 'verb' && parent.subject === null) {
-          newActiveWord = parent._id
-        } else {
-          newActiveWord = initialized._id
-        }
-      } else {
-        newActiveWord = initialized._id
-      }
+    case 'CREATE_WORD': {
+      const [parent, newWords, initialized] = createWordHelper(state, action)
 
       return {
         ...state,
-        saved: false,
-        activeWord: newActiveWord,
+        route: 'detail',
+        routeAction: 'slidedown',
         target: [],
         Words: newWords
       }
@@ -152,36 +113,11 @@ function reducer(state, action) {
       }
     }
     case 'DELETE_ELEMENT': {
-      const deletedIds = getDescendantIds(action._id, state.Words)
-      const filtered = state.Words.filter(o => !deletedIds.includes(o._id))
-
-      // console.log(`${state.Words.length} - ${filtered.length}`)
-
-      const elementIndex = filtered.findIndex(t => t._id === action.parentId)
-      const parent = filtered[elementIndex]
-
-      let newRole
-      if (action.role[1] === null) {
-        newRole = action.role[0].slice(-1) === 's' ?
-                  parent[action.role[0]].filter(o => o !== action._id) : null
-      }
-      else {
-        newRole = Object.assign([], parent.complements)
-        newRole[action.role[1]]._id = null
-      }
-      
-      const newWords = Object.assign([], filtered)
-      const resetComplement = action.role[0] === 'particle' ? {
-                                complementIndex: null,
-                                complements: []
-                              } : {}
-      newWords[elementIndex] = {
-        ...parent,
-        [action.role[0]]: newRole,
-        ...resetComplement
-      }
+      const newWords = deleteElementHelper(state, action)
       return {
         ...state,
+        route: 'canvas',
+        routeAction: 'backward',
         saved: false,
         target: [],
         Words: newWords
@@ -241,23 +177,7 @@ function reducer(state, action) {
     }
 
     case 'SET_COMPLEMENT': {
-      const elementIndex = state.Words.findIndex(t => t._id === action._id)
-      const oldElement = state.Words[elementIndex]
-      const complementArray = oldElement.valid_complements[action.verbType][action.index]
-
-      const newWords = Object.assign([], state.Words)
-      newWords[elementIndex] = {
-        ...oldElement,
-        complementIndex: action.index,
-        complements: complementArray.map(o => ({category: o, _id: null}))
-      }
-
-      return {
-        ...state,
-        currentModal: {name: null},
-        target: [],
-        Words: newWords
-      }
+      return setComplementHelper(state, action)
     }
   
     default: {

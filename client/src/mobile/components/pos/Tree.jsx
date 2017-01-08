@@ -3,13 +3,13 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { store } from '../../../index.js'
 import { pos_components, posLinks } from './pos_components'
 import { changeAttribute, deleteElement, useConjunction, undoConjunction,
-         changeModal, showDetail } from '../../../shared/actions'
+         routeComplementOption} from '../../../shared/actions'
 import { getWordDictionary } from '../../../shared/wordDictionary'
 
 const e = React.createElement
 
 export const Children = (props) => (
-	<ul className='m-tree'>
+  <ul className='m-tree'>
     <ReactCSSTransitionGroup
       transitionName="tree"
       transitionEnterTimeout={300}
@@ -31,8 +31,8 @@ export const Children = (props) => (
           )
         ))
       }
-    </ReactCSSTransitionGroup>  		
-	</ul>
+    </ReactCSSTransitionGroup>      
+  </ul>
 )
 
 export const ChildrenDetail = (props) => (
@@ -43,7 +43,7 @@ export const ChildrenDetail = (props) => (
           if (w.slice(-1) === 's') {
             return props.element[w].map((t, j) => {
               const element = props.words.find(o => o._id === t)
-              e(posLinks[element.pos],
+              return e(posLinks[element.pos],
                 {key: w+j, _id: t, parent: props.element, role: [w, null]}
               )
             })
@@ -56,6 +56,9 @@ export const ChildrenDetail = (props) => (
               )
             )
           }
+          else {
+            return ''
+          }
         })
       }
     </ul>
@@ -63,7 +66,7 @@ export const ChildrenDetail = (props) => (
       {
         props.attrs.filter(t => t.slice(-1) === 's' || !props.element[t]).map((o, i) => (
           <li key={o}
-              onClick={() => getWordDictionary(props.element, [o, null])}>
+              onClick={() => getWordDictionary(props.element, [o, null], true)}>
             <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
             <span className='m-list'>{o}</span>
           </li>
@@ -75,33 +78,52 @@ export const ChildrenDetail = (props) => (
 )
 
 export const CompChildren = (props) => (
-  <ul className='comp-children'>
-    {
-      props.activeWord === props.element._id &&
-        <li className='word tree tree-info'
-            onClick={() => store.dispatch(changeModal({name: 'Complement', rest: props.element._id}))}>
-            {`${props.element.complementIndex !== null ? 'Change' : 'Choose'}`} a complement</li>
-    }
+  <ul className='m-tree'>
     {
       props.element.complementIndex !== null &&
         props.element.complements.map((w, i) => (
-          w._id ?
+          w._id &&
             e(pos_components[props.words.find(o => o._id === w._id).pos],
               {key: i, parent: props.element, _id: w._id, role: ['complements', i]}
-            ) : props.activeWord === props.element._id &&
-            e(
-              'li',
-              {
-                className: `word tree tree-${props.target[1] === i ? 'active' : 'info'}`,
-                key: i,
-                disabled: props.element.passive && i === 0 && w.category === 'noun' && "disabled",
-                onClick: () => getWordDictionary(props.element, ['complements', i])
-              },
-              w.category
             )
         ))
     }
   </ul>
+)
+
+export const CompChildrenDetail = (props) => (
+  <div>
+    <ul className='m-list-group'>
+      <li key='complement'>
+        <hr className='m-border-edge' />
+        <span className='m-list' onClick={() => store.dispatch(routeComplementOption())}>
+          <span>
+            {`${props.element.complementIndex !== null ? 'Change' : 'Choose'}`} a complement
+          </span>
+          <span className='m-list-right'>WIP</span>
+        </span>
+        <hr className='m-border' />
+      </li>
+    </ul>
+    <ul className='m-list-group'>
+      {
+        props.element.complementIndex !== null &&
+          props.element.complements.map((w, i) => (
+            w._id ?
+              e(posLinks[props.words.find(o => o._id === w._id).pos],
+                {key: i, parent: props.element, _id: w._id, role: ['complements', i]}
+              ) : (
+              <li key={i}
+                  onClick={() => getWordDictionary(props.element, ['complements', i], true)}
+                  disabled={props.element.passive && i === 0 && w.category === 'noun' && "disabled"}>
+                <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
+                <span className='m-list'>{w.category}</span>
+              </li>
+              )
+          ))
+      }
+    </ul>
+  </div>
 )
 
 export const WH = (props) => (
@@ -117,16 +139,16 @@ export const WH = (props) => (
 
 
 export const DeleteButton = (props) => (
-	<button type="button" className="button-error trash"
+	<button type="button" className="button-error m-list"
 	        onClick={() => store.dispatch(deleteElement(props.id, props.role, props.parentId))}>
-    ×
+    Delete
 	</button>
 )
 
 export const ConjunctionButton = (props) => (
-  <button type="button" className='tree-button'
+  <button type="button" className='m-list'
           onClick={() => store.dispatch(useConjunction(props.element, props.role, props.parentId))}>
-    C
+    Use a Conjunction
   </button>
 )
 
@@ -150,7 +172,12 @@ export const ModalSelect = (props) => (
 )
 
 export const Label = (props) => (
-  <span className="label">
-    {props.role[1] === null ? props.role[0] : props.parent.complements[props.role[1]].category}
-  </span>
+  <div className='m-label'>
+    <span className="m-list">
+      <span>Function</span>
+      <span className='m-list-right'>
+        {props.role[1] === null ? props.role[0] : props.parent.complements[props.role[1]].category}
+      </span>
+    </span>
+  </div>
 )

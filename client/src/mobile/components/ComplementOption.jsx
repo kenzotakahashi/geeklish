@@ -1,26 +1,38 @@
 import React from 'react'
 import { store } from '../../index.js'
-import { changeAttribute, showDetail } from '../../shared/actions'
+import { setComplement, showDetail } from '../../shared/actions'
 
 import Output from './Output'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-const Option = React.createClass({
+const ComplementOption = React.createClass({
   render: function() {
     const {route, routeAction} = this.props
     let comp = ''
     if (route) {
       const state = store.getState()
       const element = state.Words.find(o => o._id === state.activeWord)
-      const option = state.option
+      const compIndex = element.complementIndex
+
+      const verbType = !!element.particle ? 
+                         state.Words.find(o => o._id === element.particle).word : 'base'
+
+      const option = {
+        label: 'Complement',
+        choice: element.valid_complements[verbType].map(o => (
+          o.length > 0 ? o.join(' ') : 'No complement'
+        ))
+      }
+
       const choice = option.choice.map((o, i) => (
-        <li key={o}>
+        <li key={i}>
           <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
-          <span className='m-list' onClick={() => store.dispatch(changeAttribute(
-            state.activeWord, option.attr, o  
+          <span className='m-list' onClick={() => store.dispatch(setComplement(
+            element._id, verbType, i
           ))}>
-            <span>{o}</span>{element[option.attr] === o && (<span className='m-list-right'>!</span>)}
+            <span>{o}</span>
+            {compIndex === i && (<span className='m-list-right'>!</span>)}
           </span>
         </li>
       ))
@@ -58,4 +70,4 @@ const Option = React.createClass({
   }
 })
 
-export default Option
+export default ComplementOption

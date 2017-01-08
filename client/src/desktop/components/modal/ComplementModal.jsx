@@ -1,5 +1,6 @@
 import React from 'react'
 import { store } from '../../../index'
+import { setComplement } from '../../../shared/actions'
 
 import Modal from './Modal'
 
@@ -14,12 +15,7 @@ export const ComplementModal = React.createClass({
 	},
 	onFormSubmit: function(_id, verbType, e) {
 	  e.preventDefault()
-	  store.dispatch({
-	  	type: 'SET_COMPLEMENT',
-	  	_id,
-	  	verbType,
-	  	index: this.state.choice
-	  })
+	  store.dispatch(setComplement(_id, verbType, this.state.choice))
 	},
 	render: function() {
 		const state = store.getState()

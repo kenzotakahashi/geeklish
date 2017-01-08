@@ -2,7 +2,7 @@ import React from 'react'
 import createHistory from 'history/createBrowserHistory'
 import { store } from '../index.js'
 import Client from '../Client'
-import { routeSentences, routeCanvas, routeDetail } from '../shared/actions'
+import { routeSentences, routeCanvas } from '../shared/actions'
 
 export const mobileHistory = createHistory()
 
@@ -44,12 +44,6 @@ export const mobileHandleNavigation = (location, action) => {
       })
     }
   }
-  // else if (path === 'detail') {
-  //   const _id = pathList[1]
-  //   // Assume words are cached in session.
-  //   const words = JSON.parse(sessionStorage.canvas)
-  //   store.dispatch(routeDetail(_id, words))
-  // }
 }
 
 const isLeftClickEvent = (e) => e.button === 0
@@ -64,8 +58,7 @@ export const Link = React.createClass({
     
     const pathList = getPathList(mobileHistory.location, mobileHistory.action)
     const path = pathList[0] || rootPath
-    console.log(path)
-    const {back, parent, role} = this.props
+    const {back } = this.props
 
     mobileHistory.push(this.props.to, {
       back: back,

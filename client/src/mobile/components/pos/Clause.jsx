@@ -1,10 +1,7 @@
 import React from 'react'
 import { store } from '../../../index.js'
-import { Children, ChildrenDetail } from './Tree'
-import { showOptions, showDetail, changeAttribute, routeOption } from '../../../shared/actions'
-import { Link } from '../../kenzo-router'
-
-// const e = React.createElement
+import { Children, ChildrenDetail, DeleteButton, Label } from './Tree'
+import { showOptions, showDetail, routeOption } from '../../../shared/actions'
 
 export const Clause = React.createClass({
   render: function() {
@@ -36,11 +33,12 @@ const clauseOption = {
 export const ClauseDetail = React.createClass({
   render: function() {
     const state = store.getState()
-    const element = this.props.element
+    const {element, parent, role} = this.props
     const attrs = ['subject','verb','adverbs','adjective']
 
     return (
       <div>
+        <Label parent={parent} role={role} />        
         <ul className='m-list-group'>
           <li key='cType'>
             <hr className='m-border-edge' />
@@ -51,6 +49,7 @@ export const ClauseDetail = React.createClass({
           </li>
         </ul>
         <ChildrenDetail element={element} attrs={attrs} words={state.Words} />
+        <DeleteButton id={element._id} role={role} parentId={parent._id} />        
       </div>
     )
   },

@@ -1,6 +1,6 @@
 import { store } from '../index.js'
 import Client from '../Client'
-import { showWordFactory, createNewWord } from '../shared/actions'
+import { showWordFactory, createNewWord, routeWordFactory } from '../shared/actions'
 
 function validDeterminer(dType, w, word) {
   if (w.type !== dType) return false
@@ -140,23 +140,28 @@ function valid_check(valid_list, dicWord, word) {
   return false
 }
 
-function dispatchTask(data, valid, word, target) {
+function dispatchTask(data, valid, word, target, mobile) {
   const dictionary = data.filter(t => valid_check(valid, t, word))
-  store.dispatch(showWordFactory(word._id, target, dictionary))
-  if (dictionary.length === 1 && ['Clause','AdjectiveClause'].includes(dictionary[0].pos)) {
-    store.dispatch(createNewWord(dictionary[0], word._id, target))
+  if (mobile) {
+    store.dispatch(routeWordFactory(target, dictionary))
+  }
+  else {
+    store.dispatch(showWordFactory(word._id, target, dictionary))
+    if (dictionary.length === 1 && ['Clause','AdjectiveClause'].includes(dictionary[0].pos)) {
+      store.dispatch(createNewWord(dictionary[0], word._id, target))
+    }
   }
 }
 
-export const getWordDictionary = function(word, target) {
+export const getWordDictionary = function(word, target, mobile=false) {
   const valid = valid_pos[word.pos][target[1] === null ?
                                     target[0] : word.complements[target[1]].category]
   if (sessionStorage.dictionary) {
     const data = JSON.parse(sessionStorage.dictionary)
-    dispatchTask(data, valid, word, target)
+    dispatchTask(data, valid, word, target, mobile)
   } else {
     Client.getDics(data => {
-      dispatchTask(data, valid, word, target)
+      dispatchTask(data, valid, word, target, mobile)
     })
   }
 }

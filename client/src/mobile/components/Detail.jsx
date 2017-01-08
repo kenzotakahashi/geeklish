@@ -4,6 +4,7 @@ import { Link } from '../kenzo-router'
 
 import Output from './Output.jsx'
 import { posDetails } from './pos/pos_components.jsx'
+import { getLabel } from '../../shared/others'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
@@ -24,7 +25,7 @@ const Detail = React.createClass({
             <Link to={`/canvas/${state.example}`} back={true} className='m-back'>
               <span className='back-arrow'></span>
             </Link>
-            <h3 className='title'>{state.title}</h3>
+            <h3 className='title'>{getLabel(element, parent)}</h3>
           </nav>
           <section>
             <Output />

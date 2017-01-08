@@ -55,7 +55,7 @@ const initVerb = function(v) {
   this.valid_particles = v.valid_particles
   this.complementIndex = v.complementIndex
   this.form = v.form
-  this.modal = v.modal
+  this.modal = v.modal === 'No modal' ? '' : v.modal
   this.past = v.past
   this.negative = v.negative
   this.continuous = v.continuous

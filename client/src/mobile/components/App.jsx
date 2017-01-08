@@ -5,14 +5,10 @@ import Examples from './Examples'
 import Canvas from './Canvas'
 import Detail from './Detail'
 import Option from './Option'
+import ComplementOption from './ComplementOption'
+import WordFactory from './WordFactory'
 
 import '../css/main.css'
-
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-// import {TransitionMotion, spring, presets} from 'react-motion'
-
-
-const timeout = 3000
 
 const App = React.createClass({
   componentDidMount: function() {
@@ -25,8 +21,7 @@ const App = React.createClass({
     const previous = state.previous
     const routeAction = state.routeAction
 
-    // console.log(route)
-    console.log(state.routeAction)
+    // console.log(state.routeAction)
 
     return (
       <div>
@@ -37,6 +32,8 @@ const App = React.createClass({
         <Detail route={route === 'detail'} previous={previous === 'detail'}
                   routeAction={routeAction} />
         <Option route={route === 'option'} routeAction={routeAction} />
+        <ComplementOption route={route === 'complementOption'} routeAction={routeAction} />
+        <WordFactory route={route === 'wordFactory'} routeAction={routeAction} />
       </div>
     )
 
