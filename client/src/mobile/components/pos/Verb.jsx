@@ -46,7 +46,7 @@ export const VerbDetail = React.createClass({
     const attributes = !['Gerund','Participle'].includes(parent.pos) && list.map(o => (
       <li key={o}>
         <hr className='m-border' />
-        <span className='m-list'>
+        <span className='m-list back-white'>
           <span>{o}</span>
           <label className="switch">
             <input type="checkbox" checked={element[o]}
@@ -116,7 +116,7 @@ export const BeDetail = React.createClass({
     const attributes = !['Gerund','Participle'].includes(parent.pos) && list.map((o, i) => (
       <li key={o}>
         {i !== 0 && <hr className='m-border' />}
-        <span className='m-list'>
+        <span className='m-list back-white'>
           <span>{o}</span>
           <label className="switch">
             <input type="checkbox" checked={element[o]}

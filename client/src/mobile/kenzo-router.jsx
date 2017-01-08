@@ -3,6 +3,7 @@ import createHistory from 'history/createBrowserHistory'
 import { store } from '../index.js'
 import Client from '../Client'
 import { routeSentences, routeCanvas } from '../shared/actions'
+import { removeMetaData } from '../shared/score'
 
 export const mobileHistory = createHistory()
 
@@ -36,7 +37,8 @@ export const mobileHandleNavigation = (location, action) => {
   else if (path === 'canvas') {
     const _id = pathList[1]
     Client.getProject(_id, (data) => {
-      store.dispatch(routeCanvas(_id, data, routeAction))
+      const words = removeMetaData(data.words)
+      store.dispatch(routeCanvas(_id, data.project.title, words, routeAction))
     })
     // if (sessionStorage.canvas) {
     //   const data = JSON.parse(sessionStorage.canvas)
@@ -59,8 +61,8 @@ export const Link = React.createClass({
     }
     event.preventDefault()
     
-    const pathList = getPathList(mobileHistory.location, mobileHistory.action)
-    const path = pathList[0] || rootPath
+    // const pathList = getPathList(mobileHistory.location, mobileHistory.action)
+    // const path = pathList[0] || rootPath
     const {back } = this.props
 
     mobileHistory.push(this.props.to, {

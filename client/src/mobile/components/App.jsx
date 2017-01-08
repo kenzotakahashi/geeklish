@@ -8,6 +8,7 @@ import Option from './Option'
 import ComplementOption from './ComplementOption'
 import WordFactory from './WordFactory'
 
+import 'normalize.css'
 import '../css/main.css'
 
 const App = React.createClass({
@@ -18,7 +19,6 @@ const App = React.createClass({
   render: function() {
     const state = store.getState()
     const route = state.route
-    const previous = state.previous
     const routeAction = state.routeAction
 
     // console.log(state.routeAction)
@@ -30,7 +30,8 @@ const App = React.createClass({
         <Detail route={route === 'detail'} routeAction={routeAction} />
         <Option route={route === 'option'} routeAction={routeAction} />
         <ComplementOption route={route === 'complementOption'} routeAction={routeAction} />
-        <WordFactory route={route === 'wordFactory'} routeAction={routeAction} />
+        <WordFactory route={route === 'wordFactory'} routeAction={routeAction}
+                     dictionary={state.dictionary} />
       </div>
     )
 

@@ -73,7 +73,7 @@ export const ChildrenDetail = (props) => (
           <li key={o}
               onClick={() => getWordDictionary(props.element, [o, null], true)}>
             <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
-            <span className='m-list pointer'>
+            <span className='m-list back-white pointer'>
               {o}
               <span className='m-list-right'>
                 <span className='m-list-arrow'></span>
@@ -116,7 +116,7 @@ function getComplement(props) {
   }
 
   return (
-    <span className='m-list pointer' onClick={() => store.dispatch(routeComplementOption())}>
+    <span className='m-list back-white pointer' onClick={() => store.dispatch(routeComplementOption())}>
       <span>
         {word} a complement
       </span>
@@ -145,7 +145,7 @@ export const CompChildrenDetail = (props) => (
                 onClick={() => getWordDictionary(props.element, ['complements', i], true)}
                 disabled={props.element.passive && i === 0 && w.category === 'noun' && "disabled"}>
               <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
-              <span className='m-list'>
+              <span className='m-list back-white'>
                 {w.category}
                 <span className='m-list-right'>
                   <span className='m-list-arrow'></span>
@@ -161,7 +161,7 @@ export const CompChildrenDetail = (props) => (
 )
 
 export const WH = (props) => (
-  <span className='m-list'>
+  <span className='m-list back-white'>
     <span>WH</span>
     <label className="switch">
       <input type="checkbox" onChange={() => store.dispatch(changeAttribute(
@@ -173,7 +173,7 @@ export const WH = (props) => (
 
 
 export const DeleteButton = (props) => (
-	<button type="button" className="button-error m-list"
+	<button type="button" className="m-list button-error"
 	        onClick={() => store.dispatch(deleteElement(props.id, props.role, props.parentId))}>
     Delete
 	</button>
@@ -202,7 +202,7 @@ const verbOption = {
 
 export const ModalSelect = (props) => (
   <li key='form'>
-    <span className='m-list' onClick={() => store.dispatch(routeOption(verbOption))}>
+    <span className='m-list back-white' onClick={() => store.dispatch(routeOption(verbOption))}>
       <span>Modal</span>
       <span className='m-list-right'>
         <span>{props.element.modal === '' ? 'No Modal' : props.element.modal}</span>
@@ -214,7 +214,7 @@ export const ModalSelect = (props) => (
 
 export const Label = (props) => (
   <div className='m-label'>
-    <span className="m-list">
+    <span className="m-list back-white">
       <span>Function</span>
       <span className='m-list-right'>
         {props.role[1] === null ? props.role[0] : props.parent.complements[props.role[1]].category}

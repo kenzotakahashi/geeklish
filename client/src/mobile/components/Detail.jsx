@@ -5,6 +5,7 @@ import { Link } from '../kenzo-router'
 import Output from './Output.jsx'
 import { posDetails } from './pos/pos_components.jsx'
 import { getLabel } from '../../shared/others'
+import { wordColor } from '../../shared/style'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
@@ -19,6 +20,15 @@ const Detail = React.createClass({
       const element = state.Words.find(o => o._id === state.activeWord)
       // const parent = state.Words.find(o => o._id === state.parent)
 
+      const style = {
+        position: 'fixed',
+        top: '0',
+        right: '10px',
+        padding: '18px',
+        color: wordColor(element),
+        fontSize: '12px'
+      }
+
       comp = (
         <div className='page page-detail' key='detail'>
           <nav className='m-nav'>
@@ -26,6 +36,9 @@ const Detail = React.createClass({
               <span className='back-arrow'></span>
             </Link>
             <h4 className='title'>{getLabel(element, parent)}</h4>
+            <span style={style}>
+              <span>{element.pos}</span>
+            </span>
           </nav>
           <section>
             <Output />

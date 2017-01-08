@@ -1,7 +1,6 @@
 import React from 'react'
 import { store } from '../../../index.js'
-import { showOptions } from '../../../shared/actions'
-import { Children, Label, ChildrenDetail } from './Tree'
+import { Children, ChildrenDetail } from './Tree'
 import { showDetail } from '../../../shared/actions'
 
 export const Sentence = React.createClass({

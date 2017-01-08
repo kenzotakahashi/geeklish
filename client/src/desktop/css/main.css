@@ -153,7 +153,7 @@ button[disabled] {
   background-color: #0078e7;
 }
 
-.button-error {
+button.button-error {
   background: rgb(202, 60, 60); /* this is a maroon */
 }
 
@@ -187,58 +187,6 @@ div.row > div {
 li.list-group-item, .tree{
   cursor: pointer;
   padding: 5px;
-}
-
-.list-group-item.Noun, .tree-box.Noun, .Noun {
-  color: #fff;
-  background-color: #88725D;
-}
-
-.list-group-item.Pronoun, .tree-box.Pronoun, .Pronoun {
-  color: #fff;
-  background-color: #845A31;
-}
-
-.list-group-item.Determiner, .tree-box.Determiner, .Determiner {
-  color: #fff;
-  background-color: #603F39;
-}
-
-.list-group-item.Verb, .tree-box.Verb, .Verb {
-  color: #fff;
-  background-color: #E80046;
-}
-
-.list-group-item.Be, .tree-box.Be, .Be {
-  color: #fff;
-  background-color: #FF4900;
-}
-
-.list-group-item.Adjective, .tree-box.Adjective, .Adjective {
-  color: #fff;
-  background-color: #890089;
-}
-
-.list-group-item.Adverb, .tree-box.Adverb, .Adverb {
-  color: #fff;
-  background-color: #7CADA8;
-}
-
-.list-group-item.Preposition, .tree-box.Preposition, .Preposition {
-  color: #fff;
-  background-color: #2C7EB4;
-}
-
-.list-group-item.Conjunction, .tree-box.Conjunction, .Conjunction {
-  color: #fff;
-  background-color: #0C980C;
-}
-
-.Sentence,.Clause,.ClauseContainer,.NounContainer,.VerbContainer,
-.NounClause,.AdjectiveClause, .AdverbClause, .Possessive,.Infinitive,
-.Gerund,.Participle,.basic {
-  color: #fff;
-  background-color: #aaa;
 }
 
 button.tree-button {
@@ -343,6 +291,13 @@ input.form-control.title-form {
 
 .output {
   padding: 7px 0 0 7px;
+  -webkit-transition: all 250ms ease;;
+  transition: all 250ms ease;
+}
+
+.output.correct-output {
+  color: #10E9C8;
+  transition: all 250ms ease;
 }
 
 .modal-container {
@@ -356,6 +311,59 @@ input.form-control.title-form {
 .comp-choice {
   padding: 5px;
 }
+
+.list-group-item.Noun, .tree-box.Noun, .Noun {
+  color: #fff;
+  background-color: #88725D;
+}
+
+.list-group-item.Pronoun, .tree-box.Pronoun, .Pronoun {
+  color: #fff;
+  background-color: #845A31;
+}
+
+.list-group-item.Determiner, .tree-box.Determiner, .Determiner {
+  color: #fff;
+  background-color: #603F39;
+}
+
+.list-group-item.Verb, .tree-box.Verb, .Verb {
+  color: #fff;
+  background-color: #E80046;
+}
+
+.list-group-item.Be, .tree-box.Be, .Be {
+  color: #fff;
+  background-color: #FF4900;
+}
+
+.list-group-item.Adjective, .tree-box.Adjective, .Adjective {
+  color: #fff;
+  background-color: #890089;
+}
+
+.list-group-item.Adverb, .tree-box.Adverb, .Adverb {
+  color: #fff;
+  background-color: #7CADA8;
+}
+
+.list-group-item.Preposition, .tree-box.Preposition, .Preposition {
+  color: #fff;
+  background-color: #2C7EB4;
+}
+
+.list-group-item.Conjunction, .tree-box.Conjunction, .Conjunction {
+  color: #fff;
+  background-color: #0C980C;
+}
+
+.Sentence,.Clause,.ClauseContainer,.NounContainer,.VerbContainer,
+.NounClause,.AdjectiveClause, .AdverbClause, .Possessive,.Infinitive,
+.Gerund,.Participle,.basic {
+  color: #fff;
+  background-color: #aaa;
+}
+
 
  /* =============== Animation ==================*/
 

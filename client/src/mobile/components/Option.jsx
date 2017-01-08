@@ -19,7 +19,7 @@ const Option = React.createClass({
       const choice = option.choice.map((o, i) => (
         <li key={i}>
           <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
-          <span className='m-list pointer' onClick={() => store.dispatch(changeAttribute(
+          <span className='m-list back-white pointer' onClick={() => store.dispatch(changeAttribute(
             state.activeWord, option.attr, handleModal(o)
           ))}>
             <span>{o}</span>

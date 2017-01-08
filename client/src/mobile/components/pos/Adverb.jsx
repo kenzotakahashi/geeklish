@@ -120,7 +120,7 @@ export const AdverbClauseDetail = React.createClass({
         <ul className='m-list-group'>        
           <hr className='m-border-edge' />
           <li key='number'>
-            <span className='m-list'>
+            <span className='m-list back-white'>
               <span>Before Subject</span>
               <label className="switch">
                 <input type="checkbox" checked={element.before}

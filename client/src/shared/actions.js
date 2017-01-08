@@ -74,10 +74,11 @@ export const changeModal = (currentModal) => ({
 
 // ================ Mobile =================
 
-export const routeCanvas = (_id, project, routeAction) => ({
+export const routeCanvas = (_id, title, words, routeAction) => ({
   type: 'ROUTE_CANVAS',
   _id,
-  project,
+  title,
+  words,
   routeAction
 })
 

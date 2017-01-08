@@ -38,7 +38,7 @@ export const DeterminerDetail = React.createClass({
           <ul className='m-list-group'>
             <hr className='m-border-edge' />
             <li key='of'>
-              <span className='m-list'>
+              <span className='m-list back-white'>
                 <span>Of</span>
                 <label className="switch">
                   <input type="checkbox" checked={element.isOf}

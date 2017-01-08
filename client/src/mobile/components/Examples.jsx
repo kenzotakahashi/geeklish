@@ -15,7 +15,7 @@ const Examples = React.createClass({
         {o.examples.map((t, i) => (
           <li key={t._id}>
             {i > 0 && <hr className='m-border' />}
-            <Link className='m-list' to={`/canvas/${t._id}`} >
+            <Link className='m-list back-white' to={`/canvas/${t._id}`} >
               {t.title}
             </Link>
           </li>

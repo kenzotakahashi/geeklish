@@ -38,7 +38,7 @@ export const PrepositionDetail = React.createClass({
 
     const position = needPosition(parent, role) && (
       <li key='number'>
-        <span className='m-list'>
+        <span className='m-list back-white'>
           <span>Beginning of Clause</span>
           <label className="switch">
             <input type="checkbox" checked={element.before}

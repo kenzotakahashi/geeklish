@@ -1,4 +1,4 @@
-// import { score } from '../../shared/score'
+import { score } from '../../shared/score'
 import { createWordHelper, setComplementHelper, deleteElementHelper, useConjunctionHelper,
          undoConjunctionHelper, changeAttributeHelper } from '../../shared/others'
 import { mobileInitialState } from '../initialState'
@@ -23,15 +23,15 @@ function reducer(state, action) {
           routeAction: action.routeAction
         }
       } else {
-        const words = mobileInitialState().Words
+        const initial = mobileInitialState().Words
         return {
           ...state,
           route: 'canvas',
           routeAction: action.routeAction,
           example: action._id,
-          title: action.project.project.title,
-          Words: words,
-          answer: action.project.words,
+          title: action.title,
+          Words: initial,
+          answer: action.words,
           // userAnswer: ,
         }
       }
@@ -85,36 +85,36 @@ function reducer(state, action) {
     // ====================== Canvas ==================================
     case 'CREATE_WORD': {
       const [parent, newWords, initialized] = createWordHelper(state, action)
-      return {
+      return score({
         ...state,
         route: 'detail',
         routeAction: 'slidedown',
         target: [],
         Words: newWords
-      }
+      })
     }
     case 'CHANGE_ATTRIBUTE': {
       const newWords = changeAttributeHelper(state, action)
-      return {
+      return score({
         ...state,
         saved: false,
         Words: newWords,
-      }
+      })
     }
     case 'DELETE_ELEMENT': {
       const newWords = deleteElementHelper(state, action)
-      return {
+      return score({
         ...state,
         route: 'canvas',
         routeAction: 'backward',
         saved: false,
         target: [],
         Words: newWords
-      }
+      })
     }
     case 'USE_CONJUNCTION': {
       const [newWords, initialized] = useConjunctionHelper(state, action)
-      return {
+      return score({
         ...state,
         route: 'canvas',
         routeAction: 'backward', 
@@ -122,20 +122,20 @@ function reducer(state, action) {
         activeWord: initialized._id,
         target: [],
         Words: newWords
-      }
+      })
     }
     case 'UNDO_CONJUNCTION': {
       const newWords = undoConjunctionHelper(state, action)
-      return {
+      return score({
         ...state,
         route: 'canvas',
         routeAction: 'backward',
         saved: false,
         Words: newWords
-      }
+      })
     }
     case 'SET_COMPLEMENT': {
-      return setComplementHelper(state, action)
+      return score(setComplementHelper(state, action))
     }
     case 'SWITCH_CANVAS': {
       if (state.isAnswer) {

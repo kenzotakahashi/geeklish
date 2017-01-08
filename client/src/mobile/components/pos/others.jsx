@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { store } from '../../../index.js'
 import { Children, DeleteButton, ConjunctionButton, Label, ChildrenDetail } from './Tree'
@@ -38,7 +39,7 @@ export const InfinitiveDetail = React.createClass({
           <ul className='m-list-group'>
             <hr className='m-border-edge' />
             <li key='omit'>
-              <span className='m-list'>
+              <span className='m-list back-white'>
                 <span>Omit to</span>
                 <label className="switch">
                   <input type="checkbox" checked={element.omit}
@@ -51,7 +52,7 @@ export const InfinitiveDetail = React.createClass({
             </li>
             <hr className='m-border' />
             <li key='position'>
-              <span className='m-list'>
+              <span className='m-list back-white'>
                 <span>Beginning of Clause</span>
                 <label className="switch">
                   <input type="checkbox" checked={element.before}
@@ -151,7 +152,7 @@ export const ParticipleDetail = React.createClass({
           <ul className='m-list-group'>
             <hr className='m-border-edge' />
             <li key='form'>
-              <span className='m-list pointer'
+              <span className='m-list back-white pointer'
                     onClick={() => store.dispatch(routeOption(participleOption))}>
                 <span>Form</span>
                 <span className='m-list-right'>
@@ -162,7 +163,7 @@ export const ParticipleDetail = React.createClass({
             </li>
             <hr className='m-border' />
             <li key='position'>
-              <span className='m-list'>
+              <span className='m-list back-white'>
                 <span>Before Subject</span>
                 <label className="switch">
                   <input type="checkbox" checked={element.beginning}

@@ -11,8 +11,8 @@ const Output = React.createClass({
     return (
       <div>
         <span className='m-answer'>{state.title}</span>
-        <div className="output">
-          {sentence}
+        <div className={`output ${state.isCorrect ? 'correct-output' : ''}`}>
+          <span>{sentence}</span>
         </div>
         <hr />
       </div>

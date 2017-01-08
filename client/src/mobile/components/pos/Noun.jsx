@@ -39,7 +39,7 @@ export const NounDetail = React.createClass({
 
     const number = element.type === 'countable' && (
       <li key='number'>
-        <span className='m-list'>
+        <span className='m-list back-white'>
           <span>Plural</span>
           <label className="switch">
             <input type="checkbox" checked={element.number === 'plural'}
@@ -47,7 +47,6 @@ export const NounDetail = React.createClass({
                 onChange={() => store.dispatch(changeAttribute(
                   element._id,'number',element.number === 'plural' ? 'singular' : 'plural'))} 
             />
-
             <div className="slider round"></div>
           </label>
         </span>
@@ -151,7 +150,7 @@ export const NounClauseDetail = React.createClass({
         <ul className='m-list-group'>        
           <hr className='m-border-edge' />
           <li key='number'>
-            <span className='m-list'>
+            <span className='m-list back-white'>
               <span>Include "that"</span>
               <label className="switch">
                 <input type="checkbox" checked={element.that}
