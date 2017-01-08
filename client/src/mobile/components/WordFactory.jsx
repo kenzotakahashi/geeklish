@@ -37,7 +37,7 @@ const WordFactory = React.createClass({
     // }
 
       const wordList = state.dictionary.map(o => (
-        <li key={o._id} className={`m-list ${o.pos}`}
+        <li key={o._id} className={`m-list m-dictionary ${o.pos}`}
             onClick={() => store.dispatch(createNewWord(o, state.activeWord, state.target))}>
             {o.base}
         </li>
@@ -51,7 +51,7 @@ const WordFactory = React.createClass({
             )}>
               <span>Cancel</span>
             </span>
-            <h3 className='title'>Select a Word</h3>
+            <h4 className='title'>Select a Word</h4>
           </nav>
           <section>
             {wordList}

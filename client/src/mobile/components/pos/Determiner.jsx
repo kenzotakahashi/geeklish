@@ -14,7 +14,7 @@ export const Determiner = React.createClass({
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className={`tree-box ${element.pos}`}
+          <div className={`m-tree-box ${element.pos}`}
                onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
             <span className='word' >{element.word}</span>
           </div>
@@ -69,7 +69,7 @@ export const Possessive = React.createClass({
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className='tree-box basic'
+          <div className='m-tree-box basic'
                onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
             <span className='word' >Possessive</span>
           </div>

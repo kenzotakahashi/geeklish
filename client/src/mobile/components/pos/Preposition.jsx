@@ -13,7 +13,7 @@ export const Preposition = React.createClass({
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className={`tree-box ${element.pos}`}
+          <div className={`m-tree-box ${element.pos}`}
                onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
             <span className='word' >{element.word}</span>
           </div>
@@ -47,6 +47,7 @@ export const PrepositionDetail = React.createClass({
             <div className="slider round"></div>
           </label>
         </span>
+        <hr className='m-border' />
       </li>
     )
 
@@ -56,7 +57,6 @@ export const PrepositionDetail = React.createClass({
         <ul className='m-list-group'>        
           <hr className='m-border-edge' />
           {position}
-          <hr className='m-border' />
           {role[0] !== 'particle' && <WH id={element._id} isWh={element.isWh} />}
           <hr className='m-border-edge' />
         </ul>

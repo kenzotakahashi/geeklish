@@ -45,7 +45,7 @@ const ComplementOption = React.createClass({
             )}>
               <span className='back-arrow'></span>
             </span>
-            <h3 className='title'>{option.label}</h3>
+            <h4 className='title'>{option.label}</h4>
           </nav>
           <section>
             <Output />

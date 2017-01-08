@@ -26,28 +26,11 @@ const Canvas = React.createClass({
               <Link to='/examples' back={true} className='m-back'>
                 <span className='back-arrow'></span>
               </Link>
-              <h3 className='title'>{store.getState().title}</h3>
+              <h4 className='title'>{store.getState().title}</h4>
             </nav>
             <section>
               <Output />
               {e(pos_components.Sentence)}
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
             </section>
           </div>
         )}        

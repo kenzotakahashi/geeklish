@@ -12,7 +12,7 @@ export const Adverb = React.createClass({
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className={`tree-box ${element.pos}`}
+          <div className={`m-tree-box ${element.pos}`}
                onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
             <span className='word' >{element.word.base}</span>
           </div>
@@ -97,7 +97,7 @@ export const AdverbClause = React.createClass({
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className={`tree-box ${element.pos}`}
+          <div className={`m-tree-box ${element.pos}`}
                onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
             <span className='word' >AdverbClause</span>
           </div>

@@ -14,7 +14,7 @@ export const Infinitive = React.createClass({
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className='tree-box basic'
+          <div className='m-tree-box basic'
                onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
             <span className='word' >Infinitive</span>
           </div>
@@ -82,7 +82,7 @@ export const Gerund = React.createClass({
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className='tree-box basic'
+          <div className='m-tree-box basic'
                onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
             <span className='word' >Gerund</span>
           </div>
@@ -121,7 +121,7 @@ export const Participle = React.createClass({
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className='tree-box basic'
+          <div className='m-tree-box basic'
                onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
             <span className='word' >Participle</span>
           </div>

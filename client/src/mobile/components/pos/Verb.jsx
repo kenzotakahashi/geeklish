@@ -15,7 +15,7 @@ export const Verb = React.createClass({
     return (
       <ul className='m-ul'>
         <li className="tree-top">
-          <div className={`tree-box ${element.pos}`}
+          <div className={`m-tree-box ${element.pos}`}
                onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
             <span className='word'>
               {parent.pos === 'Gerund' ? element.word[element.form] : element.word.base}
@@ -92,7 +92,7 @@ export const Be = React.createClass({
     return (
       <ul className='m-ul'>
         <li className="tree-top">
-          <div className={`tree-box ${element.pos}`}
+          <div className={`m-tree-box ${element.pos}`}
                onClick={() => store.dispatch(showDetail(_id,'forward',parent,role))}>
             <span className='word'>{element.word.base}</span>
           </div>
@@ -158,7 +158,7 @@ export const VerbContainer = React.createClass({
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className={`tree-box ${element.pos}`}
+          <div className={`m-tree-box ${element.pos}`}
                onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
             <span className='word' >VerbContainer</span>
           </div>

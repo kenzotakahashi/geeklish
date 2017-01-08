@@ -31,27 +31,10 @@ const Examples = React.createClass({
         {route && (
           <div className='page page-examples'>
             <nav className='m-nav'>
-              <h3 className='title'>Geeklish</h3>
+              <h4 className='title'>Geeklish</h4>
             </nav>
             <section>
               {examples}
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
-              <p>Something</p>
             </section>
           </div>
         )}

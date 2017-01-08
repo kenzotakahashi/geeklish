@@ -12,7 +12,7 @@ export const Sentence = React.createClass({
     return (
       <ul className='m-ul'>
         <li>
-          <div className='tree-box basic'>
+          <div className='m-tree-box basic'>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>Sentence</span>
           </div>
           <Children element={element} attrs={attrs} words={state.Words} />

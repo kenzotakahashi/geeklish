@@ -14,7 +14,7 @@ export const Clause = React.createClass({
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className={`tree-box basic ${element.pos}`}
+          <div className={`m-tree-box basic ${element.pos}`}
                onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
             <span className='word'>Clause</span>
           </div>
@@ -67,7 +67,7 @@ export const ClauseContainer = React.createClass({
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className={`tree-box basic ${element.pos}`}
+          <div className={`m-tree-box basic ${element.pos}`}
                onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
             <span className='word'>ClauseContainer</span>
           </div>

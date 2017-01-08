@@ -25,7 +25,7 @@ const Detail = React.createClass({
             <Link to={`/canvas/${state.example}`} back={true} className='m-back'>
               <span className='back-arrow'></span>
             </Link>
-            <h3 className='title'>{getLabel(element, parent)}</h3>
+            <h4 className='title'>{getLabel(element, parent)}</h4>
           </nav>
           <section>
             <Output />
