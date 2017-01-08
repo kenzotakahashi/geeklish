@@ -10,7 +10,7 @@ export const desktopHistory = createHistory()
 function dispatchExamples(_id, examples) {
   if (!!_id) {
     Client.getProject(_id, (data) => {
-      store.dispatch(routeExample(examples, data.result))
+      store.dispatch(routeExample(examples, data.words))
     })
   }
   else {

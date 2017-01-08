@@ -1,6 +1,5 @@
 import React from 'react'
 import { store } from '../../index.js'
-
 import { Link } from '../kenzo-router'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'

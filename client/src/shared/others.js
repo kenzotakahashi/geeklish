@@ -95,6 +95,17 @@ export const createWordHelper = (state, action) => {
   return [parent, newWords, initialized]
 }
 
+export const changeAttributeHelper = (state, action) => {
+  const elementIndex = state.Words.findIndex(t => t._id === action._id)
+  const parent = state.Words[elementIndex]
+  const newWords = Object.assign([], state.Words)
+  newWords[elementIndex] = {
+    ...parent,
+    [action.attr]: action.change_to,
+  }
+  return newWords
+}
+
 export const setComplementHelper = (state, action) => {
   const elementIndex = state.Words.findIndex(t => t._id === action._id)
   const oldElement = state.Words[elementIndex]

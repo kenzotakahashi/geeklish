@@ -22,7 +22,7 @@ const Detail = React.createClass({
       comp = (
         <div className='page page-detail' key='detail'>
           <nav className='m-nav'>
-            <Link to={`/canvas/${state.example}`} back={true} className='m-back'>
+            <Link to={`/canvas/${state.example}`} back={true} className='m-nav-left'>
               <span className='back-arrow'></span>
             </Link>
             <h4 className='title'>{getLabel(element, parent)}</h4>

@@ -21,29 +21,29 @@ export const mobileHandleNavigation = (location, action) => {
   const path = pathList[0] || rootPath
   const routeAction = !action ? 'initial' :
                       location.state.back ? 'backward' : 'forward'
-  const previous = action === undefined ? null : location.state.previous
+  // const previous = action === undefined ? null : location.state.previous
 
   if (path === 'examples') {
     if (sessionStorage.examples) {
       const data = JSON.parse(sessionStorage.examples)
-      store.dispatch(routeSentences(data, previous, routeAction))
+      store.dispatch(routeSentences(data, routeAction))
     } else {
       Client.getProjects(data => {
-        store.dispatch(routeSentences(data, previous, routeAction))
+        store.dispatch(routeSentences(data, routeAction))
       })
     }
   }
   else if (path === 'canvas') {
     const _id = pathList[1]
     Client.getProject(_id, (data) => {
-      store.dispatch(routeCanvas(_id, data, previous, routeAction))
+      store.dispatch(routeCanvas(_id, data, routeAction))
     })
     // if (sessionStorage.canvas) {
     //   const data = JSON.parse(sessionStorage.canvas)
-    //   store.dispatch(routeCanvas(_id, data, previous, routeAction))
+    //   store.dispatch(routeCanvas(_id, data, routeAction))
     // } else {
     //   Client.getProject(_id, (data) => {
-    //     store.dispatch(routeCanvas(_id, data, previous, routeAction))
+    //     store.dispatch(routeCanvas(_id, data, routeAction))
     //   })
     // }
   }
@@ -65,9 +65,6 @@ export const Link = React.createClass({
 
     mobileHistory.push(this.props.to, {
       back: back,
-      // parent: parent,
-      // role: role,
-      previous: path
     })
   },
 
@@ -85,17 +82,3 @@ export const Link = React.createClass({
     )
   }
 })
-
-// export const BackButton = React.createClass({
-//   handleClick: function(event) {
-//     mobileHistory.goBack()
-//   },
-//   render: function() {
-//     let props = Object.assign({}, this.props)
-//     props.onClick = this.handleClick
-
-//     return (
-//       <span {...props}>{this.props.children}</span>
-//     )
-//   }
-// })

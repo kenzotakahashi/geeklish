@@ -22,11 +22,20 @@ a.m-link:active {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.m-back {
+.m-nav-left {
 	position: fixed;
 	top: 0;
 	padding: 15px;
 	/*float: left;*/
+}
+
+.m-nav-right {
+	position: fixed;
+	top: 0;
+	right: 0;
+	padding: 15px;
+	color: #007AFF;
+	cursor: pointer;
 }
 
 .back-arrow {

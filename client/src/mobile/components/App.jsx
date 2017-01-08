@@ -25,12 +25,9 @@ const App = React.createClass({
 
     return (
       <div>
-        <Examples route={route === 'examples'} previous={previous === 'examples'}
-                  routeAction={routeAction} />
-        <Canvas route={route === 'canvas'} previous={previous === 'canvas'}
-                  routeAction={routeAction} />
-        <Detail route={route === 'detail'} previous={previous === 'detail'}
-                  routeAction={routeAction} />
+        <Examples route={route === 'examples'} routeAction={routeAction} />
+        <Canvas route={route === 'canvas'} routeAction={routeAction} />
+        <Detail route={route === 'detail'} routeAction={routeAction} />
         <Option route={route === 'option'} routeAction={routeAction} />
         <ComplementOption route={route === 'complementOption'} routeAction={routeAction} />
         <WordFactory route={route === 'wordFactory'} routeAction={routeAction} />

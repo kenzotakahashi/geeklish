@@ -40,7 +40,7 @@ const ComplementOption = React.createClass({
       comp = (
         <div className='page page-option' key='option'>
           <nav className='m-nav'>
-            <span className='m-back' onClick={() => store.dispatch(
+            <span className='m-nav-left' onClick={() => store.dispatch(
               showDetail(element._id,'backward')
             )}>
               <span className='back-arrow'></span>

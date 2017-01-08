@@ -1,14 +1,4 @@
-export const showOptions = (_id) => ({
-  type: 'SHOW_OPTIONS',
-  _id
-})
-
-export const showWordFactory = (_id, target, dictionary) => ({
-  type: 'SHOW_WORD_FACTORY',
-  _id,
-  target,
-  dictionary
-})
+// ============== Common ============================
 
 export const changeAttribute = (_id, attr, change_to) => ({
   type: 'CHANGE_ATTRIBUTE',
@@ -18,8 +8,8 @@ export const changeAttribute = (_id, attr, change_to) => ({
 })
 
 export const deleteElement = (_id, role, parentId) => ({
-	type: 'DELETE_ELEMENT',
-	_id,
+  type: 'DELETE_ELEMENT',
+  _id,
   role,
   parentId
 })
@@ -46,6 +36,31 @@ export const createNewWord = (wordBase, activeWord, target) => ({
   target,
 })
 
+export const setComplement = (_id, verbType, index) => ({
+  type: 'SET_COMPLEMENT',
+  _id,
+  verbType,
+  index
+})
+
+export const switchCanvas = () =>({
+  type: 'SWITCH_CANVAS'
+})
+
+// ============== Desktop ===========================
+
+export const showOptions = (_id) => ({
+  type: 'SHOW_OPTIONS',
+  _id
+})
+
+export const showWordFactory = (_id, target, dictionary) => ({
+  type: 'SHOW_WORD_FACTORY',
+  _id,
+  target,
+  dictionary
+})
+
 export const routeExample = (examples, words) => ({
   type: 'ROUTE_EXAMPLES',
   examples,
@@ -57,27 +72,18 @@ export const changeModal = (currentModal) => ({
   currentModal
 })
 
-export const setComplement = (_id, verbType, index) => ({
-  type: 'SET_COMPLEMENT',
-  _id,
-  verbType,
-  index
-})
-
 // ================ Mobile =================
 
-export const routeCanvas = (_id, project, previous, routeAction) => ({
+export const routeCanvas = (_id, project, routeAction) => ({
   type: 'ROUTE_CANVAS',
   _id,
   project,
-  previous,
   routeAction
 })
 
-export const routeSentences = (examples, previous, routeAction) => ({
+export const routeSentences = (examples, routeAction) => ({
   type: 'ROUTE_SENTENCES',
   examples,
-  previous,
   routeAction
 })
 

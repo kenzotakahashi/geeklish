@@ -44,7 +44,11 @@ export const ClauseDetail = React.createClass({
           <li key='cType'>
             <hr className='m-border-edge' />
             <span className='m-list' onClick={() => store.dispatch(routeOption(clauseOption))}>
-              <span>Clause Type</span><span className='m-list-right'>{element.cType}</span>
+              <span>Clause Type</span>
+              <span className='m-list-right'>
+                <span>{element.cType}</span>
+                <span className='m-list-arrow'></span>
+              </span>
             </span>
             <hr className='m-border-edge' />
           </li>

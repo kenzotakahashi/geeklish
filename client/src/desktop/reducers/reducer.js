@@ -2,7 +2,7 @@ import uuid from 'uuid'
 import { desktopInitialState } from '../examples'
 // import { score } from '../../shared/score'
 import { createWordHelper, setComplementHelper, deleteElementHelper, useConjunctionHelper,
-         undoConjunctionHelper } from '../../shared/others'
+         undoConjunctionHelper, changeAttributeHelper } from '../../shared/others'
 
 
 function reducer(state, action) {
@@ -91,14 +91,7 @@ function reducer(state, action) {
       }
     }
     case 'CHANGE_ATTRIBUTE': {
-      const elementIndex = state.Words.findIndex(t => t._id === action._id)
-      const parent = state.Words[elementIndex]
-      const newWords = Object.assign([], state.Words)
-      newWords[elementIndex] = {
-        ...parent,
-        [action.attr]: action.change_to,
-      }
-
+      const newWords = changeAttributeHelper(state, action)
       // console.log(score())
 
       return {

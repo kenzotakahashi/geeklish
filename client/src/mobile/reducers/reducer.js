@@ -1,6 +1,6 @@
 // import { score } from '../../shared/score'
 import { createWordHelper, setComplementHelper, deleteElementHelper, useConjunctionHelper,
-         undoConjunctionHelper } from '../../shared/others'
+         undoConjunctionHelper, changeAttributeHelper } from '../../shared/others'
 import { mobileInitialState } from '../initialState'
 
 function reducer(state, action) {
@@ -10,7 +10,6 @@ function reducer(state, action) {
       return {
         ...state,
         route: 'examples',
-        previous: action.previous,
         routeAction: action.routeAction,
         examples: action.examples,
       }
@@ -24,16 +23,16 @@ function reducer(state, action) {
           routeAction: action.routeAction
         }
       } else {
+        const words = mobileInitialState().Words
         return {
           ...state,
           route: 'canvas',
-          previous: action.previous,
           routeAction: action.routeAction,
           example: action._id,
           title: action.project.project.title,
-          Words: action.project.words,
+          Words: words,
           answer: action.project.words,
-          userAnswer: mobileInitialState(),
+          // userAnswer: ,
         }
       }
     }
@@ -95,16 +94,7 @@ function reducer(state, action) {
       }
     }
     case 'CHANGE_ATTRIBUTE': {
-      const elementIndex = state.Words.findIndex(t => t._id === action._id)
-      const parent = state.Words[elementIndex]
-      const newWords = Object.assign([], state.Words)
-      newWords[elementIndex] = {
-        ...parent,
-        [action.attr]: action.change_to,
-      }
-
-      // console.log(score())
-
+      const newWords = changeAttributeHelper(state, action)
       return {
         ...state,
         saved: false,
@@ -134,7 +124,6 @@ function reducer(state, action) {
         Words: newWords
       }
     }
-
     case 'UNDO_CONJUNCTION': {
       const newWords = undoConjunctionHelper(state, action)
       return {
@@ -145,9 +134,24 @@ function reducer(state, action) {
         Words: newWords
       }
     }
-
     case 'SET_COMPLEMENT': {
       return setComplementHelper(state, action)
+    }
+    case 'SWITCH_CANVAS': {
+      if (state.isAnswer) {
+        return {
+          ...state,
+          Words: state.userAnswer,
+          isAnswer: false
+        }
+      } else {
+        return {
+          ...state,
+          Words: state.answer,
+          userAnswer: state.Words,
+          isAnswer: true
+        }
+      }
     }
   
     default: {
