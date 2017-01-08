@@ -68,6 +68,9 @@ const prepositions = [
 	{
 		base: 'back'
 	},
+	{
+		base: 'out'
+	},
 ].map(o => ({
 	...o,
 	order: 7

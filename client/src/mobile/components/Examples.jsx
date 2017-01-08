@@ -26,8 +26,8 @@ const Examples = React.createClass({
     return (
       <ReactCSSTransitionGroup
         transitionName={routeAction}
-        transitionEnterTimeout={1000}
-        transitionLeaveTimeout={1000}>
+        transitionEnterTimeout={250}
+        transitionLeaveTimeout={250}>
         {route && (
           <div className='page page-examples'>
             <nav className='m-nav'>

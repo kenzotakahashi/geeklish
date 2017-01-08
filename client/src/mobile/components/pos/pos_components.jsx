@@ -1,20 +1,23 @@
 import { Verb, VerbDetail, Be, BeDetail,
 				 VerbContainer } from './Verb.jsx'
-import { Clause, ClauseContainer, ClauseDetail } from './Clause.jsx'
+import { Clause, ClauseDetail,
+				 ClauseContainer } from './Clause.jsx'
 import { Pronoun, PronounDetail } from './Pronoun.jsx'
 import Sentence from './Sentence.jsx'
 import { Noun, NounDetail,
 				 NounContainer, NounContainerDetail,
 				 NounClause } from './Noun.jsx'
 import { Determiner, DeterminerDetail,
-				 Possessive } from './Determiner.jsx'
-import { Adjective,
+				 Possessive, PossessiveDetail } from './Determiner.jsx'
+import { Adjective, AdjectiveDetail,
 				 AdjectiveClause } from './Adjective.jsx'
-import { Adverb,
+import { Adverb, AdverbDetail,
 				 AdverbClause } from './Adverb.jsx'
-import { Preposition } from './Preposition.jsx'
+import { Preposition, PrepositionDetail } from './Preposition.jsx'
 import { Conjunction, ConjunctionDetail } from './Conjunction.jsx'
-import { Infinitive, Gerund, Participle } from './others.jsx'
+import { Infinitive, InfinitiveDetail,
+				 Gerund, GerundDetail,
+				 Participle, ParticipleDetail } from './others.jsx'
 
 export const pos_components = {
 	Verb,
@@ -47,11 +50,15 @@ export const posDetails = {
 	Be: BeDetail,
 	Determiner: DeterminerDetail,
 	Noun: NounDetail,
-	Conjunction: ConjunctionDetail,
 	NounContainer: NounContainerDetail,
-	// Adjective: AdjectiveDetail,
-	// Adverb: AdverbDetail,
-	// Preposition: PrepositionDetail
+	Adjective: AdjectiveDetail,
+	Adverb: AdverbDetail,
+	Preposition: PrepositionDetail,
+	Conjunction: ConjunctionDetail,
+	Infinitive: InfinitiveDetail,
+	Gerund: GerundDetail,
+	Participle: ParticipleDetail,
+	Possessive: PossessiveDetail,
 }
 
 // export const posLinks = {

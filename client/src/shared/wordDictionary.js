@@ -21,7 +21,7 @@ const determiners = [{pos: 'Determiner', attr: (w, word) => validDeterminer('det
                       'Possessive']
 const quantifier = [{pos: 'Determiner', attr: (w, word) => validDeterminer('quantifier', w, word)}]
 
-const valid_pos = {
+export const validPos = {
   Sentence: {
     clause: ['Clause'],
   },
@@ -154,7 +154,7 @@ function dispatchTask(data, valid, word, target, mobile) {
 }
 
 export const getWordDictionary = function(word, target, mobile=false) {
-  const valid = valid_pos[word.pos][target[1] === null ?
+  const valid = validPos[word.pos][target[1] === null ?
                                     target[0] : word.complements[target[1]].category]
   if (sessionStorage.dictionary) {
     const data = JSON.parse(sessionStorage.dictionary)

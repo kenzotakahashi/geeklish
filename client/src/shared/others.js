@@ -33,6 +33,19 @@ export const getLabel = (element, parent) => {
   return element.pos
 }
 
+// export const getAttributes = (element) => {
+//   const pos = element.pos
+//   if (pos === 'Verb') {
+//     const attrs = element.valid_particles.length > 0 ?
+//                   ['particle','adverbs','prepositions'] : ['adverbs','prepositions']
+//     return [attrs, true]
+//   }
+//   if (pos === 'Be') {
+//     return [['adverbs','prepositions'], true]
+//   }
+//   return [Object.keys(validPos[element.pos]), false]
+// }
+
 const getArgument = (parent, wordPos, target) => {
   if (wordPos === 'Pronoun' &&
       ['Verb','Be','VerbContainer','Preposition'].includes(parent.pos)) {

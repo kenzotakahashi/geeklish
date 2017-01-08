@@ -51,8 +51,8 @@ const Option = React.createClass({
     return (
       <ReactCSSTransitionGroup
         transitionName={routeAction}
-        transitionEnterTimeout={1000}
-        transitionLeaveTimeout={1000}>
+        transitionEnterTimeout={250}
+        transitionLeaveTimeout={250}>
         {comp}     
       </ReactCSSTransitionGroup>
     )

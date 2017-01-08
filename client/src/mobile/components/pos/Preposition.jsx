@@ -1,58 +1,71 @@
 import React from 'react'
 import { store } from '../../../index.js'
-import { Children, WH, DeleteButton, Label } from './Tree'
-import { showOptions, changeAttribute } from '../../../shared/actions'
+import { Children, WH, DeleteButton, Label, ChildrenDetail } from './Tree'
+import { showOptions, changeAttribute, showDetail } from '../../../shared/actions'
 
 const e = React.createElement
 
-const Preposition = React.createClass({
+export const Preposition = React.createClass({
   render: function() {
     const state = store.getState()
-    const element = state.Words.find(o => o._id === this.props._id)
+    const {_id, parent, role} = this.props
+    const element = state.Words.find(o => o._id === _id)
     const attrs = ['complement']
 
-    if (this.props.role[0] === 'particle') {
-      return (
-        <ul className='m-ul'>
-          <li className='tree-top'>
-            <div className={`tree-box ${element.pos}`}>
-              <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>{element.word}</span>
-              <Label parent={this.props.parent} role={this.props.role} />
-              {this.props.parent.complements.length > 0 &&
-              e('button', {
-                className: `tree-button ${element.before  && 'on'}`,
-                type: 'button',
-                onClick: () => store.dispatch(changeAttribute(element._id, 'before', !element.before))
-              }, element.before ? 'before': 'after')
-              }
-              <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
-            </div>
-          </li>
-        </ul>
-      )
-    } else {
-      return (
-        <ul className='m-ul'>
-          <li className='tree-top'>
-            <div className={`tree-box ${element.pos}`}>
-              <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>{element.word}</span>
-              <Label parent={this.props.parent} role={this.props.role} />
-              <WH id={element._id} isWh={element.isWh} />
-              {['Verb','Be','VerbContainer'].includes(this.props.parent.pos) &&
-                e('button', {
-                className: `tree-button ${element.before  && 'on'}`,
-                type: 'button',
-                onClick: () => store.dispatch(changeAttribute(element._id, 'before', !element.before))
-              }, element.before ? 'before': 'after')}
-              <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
-            </div>
-            <Children element={element} attrs={attrs} words={state.Words}
-                      target={state.target} activeWord={state.activeWord} />
-          </li>
-        </ul>
-      )
-    }
-  },
+    return (
+      <ul className='m-ul'>
+        <li className='tree-top'>
+          <div className={`tree-box ${element.pos}`}
+               onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
+            <span className='word' >{element.word}</span>
+          </div>
+          <Children element={element} attrs={attrs} words={state.Words}/>
+        </li>
+      </ul>
+    )
+  }
 })
 
-export default Preposition
+const needPosition = (parent, role) => (
+  role[0] === 'particle'
+  ? parent.complements.length > 0
+  : ['Verb','Be','VerbContainer'].includes(parent.pos)
+)
+
+export const PrepositionDetail = React.createClass({
+  render: function() {
+    const state = store.getState()
+    const {element, parent, role} = this.props
+    const attrs = ['complement']
+
+    const position = needPosition(parent, role) && (
+      <li key='number'>
+        <span className='m-list'>
+          <span>Beginning of Clause</span>
+          <label className="switch">
+            <input type="checkbox" checked={element.before}
+              onChange={() => store.dispatch(changeAttribute(element._id,'before',!element.before))} 
+            />
+            <div className="slider round"></div>
+          </label>
+        </span>
+      </li>
+    )
+
+    return (
+      <div>
+        <Label parent={parent} role={role} />
+        <ul className='m-list-group'>        
+          <hr className='m-border-edge' />
+          {position}
+          <hr className='m-border' />
+          {role[0] !== 'particle' && <WH id={element._id} isWh={element.isWh} />}
+          <hr className='m-border-edge' />
+        </ul>
+        <ChildrenDetail element={element} attrs={attrs} words={state.Words} />
+        {role[0] !== 'particle' &&
+         <DeleteButton id={element._id} role={role} parentId={parent._id} />}        
+      </div>
+    )
+  }
+})
