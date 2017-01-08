@@ -1,10 +1,8 @@
 import React from 'react'
 import { store } from '../../../index.js'
 import { Children, DeleteButton, ConjunctionButton, Label, ChildrenDetail } from './Tree'
-import { showOptions, changeAttribute, showDetail, routeOption } from '../../../shared/actions'
+import { changeAttribute, showDetail, routeOption } from '../../../shared/actions'
 // import { getWordDictionary } from '../../../shared/wordDictionary'
-
-const e = React.createElement
 
 export const Infinitive = React.createClass({
   render: function() {

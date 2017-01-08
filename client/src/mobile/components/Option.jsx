@@ -6,6 +6,8 @@ import Output from './Output'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
+const handleModal = (text) => text === 'No modal' ? '' : text
+
 const Option = React.createClass({
   render: function() {
     const {route, routeAction} = this.props
@@ -15,13 +17,14 @@ const Option = React.createClass({
       const element = state.Words.find(o => o._id === state.activeWord)
       const option = state.option
       const choice = option.choice.map((o, i) => (
-        <li key={o}>
+        <li key={i}>
           <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
           <span className='m-list pointer' onClick={() => store.dispatch(changeAttribute(
-            state.activeWord, option.attr, o  
+            state.activeWord, option.attr, handleModal(o)
           ))}>
             <span>{o}</span>
-            {element[option.attr] === o && (<span className='m-list-right m-check'></span>)}
+            {element[option.attr] === handleModal(o) &&
+             (<span className='m-list-right m-check'></span>)}
           </span>
         </li>
       ))

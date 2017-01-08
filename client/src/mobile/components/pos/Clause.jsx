@@ -1,7 +1,8 @@
 import React from 'react'
 import { store } from '../../../index.js'
-import { Children, ChildrenDetail, DeleteButton, Label } from './Tree'
-import { showOptions, showDetail, routeOption } from '../../../shared/actions'
+import { Children, ChildrenDetail, DeleteButton, Label,
+         UndoConjunctionButton } from './Tree'
+import { showDetail, routeOption } from '../../../shared/actions'
 
 export const Clause = React.createClass({
   render: function() {
@@ -56,24 +57,42 @@ export const ClauseDetail = React.createClass({
 })
 
 
-// ======================
-
 export const ClauseContainer = React.createClass({
   render: function() {
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
+    const {_id, parent, role} = this.props
     const attrs = ['conjunction', 'clauses']
 
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className={`tree-box ${element.pos}`}>
-            <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>ClauseContainer</span>
+          <div className={`tree-box basic ${element.pos}`}
+               onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
+            <span className='word'>ClauseContainer</span>
           </div>
-          <Children element={element} attrs={attrs} words={state.Words}
-                    target={state.target} activeWord={state.activeWord} />
+          <Children element={element} attrs={attrs} words={state.Words} />
         </li>
       </ul>
     )
-  },
+  }
+})
+
+export const ClauseContainerDetail = React.createClass({
+  render: function() {
+    const state = store.getState()
+    const {element, parent, role} = this.props
+    const attrs = ['subject','verb','adverbs','adjective']
+
+    return (
+      <div>
+        <Label parent={parent} role={role} />        
+        <ChildrenDetail element={element} attrs={attrs} words={state.Words} />
+        {element.clauses.length > 0 &&
+        <UndoConjunctionButton element={element} thisRole={role}
+                               childRole='clauses' parentId={parent._id} />}
+        <DeleteButton id={element._id} role={role} parentId={parent._id} />        
+      </div>
+    )
+  }
 })

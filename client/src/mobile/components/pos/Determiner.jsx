@@ -1,8 +1,8 @@
 import React from 'react'
 import { store } from '../../../index.js'
 import { Children, DeleteButton, Label, ChildrenDetail } from './Tree'
-import { showOptions, changeAttribute, showDetail } from '../../../shared/actions'
-import { getWordDictionary } from '../../../shared/wordDictionary'
+import { changeAttribute, showDetail } from '../../../shared/actions'
+// import { getWordDictionary } from '../../../shared/wordDictionary'
 
 export const Determiner = React.createClass({
   render: function() {

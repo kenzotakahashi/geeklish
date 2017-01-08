@@ -1,6 +1,5 @@
 // import { score } from '../../shared/score'
-import { getContainer, createWordHelper, setComplementHelper,
-         deleteElementHelper, useConjunctionHelper,
+import { createWordHelper, setComplementHelper, deleteElementHelper, useConjunctionHelper,
          undoConjunctionHelper } from '../../shared/others'
 import { mobileInitialState } from '../initialState'
 

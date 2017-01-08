@@ -1,9 +1,6 @@
 import React from 'react'
 import { store } from '../../index.js'
-import { Link } from '../kenzo-router'
-import { changeAttribute, showDetail, createNewWord } from '../../shared/actions'
-
-import Output from './Output'
+import { showDetail, createNewWord } from '../../shared/actions'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 

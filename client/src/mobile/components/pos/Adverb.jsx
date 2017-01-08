@@ -1,9 +1,7 @@
 import React from 'react'
 import { store } from '../../../index.js'
 import { Children, WH, DeleteButton, Label, ChildrenDetail } from './Tree'
-import { changeAttribute, showDetail, routeOption, showOptions } from '../../../shared/actions'
-
-const e = React.createElement
+import { changeAttribute, showDetail, routeOption } from '../../../shared/actions'
 
 export const Adverb = React.createClass({
   render: function() {
@@ -89,31 +87,55 @@ export const AdverbDetail = React.createClass({
   }
 })
 
-
-
 export const AdverbClause = React.createClass({
   render: function() {
     const state = store.getState()
-    const element = state.Words.find(o => o._id === this.props._id)
+    const {_id, parent, role} = this.props
+    const element = state.Words.find(o => o._id === _id)
     const attrs = ['conjunction', 'clause']
 
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
-          <div className={`tree-box ${element.pos}`}>
-            <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>Adverb Clause</span>            
-            <Label parent={this.props.parent} role={this.props.role} />
-            {e('button', {
-              className: `tree-button ${element.before && 'on'}`,              
-              type: 'button',
-              onClick: () => store.dispatch(changeAttribute(this.props._id, 'before', !element.before))
-            }, element.before ? 'before' : 'after')}
-            <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
+          <div className={`tree-box ${element.pos}`}
+               onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
+            <span className='word' >AdverbClause</span>
           </div>
-          <Children element={element} attrs={attrs} words={state.Words}
-                    target={state.target} activeWord={state.activeWord} />
+          <Children element={element} attrs={attrs} words={state.Words}/>
         </li>
       </ul>
     )
-  },
+  }
+})
+
+export const AdverbClauseDetail = React.createClass({
+  render: function() {
+    const state = store.getState()
+    const {element, parent, role} = this.props
+    const attrs = ['conjunction', 'clause']
+
+    return (
+      <div>
+        <Label parent={parent} role={role} />
+        <ul className='m-list-group'>        
+          <hr className='m-border-edge' />
+          <li key='number'>
+            <span className='m-list'>
+              <span>Before Subject</span>
+              <label className="switch">
+                <input type="checkbox" checked={element.before}
+                    onChange={() => store.dispatch(changeAttribute(
+                      element._id,'before',!element.before))} 
+                />
+                <div className="slider round"></div>
+              </label>
+            </span>
+          </li>
+          <hr className='m-border-edge' />
+        </ul>
+        <ChildrenDetail element={element} attrs={attrs} words={state.Words} />
+        <DeleteButton id={element._id} role={role} parentId={parent._id} />        
+      </div>
+    )
+  }
 })

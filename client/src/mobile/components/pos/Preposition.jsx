@@ -1,9 +1,7 @@
 import React from 'react'
 import { store } from '../../../index.js'
 import { Children, WH, DeleteButton, Label, ChildrenDetail } from './Tree'
-import { showOptions, changeAttribute, showDetail } from '../../../shared/actions'
-
-const e = React.createElement
+import { changeAttribute, showDetail } from '../../../shared/actions'
 
 export const Preposition = React.createClass({
   render: function() {

@@ -3,7 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { store } from '../../../index.js'
 import { pos_components } from './pos_components'
 import { changeAttribute, deleteElement, useConjunction, undoConjunction,
-         routeComplementOption, showDetail} from '../../../shared/actions'
+         routeComplementOption, showDetail, routeOption} from '../../../shared/actions'
 import { getWordDictionary } from '../../../shared/wordDictionary'
 import { getLabel } from '../../../shared/others'
 
@@ -73,7 +73,12 @@ export const ChildrenDetail = (props) => (
           <li key={o}
               onClick={() => getWordDictionary(props.element, [o, null], true)}>
             <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
-            <span className='m-list pointer'>{o}</span>
+            <span className='m-list pointer'>
+              {o}
+              <span className='m-list-right'>
+                <span className='m-list-arrow'></span>
+              </span>
+            </span>
           </li>
         ))
       }
@@ -126,13 +131,10 @@ function getComplement(props) {
 export const CompChildrenDetail = (props) => (
   <div>
     <ul className='m-list-group'>
+      <hr className='m-border-edge' />
       <li key='complement'>
-        <hr className='m-border-edge' />
         {getComplement(props)}
-        <hr className='m-border' />
       </li>
-    </ul>
-    <ul className='m-list-group'>
       {
         props.element.complementIndex !== null && props.element.complements.map((w, i) => (
           w._id ?
@@ -143,11 +145,17 @@ export const CompChildrenDetail = (props) => (
                 onClick={() => getWordDictionary(props.element, ['complements', i], true)}
                 disabled={props.element.passive && i === 0 && w.category === 'noun' && "disabled"}>
               <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
-              <span className='m-list'>{w.category}</span>
+              <span className='m-list'>
+                {w.category}
+                <span className='m-list-right'>
+                  <span className='m-list-arrow'></span>
+                </span>
+              </span>
             </li>
             )
         ))
       }
+      <hr className='m-border-edge' />
     </ul>
   </div>
 )
@@ -186,15 +194,22 @@ export const UndoConjunctionButton = (props) => (
   </button>
 )
 
+const verbOption = {
+  attr: 'modal',
+  label: 'Modal',
+  choice: ['No modal','can','could','should','may','might','must','will','would']
+}
+
 export const ModalSelect = (props) => (
-  <span className='select'>
-    <select value={props.value} onChange={props.onChange}>
-      {['modal','can','could','should','may','might','must','will','would'].map(o => (
-         <option key={o} value={o === 'modal' ? '' : o}>{o}</option>
-        ))
-      }
-    </select>
-  </span>
+  <li key='form'>
+    <span className='m-list' onClick={() => store.dispatch(routeOption(verbOption))}>
+      <span>Modal</span>
+      <span className='m-list-right'>
+        <span>{props.element.modal === '' ? 'No Modal' : props.element.modal}</span>
+        <span className='m-list-arrow'></span>
+      </span>
+    </span>
+  </li>
 )
 
 export const Label = (props) => (

@@ -1,8 +1,8 @@
 import React from 'react'
 import { store } from '../../../index.js'
 import { CompChildren, Children, ChildrenDetail, CompChildrenDetail,
-         DeleteButton, Label, ConjunctionButton } from './Tree'
-import { showOptions, changeAttribute, showDetail, routeOption } from '../../../shared/actions'
+         DeleteButton, Label, ConjunctionButton, ModalSelect, UndoConjunctionButton } from './Tree'
+import { changeAttribute, showDetail } from '../../../shared/actions'
 
 export const Verb = React.createClass({
   render: function() {
@@ -29,26 +29,12 @@ export const Verb = React.createClass({
   }
 })
 
-const verbOption = {
-  attr: 'modal',
-  label: 'Modal',
-  choice: ['No modal','can','could','should','may','might','must','will','would']
-}
-
 export const VerbDetail = React.createClass({
   render: function() {
     const state = store.getState()
     const {element, parent, role} = this.props
     const attrs = element.valid_particles.length > 0 ?
                   ['particle','adverbs','prepositions'] : ['adverbs','prepositions']
-
-    const modalSelect = !['Gerund','Participle','Infinitive'].includes(parent.pos) && (
-      <li key='form'>
-        <span className='m-list' onClick={() => store.dispatch(routeOption(verbOption))}>
-          <span>Modal</span><span className='m-list-right'>{element.modal}</span>
-        </span>
-      </li>
-    )
 
     const object = element.complements[0]
     const disablePassive = (object && object.category === 'noun' && !!object._id) ||
@@ -81,7 +67,8 @@ export const VerbDetail = React.createClass({
         <Label parent={parent} role={role} />
         <ul className='m-list-group'>
           <hr className='m-border-edge' />
-          {modalSelect}
+          {!['Gerund','Participle','Infinitive'].includes(parent.pos) && 
+            <ModalSelect element={element} />}
           {attributes}
           <hr className='m-border-edge' />
         </ul>
@@ -162,21 +149,45 @@ export const BeDetail = React.createClass({
 })
 
 export const VerbContainer = React.createClass({
-  handleChange: function(e){
-    store.dispatch(changeAttribute(this.props._id, 'modal', e.target.value))
-  },
   render: function() {
     const state = store.getState()
-    const element = state.Words.find(o => o._id === this.props._id)
+    const {_id, parent, role} = this.props
+    const element = state.Words.find(o => o._id === _id)
+    const attrs = ['conjunction', 'verbs', 'complements','adverbs','prepositions']
 
     return (
       <ul className='m-ul'>
-        <li className="tree-top">
-          <div className={`tree-box ${element.pos}`}>
-            <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>VerbContainer</span>
+        <li className='tree-top'>
+          <div className={`tree-box ${element.pos}`}
+               onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
+            <span className='word' >VerbContainer</span>
           </div>
+          <Children element={element} attrs={attrs} words={state.Words}/>
         </li>
       </ul>
     )
-  },
+  }
+})
+
+export const VerbContainerDetail = React.createClass({
+  render: function() {
+    const state = store.getState()
+    const {element, parent, role} = this.props
+    const attrs = ['conjunction', 'verbs', 'complements','adverbs','prepositions']
+
+    return (
+      <div>
+        <Label parent={parent} role={role} />
+        <ul className='m-list-group'>        
+          <hr className='m-border-edge' />
+          <ModalSelect element={element} />
+          <hr className='m-border-edge' />
+        </ul>
+        <ChildrenDetail element={element} attrs={attrs} words={state.Words} />
+        <UndoConjunctionButton element={element} thisRole={role}
+                               childRole='verbs' parentId={parent._id} />}
+        <DeleteButton id={element._id} role={role} parentId={parent._id} />        
+      </div>
+    )
+  }
 })

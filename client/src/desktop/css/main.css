@@ -234,7 +234,9 @@ li.list-group-item, .tree{
   background-color: #0C980C;
 }
 
-.basic {
+.Sentence,.Clause,.ClauseContainer,.NounContainer,.VerbContainer,
+.NounClause,.AdjectiveClause, .AdverbClause, .Possessive,.Infinitive,
+.Gerund,.Participle,.basic {
   color: #fff;
   background-color: #aaa;
 }
