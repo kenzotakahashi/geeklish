@@ -17,10 +17,11 @@ const Option = React.createClass({
       const choice = option.choice.map((o, i) => (
         <li key={o}>
           <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
-          <span className='m-list' onClick={() => store.dispatch(changeAttribute(
+          <span className='m-list pointer' onClick={() => store.dispatch(changeAttribute(
             state.activeWord, option.attr, o  
           ))}>
-            <span>{o}</span>{element[option.attr] === o && (<span className='m-list-right'>!</span>)}
+            <span>{o}</span>
+            {element[option.attr] === o && (<span className='m-list-right m-check'></span>)}
           </span>
         </li>
       ))

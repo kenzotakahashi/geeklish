@@ -35,14 +35,17 @@ export const mobileHandleNavigation = (location, action) => {
   }
   else if (path === 'canvas') {
     const _id = pathList[1]
-    if (sessionStorage.canvas) {
-      const data = JSON.parse(sessionStorage.canvas)
+    Client.getProject(_id, (data) => {
       store.dispatch(routeCanvas(_id, data, previous, routeAction))
-    } else {
-      Client.getProject(_id, (data) => {
-        store.dispatch(routeCanvas(_id, data, previous, routeAction))
-      })
-    }
+    })
+    // if (sessionStorage.canvas) {
+    //   const data = JSON.parse(sessionStorage.canvas)
+    //   store.dispatch(routeCanvas(_id, data, previous, routeAction))
+    // } else {
+    //   Client.getProject(_id, (data) => {
+    //     store.dispatch(routeCanvas(_id, data, previous, routeAction))
+    //   })
+    // }
   }
 }
 

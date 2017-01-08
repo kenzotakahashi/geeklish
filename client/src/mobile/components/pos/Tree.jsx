@@ -1,12 +1,26 @@
 import React from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group' 
 import { store } from '../../../index.js'
-import { pos_components, posLinks } from './pos_components'
+import { pos_components } from './pos_components'
 import { changeAttribute, deleteElement, useConjunction, undoConjunction,
-         routeComplementOption} from '../../../shared/actions'
+         routeComplementOption, showDetail} from '../../../shared/actions'
 import { getWordDictionary } from '../../../shared/wordDictionary'
+import { getLabel } from '../../../shared/others'
 
 const e = React.createElement
+
+const PosLink = React.createClass({
+  render: function() {
+    const {_id, parent, role} = this.props
+    const element = store.getState().Words.find(o => o._id === _id)
+    return (
+      <li key={_id} className={`m-list pointer ${element.pos}`}
+          onClick={() => store.dispatch(showDetail(element._id,'switch',parent,role))}>
+        <span className='word' >{getLabel(element, parent)}</span>
+      </li>
+    )
+  }
+})
 
 export const Children = (props) => (
   <ul className='m-tree'>
@@ -41,24 +55,15 @@ export const ChildrenDetail = (props) => (
       {
         props.attrs.map((w, i) => {
           if (w.slice(-1) === 's') {
-            return props.element[w].map((t, j) => {
-              const element = props.words.find(o => o._id === t)
-              return e(posLinks[element.pos],
-                {key: w+j, _id: t, parent: props.element, role: [w, null]}
-              )
-            })
+            return props.element[w].map((t, j) => (
+              e(PosLink, {key: w+j, _id: t, parent: props.element, role: [w, null]})
+            ))
           }
-          else if (props.element[w]) {
-            const element = props.words.find(o => o._id === props.element[w])
-            return (
-              e(posLinks[element.pos],
-                {key: w, _id: element._id, parent: props.element, role: [w, null]}
-              )
-            )
+          if (props.element[w]) {
+            return e(PosLink, {key: w, _id: props.element[w],
+                               parent: props.element, role: [w, null]})
           }
-          else {
-            return ''
-          }
+          return ''
         })
       }
     </ul>
@@ -68,7 +73,7 @@ export const ChildrenDetail = (props) => (
           <li key={o}
               onClick={() => getWordDictionary(props.element, [o, null], true)}>
             <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
-            <span className='m-list'>{o}</span>
+            <span className='m-list pointer'>{o}</span>
           </li>
         ))
       }
@@ -91,36 +96,57 @@ export const CompChildren = (props) => (
   </ul>
 )
 
+function getComplement(props) {
+  const {element, words} = props
+  let word, comp
+  if (element.complementIndex === null) {
+    word = 'Choose'
+    comp = ''
+  } else {
+    word = 'Change'
+    const verbType = !!element.particle ? 
+                       words.find(o => o._id === element.particle).word : 'base'
+    const compList = element.valid_complements[verbType][element.complementIndex]
+    comp = compList.length > 0 ? compList.join(' ') : 'No complement'
+  }
+
+  return (
+    <span className='m-list pointer' onClick={() => store.dispatch(routeComplementOption())}>
+      <span>
+        {word} a complement
+      </span>
+      <span className='m-list-right'>
+        <span>{comp}</span>
+        <span className='m-list-arrow'></span>
+      </span>
+    </span>
+  )
+}
+
 export const CompChildrenDetail = (props) => (
   <div>
     <ul className='m-list-group'>
       <li key='complement'>
         <hr className='m-border-edge' />
-        <span className='m-list' onClick={() => store.dispatch(routeComplementOption())}>
-          <span>
-            {`${props.element.complementIndex !== null ? 'Change' : 'Choose'}`} a complement
-          </span>
-          <span className='m-list-right'>WIP</span>
-        </span>
+        {getComplement(props)}
         <hr className='m-border' />
       </li>
     </ul>
     <ul className='m-list-group'>
       {
-        props.element.complementIndex !== null &&
-          props.element.complements.map((w, i) => (
-            w._id ?
-              e(posLinks[props.words.find(o => o._id === w._id).pos],
-                {key: i, parent: props.element, _id: w._id, role: ['complements', i]}
-              ) : (
-              <li key={i}
-                  onClick={() => getWordDictionary(props.element, ['complements', i], true)}
-                  disabled={props.element.passive && i === 0 && w.category === 'noun' && "disabled"}>
-                <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
-                <span className='m-list'>{w.category}</span>
-              </li>
-              )
-          ))
+        props.element.complementIndex !== null && props.element.complements.map((w, i) => (
+          w._id ?
+            e(PosLink, {key: i, _id: w._id, parent: props.element, role: ['compLists', i]})
+            :
+            (
+            <li key={i}
+                onClick={() => getWordDictionary(props.element, ['complements', i], true)}
+                disabled={props.element.passive && i === 0 && w.category === 'noun' && "disabled"}>
+              <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
+              <span className='m-list'>{w.category}</span>
+            </li>
+            )
+        ))
       }
     </ul>
   </div>
@@ -146,17 +172,17 @@ export const DeleteButton = (props) => (
 )
 
 export const ConjunctionButton = (props) => (
-  <button type="button" className='m-list'
+  <button type="button" className='m-list pointer'
           onClick={() => store.dispatch(useConjunction(props.element, props.role, props.parentId))}>
-    Use a Conjunction
+    Use a Container
   </button>
 )
 
 export const UndoConjunctionButton = (props) => (
-  <button type="button" className='tree-button on'
+  <button type="button" className='m-list pointer'
           onClick={() => store.dispatch(undoConjunction(
                           props.element, props.thisRole, props.childRole, props.parentId))}>
-    C
+    Remove the Container
   </button>
 )
 

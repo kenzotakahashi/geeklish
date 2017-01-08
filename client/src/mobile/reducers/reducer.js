@@ -1,6 +1,7 @@
 // import { score } from '../../shared/score'
-import { takeWord, getContainer, createWordHelper, setComplementHelper,
-         deleteElementHelper } from '../../shared/others'
+import { getContainer, createWordHelper, setComplementHelper,
+         deleteElementHelper, useConjunctionHelper,
+         undoConjunctionHelper } from '../../shared/others'
 import { mobileInitialState } from '../initialState'
 
 function reducer(state, action) {
@@ -86,7 +87,6 @@ function reducer(state, action) {
     // ====================== Canvas ==================================
     case 'CREATE_WORD': {
       const [parent, newWords, initialized] = createWordHelper(state, action)
-
       return {
         ...state,
         route: 'detail',
@@ -124,24 +124,11 @@ function reducer(state, action) {
       }
     }
     case 'USE_CONJUNCTION': {
-      const elementIndex = state.Words.findIndex(t => t._id === action.parentId)
-      const parent = state.Words[elementIndex]
-      const [updated, initialized] = takeWord(
-        parent,
-        getContainer(action.element.pos),
-        action.target,
-        {child: action.element._id}
-      )
-
-      const newWords = Object.assign([], state.Words)
-      newWords[elementIndex] = {
-        ...parent,
-        [action.target[0]]: updated,
-      }
-      newWords.push(initialized)
-
+      const [newWords, initialized] = useConjunctionHelper(state, action)
       return {
         ...state,
+        route: 'canvas',
+        routeAction: 'backward', 
         saved: false,
         activeWord: initialized._id,
         target: [],
@@ -150,27 +137,11 @@ function reducer(state, action) {
     }
 
     case 'UNDO_CONJUNCTION': {
-      const filtered = state.Words.filter(o => o._id !== action.element._id)
-      const elementIndex = filtered.findIndex(t => t._id === action.parentId)
-      const parent = filtered[elementIndex]
-      const childId = action.element[action.childRole][0]
-
-      let updated
-      if (action.thisRole[1] === null) {
-        updated = action.thisRole[0].slice(-1) === 's' ? [childId] : childId
-      }
-      else {
-        updated = Object.assign([], parent.complements)
-        updated[action.thisRole[1]]._id = childId
-      }
-
-      const newWords = Object.assign([], filtered)
-      newWords[elementIndex] = {
-        ...parent,
-        [action.thisRole[0]]: updated
-      }
+      const newWords = undoConjunctionHelper(state, action)
       return {
         ...state,
+        route: 'canvas',
+        routeAction: 'backward',
         saved: false,
         Words: newWords
       }

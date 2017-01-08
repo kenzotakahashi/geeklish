@@ -47,7 +47,7 @@ const getArgument = (parent, wordPos, target) => {
   return {}
 }
 
-export const takeWord = (parent, wordBase, actionTarget, child={}) => {
+const takeWord = (parent, wordBase, actionTarget, child={}) => {
   const arg = getArgument(parent, wordBase.pos, actionTarget)
   const init = factory[wordBase.pos](wordBase, {...arg, ...child})
   let updated
@@ -128,6 +128,48 @@ export const deleteElementHelper = (state, action) => {
     ...parent,
     [action.role[0]]: newRole,
     ...resetComplement
+  }
+  return newWords
+}
+
+export const useConjunctionHelper = (state, action) => {
+  const elementIndex = state.Words.findIndex(t => t._id === action.parentId)
+  const parent = state.Words[elementIndex]
+  const [updated, initialized] = takeWord(
+    parent,
+    getContainer(action.element.pos),
+    action.target,
+    {child: action.element._id}
+  )
+
+  const newWords = Object.assign([], state.Words)
+  newWords[elementIndex] = {
+    ...parent,
+    [action.target[0]]: updated,
+  }
+  newWords.push(initialized)
+  return [newWords, initialized]
+}
+
+export const undoConjunctionHelper = (state, action) => {
+  const filtered = state.Words.filter(o => o._id !== action.element._id)
+  const elementIndex = filtered.findIndex(t => t._id === action.parentId)
+  const parent = filtered[elementIndex]
+  const childId = action.element[action.childRole][0]
+
+  let updated
+  if (action.thisRole[1] === null) {
+    updated = action.thisRole[0].slice(-1) === 's' ? [childId] : childId
+  }
+  else {
+    updated = Object.assign([], parent.complements)
+    updated[action.thisRole[1]]._id = childId
+  }
+
+  const newWords = Object.assign([], filtered)
+  newWords[elementIndex] = {
+    ...parent,
+    [action.thisRole[0]]: updated
   }
   return newWords
 }

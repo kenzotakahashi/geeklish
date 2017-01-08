@@ -32,7 +32,7 @@ const ComplementOption = React.createClass({
             element._id, verbType, i
           ))}>
             <span>{o}</span>
-            {compIndex === i && (<span className='m-list-right'>!</span>)}
+            {compIndex === i && (<span className='m-list-right m-check'></span>)}
           </span>
         </li>
       ))

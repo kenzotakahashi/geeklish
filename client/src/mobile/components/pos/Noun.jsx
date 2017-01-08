@@ -28,19 +28,6 @@ export const Noun = React.createClass({
   }
 })
 
-export const NounLink = React.createClass({
-  render: function() {
-    const {_id, parent,role} = this.props
-    const element = store.getState().Words.find(o => o._id === _id)
-    return (
-      <li key={_id} className={`m-list ${element.pos}`}
-          onClick={() => store.dispatch(showDetail(element._id,'initial',parent,role))}>
-        <span className='word' >{element.word.singular}</span>
-      </li>
-    )
-  }
-})
-
 export const NounDetail = React.createClass({
   render: function() {
     const state = store.getState()
@@ -68,9 +55,6 @@ export const NounDetail = React.createClass({
         </span>
       </li>
     )
-    
-    // {this.props.parent.pos !== 'NounContainer' &&
-    //  <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent._id} />}
 
     return (
       <div>
@@ -83,6 +67,8 @@ export const NounDetail = React.createClass({
           <hr className='m-border-edge' />
         </ul>
         <ChildrenDetail element={element} attrs={attrs} words={state.Words} />
+        {parent.pos !== 'NounContainer' &&
+         <ConjunctionButton element={element} role={role} parentId={parent._id} />}
         <DeleteButton id={element._id} role={role} parentId={parent._id} />        
       </div>
     )
@@ -110,28 +96,11 @@ export const NounContainer = React.createClass({
   }
 })
 
-export const NounContainerLink = React.createClass({
-  render: function() {
-    const {_id, parent} = this.props
-    const element = store.getState().Words.find(o => o._id === _id)
-    return (
-      <li key={_id} className={`m-list ${element.pos}`}
-          onClick={() => store.dispatch(showDetail(element._id,'initial',parent))}>
-        <span className='word' >NounContainer</span>
-      </li>
-    )
-  }
-})
-
 export const NounContainerDetail = React.createClass({
   render: function() {
     const state = store.getState()
     const {element, parent, role} = this.props
     const attrs = ['conjunction','quantifier','determiner','adjectives','nouns','prepositions']
-
-    // {element.nouns.length > 0 &&
-    // <UndoConjunctionButton element={element} thisRole={this.props.role}
-    //                        childRole='nouns' parentId={this.props.parent._id} />}
 
     return (
       <div>
@@ -142,7 +111,10 @@ export const NounContainerDetail = React.createClass({
           <hr className='m-border-edge' />
         </ul>
         <ChildrenDetail element={element} attrs={attrs} words={state.Words} />
-        <DeleteButton id={element._id} role={role} parentId={parent._id} />        
+        {element.nouns.length > 0 &&
+        <UndoConjunctionButton element={element} thisRole={role}
+                               childRole='nouns' parentId={parent._id} />}
+        <DeleteButton id={element._id} role={role} parentId={parent._id} />
       </div>
     )
   }

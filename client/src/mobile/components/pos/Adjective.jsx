@@ -38,6 +38,15 @@ export const Adjective = React.createClass({
   },
 })
 
+
+
+
+
+
+
+
+
+
 export const AdjectiveClause = React.createClass({
   render: function() {
     const state = store.getState()

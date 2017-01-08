@@ -29,21 +29,6 @@ export const Verb = React.createClass({
   }
 })
 
-export const VerbLink = React.createClass({
-  render: function() {
-    const {_id, parent} = this.props
-    const element = store.getState().Words.find(o => o._id === _id)
-    return (
-      <li key={_id} className={`m-list ${element.pos}`}
-          onClick={() => store.dispatch(showDetail(element._id,'initial',parent))}>
-        <span className='word' >
-          {parent.pos === 'Gerund' ? element.word[element.form] : element.word.base}
-        </span>
-      </li>
-    )
-  }
-})
-
 const verbOption = {
   attr: 'modal',
   label: 'Modal',
@@ -100,7 +85,7 @@ export const VerbDetail = React.createClass({
           {attributes}
           <hr className='m-border-edge' />
         </ul>
-        <CompChildrenDetail element={element} words={state.Words} target={state.target}/>
+        <CompChildrenDetail element={element} words={state.Words} />
         <ChildrenDetail element={element} attrs={attrs} words={state.Words} />
         {conjunctionButton}
         <DeleteButton id={element._id} role={role} parentId={parent._id} />        
@@ -132,19 +117,6 @@ export const Be = React.createClass({
   }
 })
 
-export const BeLink = React.createClass({
-  render: function() {
-    const {_id, parent} = this.props
-    const element = store.getState().Words.find(o => o._id === _id)
-    return (
-      <li key={_id} className={`m-list ${element.pos}`}
-          onClick={() => store.dispatch(showDetail(element._id,'initial',parent))}>
-        <span className='word' >{element.word.base}</span>
-      </li>
-    )
-  }
-})
-
 export const BeDetail = React.createClass({
   render: function() {
     const state = store.getState()
@@ -154,9 +126,9 @@ export const BeDetail = React.createClass({
     const list = parent.pos === 'Infinitive' ?
                  ['negative','continuous'] : ['past','negative','continuous','perfect']
 
-    const attributes = !['Gerund','Participle'].includes(parent.pos) && list.map(o => (
+    const attributes = !['Gerund','Participle'].includes(parent.pos) && list.map((o, i) => (
       <li key={o}>
-        <hr className='m-border' />
+        {i !== 0 && <hr className='m-border' />}
         <span className='m-list'>
           <span>{o}</span>
           <label className="switch">
@@ -180,7 +152,7 @@ export const BeDetail = React.createClass({
           {attributes}
           <hr className='m-border-edge' />
         </ul>
-        <CompChildrenDetail element={element} words={state.Words} target={state.target}/>
+        <CompChildrenDetail element={element} words={state.Words} />
         <ChildrenDetail element={element} attrs={attrs} words={state.Words} />
         {conjunctionButton}
         <DeleteButton id={element._id} role={role} parentId={parent._id} />        

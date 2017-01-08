@@ -1,6 +1,7 @@
 import React from 'react'
 import { store } from '../../../index.js'
-import { Children, ChildrenDetail, WH, DeleteButton, Label } from './Tree'
+import { Children, ChildrenDetail, WH, DeleteButton, Label,
+         ConjunctionButton } from './Tree'
 import { showDetail, routeOption } from '../../../shared/actions'
 
 export const Pronoun = React.createClass({
@@ -24,19 +25,6 @@ export const Pronoun = React.createClass({
   }
 })
 
-export const PronounLink = React.createClass({
-  render: function() {
-    const {_id, parent, role} = this.props
-    const element = store.getState().Words.find(o => o._id === _id)
-    return (
-      <li key={_id} className={`m-list ${element.pos}`}
-          onClick={() => store.dispatch(showDetail(element._id,'switch',parent,role))}>
-        <span className='word' >{element.word[element.form]}</span>
-      </li>
-    )
-  }
-})
-
 const pronounOption = {
   attr: 'form',
   label: 'Form',
@@ -55,8 +43,12 @@ export const PronounDetail = React.createClass({
         <ul className='m-list-group'>
           <li key='form'>
             <hr className='m-border-edge' />
-            <span className='m-list' onClick={() => store.dispatch(routeOption(pronounOption))}>
-              <span>Form</span><span className='m-list-right'>{element.form}</span>
+            <span className='m-list pointer' onClick={() => store.dispatch(routeOption(pronounOption))}>
+              <span>Form</span>
+              <span className='m-list-right'>
+                <span>{element.form}</span>
+                <span className='m-list-arrow'></span>
+              </span>
             </span>
             <hr className='m-border' />
           </li>
@@ -64,6 +56,8 @@ export const PronounDetail = React.createClass({
           <hr className='m-border-edge' />
         </ul>
         <ChildrenDetail element={element} attrs={attrs} words={state.Words} />
+        {parent.pos !== 'NounContainer' &&
+         <ConjunctionButton element={element} role={role} parentId={parent._id} />}
         <DeleteButton id={element._id} role={role} parentId={parent._id} />
       </div>
     )
