@@ -15,12 +15,14 @@ export const categories = [
   'Adjective',
   "Gerund",
 	'Adverb',
+	'Infinitive',
 	"Particle",
 	'Possessive',
 	'Question',
 	"Noun Container",
 	"Noun Clause",
 	"Adverb Clause",
-	'Adjective Clause'
+	'Adjective Clause',
+	'Technical'
 ]
 

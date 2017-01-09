@@ -37,7 +37,7 @@ const VerbDic = Dictionary.discriminator('VerbDic', new Schema({
 	present: {type: String},
 	past: String,
 	passive: {type: String},
-	progressive: {type: String, required: true},
+	progressive: String,
 	particles: [String],
 	complements: Schema.Types.Mixed,
 	pos: {type: String, default: 'Verb'},

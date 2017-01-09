@@ -32,7 +32,7 @@ export const Possessive = {
     if (this.noun.pos === 'Pronoun') {
       return this.noun.word.possessive
     } else if (['Noun', 'NounContainer'].includes(this.noun.pos)) {
-      return this.noun.possessive()
+      return this.noun.possessive().filter(o => o !== '')
     }
   },
 }

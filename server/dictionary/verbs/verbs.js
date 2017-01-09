@@ -525,6 +525,42 @@ const verbs = [
 				['noun']
 			]
 		}
+	},
+	{
+		base: 'keep',
+		past: 'kept',
+		particles: ['at','back','down','in','off','on','up'],
+		complements: {
+			base: [
+				[],
+				['noun'],
+				['adjective'],
+				['noun','adjective'],
+			],
+			at: [
+				['noun']
+			],
+			back: [
+				['noun']
+			],
+			down: [
+				['noun']
+			],
+			in: [
+				['noun']
+			],
+			off: [
+				['noun'],
+				['noun','noun']
+			],
+			on: [
+				['noun']
+			],
+			up: [
+				[],
+				['noun']
+			]
+		}
 	}
 ].map(o => ({
 	...o,
