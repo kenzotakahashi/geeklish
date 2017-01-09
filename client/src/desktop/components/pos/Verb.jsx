@@ -86,6 +86,9 @@ export const Be = React.createClass({
       }, o)
     ))
 
+    const modalSelect = !['Gerund','Participle','Infinitive'].includes(parent.pos) &&
+                        <ModalSelect value={element.modal} onChange={this.handleChange} />
+
     const conjunctionButton = !['Gerund','Participle'].includes(parent.pos) &&
               parent.pos !== 'VerbContainer' &&
               <ConjunctionButton element={element} role={role} parentId={parent._id} />
@@ -98,6 +101,7 @@ export const Be = React.createClass({
               {element.word.base}
             </span>
             <Label parent={parent} role={role} />
+            {modalSelect}
             {attributes}
             {conjunctionButton}
             <DeleteButton id={element._id} role={role} parentId={parent._id} />

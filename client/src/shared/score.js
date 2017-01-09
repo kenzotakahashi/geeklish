@@ -211,13 +211,13 @@ const diff = (a, b) => {
 	const newA = convert(a)
 	const newB = convert(b)
 
-	if (newA.length === newB.length) {
-		newA.map((o, i) => {
-			console.log(_.isEqual(newA[i], newB[i]))
-		})
-		// console.log(newA)
-		// console.log(newB)
-	}
+	// if (newA.length === newB.length) {
+	// 	newA.map((o, i) => {
+	// 		console.log(_.isEqual(newA[i], newB[i]))
+	// 	})
+	// 	console.log(newA)
+	// 	console.log(newB)
+	// }
 
 	return _.isEqual(newA, newB)
 }

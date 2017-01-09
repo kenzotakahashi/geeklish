@@ -115,7 +115,7 @@ export const BeDetail = React.createClass({
 
     const attributes = !['Gerund','Participle'].includes(parent.pos) && list.map((o, i) => (
       <li key={o}>
-        {i !== 0 && <hr className='m-border' />}
+        <hr className='m-border' />
         <span className='m-list back-white'>
           <span>{o}</span>
           <label className="switch">
@@ -136,6 +136,8 @@ export const BeDetail = React.createClass({
         <Label parent={parent} role={role} />
         <ul className='m-list-group'>
           <hr className='m-border-edge' />
+          {!['Gerund','Participle','Infinitive'].includes(parent.pos) && 
+            <ModalSelect element={element} />}
           {attributes}
           <hr className='m-border-edge' />
         </ul>

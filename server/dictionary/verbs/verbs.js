@@ -554,11 +554,101 @@ const verbs = [
 				['noun','noun']
 			],
 			on: [
-				['noun']
+				['gerund']
 			],
 			up: [
 				[],
 				['noun']
+			]
+		}
+	},
+	{
+		base: 'play',
+		particles: ['around','along','at','back','down','off','out','on','upon',
+								'with','up'],
+		complements: {
+			base: [
+				[],
+				['noun'],
+				['adjective']
+			],
+			around: [
+				[]
+			],
+			along: [
+				[]
+			],
+			at: [
+				['noun']
+			],
+			back: [
+				['noun']
+			],
+			down: [
+				['noun']
+			],
+			off: [
+				[]
+			],
+			out: [
+				['noun']
+			],
+			on: [
+				['noun']
+			],
+			upon: [
+				['noun']
+			],
+			with: [
+				['noun']
+			],
+			up: [
+				['noun']
+			]
+		}
+	},
+	{
+		base: 'sound',
+		particles: ['like','off'],
+		complements: {
+			base: [
+				['noun'],
+				['adjective']
+			],
+			like: [
+				['noun'],
+				['adjective'],
+				['clause']
+			],
+			off: [
+				[]
+			]
+		}	
+	},
+	{
+		base: 'wait',
+		particles: ['around','behind','in','on','out','up'],
+		complements: {
+			base: [
+				[]
+			],
+			around: [
+				[]
+			],
+			behind: [
+				[]
+			],
+			in: [
+				[]
+			],
+			on: [
+				['noun']
+			],
+			out: [
+				['noun']
+			],
+			up: [
+				[]
 			]
 		}
 	}

@@ -130,7 +130,7 @@ export const Clause = {
         const last = v.verbs.length - 1
         let c = negative
         for (let i = 0; i < v.verbs.length; i++) {
-          c.concat(v.verbs[i].getList([v.verbs[i].base]))
+          c = c.concat(v.verbs[i].getList([v.verbs[i].word.base]))
           if (i !== last) {
             c = c.concat(v.conjunction)
           }

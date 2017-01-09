@@ -26,6 +26,11 @@ const adjectives = [
 		superlative: "hardest"
 	},
 	{
+		base: "easy",
+		comparative: "easier",
+		superlative: "easiest"
+	},
+	{
 		base: 'hungry'
 	},
 	{
@@ -49,7 +54,7 @@ const adjectives = [
 	},
 	{
 		base: 'transitive'
-	}
+	},
 ].map(o => ({
 	...o,
 	order: 5

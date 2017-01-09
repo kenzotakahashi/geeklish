@@ -18,7 +18,8 @@ export const references = {
   Infinitive: ['verb'],
   Gerund: ['verb'],
   Participle: ['verb'],
-  Possessive: ['noun']
+  Possessive: ['noun'],
+  Conjunction: [],
 }
 
 export function getDescendantIds(_id, words) {

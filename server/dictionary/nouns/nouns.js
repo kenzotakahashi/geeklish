@@ -130,6 +130,14 @@ const nouns = [
 	{
 		type: 'countable',
 		base: 'object'
+	},
+	{
+		type: 'uncountable',
+		base: 'fun'
+	},
+	{
+		type: 'countable',
+		base: 'guest'
 	}
 ].map(o => ({
 	...o,

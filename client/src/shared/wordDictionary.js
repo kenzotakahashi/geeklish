@@ -37,6 +37,7 @@ export const validPos = {
   },
   Verb: {
     noun: nouns,
+    gerund: ['Gerund'],
     clause: ['NounClause'],
     infinitive: ['Infinitive'],
     adverb: [adverb('comp')],
@@ -49,6 +50,7 @@ export const validPos = {
   },
   Be: {
     noun: nouns,
+    gerund: ['Gerund'],
     clause: ['NounClause'],
     infinitive: ['Infinitive'],
     adverb: [adverb('comp')],
