@@ -4,17 +4,20 @@ import { store } from '../index.js'
 import { desktopInitialState } from './examples'
 import Client from '../Client'
 import { routeExample } from '../shared/actions'
+import { removeMetaData } from '../shared/score'
 
 export const desktopHistory = createHistory()
 
 function dispatchExamples(_id, examples) {
   if (!!_id) {
     Client.getProject(_id, (data) => {
-      store.dispatch(routeExample(examples, data.words))
+      store.dispatch(routeExample(
+        examples, data.project.title, removeMetaData(data.words)))
     })
   }
   else {
-    store.dispatch(routeExample(examples, desktopInitialState().Words))
+    store.dispatch(routeExample(
+      examples, '', desktopInitialState().Words))
   }
 }
 

@@ -44,7 +44,7 @@ export const AdverbDetail = React.createClass({
     const modifyVerb = ['Verb','Be','VerbContainer'].includes(parent.pos) &&
                         role[0] === 'adverbs'
 
-    const form = modifyVerb && (
+    const form = modifyVerb && !!element.word.comparative && (
       <li key='form'>
         <span className='m-list pointer' onClick={() => store.dispatch(routeOption(formOption))}>
           <span>Form</span>
@@ -57,7 +57,7 @@ export const AdverbDetail = React.createClass({
       </li>
     )
 
-    const position = modifyVerb && !!element.word.comparative && (
+    const position = modifyVerb && (
       <li key='form'>
         <span className='m-list pointer' onClick={() => store.dispatch(routeOption(positionOption))}>
           <span>Position</span>

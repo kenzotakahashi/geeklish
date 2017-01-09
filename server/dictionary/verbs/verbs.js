@@ -1,7 +1,6 @@
 const verbs = [
 	{
 		base: 'love',
-		progressive: 'loving',
 		particles: [],
 		complements: {
 			base: [
@@ -12,7 +11,6 @@ const verbs = [
 	},
 	{
 		base: 'like',
-		progressive: 'liking',
 		particles: [],
 		complements: {
 			base: [
@@ -24,7 +22,6 @@ const verbs = [
 	{
 		base: 'find',
 		past: 'found',
-		progressive: 'finding',
 		particles: ['out'],
 		complements: {
 			base: [
@@ -43,7 +40,6 @@ const verbs = [
 		base: 'have',
 		present: 'has',
 		past: 'had',
-		progressive: 'having',
 		particles: [],
 		complements: {
 			base: [
@@ -54,7 +50,6 @@ const verbs = [
 	},
 	{
 		base: 'want',
-		progressive: 'wanting',
 		particles: [],
 		complements: {
 			base: [
@@ -67,7 +62,6 @@ const verbs = [
 		base: 'give',
 		past: 'gave',
 		passive: 'given',
-		progressive: 'giving',
 		particles: ['up'],
 		complements: {
 			base: [
@@ -82,7 +76,6 @@ const verbs = [
 	},
 	{
 		base: 'talk',
-		progressive: 'talking',
 		particles: [],
 		complements: {
 			base: [
@@ -92,7 +85,6 @@ const verbs = [
 	},
 	{
 		base: 'live',
-		progressive: 'living',
 		particles: [],
 		complements: {
 			base: [
@@ -102,7 +94,6 @@ const verbs = [
 	},
 	{
 		base: 'work',
-		progressive: 'working',
 		particles: ['out'],
 		complements: {
 			base: [
@@ -117,7 +108,6 @@ const verbs = [
 		base: 'eat',
 		past: 'ate',
 		passive: 'eaten',
-		progressive: 'eating',
 		particles: ['out'],
 		complements: {
 			base: [
@@ -131,7 +121,6 @@ const verbs = [
 	},
 	{
 		base: 'walk',
-		progressive: 'walking',
 		particles: ['away','down'],
 		complements: {
 			base: [
@@ -149,12 +138,12 @@ const verbs = [
 	{
 		base: 'tell',
 		past: 'told',
-		progressive: 'telling',
 		particles: [],
 		complements: {
 			base: [
 				[],
 				['noun'],
+				['noun','noun'],
 				['noun','clause'],
 				['clause']
 			],
@@ -165,7 +154,6 @@ const verbs = [
 		present: 'goes',
 		past: 'went',
 		passive: 'gone',
-		progressive: 'going',
 		particles: ['on','up','down','about','after','against','ahead','through',
 								'over','out','around','by'],
 		complements: {
@@ -218,7 +206,6 @@ const verbs = [
 		present: 'does',
 		past: 'did',
 		passive: 'done',
-		progressive: 'doing',
 		particles: [],
 		complements: {
 			base: [
@@ -230,7 +217,6 @@ const verbs = [
 	{
 		base: 'buy',
 		past: 'bought',
-		progressive: 'buying',
 		particles: ['into'],
 		complements: {
 			base: [
@@ -246,7 +232,6 @@ const verbs = [
 	{
 		base: 'think',
 		past: 'thought',
-		progressive: 'thinking',
 		particles: [],
 		complements: {
 			base: [
@@ -261,7 +246,6 @@ const verbs = [
 		base: 'know',
 		past: 'knew',
 		passive: 'known',
-		progressive: 'knowing',
 		particles: [],
 		complements: {
 			base: [
@@ -274,7 +258,6 @@ const verbs = [
 	{
 		base: 'drink',
 		past: 'drunk',
-		progressive: 'drinking',
 		particles: ['up'],
 		complements: {
 			base: [
@@ -289,7 +272,6 @@ const verbs = [
 	},
 	{
 		base: 'need',
-		progressive: 'needing',
 		particles: [],
 		complements: {
 			base: [
@@ -326,7 +308,6 @@ const verbs = [
 		base: 'see',
 		past: 'saw',
 		passive: 'seen',
-		progressive: 'seeing',
 		particles: ['through'],
 		complements: {
 			base: [
@@ -343,7 +324,6 @@ const verbs = [
 		base: 'take',
 		past: 'took',
 		passive: 'taken',
-		progressive: 'taking',
 		particles: ['over','up','away','off','into'],
 		complements: {
 			base: [
@@ -445,7 +425,6 @@ const verbs = [
 		base: 'wake',
 		past: 'woke',
 		passive: 'woken',
-		progressive: 'waking',
 		particles: ['up'],
 		complements: {
 			base: [
@@ -461,7 +440,6 @@ const verbs = [
 	{
 		base: 'say',
 		past: 'said',
-		progressive: 'saying',
 		particles: [],
 		complements: {
 			base: [
@@ -475,7 +453,6 @@ const verbs = [
 		base: 'speak',
 		past: 'spoke',
 		passive: 'spoken',
-		progressive: 'speaking',
 		particles: ['up'],
 		complements: {
 			base: [
@@ -490,7 +467,6 @@ const verbs = [
 	{
 		base: 'make',
 		past: 'made',
-		progressive: 'making',
 		particles: ['out','up'],
 		complements: {
 			base: [
@@ -508,7 +484,6 @@ const verbs = [
 	},
 	{
 		base: 'call',
-		progressive: 'calling',
 		particles: ['back'],
 		complements: {
 			base: [
@@ -522,9 +497,38 @@ const verbs = [
 			],
 		}
 	},
+	{
+		base: 'substitute',
+		particles: [],
+		complements: {
+			base: [
+				[],
+				['noun']
+			]
+		}
+	},
+	{
+		base: 'provide',
+		particles: [],
+		complements: {
+			base: [
+				['noun']
+			]
+		}
+	},
+	{
+		base: 'criticize',
+		particles: [],
+		complements: {
+			base: [
+				[],
+				['noun']
+			]
+		}
+	}
 ].map(o => ({
 	...o,
-	order: 3
+	order: 4
 }))
 
 export default verbs

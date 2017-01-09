@@ -22,7 +22,7 @@ const others = [
 	{
 		pos: 'Be',
 		base: 'be',
-		order: 4
+		order: 3
 	},
 	{
 		pos: 'Clause',

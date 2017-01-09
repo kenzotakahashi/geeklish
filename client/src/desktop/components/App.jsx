@@ -26,6 +26,29 @@ function getChildren(state, route) {
   }
 }
 
+const navStyle = {
+  backgroundColor: '#fff',
+  borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+  position: 'fixed',
+  top: '0',
+  width: '100%',
+  zIndex: '100'
+}
+
+const navItemStyle = {
+  float: 'left',
+  padding: '15px'
+}
+
+const textStyle = {
+  color: '#292b2c',
+  fontSize: '14px'
+}
+
+const sectionStyle = {
+  marginTop: '70px'
+}
+
 const App = React.createClass({
   componentDidMount: function() {
     store.subscribe(() => this.forceUpdate())
@@ -37,22 +60,24 @@ const App = React.createClass({
 
     return (
       <div>
-        <nav className="row">
-          <span className="nav-item">
-            <Link to='/' className="">Geeklish</Link>
+        <nav className="row" style={navStyle}>
+          <span style={navItemStyle}>
+            <Link to='/' className='logo'></Link>
           </span>
-          <span className="nav-item">
-            <Link to='/examples'>Examples</Link>
+          <span style={navItemStyle}>
+            <Link to='/examples' style={textStyle}>Examples</Link>
           </span>
-          <span className="nav-item">
-            <Link to='/projects'>My Projects</Link>
+          <span style={navItemStyle}>
+            <Link to='/projects' style={textStyle}>My Projects</Link>
           </span>
-          <span className="nav-item">
-            <Link to='/guide'>Guide</Link>
+          <span style={navItemStyle}>
+            <Link to='/guide' style={textStyle}>Guide</Link>
           </span>
         </nav>
 
-        {children}
+        <div style={sectionStyle}>
+          {children}
+        </div>
 
         <footer>
           <p>© 2016 Geeklish. All Rights Reserved. 

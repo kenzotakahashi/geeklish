@@ -43,6 +43,12 @@ const adjectives = [
 		base: 'smart',
 		comparative: "smarter",
 		superlative: "smartest"
+	},
+	{
+		base: 'local',
+	},
+	{
+		base: 'transitive'
 	}
 ].map(o => ({
 	...o,

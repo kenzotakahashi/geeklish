@@ -33,9 +33,9 @@ const factory = {
       person: null,
       number: 'singular',
       isWh: false,
-      adjectives: [],
       quantifier: null,
       determiner: null,
+      adjectives: [],
       prepositions: [],
       nouns: []
     }
@@ -100,8 +100,10 @@ const factory = {
       word: {
         base: w.base,
         present: w.present || `${w.base}s`, 
-        past: w.past || `${w.base}ed`,
-        progressive: w.progressive 
+        past: w.past ||
+          (w.base.slice(-1) === 'e' ? `${w.base}d` : `${w.base}ed`),
+        progressive: w.progressive ||
+          (w.base.slice(-1) === 'e' ? `${w.base.slice(0,-1)}ing` : `${w.base}ing`),
       },
       valid_complements: w.complements,
       valid_particles: w.particles,
@@ -206,7 +208,7 @@ const factory = {
       pos: 'Adverb',
       word: {
         base: w.base,
-        comparative: w.comparative === 'n' ? false : w.comparative || `more ${w.base}`,
+        comparative: w.comparative === 'n' ? '' : w.comparative || `more ${w.base}`,
         superlative: w.superlative || `most ${w.base}`
       },
       form: 'base',

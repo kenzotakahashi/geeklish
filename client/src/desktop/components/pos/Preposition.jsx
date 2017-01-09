@@ -39,7 +39,7 @@ const Preposition = React.createClass({
               <span className='word' onClick={() => store.dispatch(showOptions(_id))}>{element.word}</span>
               <Label parent={parent} role={role} />
               <WH id={element._id} isWh={element.isWh} />
-              {['Verb','Be','VerbContainer'].includes(parent.pos) &&
+              {['Verb','Be','VerbContainer'].includes(parent.pos) && role[0] === 'prepositions' &&
                 e('button', {
                 className: `tree-button ${element.before  && 'on'}`,
                 type: 'button',

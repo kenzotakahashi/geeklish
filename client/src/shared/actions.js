@@ -61,9 +61,10 @@ export const showWordFactory = (_id, target, dictionary) => ({
   dictionary
 })
 
-export const routeExample = (examples, words) => ({
+export const routeExample = (examples, title, words) => ({
   type: 'ROUTE_EXAMPLES',
   examples,
+  title,
   words
 })
 

@@ -104,14 +104,9 @@ const pronouns = [
     person: 3,
     number: 'singular',
   },
-  {
-    base: 'one',
-    person: 3,
-    number: 'singular',
-  }
 ].map(o => ({
   ...o,
-  order: 2
+  order: 1
 }))
 
 export default pronouns

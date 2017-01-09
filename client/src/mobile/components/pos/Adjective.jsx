@@ -41,7 +41,7 @@ export const AdjectiveDetail = React.createClass({
         <ul className='m-list-group'>
           <li key='form'>
             <hr className='m-border-edge' />
-            <span className='m-list pointer' onClick={() => store.dispatch(routeOption(adjectiveOption))}>
+            <span className='m-list back-white pointer' onClick={() => store.dispatch(routeOption(adjectiveOption))}>
               <span>Form</span>
               <span className='m-list-right'>
                 <span>{element.form}</span>

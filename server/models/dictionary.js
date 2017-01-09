@@ -35,7 +35,7 @@ const DeterminerDic = Dictionary.discriminator('DeterminerDic', new Schema({
 
 const VerbDic = Dictionary.discriminator('VerbDic', new Schema({
 	present: {type: String},
-	past: {type: String, required: true},
+	past: String,
 	passive: {type: String},
 	progressive: {type: String, required: true},
 	particles: [String],

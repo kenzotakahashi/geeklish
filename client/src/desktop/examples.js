@@ -20,5 +20,9 @@ export const desktopInitialState = function() {
         clause: null,
       },
     ],
+    answer: [],
+    userAnswer: [],
+    isAnswer: false,
+    isCorrect: false,
   }
 }

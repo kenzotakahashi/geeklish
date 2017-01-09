@@ -105,7 +105,6 @@ export const Noun = Element.discriminator('Noun', new Schema({
   quantifier: String,
   determiner: String,
   adjectives: [String],
-  adjectivesAfter: [String],
   prepositions: [String],
   nouns: [String]
 }, options))
@@ -115,7 +114,6 @@ export const NounContainer = Element.discriminator('NounContainer', new Schema({
   number: String,
   isWh: Boolean,
   adjectives: [String],
-  adjectivesAfter: [String],
   quantifier: String,
   determiner: String,
   prepositions: [String],
@@ -131,14 +129,17 @@ export const NounClause = Element.discriminator('NounClause', new Schema({
   clause: String,
   quantifier: String,
   adjectives: [String],
-  adjectivesAfter: [String],
   prepositions: [String],
   nouns: [String],
 }, options))
 
 export const Determiner = Element.discriminator('Determiner', new Schema({
   word: String,
+  type: String,
   number: String,
+  mass: Boolean,
+  of: String,
+  isOf: Boolean,
   adverb: String,
 }, options))
 
@@ -215,6 +216,7 @@ export const Infinitive = Element.discriminator('Infinitive', new Schema({
   word: String,
   verb: String,
   omit: Boolean,
+  before: Boolean,
 }, options))
 
 export const Gerund = Element.discriminator('Gerund', new Schema({

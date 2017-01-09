@@ -28,7 +28,7 @@ const ComplementOption = React.createClass({
       const choice = option.choice.map((o, i) => (
         <li key={i}>
           <hr className={`m-border${i === 0 ? '-edge' : ''}`} />
-          <span className='m-list' onClick={() => store.dispatch(setComplement(
+          <span className='m-list back-white' onClick={() => store.dispatch(setComplement(
             element._id, verbType, i
           ))}>
             <span>{o}</span>

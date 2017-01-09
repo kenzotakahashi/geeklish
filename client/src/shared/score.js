@@ -210,11 +210,21 @@ const convert = (base) => {
 const diff = (a, b) => {
 	const newA = convert(a)
 	const newB = convert(b)
+
+	if (newA.length === newB.length) {
+		newA.map((o, i) => {
+			console.log(_.isEqual(newA[i], newB[i]))
+		})
+		console.log(newA)
+		console.log(newB)
+	}
+
 	return _.isEqual(newA, newB)
 }
 
 export const score = (state) => {
 	if (state.isAnswer) return state
+	if (state.route === 'projects') return state
 	return {
 		...state,
 		isCorrect: diff(state.answer, state.Words)

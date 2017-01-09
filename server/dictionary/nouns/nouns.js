@@ -75,10 +75,65 @@ const nouns = [
 	{
 		type: "countable",
 		base: 'T-shirt',
+	},
+	{
+		type: "countable",
+		base: "option"
+	},
+	{
+		type: "both",
+		base: "proxy",
+		plural: 'proxies'
+	},
+	{
+		type: "both",
+		base: "yum"
+	},
+	{
+		type: "countable",
+		base: "repository",
+		plural: "repositories"
+	},
+	{
+		type: "countable",
+		base: "URL"
+	},
+	{
+		type: "both",
+		base: "base"
+	},
+	{
+		type: 'countable',
+	  base: 'one',
+	},
+	{
+		type: 'countable',
+		base: 'birthday'
+	},
+	{
+		type: 'countable',
+		base: 'page'
+	},
+	{
+		type: 'countable',
+		base: 'kernel'
+	},
+	{
+		type: 'countable',
+		base: 'patch',
+		plural: 'patches'
+	},
+	{
+		type: 'countable',
+		base: 'verb' 
+	},
+	{
+		type: 'countable',
+		base: 'object'
 	}
 ].map(o => ({
 	...o,
-	order: 1
+	order: 2
 }))
 
 export default nouns

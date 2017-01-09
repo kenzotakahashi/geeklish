@@ -43,7 +43,6 @@ const WordFactory = React.createClass({
               type='search'
               value={state.search}
               onChange={this.onInputChange}
-              autoFocus
             />
             <span className='m-nav-right' onClick={() => store.dispatch(
               showDetail(state.activeWord,'slidedown')

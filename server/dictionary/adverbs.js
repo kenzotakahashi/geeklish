@@ -87,14 +87,18 @@ const adverbs = [
 	},
 	{
 		base: 'soon',
-		canModify: ["verb"],
+		canModify: ["verb",'clause'],
 		comparative: "sooner",
 		superlative: "soonest"
 	},
 	{
 		base: 'later',
-		canModify: ["verb"],
+		canModify: ["verb",'clause'],
 	},
+	{
+		base: 'instead',
+		canModify: ['verb','clause']
+	}
 ].map(o => ({
 	...o,
 	order: 6

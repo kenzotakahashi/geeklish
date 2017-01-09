@@ -1,6 +1,6 @@
 import uuid from 'uuid'
 import { desktopInitialState } from '../examples'
-// import { score } from '../../shared/score'
+import { score } from '../../shared/score'
 import { createWordHelper, setComplementHelper, deleteElementHelper, useConjunctionHelper,
          undoConjunctionHelper, changeAttributeHelper } from '../../shared/others'
 
@@ -19,11 +19,15 @@ function reducer(state, action) {
       }
     }
     case 'ROUTE_EXAMPLES': {
+      // TODO title is used both for project and example
       return {
         ...state,
         route: 'examples',
         examples: action.examples,
-        Words: action.words
+        title: action.title,
+        Words: desktopInitialState().Words,
+        answer: action.words,
+        isAnswer: false,
       }
     }
     case 'ROUTE_GUIDE': {
@@ -82,55 +86,69 @@ function reducer(state, action) {
         newActiveWord = initialized._id
       }
 
-      return {
+      return score({
         ...state,
         saved: false,
         activeWord: newActiveWord,
         target: [],
         Words: newWords
-      }
+      })
     }
     case 'CHANGE_ATTRIBUTE': {
       const newWords = changeAttributeHelper(state, action)
-      // console.log(score())
-
-      return {
+      return score({
         ...state,
         saved: false,
         Words: newWords,
-      }
+      })
     }
     case 'DELETE_ELEMENT': {
       const newWords = deleteElementHelper(state, action)
-      return {
+      return score({
         ...state,
         saved: false,
         target: [],
         Words: newWords
-      }
+      })
     }
     case 'USE_CONJUNCTION': {
       const [newWords, initialized] = useConjunctionHelper(state, action)
-      return {
+      return score({
         ...state,
         saved: false,
         activeWord: initialized._id,
         target: [],
         Words: newWords
-      }
+      })
     }
 
     case 'UNDO_CONJUNCTION': {
       const newWords = undoConjunctionHelper(state, action)
-      return {
+      return score({
         ...state,
         saved: false,
         Words: newWords
-      }
+      })
     }
 
     case 'SET_COMPLEMENT': {
-      return setComplementHelper(state, action)
+      return score(setComplementHelper(state, action))
+    }
+    case 'SWITCH_CANVAS': {
+      if (state.isAnswer) {
+        return {
+          ...state,
+          Words: state.userAnswer,
+          isAnswer: false
+        }
+      } else {
+        return {
+          ...state,
+          Words: state.answer,
+          userAnswer: state.Words,
+          isAnswer: true
+        }
+      }
     }
 
     // ======================= Project ================================

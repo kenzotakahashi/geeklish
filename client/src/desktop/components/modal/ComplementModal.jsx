@@ -11,7 +11,7 @@ export const ComplementModal = React.createClass({
 	  return {choice: element.complementIndex}
 	},
 	onChange: function(e) {
-		this.setState({choice: e.currentTarget.value})
+		this.setState({choice: parseInt(e.currentTarget.value, 10)})
 	},
 	onFormSubmit: function(_id, verbType, e) {
 	  e.preventDefault()
@@ -25,7 +25,7 @@ export const ComplementModal = React.createClass({
 		                   state.Words.find(o => o._id === element.particle).word : 'base'
 		const complements = element.valid_complements[verbType].map((o, i) => (
 			<div className="radio" key={i}>
-		    <input type="radio" value={i} checked={parseInt(this.state.choice, 10) === i}
+		    <input type="radio" value={i} checked={this.state.choice === i}
 		           onChange={this.onChange} />
 		    {o.length > 0 ?
 		       o.map((t, j) => (<span key={j} className='comp-choice'>{t}</span>))

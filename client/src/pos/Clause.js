@@ -141,7 +141,8 @@ export const Clause = {
       }
     }
     if (!(s && s.isValid() && v && v.isValid())) return [false, '(You need a subject and a verb)']
-    if (s && s.isValid() && s.pos === 'Noun' && !(s.determiner || s.quantifier)) {
+    if (s && s.isValid() && s.pos === 'Noun' && s.type === 'countable'
+        && !(s.determiner || s.quantifier)) {
       return [false, '(The countable noun needs either a quantifier or determiner)']
     }
 

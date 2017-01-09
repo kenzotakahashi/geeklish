@@ -31,7 +31,8 @@ const Examples = React.createClass({
           </div>
         </div>
         <div className='col-10'>
-          <Canvas />
+          {state.title && <Canvas />
+          }
         </div>
       </div>
     )

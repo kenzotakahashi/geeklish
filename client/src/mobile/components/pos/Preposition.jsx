@@ -27,7 +27,7 @@ export const Preposition = React.createClass({
 const needPosition = (parent, role) => (
   role[0] === 'particle'
   ? parent.complements.length > 0
-  : ['Verb','Be','VerbContainer'].includes(parent.pos)
+  : ['Verb','Be','VerbContainer'].includes(parent.pos) && role[0] === 'prepositions'
 )
 
 export const PrepositionDetail = React.createClass({
@@ -39,7 +39,7 @@ export const PrepositionDetail = React.createClass({
     const position = needPosition(parent, role) && (
       <li key='number'>
         <span className='m-list back-white'>
-          <span>Beginning of Clause</span>
+          <span>{role[0] === 'particle' ? 'Before Complement' : 'Beginning of Clause'}</span>
           <label className="switch">
             <input type="checkbox" checked={element.before}
               onChange={() => store.dispatch(changeAttribute(element._id,'before',!element.before))} 
