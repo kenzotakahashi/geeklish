@@ -28,6 +28,7 @@ function reducer(state, action) {
         Words: desktopInitialState().Words,
         answer: action.words,
         isAnswer: false,
+        isCorrect: false,
       }
     }
     case 'ROUTE_GUIDE': {

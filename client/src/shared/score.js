@@ -215,8 +215,8 @@ const diff = (a, b) => {
 		newA.map((o, i) => {
 			console.log(_.isEqual(newA[i], newB[i]))
 		})
-		console.log(newA)
-		console.log(newB)
+		// console.log(newA)
+		// console.log(newB)
 	}
 
 	return _.isEqual(newA, newB)
