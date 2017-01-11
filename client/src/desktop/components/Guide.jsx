@@ -65,6 +65,7 @@ const Guide = React.createClass({
           <ul>
             <li className='function-group'>
               <div className='function-title'>adjectives</div>
+              <span className='pos Adjective'>Adjective</span>
               <span className='pos basic'>Adjective Clause</span>
               <span className='pos basic'>Participle</span>
               <span className='pos basic'>Infinitive</span>
@@ -105,7 +106,8 @@ const Guide = React.createClass({
           <ul>
             <li className='function-group'>
               <div className='function-title'>particle</div>
-              <span className='pos Preposition'>Preposition</span>            
+              <span className='pos Preposition'>Preposition</span>
+              <span className='pos Adverb'>Adverb</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>complements</div>

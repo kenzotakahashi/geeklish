@@ -81,8 +81,10 @@ export const createWordHelper = (state, action) => {
   const [updated, initialized] = takeWord(parent, action.wordBase, action.target)
 
   const newWords = Object.assign([], state.Words)
+
   const resetComplement = action.target[0] === 'particle' ? {
-    complementIndex: parent.valid_complements[initialized.word][0].length === 0 ? 0 : null,
+    complementIndex: parent.valid_complements[initialized.pos === 'Adverb'
+          ? initialized.word.base : initialized.word][0].length === 0 ? 0 : null,
     complements: []
   } : {}
 

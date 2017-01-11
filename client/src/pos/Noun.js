@@ -14,22 +14,25 @@ const getWh = function() {
   return [null, false]
 }
 
-function beforeOrAfter(adjs) {
+function categorizeAdj(adjs) {
   const adjBeginning = []
   const adjectives = []
   const adjectivesAfter = []
+  let appositive = []
   const base = adjs.map(o => createWord(o))
   for (let adj of base) {
     if (adj.pos === 'Participle' && adj.beginning) {
       adjBeginning.push(adj)
-    } else if (adj.pos === 'Adjective' && !adj.after ||
-              (adj.pos === 'Participle' && !adj.isPhrase())) {
+    } else if ((adj.pos === 'Adjective' && !adj.after) ||
+              ((adj.pos === 'Participle' && !adj.isPhrase()))) {
       adjectives.push(adj)
+    } else if (adj.pos === 'Appositive') {
+      appositive = !adj.isValid() ? [] : adj.essential ? [adj] : [',', adj ,',']
     } else {
       adjectivesAfter.push(adj)
     } 
   }
-  return [adjBeginning, adjectives, adjectivesAfter]
+  return [adjBeginning, adjectives, adjectivesAfter, appositive]
 }
 
 function shouldUseAn(word) {
@@ -61,7 +64,7 @@ export const Noun = {
     this.person = w.person
     this.number = w.number
     this.isWh = w.isWh;
-    [this.adjBeginning, this.adjectives, this.adjectivesAfter] = beforeOrAfter(w.adjectives)
+    [this.adjBeginning, this.adjectives, this.adjectivesAfter, this.appositive] = categorizeAdj(w.adjectives)
     this.quantifier = createWord(w.quantifier)
     this.determiner = createWord(w.determiner)
     this.prepositions = w.prepositions.map(o => createWord(o))
@@ -92,6 +95,7 @@ export const Noun = {
             ...this.adjectives,
             ...this.nouns, 
             noun,
+            ...this.appositive,
             ...this.adjectivesAfter,
             ...this.prepositions]
   },
@@ -115,7 +119,7 @@ export const NounContainer = {
     this.person = w.person
     this.number = w.number
     this.isWh = w.isWh;
-    [this.adjectives, this.adjectivesAfter] = beforeOrAfter(w.adjectives)
+    [this.adjBeginning, this.adjectives, this.adjectivesAfter, this.appositive] = categorizeAdj(w.adjectives)
     this.quantifier = createWord(w.quantifier)
     this.determiner = createWord(w.determiner)
     this.prepositions = w.prepositions.map(o => createWord(o))
@@ -147,6 +151,7 @@ export const NounContainer = {
             this.determiner || '',
             ...this.adjectives,
             ...noun,
+            ...this.appositive,
             ...this.adjectivesAfter,
             ...this.prepositions]
   },
@@ -168,7 +173,7 @@ export const NounClause = {
     this.that = w.that
     this.clause = createWord(w.clause)
     this.isWh = w.isWh;
-    [this.adjectives, this.adjectivesAfter] = beforeOrAfter(w.adjectives)
+    [this.adjBeginning, this.adjectives, this.adjectivesAfter, this.appositive] = categorizeAdj(w.adjectives)
     this.quantifier = createWord(w.quantifier)
     this.prepositions = w.prepositions.map(o => createWord(o))
     this.nouns = w.nouns.map(o => createWord(o))

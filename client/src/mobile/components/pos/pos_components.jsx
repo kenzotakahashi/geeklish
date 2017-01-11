@@ -10,7 +10,8 @@ import { Noun, NounDetail,
 import { Determiner, DeterminerDetail,
 				 Possessive, PossessiveDetail } from './Determiner.jsx'
 import { Adjective, AdjectiveDetail,
-				 AdjectiveClause, AdjectiveClauseDetail } from './Adjective.jsx'
+				 AdjectiveClause, AdjectiveClauseDetail,
+				 Appositive, AppositiveDetail } from './Adjective.jsx'
 import { Adverb, AdverbDetail,
 				 AdverbClause, AdverbClauseDetail } from './Adverb.jsx'
 import { Preposition, PrepositionDetail } from './Preposition.jsx'
@@ -33,6 +34,7 @@ export const pos_components = {
 	Determiner,
 	Adjective,
 	AdjectiveClause,
+	Appositive,
 	Adverb,
 	AdverbClause,
 	Preposition,
@@ -57,6 +59,7 @@ export const posDetails = {
 	NounClause: NounClauseDetail,
 	Adjective: AdjectiveDetail,
 	AdjectiveClause: AdjectiveClauseDetail,
+	Appositive: AppositiveDetail,
 	Adverb: AdverbDetail,
 	AdverbClause: AdverbClauseDetail,
 	Preposition: PrepositionDetail,

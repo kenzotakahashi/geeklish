@@ -49,3 +49,20 @@ export const AdjectiveClause = {
     return [null, false]
   }
 }
+
+export const Appositive = {
+  init: function(p) {
+    this._id = p._id
+    this.pos = p.pos
+    this.noun = createWord(p.noun)
+    this.essential = p.essential
+    return this
+  },
+  isValid: function() {
+    return !!this.noun
+  },
+  toString: function() {
+    if (!this.noun) return ''
+    return this.noun
+  }
+}

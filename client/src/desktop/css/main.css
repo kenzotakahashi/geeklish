@@ -362,7 +362,7 @@ input.form-control.title-form {
 
 .Sentence,.Clause,.ClauseContainer,.NounContainer,.VerbContainer,
 .NounClause,.AdjectiveClause, .AdverbClause, .Possessive,.Infinitive,
-.Gerund,.Participle,.basic {
+.Gerund,.Participle,.Appositive,.basic {
   color: #fff;
   background-color: #aaa;
 }

@@ -10,7 +10,7 @@ function validDeterminer(dType, w, word) {
   return ['both',word.number].includes(w.number)
 }
 
-const adverb = p => ({pos: 'Adverb', attr: (w) => w.canModify.includes(p)})
+const adverb = p => ({pos: 'Adverb', attr: (w) => w.usage.includes(p)})
 
 const nouns = ['Noun', 'Pronoun', 'NounClause', 'Gerund']
 const verbs = ['Verb', 'Be']
@@ -20,6 +20,8 @@ const complements = [...nouns, 'Adjective', adverb('comp'), 'Preposition', 'Infi
 const determiners = [{pos: 'Determiner', attr: (w, word) => validDeterminer('determiner', w, word)},
                       'Possessive']
 const quantifier = [{pos: 'Determiner', attr: (w, word) => validDeterminer('quantifier', w, word)}]
+const appositive = {pos: 'Appositive', attr: (w, word) => 
+                    word.adjectives.filter(o => o.pos === 'Appositive').length === 0}
 
 export const validPos = {
   Sentence: {
@@ -44,7 +46,8 @@ export const validPos = {
     adjective: ['Adjective'],
     preposition: ['Preposition'],
 
-    particle: [{pos: 'Preposition', attr: (w, word) => word.valid_particles.includes(w.base)}],
+    particle: [{pos: 'Preposition', attr: (w, word) => word.valid_particles.includes(w.base)},
+               {pos: 'Adverb', attr: (w, word) => word.valid_particles.includes(w.base)}],
     adverbs: [adverb('verb')],
     prepositions: ['Preposition']
   },
@@ -70,13 +73,13 @@ export const validPos = {
   Noun: {
     quantifier: quantifier,
     determiner: determiners,
-    adjectives: [...adjectives, 'Infinitive'],
+    adjectives: [...adjectives, 'Infinitive', appositive],
     nouns: ['Noun', 'NounClause'],
     prepositions: ['Preposition'],
   },
   NounContainer: {
     nouns: nouns,
-    adjectives: adjectives,
+    adjectives: [...adjectives, appositive],
     prepositions: ['Preposition'],
     quantifier: quantifier,
     determiner: determiners,
@@ -90,7 +93,7 @@ export const validPos = {
     prepositions: ['Preposition'],
   },
   Pronoun: {
-    adjectives: ['AdjectiveClause','Infinitive', 'Participle','Adjective'], 
+    adjectives: [...adjectives, 'Infinitive'], 
     prepositions: ['Preposition'],
   },
   Determiner: {
@@ -125,6 +128,9 @@ export const validPos = {
   Possessive: {
     noun: [{pos: 'Pronoun', attr: (w) => !!w.p }, 'Noun'],
   },
+  Appositive: {
+    noun: ['Noun']
+  }
 }
 
 function valid_check(valid_list, dicWord, word) {

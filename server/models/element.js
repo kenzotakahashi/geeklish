@@ -189,11 +189,7 @@ export const Adverb = Element.discriminator('Adverb', new Schema({
     superlative: String
   },
   form: String,
-  canModifyVerb: Boolean,
-  canModifyAdj: Boolean,
-  canModifyAdv: Boolean,
-  canModifyDet: Boolean,
-  canModifyClause: Boolean,
+  usage: [String],
   position: String,
   adverb: String,
   isWh: Boolean

@@ -213,11 +213,7 @@ const factory = {
         superlative: w.superlative || `most ${w.base}`
       },
       form: 'base',
-      canModifyVerb: w.canModify.includes('verb'),
-      canModifyAdj: w.canModify.includes('adj'),
-      canModifyAdv: w.canModify.includes('adv'),
-      canModifyDet: w.canModify.includes('det'),
-      canModifyClause: w.canModify.includes('clause'),
+      usage: w.usage,
       position: 'before',
       adverb: null,
       isWh: ['when','where','how','why'].includes(w.base) ? true : false
@@ -294,6 +290,14 @@ const factory = {
       pos: 'Conjunction',
       word: w.base,
       type: w.type
+    }
+  },
+  Appositive: function(w) {
+    return {
+      _id: uuid.v1(),
+      pos: 'Appositive',
+      noun: null,
+      essential: false,
     }
   }
 }

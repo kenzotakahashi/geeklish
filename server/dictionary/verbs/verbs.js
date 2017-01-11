@@ -357,7 +357,7 @@ const verbs = [
 		passive: 'got',
 		progressive: 'getting',
 		particles: ['across','away','along','around','back','behind','by','down','in',
-		            'into','off','on','out','over','up'],
+		            'into','off','on','out','over','up','together'],
 		complements: {
 			base: [
 				['noun'],
@@ -418,7 +418,10 @@ const verbs = [
 			],
 			up: [
 				[]
-			]
+			],
+			together: [
+				[]
+			],
 		}
 	},
 	{

@@ -52,7 +52,7 @@ const AdjectiveDic = Dictionary.discriminator('AdjectiveDic', new Schema({
 const AdverbDic = Dictionary.discriminator('AdverbDic', new Schema({
 	comparative: {type: String},
 	superlative: {type: String},
-	canModify: [{type: String}],
+	usage: [{type: String}],
 	pos: {type: String, default: 'Adverb'},
 }, options))
 
@@ -100,6 +100,9 @@ const ClauseContainerDic = Dictionary.discriminator('ClauseContainerDic',
 const VerbContainerDic = Dictionary.discriminator('VerbContainerDic',
 	new Schema({pos: {type: String, default: 'VerbContainer'}}, options))
 
+const AppositiveDic = Dictionary.discriminator('AppositiveDic',
+	new Schema({pos: {type: String, default: 'Appositive'}}, options))
+
 export const DicPos = {
 	Verb: VerbDic,
 	Pronoun: PronounDic,
@@ -120,5 +123,6 @@ export const DicPos = {
   AdjectiveClause: AdjectiveClauseDic,
   AdverbClause: AdverbClauseDic,
   ClauseContainer: ClauseContainerDic,
-  VerbContainer: VerbContainerDic
+  VerbContainer: VerbContainerDic,
+  Appositive: AppositiveDic
 }

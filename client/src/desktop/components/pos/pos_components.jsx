@@ -4,7 +4,7 @@ import Pronoun from './Pronoun.jsx'
 import Sentence from './Sentence.jsx'
 import { Noun, NounContainer, NounClause } from './Noun.jsx'
 import { Determiner, Possessive } from './Determiner.jsx'
-import { Adjective, AdjectiveClause } from './Adjective.jsx'
+import { Adjective, AdjectiveClause, Appositive } from './Adjective.jsx'
 import { Adverb, AdverbClause } from './Adverb.jsx'
 import Preposition from './Preposition.jsx'
 import Conjunction from './Conjunction.jsx'
@@ -24,6 +24,7 @@ const components = {
 	Determiner,
 	Adjective,
 	AdjectiveClause,
+	Appositive,
 	Adverb,
 	AdverbClause,
 	Preposition,

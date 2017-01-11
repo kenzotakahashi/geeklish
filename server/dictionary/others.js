@@ -58,6 +58,11 @@ const others = [
 		pos: 'VerbContainer',
 		base: 'VerbContainer',
 		order: 2
+	},
+	{
+		pos: 'Appositive',
+		base: 'Appositive',
+		order: 9
 	}
 ]
 

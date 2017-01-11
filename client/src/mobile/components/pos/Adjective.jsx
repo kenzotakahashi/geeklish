@@ -114,3 +114,55 @@ export const AdjectiveClauseDetail = React.createClass({
     )
   }
 })
+
+export const Appositive = React.createClass({
+  render: function() {
+    const state = store.getState()
+    const {_id, parent, role} = this.props
+    const element = state.Words.find(o => o._id === _id)
+    const attrs = ['noun']
+
+    return (
+      <ul className='m-ul'>
+        <li className='tree-top'>
+          <div className={`m-tree-box ${element.pos}`}
+               onClick={() => store.dispatch(showDetail(element._id,'forward',parent,role))}>
+            <span className='word' >Appositive</span>
+          </div>
+          <Children element={element} attrs={attrs} words={state.Words}/>
+        </li>
+      </ul>
+    )
+  }
+})
+
+export const AppositiveDetail = React.createClass({
+  render: function() {
+    const state = store.getState()
+    const {element, parent, role} = this.props
+    const attrs = ['noun']
+
+    return (
+      <div>
+        <Label parent={parent} role={role} />
+        <ul className='m-list-group'>
+          <hr className='m-border-edge' />
+          <li key='number'>
+            <span className='m-list back-white'>
+              <span>Essential</span>
+              <label className="switch">
+                <input type="checkbox" checked={element.essential}
+                  onChange={() => store.dispatch(changeAttribute(element._id,'essential',!element.essential))} 
+                />
+                <div className="slider round"></div>
+              </label>
+            </span>
+          </li>
+          <hr className='m-border-edge' />
+        </ul>
+        <ChildrenDetail element={element} attrs={attrs} words={state.Words} />
+        <DeleteButton id={element._id} role={role} parentId={parent._id} />
+      </div>
+    )
+  }
+})

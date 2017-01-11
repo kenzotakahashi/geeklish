@@ -1,103 +1,107 @@
 const adverbs = [
 	{
 		base: "hard",
-		canModify: ["verb","adj"],
+		usage: ["verb","adj"],
 		comparative: "harder",
 		superlative: "hardest"
 	},
 	{
 		base: "really",
-		canModify: ["verb","clause"]
+		usage: ["verb","clause"]
 	},
 	{
 		base: "quickly",
-		canModify: ["verb","clause"]
+		usage: ["verb","clause"]
 	},
 	{
 		base: "hopefully",
-		canModify: ["verb","clause"]
+		usage: ["verb","clause"]
 	},
 	{
 		base: "why",
-		canModify: ["verb"],
+		usage: ["verb"],
 		comparative: "n",
 	},
 	{
 		base: "how",
-		canModify: ["verb","adj","adv"],
+		usage: ["verb","adj","adv"],
 		comparative: "n",
 	},
 	{
 		base: "when",
-		canModify: ["verb","comp"],
+		usage: ["verb","comp"],
 		comparative: "n",
 	},
 	{
 		base: "where",
-		canModify: ["verb","comp"],
+		usage: ["verb","comp"],
 		comparative: "n",
 	},
 	{
 		base: "almost",
-		canModify: ["verb","adj","adv","det"]
+		usage: ["verb","adj","adv","det"]
 	},
 	{
 		base: "nearly",
-		canModify: ["verb","adj","adv","det"]
+		usage: ["verb","adj","adv","det"]
 	},
 	{
 		base: "so",
-		canModify: ["adj","adv"],
+		usage: ["adj","adv"],
 		comparative: "n",
 	},
 	{
 		base: "much",
-		canModify: ["verb","adj","adv"],
+		usage: ["verb","adj","adv"],
 		comparative: "n",
 	},
 	{
 		base: "today",
-		canModify: ["verb","clause","comp"],
+		usage: ["verb","clause","comp"],
 		comparative: "n",
 	},
 	{
 		base: "yesterday",
-		canModify: ["verb","clause","comp"],
+		usage: ["verb","clause","comp"],
 		comparative: "n",
 	},
 	{
 		base: "just",
-		canModify: ["verb","adj","adv"],
+		usage: ["verb","adj","adv"],
 		comparative: "n",
 	},
 	{
 		base: 'never',
-		canModify: ["verb"],
+		usage: ["verb"],
 		comparative: "n",
 	},
 	{
 		base: 'ever',
-		canModify: ["verb"],
+		usage: ["verb"],
 		comparative: "n",
 	},
 	{
 		base: 'as',
-		canModify: ["adj"],
+		usage: ["adj"],
 		comparative: "n",
 	},
 	{
 		base: 'soon',
-		canModify: ["verb",'clause'],
+		usage: ["verb",'clause'],
 		comparative: "sooner",
 		superlative: "soonest"
 	},
 	{
 		base: 'later',
-		canModify: ["verb",'clause'],
+		usage: ["verb",'clause'],
 	},
 	{
 		base: 'instead',
-		canModify: ['verb','clause']
+		usage: ['verb','clause']
+	},
+	{
+		base: 'together',
+		usage: ['verb','clause','particle']
 	}
 ].map(o => ({
 	...o,
