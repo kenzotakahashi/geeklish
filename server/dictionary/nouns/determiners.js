@@ -98,7 +98,7 @@ const determiners = [
 	},
 ].map(o => ({
 	...o,
-	order: 0
+	order: 10
 }))
 
 export default determiners

@@ -1,14 +1,15 @@
 import React from 'react'
 import { store } from '../../../index.js'
 import { Children, WH, DeleteButton, Label, ChildrenDetail } from './Tree'
-import { showDetail, routeOption } from '../../../shared/actions'
+import { showDetail, routeOption, changeAttribute } from '../../../shared/actions'
 
 export const Adjective = React.createClass({
   render: function() {
     const state = store.getState()
     const {_id, parent, role} = this.props
     const element = state.Words.find(o => o._id === _id)
-    const attrs = ['adverbs', 'prepositions']
+    const attrs = ['complement','adverbs']
+
     return (
       <ul className='m-ul'>
         <li className='tree-top'>
@@ -33,7 +34,23 @@ export const AdjectiveDetail = React.createClass({
   render: function() {
     const state = store.getState()
     const {element, parent, role} = this.props
-    const attrs = ['adverbs', 'prepositions']    
+    const attrs = ['complement','adverbs']
+    
+    const position = role[1] === null && (
+      <li key='number'>
+        <span className='m-list back-white'>
+          <span>After Noun</span>
+          <label className="switch">
+            <input type="checkbox" checked={element.after}
+              onChange={() => store.dispatch(changeAttribute(element._id,'after',!element.after))} 
+            />
+            <div className="slider round"></div>
+          </label>
+        </span>
+        <hr className='m-border' />
+      </li>
+    )
+
 
     return (
       <div>
@@ -50,6 +67,7 @@ export const AdjectiveDetail = React.createClass({
             </span>
             <hr className='m-border' />
           </li>
+          {position}
           <WH id={element._id} isWh={element.isWh} />
           <hr className='m-border-edge' />
         </ul>

@@ -178,8 +178,11 @@ const Guide = React.createClass({
               <span className='pos Adverb'>Adverb</span>
             </li>
             <li className='function-group'>
-              <div className='function-title'>prepositions</div>
-              <span className='pos Preposition'>Preposition</span>            
+              <div className='function-title'>complement</div>
+              <span className='pos Preposition'>Preposition</span>
+              <span className='pos basic'>NounClause</span>
+              <span className='pos basic'>Infinitive</span>
+              <span className='pos basic'>Gerund</span>
             </li>
           </ul>
         </div>

@@ -12,52 +12,52 @@ const others = [
 	{
 		pos: 'Participle',
 		base: 'Participle',
-		order: 10
+		order: 1
 	},
 	{
 		pos: 'Possessive',
 		base: 'Possessive',
-		order: 10
+		order: 1
 	},
 	{
 		pos: 'Be',
 		base: 'be',
-		order: 3
+		order: 13
 	},
 	{
 		pos: 'Clause',
 		base: 'Clause',
-		order: 12
+		order: 2
 	},
 	{
 		pos: 'NounContainer',
 		base: 'NounContainer',
-		order: 14
+		order: 4
 	},
 	{
 		pos: 'NounClause',
 		base: 'NounClause',
-		order: 16
+		order: 6
 	},
 	{
 		pos: 'AdjectiveClause',
 		base: 'AdjectiveClause',
-		order: 18
+		order: 8
 	},
 	{
 		pos: 'AdverbClause',
 		base: 'AdverbClause',
-		order: 18
+		order: 8
 	},
 	{
 		pos: 'ClauseContainer',
 		base: 'ClauseContainer',
-		order: 20
+		order: 9
 	},
 	{
 		pos: 'VerbContainer',
 		base: 'VerbContainer',
-		order: 22
+		order: 2
 	}
 ]
 

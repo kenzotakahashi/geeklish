@@ -57,7 +57,7 @@ const adjectives = [
 	},
 ].map(o => ({
 	...o,
-	order: 5
+	order: 15
 }))
 
 export default adjectives

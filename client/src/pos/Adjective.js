@@ -7,20 +7,19 @@ export const Adjective = {
     this.word = p.word
     this.form = p.form
     this.adverbs = p.adverbs.map(o => createWord(o))
-    this.prepositions = p.prepositions.map(o => createWord(o))
+    this.complement = createWord(p.complement)
+    this.after = p.after
     this.isWh = p.isWh
     return this    
   },  
   toString: function() {
-   return [
-     ...this.adverbs,
-     this.word[this.form],
-     ...this.prepositions
-   ].map(o => o.toString()).join(' ')
+    let adj = [...this.adverbs, this.word[this.form]]
+    adj = this.complement ? adj.concat(this.complement) : adj
+    return adj.map(o => o.toString()).join(' ')
   },
   getWh: function() {
     if (this.isWh) return [this, true]
-    for (const attr of ['adverbs','prepositions']) {
+    for (const attr of ['adverbs']) {
       for (let i = 0; i < this[attr].length; i++) {
         const [wh, isWh] = this[attr][i].getWh()
         if (isWh) {

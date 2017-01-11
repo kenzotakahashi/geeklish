@@ -111,7 +111,7 @@ const pronouns = [
   }
 ].map(o => ({
   ...o,
-  order: 1
+  order: 11
 }))
 
 export default pronouns

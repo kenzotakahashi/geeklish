@@ -1,5 +1,19 @@
 import { createWord } from './util.js'
 
+function beforeOrAfter(adjs) {
+  const adjBeginning = []
+  const adjectives = []
+  const base = adjs.map(o => createWord(o))
+  for (let adj of base) {
+    if (adj.pos === 'Participle' && adj.beginning) {
+      adjBeginning.push(adj)
+    } else {
+      adjectives.push(adj)
+    } 
+  }
+  return [adjBeginning, adjectives]
+}
+
 const Pronoun = {
   init: function(p) {
     this._id = p._id
@@ -8,23 +22,10 @@ const Pronoun = {
     this.person = p.person
     this.number = p.number
     this.form = p.form;
-    [this.adjBeginning, this.adjectives] = this.beforeOrAfter(p.adjectives)
+    [this.adjBeginning, this.adjectives] = beforeOrAfter(p.adjectives)
     this.prepositions = p.prepositions.map(o => createWord(o))
     this.isWh = p.isWh
     return this    
-  },
-  beforeOrAfter: function(adjs) {
-    const adjBeginning = []
-    const adjectives = []
-    const base = adjs.map(o => createWord(o))
-    for (let adj of base) {
-      if (adj.pos === 'Participle' && adj.beginning) {
-        adjBeginning.push(adj)
-      } else {
-        adjectives.push(adj)
-      } 
-    }
-    return [adjBeginning, adjectives]
   },
   isValid: () => true,
   toString: function() {

@@ -101,7 +101,7 @@ const adverbs = [
 	}
 ].map(o => ({
 	...o,
-	order: 6
+	order: 16
 }))
 
 export default adverbs

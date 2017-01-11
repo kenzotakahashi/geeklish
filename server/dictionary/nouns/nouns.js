@@ -141,7 +141,7 @@ const nouns = [
 	}
 ].map(o => ({
 	...o,
-	order: 2
+	order: 12
 }))
 
 export default nouns

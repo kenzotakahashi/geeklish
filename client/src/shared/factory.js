@@ -190,7 +190,8 @@ const factory = {
       },
       form: 'base',
       adverbs: [],
-      prepositions: [],
+      complement: null,
+      after: false,
       isWh: false
     }
   },

@@ -73,7 +73,7 @@ const prepositions = [
 	},
 ].map(o => ({
 	...o,
-	order: 7
+	order: 17
 }))
 
 export default prepositions

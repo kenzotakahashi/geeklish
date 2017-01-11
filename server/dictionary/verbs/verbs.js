@@ -654,7 +654,7 @@ const verbs = [
 	}
 ].map(o => ({
 	...o,
-	order: 4
+	order: 14
 }))
 
 export default verbs

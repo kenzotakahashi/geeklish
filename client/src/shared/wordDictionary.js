@@ -90,7 +90,7 @@ export const validPos = {
     prepositions: ['Preposition'],
   },
   Pronoun: {
-    adjectives: ['AdjectiveClause','Infinitive', 'Participle'], 
+    adjectives: ['AdjectiveClause','Infinitive', 'Participle','Adjective'], 
     prepositions: ['Preposition'],
   },
   Determiner: {
@@ -98,7 +98,7 @@ export const validPos = {
   },
   Adjective: {
     adverbs: [adverb('adj')],
-    prepositions: ['Preposition'] 
+    complement: ['Preposition','NounClause','Infinitive','Gerund'] 
   },
   AdjectiveClause: {
     clause: ['Clause']

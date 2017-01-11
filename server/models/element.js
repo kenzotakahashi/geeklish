@@ -172,7 +172,8 @@ export const Adjective = Element.discriminator('Adjective', new Schema({
   },
   form: String,
   adverbs: [String],
-  prepositions: [String],
+  complement: String,
+  after: Boolean,
   isWh: Boolean
 }, options))
 

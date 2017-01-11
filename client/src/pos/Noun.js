@@ -22,7 +22,8 @@ function beforeOrAfter(adjs) {
   for (let adj of base) {
     if (adj.pos === 'Participle' && adj.beginning) {
       adjBeginning.push(adj)
-    } else if (adj.pos === 'Adjective' || (adj.pos === 'Participle' && !adj.isPhrase())) {
+    } else if (adj.pos === 'Adjective' && !adj.after ||
+              (adj.pos === 'Participle' && !adj.isPhrase())) {
       adjectives.push(adj)
     } else {
       adjectivesAfter.push(adj)
