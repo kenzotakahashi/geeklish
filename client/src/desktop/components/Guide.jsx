@@ -38,6 +38,7 @@ const Guide = React.createClass({
               <span className='pos basic'>Adjective Clause</span>
               <span className='pos basic'>Participle</span>
               <span className='pos basic'>Infinitive</span>
+              <span className='pos basic'>Appositive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>nouns</div>
@@ -416,6 +417,7 @@ const Guide = React.createClass({
               <span className='pos basic'>Adjective Clause</span>
               <span className='pos basic'>Participle</span>
               <span className='pos basic'>Infinitive</span>
+              <span className='pos basic'>Appositive</span>
             </li>
             <li className='function-group'>
               <div className='function-title'>nouns</div>
@@ -550,6 +552,20 @@ const Guide = React.createClass({
         </div>
 
         <hr />
+
+        <div className='wrapper'>
+          <h3><span className='pos basic'>Appositive</span></h3>
+          <p>An appositive is a noun that describes another noun. It acts as an adjective.</p>
+
+          <h4>Functions</h4>
+
+          <ul>
+            <li className='function-group'>
+              <div className='function-title'>noun</div>
+              <span className='pos Noun'>Noun</span>
+            </li>
+          </ul>
+        </div>
 
       </div>
     )

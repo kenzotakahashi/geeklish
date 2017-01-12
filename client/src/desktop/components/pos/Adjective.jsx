@@ -59,6 +59,11 @@ export const AdjectiveClause = React.createClass({
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(this.props._id))}>Adjective Clause</span>            
             <Label parent={this.props.parent} role={this.props.role} />
+            {e('button', {
+              className: `tree-button ${element.essential && 'on'}`,
+              type: 'button',
+              onClick: () => store.dispatch(changeAttribute(element._id, 'essential', !element.essential))
+            }, 'essential')}
             <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
           </div>
           <Children element={element} attrs={attrs} words={state.Words}

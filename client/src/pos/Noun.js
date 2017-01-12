@@ -2,7 +2,7 @@ import { createWord } from './util.js'
 
 const getWh = function() {
   if (this.isWh) return [this, true]
-  for (const attr of ['adjectives','adjectivesAfter','prepositions']) {
+  for (const attr of ['adjectives','prepositions']) {
     for (let i = 0; i < this[attr].length; i++) {
       const [wh, isWh] = this[attr][i].getWh()
       if (isWh) {
@@ -17,7 +17,7 @@ const getWh = function() {
 function categorizeAdj(adjs) {
   const adjBeginning = []
   const adjectives = []
-  const adjectivesAfter = []
+  let adjectivesAfter = []
   let appositive = []
   const base = adjs.map(o => createWord(o))
   for (let adj of base) {
@@ -29,7 +29,11 @@ function categorizeAdj(adjs) {
     } else if (adj.pos === 'Appositive') {
       appositive = !adj.isValid() ? [] : adj.essential ? [adj] : [',', adj ,',']
     } else {
-      adjectivesAfter.push(adj)
+      if (adj.pos === 'AdjectiveClause' && !adj.essential) {
+        adjectivesAfter = adjectivesAfter.concat([',',adj,','])
+      } else {
+        adjectivesAfter.push(adj)
+      }
     } 
   }
   return [adjBeginning, adjectives, adjectivesAfter, appositive]
@@ -84,7 +88,8 @@ export const Noun = {
   },
   isValid: () => true,
   toString: function() {
-    return this.getList().map(o => o.toString()).join(' ')
+    return this.getList().reduce((a, b) => `${a}${b === ',' ? ',' : ' '+b}`, []).slice(1)
+    // return this.getList().map(o => o.toString()).join(' ')
   },
   getList: function() {
     return checkArticle(this.getRest(this.word[this.number]))
@@ -97,7 +102,7 @@ export const Noun = {
             noun,
             ...this.appositive,
             ...this.adjectivesAfter,
-            ...this.prepositions]
+            ...this.prepositions].filter(o => o !== '')
   },
   getBe: function(past) {
     if (this.number === 'plural' || this.person === 2) {

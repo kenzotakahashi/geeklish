@@ -37,6 +37,7 @@ export const AdjectiveClause = {
     this._id = p._id
     this.pos = p.pos
     this.clause = createWord(p.clause)
+    this.essential = p.essential
     this.isWh = p.isWh
     return this
   },

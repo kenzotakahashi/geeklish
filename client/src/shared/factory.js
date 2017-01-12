@@ -200,7 +200,16 @@ const factory = {
       _id: uuid.v1(),
       pos: 'AdjectiveClause',
       clause: null,
+      essential: true,
       isWh: false
+    }
+  },
+  Appositive: function(w) {
+    return {
+      _id: uuid.v1(),
+      pos: 'Appositive',
+      noun: null,
+      essential: false,
     }
   },
   Adverb: function(w) {
@@ -290,14 +299,6 @@ const factory = {
       pos: 'Conjunction',
       word: w.base,
       type: w.type
-    }
-  },
-  Appositive: function(w) {
-    return {
-      _id: uuid.v1(),
-      pos: 'Appositive',
-      noun: null,
-      essential: false,
     }
   }
 }

@@ -2,13 +2,17 @@ import { createWord } from './util.js'
 
 function beforeOrAfter(adjs) {
   const adjBeginning = []
-  const adjectives = []
+  let adjectives = []
   const base = adjs.map(o => createWord(o))
   for (let adj of base) {
     if (adj.pos === 'Participle' && adj.beginning) {
       adjBeginning.push(adj)
     } else {
-      adjectives.push(adj)
+      if (adj.pos === 'AdjectiveClause' && !adj.essential) {
+        adjectives = adjectives.concat([',',adj,','])
+      } else {
+        adjectives.push(adj)
+      }
     } 
   }
   return [adjBeginning, adjectives]
