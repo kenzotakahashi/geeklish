@@ -15,7 +15,7 @@ export const Adjective = {
   toString: function() {
     let adj = [...this.adverbs, this.word[this.form]]
     adj = this.complement ? adj.concat(this.complement) : adj
-    return adj.map(o => o.toString()).join(' ')
+    return adj.map(o => o.toString())
   },
   getWh: function() {
     if (this.isWh) return [this, true]
@@ -44,7 +44,7 @@ export const AdjectiveClause = {
   toString: function() {
     if (!this.clause) return ''
     const result = this.clause.print()
-    return Array.isArray(result) ? '' : result
+    return Array.isArray(result) && result[0] === false ? '' : result
   },
   getWh: function() {
     return [null, false]

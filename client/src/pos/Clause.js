@@ -199,21 +199,11 @@ export const Clause = {
       }
     }
   },
-  convertToString: function(c) {
-    return c.filter(t => !['', null].includes(t))
-            .map(o => o.toString())
-            .reduce((a, b) => a.concat(b), [])
-            .filter(t => !['', null].includes(t))
-            .map(o => o.toString())
-  },
   toString: function() {
     return this.print()
   },
   addComma: function(list) {
     return list.map(o => `${o.toString()},`).join(' ')
-  },
-  joinElements: function(list) {
-    return list.reduce((a, b) => `${a}${b === ',' ? ',' : ' '+b}`, []).slice(1)
   },
   print: function() {
     const s = this.subject
@@ -227,14 +217,14 @@ export const Clause = {
          this.addComma(prepBeginning),
          !!s && !!s.adjBeginning ? this.addComma(s.adjBeginning) : '',
          ...c]
-    // console.log(c)
+    console.log(c)
     c = this.reorderWh(c)
     // console.log(c)
     const adj = this.adjective ? [',', this.adjective] : []
     c = [...c, ...adj, ...this.advAfter]
-    c = this.convertToString(c)
-    // console.log(c)
-    c = this.joinElements(c.map(o => o.toString()))
+    console.log(c)
+    // return c
+    // c = this.convertToString(c)
     // console.log(c)
     return c
   },

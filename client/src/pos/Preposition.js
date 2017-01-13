@@ -12,8 +12,9 @@ const Preposition = {
   },
   toString: function() {
     return !!this.complement ?
-            `${this.word} ${this.complement.toString()}` :
-            this.word
+            [this.word, this.complement.toString()] : [this.word]
+            // `${this.word} ${this.complement.toString()}` :
+            // this.word
   },
   getWh: function() {
     if (this.isWh) return [this, true]

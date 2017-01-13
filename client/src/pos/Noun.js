@@ -88,13 +88,13 @@ export const Noun = {
   },
   isValid: () => true,
   toString: function() {
-    return this.getList().reduce((a, b) => `${a}${b === ',' ? ',' : ' '+b}`, []).slice(1)
-    // return this.getList().map(o => o.toString()).join(' ')
+    return this.getList()
   },
   getList: function() {
     return checkArticle(this.getRest(this.word[this.number]))
   },
   getRest: function(noun) {
+    console.log(this.prepositions)
     return [this.quantifier || '',
             this.determiner || '',
             ...this.adjectives,
@@ -141,7 +141,8 @@ export const NounContainer = {
     return this.nouns.length > 0 && !!this.conjunction
   },
   toString: function() {
-    return this.getList().map(o => o.toString()).join(' ')
+    return this.getList()
+    // return this.getList().map(o => o.toString()).join(' ')
   },
   getList: function() {
     let with_conj = []
@@ -189,21 +190,23 @@ export const NounClause = {
   },
   toString: function() {
     const list = this.getList()
-    return !!list ? list.map(o => o.toString()).join(' ') : ''
+    console.log(list)
+    return !!list ? list : []
   },
   getList: function() {
     if (!this.clause) return
     const result = this.clause.print()
-    return Array.isArray(result) ? '' : this.getRest(`${this.that ? 'that ' : ''}${result}`)
+    return Array.isArray(result) && result[0] === false
+           ? '' : this.getRest([this.that ? 'that' : '', result])
   },
   getRest: function(noun) {
     return [this.quantifier || '',
             this.determiner || '',
             ...this.adjectives,
             ...this.nouns, 
-            noun,
+            ...noun,
             ...this.adjectivesAfter,
-            ...this.prepositions]
+            ...this.prepositions].filter(o => o !== '')
   },
   getBe: function(form) {
     return form === 'past' ? 'was' : 'is'
