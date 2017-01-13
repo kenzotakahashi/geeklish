@@ -71,6 +71,9 @@ const prepositions = [
 	{
 		base: 'out'
 	},
+	{
+		base: 'of'
+	}
 ].map(o => ({
 	...o,
 	order: 17

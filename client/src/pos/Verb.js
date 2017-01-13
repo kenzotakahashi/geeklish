@@ -43,8 +43,8 @@ const verbAfterTo = function() {
   return this.getList(verb)
 }
 const toString = function() {
-  const verb = this.getList([this.word[this.form]])
-  return verb.join(' ')
+  return this.getList([this.word[this.form]])
+  // return verb.join(' ')
 }
 
 const initVerb = function(v) {
@@ -108,13 +108,9 @@ export const VerbContainer = {
     const verb = this.perfect ? [...negative, 'have', this.word.passive] :
                  this.passive ? [...negative, 'be', this.word.passive] :
                  this.continuous ? [...negative, 'be', this.word.progressive] :
-                 [...negative, this.verbs.map(o => o.toString()).join(` ${this.conjunction} `)]
+                 [...negative, this.verbs.reduce((a,b) => a.concat([b, this.conjunction]), []).slice(0,-1)]
     return this.getList(verb)
   },
-  // toString: function() {
-  //   return this.getList(this.verbs.map(o => o.toString()).join(` ${this.conjunction} `))
-  //         .map(o => o.toString()).join(' ')
-  // },
   isValid: function() {
     return this.verbs.length > 0 && this.conjunction
   },

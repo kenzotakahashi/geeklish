@@ -100,8 +100,9 @@ export const validPos = {
     adverb: [adverb('det')],
   },
   Adjective: {
+    complement: ['Preposition','NounClause','Infinitive','Gerund'],
     adverbs: [adverb('adj')],
-    complement: ['Preposition','NounClause','Infinitive','Gerund'] 
+    prepositions: ['Preposition']
   },
   AdjectiveClause: {
     clause: ['Clause']

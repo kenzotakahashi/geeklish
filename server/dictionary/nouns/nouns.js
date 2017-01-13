@@ -138,7 +138,25 @@ const nouns = [
 	{
 		type: 'countable',
 		base: 'guest'
-	}
+	},
+	{
+		type: 'uncountable',
+		base: 'help'
+	},
+	{
+		type: 'countable',
+		base: 'idea'
+	},
+	{
+		type: 'countable',
+		base: 'reality',
+		plural: 'realities'
+	},
+	{
+		type: 'countable',
+		base: 'industry',
+		plural: 'industries'
+	},
 ].map(o => ({
 	...o,
 	order: 12

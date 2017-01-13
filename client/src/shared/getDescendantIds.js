@@ -10,7 +10,7 @@ export const references = {
   NounClause: ['clause','nouns','quantifier','adjectives','prepositions'],
   Pronoun: ['adjectives','prepositions'],
   Determiner: ['adverb'],
-  Adjective: ['adverbs','complement'],
+  Adjective: ['complement','adverbs','prepositions'],
   AdjectiveClause: ['clause'],
   Adverb: ['adverb'],
   AdverbClause: ['conjunction','clause'],

@@ -189,8 +189,9 @@ const factory = {
         superlative: w.superlative || `most ${w.base}`
       },
       form: 'base',
-      adverbs: [],
       complement: null,
+      adverbs: [],
+      prepositions: [],
       after: false,
       isWh: false
     }

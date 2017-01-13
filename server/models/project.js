@@ -7,6 +7,6 @@ export const Project = mongoose.model('Project', new Schema({
   title: String,
   userId: String,
   category: String,
-  // elements: [String],
+  reference: String,
   createdAt: {type: Date, default: Date.now},
 }, {_id: false}))

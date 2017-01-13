@@ -654,6 +654,18 @@ const verbs = [
 				[]
 			]
 		}
+	},
+	{
+		base: 'use',
+		particles: ['up'],
+		complements: {
+			base: [
+				['noun']
+			],
+			up: [
+				['noun']
+			]
+		}
 	}
 ].map(o => ({
 	...o,

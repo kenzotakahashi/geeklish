@@ -51,6 +51,10 @@ const adverbs = [
 		comparative: "n",
 	},
 	{
+		base: 'very',
+		usage: ['adj','adv']
+	},
+	{
 		base: "much",
 		usage: ["verb","adj","adv"],
 		comparative: "n",

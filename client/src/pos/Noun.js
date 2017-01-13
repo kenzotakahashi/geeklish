@@ -39,26 +39,6 @@ function categorizeAdj(adjs) {
   return [adjBeginning, adjectives, adjectivesAfter, appositive]
 }
 
-function shouldUseAn(word) {
-  const a_specials = ['us','uni','one','once','eu']
-  const an_specials = ['hour','honor','honest']
-  for (const s of a_specials) {
-    if (word.startsWith(s)) return false
-  }
-  for (const s of an_specials) {
-    if (word.startsWith(s)) return true
-  }
-  return 'aeiou'.includes(word[0])
-}
-
-function checkArticle(phrase) {
-  let newPhrase = []
-  for (let i=0; i < phrase.length; i++) {
-    newPhrase.push(phrase[i].word === 'a' && shouldUseAn(phrase[i+1].toString()) ? 'an' : phrase[i])
-  }
-  return newPhrase
-}
-
 export const Noun = {
   init: function(w) {
     this._id = w._id
@@ -91,10 +71,9 @@ export const Noun = {
     return this.getList()
   },
   getList: function() {
-    return checkArticle(this.getRest(this.word[this.number]))
+    return this.getRest(this.word[this.number])
   },
   getRest: function(noun) {
-    console.log(this.prepositions)
     return [this.quantifier || '',
             this.determiner || '',
             ...this.adjectives,
@@ -142,7 +121,6 @@ export const NounContainer = {
   },
   toString: function() {
     return this.getList()
-    // return this.getList().map(o => o.toString()).join(' ')
   },
   getList: function() {
     let with_conj = []

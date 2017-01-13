@@ -203,7 +203,7 @@ export const Clause = {
     return this.print()
   },
   addComma: function(list) {
-    return list.map(o => `${o.toString()},`).join(' ')
+    return list.reduce((a,b) => a.concat([b, ',']), []).slice(0,-1)
   },
   print: function() {
     const s = this.subject
@@ -217,14 +217,11 @@ export const Clause = {
          this.addComma(prepBeginning),
          !!s && !!s.adjBeginning ? this.addComma(s.adjBeginning) : '',
          ...c]
-    console.log(c)
+    // console.log(c)
     c = this.reorderWh(c)
     // console.log(c)
     const adj = this.adjective ? [',', this.adjective] : []
     c = [...c, ...adj, ...this.advAfter]
-    console.log(c)
-    // return c
-    // c = this.convertToString(c)
     // console.log(c)
     return c
   },
@@ -250,17 +247,17 @@ export const ClauseContainer = {
       return [false, "(You need a conjunction)"]
     }
     const clauses = this.clauses.map(o => o.print())
-    if (this.clauses.length < 2 || clauses.some(o => Array.isArray(o))) {
+    if (this.clauses.length < 2 || clauses.some(o => Array.isArray(o) && o[0] === false)) {
       return [false, "(You need at least 2 clauses)"]
     }
     if (this.conjunction) {
       if (['and', 'or'].includes(this.conjunction.word)) {
-        return this.clauses.map(o => o.print()).join(` ${this.conjunction} `)
+        return this.clauses.reduce((a,b) => a.concat([b, this.conjunction]), []).slice(0,-1)
       } else {
         if (this.clauses.length > 2) {
           return [false, "(Conjunctions except 'and' and 'or' cannot join more than 2 clauses)"]
         }
-        return this.clauses.map(o => o.print()).join(`, ${this.conjunction} `)
+        return [this.clauses[0], ',', this.conjunction, this.clauses[1]]
       }
     }
   }

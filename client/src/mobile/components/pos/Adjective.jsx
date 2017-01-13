@@ -8,7 +8,7 @@ export const Adjective = React.createClass({
     const state = store.getState()
     const {_id, parent, role} = this.props
     const element = state.Words.find(o => o._id === _id)
-    const attrs = ['complement','adverbs']
+    const attrs = ['complement','adverbs','prepositions']
 
     return (
       <ul className='m-ul'>
@@ -34,7 +34,7 @@ export const AdjectiveDetail = React.createClass({
   render: function() {
     const state = store.getState()
     const {element, parent, role} = this.props
-    const attrs = ['complement','adverbs']
+    const attrs = ['complement','adverbs','prepositions']    
     
     const position = role[1] === null && (
       <li key='number'>

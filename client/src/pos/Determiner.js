@@ -15,7 +15,7 @@ export const Determiner = {
   },
   toString: function() {
     const word = this.isOf ? `${this.of} of` : this.word
-    return !!this.adverb ? `${this.adverb} ${word}` : word
+    return !!this.adverb ? [this.adverb, word] : [word]
   },
 }
 

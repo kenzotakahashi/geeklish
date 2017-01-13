@@ -26,6 +26,6 @@ export const categories = [
 	"Noun Clause",
 	"Adverb Clause",
 	'Adjective Clause',
-	'Technical'
+	// 'Technical'
 ]
 

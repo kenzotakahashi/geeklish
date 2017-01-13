@@ -12,7 +12,7 @@ export const Infinitive = {
   toString: function() {
     const phrase = !!this.verb ? this.verb.verbAfterTo() : []
     const to = this.omit ? [] : ['to']
-    return [...to, ...phrase.map(o => o.toString())].join(' ')
+    return [...to, ...phrase]
   },
   getWh: () => [null, false],
 }
@@ -28,7 +28,7 @@ export const Gerund = {
     return !!this.verb ? this.verb.getList() : []
   },
   toString: function() {
-    return this.getList().map(o => o.toString()).join(' ')
+    return this.getList()
   },
   getBe: (past) => past ? 'was' : 'is',
   getWh: () => [null, false],
@@ -51,14 +51,34 @@ export const Participle = {
   toString: function() {
     if (!this.verb) return ''
     if (this.form === 'present') {
-      return this.verb.getList([this.verb.word.progressive]).join(' ')
+      return this.verb.getList([this.verb.word.progressive])
     } else if (this.form === 'past') {
-      return this.verb.getList([this.verb.word.passive]).join(' ')
+      return this.verb.getList([this.verb.word.passive])
     } else {
-      return this.verb.getList(['having', this.verb.word.passive]).join(' ')
+      return this.verb.getList(['having', this.verb.word.passive])
     }
   },
   getWh: () => [null, false], 
+}
+
+const shouldUseAn = (word) => {
+  const a_specials = ['us','uni','one','once','eu']
+  const an_specials = ['hour','honor','honest']
+  for (const s of a_specials) {
+    if (word.startsWith(s)) return false
+  }
+  for (const s of an_specials) {
+    if (word.startsWith(s)) return true
+  }
+  return 'aeiou'.includes(word[0])
+}
+
+const checkArticle = (phrase) => {
+  let newPhrase = []
+  for (let i=0; i < phrase.length; i++) {
+    newPhrase.push(phrase[i] === 'a' && shouldUseAn(phrase[i+1]) ? 'an' : phrase[i])
+  }
+  return newPhrase
 }
 
 export const Sentence = {
@@ -83,19 +103,17 @@ export const Sentence = {
       )
     }
     return c
-            // .filter(t => !['', null].includes(t))
-            // .map(o => o.toString())
   },
   joinElements: function(list) {
     return list.reduce((a, b) => `${a}${b === ',' ? ',' : ' '+b}`, []).slice(1)
   },
   sentence: function(c) {
-    console.log(s)
     let s = this.convertToString(c)
-    console.log(s)
+    s = checkArticle(s)
+    // console.log(s)
+    // For deleting the trailing comma for Adjective clause nonessential.
     s = s.slice(-1)[0] === ',' ? s.slice(0,-1) : s
     s = this.joinElements(s)
-    // For deleting the trailing comma for Adjective clause nonessential.
     return this.capitalize(s + this.punctuation())
   },
   toString: function() {

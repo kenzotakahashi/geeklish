@@ -33,7 +33,7 @@ const Pronoun = {
   },
   isValid: () => true,
   toString: function() {
-    return this.getList().map(o => o.toString()).join(' ')
+    return this.getList()
   },
   getList: function() {
     const adj = this.adjectives || []

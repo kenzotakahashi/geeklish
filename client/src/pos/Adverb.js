@@ -14,8 +14,7 @@ export const Adverb = {
   },
   toString: function() {
     return !!this.adverb ?
-            `${this.adverb.toString()} ${this.word[this.form]}`:
-            this.word[this.form]
+            [this.adverb, this.word[this.form]] : [this.word[this.form]]
   },
   getWh: function() {
     if (this.isWh) return [this, true]
@@ -43,7 +42,7 @@ export const AdverbClause = {
   toString: function() {
     if (!this.clause) return ''
     const result = this.clause.print()
-    return Array.isArray(result) ? '' : `${this.conjunction} ${result}`
+    return Array.isArray(result) && result[0] === false ? '' : [this.conjunction, result]
   },
   getWh: function() {
     return [null, false]

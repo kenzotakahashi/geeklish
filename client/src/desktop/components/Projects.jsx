@@ -26,7 +26,8 @@ const Projects = React.createClass({
         project: {
           _id: newState.example,
           title: newState.title,
-          category: '',          
+          category: '',
+          reference: '' 
         },
         words: newState.Words
       })
