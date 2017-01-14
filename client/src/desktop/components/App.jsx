@@ -58,6 +58,10 @@ const App = React.createClass({
     const route = state.route
     const children = getChildren(state, route)
 
+    // {<span style={navItemStyle}>
+    //     <Link to='/projects' style={textStyle}>My Projects</Link>
+    //   </span>}
+
     return (
       <div>
         <nav className="row" style={navStyle}>
@@ -66,9 +70,6 @@ const App = React.createClass({
           </span>
           <span style={navItemStyle}>
             <Link to='/examples' style={textStyle}>Examples</Link>
-          </span>
-          <span style={navItemStyle}>
-            <Link to='/projects' style={textStyle}>My Projects</Link>
           </span>
           <span style={navItemStyle}>
             <Link to='/guide' style={textStyle}>Guide</Link>

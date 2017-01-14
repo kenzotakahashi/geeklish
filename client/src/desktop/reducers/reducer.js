@@ -6,6 +6,7 @@ import { createWordHelper, setComplementHelper, deleteElementHelper, useConjunct
 
 
 function reducer(state, action) {
+  console.log(action)
   switch (action.type) {
     // ======================= Route ================================
     case 'ROUTE_PROJECTS': {
@@ -25,6 +26,8 @@ function reducer(state, action) {
         route: 'examples',
         examples: action.examples,
         title: action.title,
+        activeWord: null,
+        target: [],
         Words: desktopInitialState().Words,
         answer: action.words,
         isAnswer: false,
@@ -139,12 +142,16 @@ function reducer(state, action) {
       if (state.isAnswer) {
         return {
           ...state,
+          activeWord: null,
+          target: [],
           Words: state.userAnswer,
           isAnswer: false
         }
       } else {
         return {
           ...state,
+          activeWord: null,
+          target: [],
           Words: state.answer,
           userAnswer: state.Words,
           isAnswer: true

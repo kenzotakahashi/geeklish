@@ -180,7 +180,13 @@ export const Adjective = Element.discriminator('Adjective', new Schema({
 
 export const AdjectiveClause = Element.discriminator('AdjectiveClause', new Schema({
   clause: String,
+  essential: Boolean,
   isWh: Boolean
+}, options))
+
+export const Appositive = Element.discriminator('Appositive', new Schema({
+  noun: String,
+  essential: Boolean
 }, options))
 
 export const Adverb = Element.discriminator('Adverb', new Schema({
@@ -252,6 +258,7 @@ export const Pos = {
   Possessive,
   Adjective,
   AdjectiveClause,
+  Appositive,
   Adverb,
   AdverbClause,
   Preposition,

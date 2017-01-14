@@ -9,7 +9,7 @@ export const desktopInitialState = function() {
     example: null,
     title: 'Some title',
     saved: true,
-    activeWord: _id,
+    activeWord: null,
     target: [],
     dictionary: [],
     examples: !!sessionStorage.examples ? JSON.parse(sessionStorage.examples) : [],

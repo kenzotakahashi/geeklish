@@ -140,7 +140,19 @@ hr.m-border-edge {
 
 .m-dictionary {
 	margin: 1px 0;
+	height: 45px;
+	padding: 12px;
+	width: 50%;
+	float: left;
 }
+
+@media (min-width: 600px) {
+	.m-dictionary {
+		width: 25%;
+	}
+}
+
+
 
 input.m-input {
 	padding: 6px 6px 6px 40px;

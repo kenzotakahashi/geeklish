@@ -79,7 +79,7 @@ export const Appositive = React.createClass({
   componentDidMount: function() {
     const state = store.getState()
     const element = state.Words.find(o => o._id === this.props._id)
-    if (!element.verb) {
+    if (!element.noun) {
       getWordDictionary(element, ['noun', null])
     }
   },

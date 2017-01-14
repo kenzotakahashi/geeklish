@@ -28,7 +28,7 @@ const WordFactory = React.createClass({
       const state = store.getState()
 
       const wordList = this.state.dictionary.map(o => (
-        <li key={o._id} className={`m-list m-dictionary ${o.pos}`}
+        <li key={o._id} className={`m-dictionary ${o.pos}`}
             onClick={() => store.dispatch(createNewWord(o, state.activeWord, state.target))}>
             {o.base}
         </li>
