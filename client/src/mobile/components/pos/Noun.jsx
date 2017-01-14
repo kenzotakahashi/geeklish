@@ -37,13 +37,12 @@ export const NounDetail = React.createClass({
     const disableNumber = (quantifier && quantifier.number !== 'both') ||
                           (determiner && determiner.number !== 'both')
 
-    const number = element.type === 'countable' && (
-      <li key='number'>
+    const number = element.type === 'countable' && !['Noun','NounClause'].includes(parent.pos) && (
+      <li key='number' disabled={disableNumber && "disabled"}>
         <span className='m-list back-white'>
           <span>Plural</span>
           <label className="switch">
             <input type="checkbox" checked={element.number === 'plural'}
-                disabled={disableNumber && "disabled"}   
                 onChange={() => store.dispatch(changeAttribute(
                   element._id,'number',element.number === 'plural' ? 'singular' : 'plural'))} 
             />
@@ -60,11 +59,12 @@ export const NounDetail = React.createClass({
           <hr className='m-border-edge' />
           {number}
           <hr className='m-border' />
-          {parent.pos !== 'Possessive' && <WH id={element._id} isWh={element.isWh} />}
+          {!['Noun','NounClause','Possessive'].includes(parent.pos) &&
+           <WH id={element._id} isWh={element.isWh} />}
           <hr className='m-border-edge' />
         </ul>
         <ChildrenDetail element={element} attrs={attrs} words={state.Words} />
-        {parent.pos !== 'NounContainer' &&
+        {!['NounContainer','Noun','NounClause'].includes(parent.pos) &&
          <ConjunctionButton element={element} role={role} parentId={parent._id} />}
         <DeleteButton id={element._id} role={role} parentId={parent._id} />        
       </div>

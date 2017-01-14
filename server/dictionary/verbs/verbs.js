@@ -162,9 +162,7 @@ const verbs = [
 				['noun'],
 				['adjective'],
 			],
-			on: [
-				[]
-			],
+			on: [[]],
 			up: [
 				[],
 				['noun']
@@ -173,28 +171,16 @@ const verbs = [
 				[],
 				['noun']
 			],
-			about: [
-				['noun']
-			],
-			after: [
-				['noun']
-			],
-			against: [
-				['noun']
-			],
-			ahead: [
-				[]
-			],
-			'through': [
-				['noun']
-			],
+			about: [['noun']],
+			after: [['noun']],
+			against: [['noun']],
+			ahead: [[]],
+			'through': [['noun']],
 			'over': [
 				[],
 				['noun']
 			],
-			'out': [
-				[]
-			],
+			'out': [[]],
 			'by': [
 				[],
 				['noun']
@@ -365,15 +351,9 @@ const verbs = [
 				['adjective'],
 				['noun','noun']
 			],
-			across: [
-				['noun']
-			],
-			away: [
-				[]
-			],
-			along: [
-				[]
-			],
+			across: [['noun']],
+			away: [[]],
+			along: [[]],
 			around: [
 				[],
 				['noun']
@@ -386,18 +366,10 @@ const verbs = [
 				[],
 				['noun']
 			],
-			by: [
-				[]
-			],
-			down: [
-				[]
-			],
-			in: [
-				[]
-			],
-			into: [
-				[]
-			],
+			by: [[]],
+			down: [[]],
+			in: [[]],
+			into: [[]],
 			off: [
 				[],
 				['noun']
@@ -410,18 +382,12 @@ const verbs = [
 				[],
 				['noun']
 			],
-			over: [
-				['noun']
-			],
+			over: [['noun']],
 			through: [
 				['noun']
 			],
-			up: [
-				[]
-			],
-			together: [
-				[]
-			],
+			up: [[]],
+			together: [[]],
 		}
 	},
 	{
@@ -540,25 +506,15 @@ const verbs = [
 				['adjective'],
 				['noun','adjective'],
 			],
-			at: [
-				['noun']
-			],
-			back: [
-				['noun']
-			],
-			down: [
-				['noun']
-			],
-			in: [
-				['noun']
-			],
+			at: [['noun']],
+			back: [['noun']],
+			down: [['noun']],
+			in: [['noun']],
 			off: [
 				['noun'],
 				['noun','noun']
 			],
-			on: [
-				['gerund']
-			],
+			on: [['gerund']],
 			up: [
 				[],
 				['noun']
@@ -575,39 +531,17 @@ const verbs = [
 				['noun'],
 				['adjective']
 			],
-			around: [
-				[]
-			],
-			along: [
-				[]
-			],
-			at: [
-				['noun']
-			],
-			back: [
-				['noun']
-			],
-			down: [
-				['noun']
-			],
-			off: [
-				[]
-			],
-			out: [
-				['noun']
-			],
-			on: [
-				['noun']
-			],
-			upon: [
-				['noun']
-			],
-			with: [
-				['noun']
-			],
-			up: [
-				['noun']
-			]
+			around: [[]],
+			along: [[]],
+			at: [['noun']],
+			back: [['noun']],
+			down: [['noun']],
+			off: [[]],
+			out: [['noun']],
+			on: [['noun']],
+			upon: [['noun']],
+			with: [['noun']],
+			up: [['noun']]
 		}
 	},
 	{
@@ -632,27 +566,13 @@ const verbs = [
 		base: 'wait',
 		particles: ['around','behind','in','on','out','up'],
 		complements: {
-			base: [
-				[]
-			],
-			around: [
-				[]
-			],
-			behind: [
-				[]
-			],
-			in: [
-				[]
-			],
-			on: [
-				['noun']
-			],
-			out: [
-				['noun']
-			],
-			up: [
-				[]
-			]
+			base: [[]],
+			around: [[]],
+			behind: [[]],
+			in: [[]],
+			on: [['noun']],
+			out: [['noun']],
+			up: [[]]
 		}
 	},
 	{
@@ -665,6 +585,48 @@ const verbs = [
 			up: [
 				['noun']
 			]
+		}
+	},
+	{
+		base: 'come',
+		past: 'came',
+		passive: 'come',
+		particles: ['up','over','in','with','before','after','to','out','on','of',
+								'into','from','forward','for','down','by','between','back','away',
+								'at','apart','along','around','about','across'],
+		complements: {
+			base: [[]],
+			up: [[]],
+			in: [
+				[],
+				['noun']
+			],
+			with: [['noun']],
+			over: [[]],
+			before: [['noun']],
+			after: [['noun']],
+			to: [['noun']],
+			out: [[]],
+			on: [[]],
+			off: [[]],
+			of: [['noun']],
+			into: [['noun']],
+			from: [['noun']],
+			forward: [[]],
+			down: [[]],
+			by: [[]],
+			between: [['noun']],
+			back: [[]],
+			away: [[]],
+			at: [['noun']],
+			along: [[]],
+			apart: [[]],
+			around: [[]],
+			across: [
+				[],
+				['noun']
+			],
+			about: [[]]
 		}
 	}
 ].map(o => ({

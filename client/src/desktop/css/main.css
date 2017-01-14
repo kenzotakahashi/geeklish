@@ -112,7 +112,7 @@ li {
   list-style-type: none;
 }
 
-li[disabled] {
+li[disabled], button[disabled] {
   opacity: .4;
   cursor: not-allowed;
   pointer-events: none;
@@ -122,12 +122,6 @@ button {
   border: transparent;
   padding: .5em 1em;
   background-color: #E6E6E6;
-}
-
-button[disabled] {
-  opacity: .4;
-  cursor: not-allowed;
-  pointer-events: none;
 }
 
 .button-small {

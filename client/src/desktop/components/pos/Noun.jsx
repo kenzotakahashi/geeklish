@@ -18,7 +18,8 @@ export const Noun = React.createClass({
   },
   render: function() {
     const state = store.getState()
-    const element = state.Words.find(o => o._id === this.props._id)
+    const {_id, parent, role} = this.props
+    const element = state.Words.find(o => o._id === _id)
     const attrs = ['quantifier','determiner','adjectives','nouns','prepositions']
 
     const quantifier = state.Words.find(o => o._id === element.quantifier)
@@ -31,18 +32,19 @@ export const Noun = React.createClass({
         <li className='tree-top'>
           <div className={`tree-box ${element.pos}`}>
             <span className='word' onClick={() => store.dispatch(showOptions(element._id))}>{element.word.singular}</span>
-            <Label parent={this.props.parent} role={this.props.role} />
-            {element.type === 'countable' &&
+            <Label parent={parent} role={role} />
+            {element.type === 'countable' && !['Noun','NounClause'].includes(parent.pos) &&
               e('button', {
               className: `tree-button ${element.number === 'plural'  && 'on'}`,
               type: 'button',
               disabled: disableNumber && "disabled",
               onClick: () => this.changeNumber(element)
             }, element.number)}
-            {this.props.parent.pos !== 'Possessive' && <WH id={element._id} isWh={element.isWh} />}
-            {this.props.parent.pos !== 'NounContainer' &&
-             <ConjunctionButton element={element} role={this.props.role} parentId={this.props.parent._id} />}
-            <DeleteButton id={element._id} role={this.props.role} parentId={this.props.parent._id} />
+            {!['Noun','NounClause','Possessive'].includes(parent.pos) &&
+             <WH id={element._id} isWh={element.isWh} />}
+            {!['NounContainer','Noun','NounClause'].includes(parent.pos) &&
+             <ConjunctionButton element={element} role={role} parentId={parent._id} />}
+            <DeleteButton id={element._id} role={role} parentId={parent._id} />
           </div>
           <Children element={element} attrs={attrs} words={state.Words}
                     target={state.target} activeWord={state.activeWord} />

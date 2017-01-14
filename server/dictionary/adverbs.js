@@ -46,6 +46,10 @@ const adverbs = [
 		usage: ["verb","adj","adv","det"]
 	},
 	{
+		base: "hardly",
+		usage: ["verb","adj","det"]
+	},
+	{
 		base: "so",
 		usage: ["adj","adv"],
 		comparative: "n",

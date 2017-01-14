@@ -57,12 +57,11 @@ export const Noun = {
   },
   possessive: function() {
     if (this.adjectivesAfter.length > 0 || this.prepositions.length > 0) {
-      const list = this.getList()
-      const last = `${list.slice(-1)[0]}'s`
-      return [...list.slice(0,-1), last]
+      return [...this.getList(), "'s"]
     } else {
-      const possessive = this.number === 'singular' ? `${this.word.singular}'s` :
-              `${this.word.plural}${this.word.plural.slice(-1) === 's' ? "'" : "'s"}`
+      const possessive = this.number === 'singular'
+              ? `${this.word.singular}'s`
+              : `${this.word.plural}${this.word.plural.slice(-1) === 's' ? "'" : "'s"}`
       return this.getRest(possessive)
     }
   },
@@ -112,9 +111,7 @@ export const NounContainer = {
     return this
   },
   possessive: function() {
-    const list = this.getList()
-    const last = `${list.slice(-1)[0]}'s`
-    return [...list.slice(0,-1), last]
+    return [...this.getList(), "'s"]
   },
   isValid: function() {
     return this.nouns.length > 0 && !!this.conjunction
@@ -168,7 +165,6 @@ export const NounClause = {
   },
   toString: function() {
     const list = this.getList()
-    console.log(list)
     return !!list ? list : []
   },
   getList: function() {

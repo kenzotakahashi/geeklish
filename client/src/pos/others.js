@@ -105,7 +105,7 @@ export const Sentence = {
     return c
   },
   joinElements: function(list) {
-    return list.reduce((a, b) => `${a}${b === ',' ? ',' : ' '+b}`, []).slice(1)
+    return list.reduce((a, b) => `${a}${[",","'s"].includes(b) ? b : ' '+b}`, []).slice(1)
   },
   sentence: function(c) {
     let s = this.convertToString(c)

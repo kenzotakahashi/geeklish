@@ -77,37 +77,34 @@ const pronouns = [
   {
     base: 'what',
     person: 3,
-    number: 'singular'
   },
   {
     base: 'who',
     person: 3,
-    number: 'singular'
   },
   {
     base: 'which',
     person: 3,
-    number: 'singular'
   },
   {
     base: 'something',
     person: 3,
-    number: 'singular',
   },
   {
     base: 'anything',
     person: 3,
-    number: 'singular',
   },
   {
     base: 'someone',
     person: 3,
-    number: 'singular',
   },
   {
     base: 'nothing',
     person: 3,
-    number: 'singular', 
+  },
+  {
+    base: 'each other',
+    person: 3,
   }
 ].map(o => ({
   ...o,

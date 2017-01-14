@@ -44,13 +44,12 @@ export const VerbDetail = React.createClass({
                  ['past','negative','continuous','perfect','passive']
 
     const attributes = !['Gerund','Participle'].includes(parent.pos) && list.map(o => (
-      <li key={o}>
+      <li key={o} disabled={o === 'passive' && disablePassive && "disabled"}   >
         <hr className='m-border' />
         <span className='m-list back-white'>
           <span>{o}</span>
           <label className="switch">
             <input type="checkbox" checked={element[o]}
-                disabled={o === 'passive' && disablePassive && "disabled"}   
                 onChange={() => store.dispatch(changeAttribute(element._id, o, !element[o]))}  />
             <div className="slider round"></div>
           </label>

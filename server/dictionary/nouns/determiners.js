@@ -96,6 +96,13 @@ const determiners = [
 		mass: false,
 		of: ''
 	},
+	{
+		base: 'both',
+		type: 'quantifier',
+		number: 'plural',
+		mass: false,
+		of: ''
+	},
 ].map(o => ({
 	...o,
 	order: 10
