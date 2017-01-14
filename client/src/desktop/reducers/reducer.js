@@ -6,7 +6,6 @@ import { createWordHelper, setComplementHelper, deleteElementHelper, useConjunct
 
 
 function reducer(state, action) {
-  console.log(action)
   switch (action.type) {
     // ======================= Route ================================
     case 'ROUTE_PROJECTS': {
